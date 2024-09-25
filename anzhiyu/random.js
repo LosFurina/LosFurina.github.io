@@ -1,3 +1,3 @@
-var posts=["2024/09/25/Park/","2024/09/25/Tourism/","2024/09/24/hello-world/","2024/09/24/af-githubio-hexo-deploy/"];function toRandomPost(){
+var posts=["2024/09/25/Park/","2024/09/25/Investment/","2024/09/25/Tourism/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };
