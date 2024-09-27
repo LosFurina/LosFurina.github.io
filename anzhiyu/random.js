@@ -1,3 +1,3 @@
-var posts=["2024/09/25/Park/","2024/09/27/Room/","2024/09/27/Wildlife/","2024/09/26/Advice/","2024/09/26/FavoritePlace/","2024/09/25/diskpart/","2024/09/25/CulturalPlace/","2024/09/25/GoodServices/","2024/09/25/ImportedProducts/","2024/09/25/InvestmentArt/","2024/09/25/English/","2024/09/25/Investment/","2024/09/25/Tourism/"];function toRandomPost(){
+var posts=["2024/09/25/Park/","2024/09/28/PhoneCall/","2024/09/27/IdealHouse/","2024/09/27/Room/","2024/09/27/Wildlife/","2024/09/26/Advice/","2024/09/26/FavoritePlace/","2024/09/25/diskpart/","2024/09/25/CulturalPlace/","2024/09/25/GoodServices/","2024/09/25/ImportedProducts/","2024/09/25/InvestmentArt/","2024/09/25/English/","2024/09/25/Investment/","2024/09/25/Tourism/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };
