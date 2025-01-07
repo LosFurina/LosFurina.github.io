@@ -114,12 +114,12 @@
     <title>Confidence</title>
     <url>/2024/10/01/Confidence/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h2>
-        <div id="aplayer-cXyYgosh" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ThzClecp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-cXyYgosh"),
+            element: document.getElementById("aplayer-ThzClecp"),
             narrow: false,
             autoplay: false,
             showlrc: false,
