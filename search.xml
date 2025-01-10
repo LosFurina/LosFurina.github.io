@@ -531,7 +531,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Deploy U-UI and Hysteria2 Protocol Proxy against Network Sanction</title>
+    <title>Deploy H-UI and Hysteria2 Protocol Proxy against Network Sanction</title>
     <url>/2025/01/10/Linux-H-UI/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><strong>Generally speaking, the internet that what we are using almost transfers our traffic through &#x3D;&#x3D;TCP&#x3D;&#x3D; proxy. As we all know, tcp is a stable proxy, but there are also much disadvantages, including slow transfer speed.</strong></p>
 <h1 id="Install-H-UI"><a href="#Install-H-UI" class="headerlink" title="Install H-UI"></a>Install H-UI</h1><p>Official project location: <a class="btn-beautify " href="https://github.com/jonssonyan/h-ui" title="H-UI"><span>H-UI</span></a></p>
