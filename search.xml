@@ -182,7 +182,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Git-Merge-Code-Elegantly</title>
+    <title>Merge Code Elegantly</title>
     <url>/2025/01/11/Git-Merge-Code-Elegantly/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h2 id="Why-We-Should-Not-Push-Directly-to-the-main-Branch"><a href="#Why-We-Should-Not-Push-Directly-to-the-main-Branch" class="headerlink" title="Why We Should Not Push Directly to the main Branch?"></a><strong>Why We Should Not Push Directly to the <code>main</code> Branch?</strong></h2><p>Pushing code directly to the <code>main</code> branch is <strong>not recommended</strong> due to the following reasons:</p>
 <hr>
@@ -276,6 +276,9 @@
 <li><a href="https://www.youtube.com/watch?v=uj8hjLyEBmU&t=3s">Git Merge Best Practices (YouTube)</a></li>
 </ul>
 ]]></content>
+      <tags>
+        <tag>Git</tag>
+      </tags>
   </entry>
   <entry>
     <title>DevelopmentCountry</title>
