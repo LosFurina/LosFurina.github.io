@@ -333,44 +333,58 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a class="btn-beautify " href="/logseq/#/page/%E8%AF%AD%E6%B0%94" title="More details at Logseq"><span>More details at Logseq</span></a>
 
 <h1 id="谓语动词的三大本领"><a href="#谓语动词的三大本领" class="headerlink" title="谓语动词的三大本领"></a>谓语动词的三大本领</h1><ul>
-<li>时间</li>
-<li>状态</li>
-<li>语气</li>
+<li><code>时间</code>、<code>状态</code>、<code>语气</code></li>
 </ul>
-<h2 id="语气"><a href="#语气" class="headerlink" title="语气"></a>语气</h2><h3 id="陈述语气（Indicative-Mood）"><a href="#陈述语气（Indicative-Mood）" class="headerlink" title="&#x3D;&#x3D;陈述语气（Indicative Mood）&#x3D;&#x3D;"></a>&#x3D;&#x3D;<strong>陈述语气（Indicative Mood）</strong>&#x3D;&#x3D;</h3><p>描述现实：</p>
-<ul>
+<h2 id="语气"><a href="#语气" class="headerlink" title="语气"></a>语气</h2><h3 id="陈述语气（Indicative-Mood）"><a href="#陈述语气（Indicative-Mood）" class="headerlink" title="陈述语气（Indicative Mood）"></a><strong>陈述语气（Indicative Mood）</strong></h3><ul>
+<li>描述现实：<ul>
 <li>I ate the apple.</li>
 </ul>
-<h3 id="疑问语气"><a href="#疑问语气" class="headerlink" title="疑问语气"></a><strong>疑问语气</strong></h3><p>与陈述语气对应：</p>
-<ul>
+</li>
+</ul>
+<h3 id="疑问语气"><a href="#疑问语气" class="headerlink" title="疑问语气"></a><strong>疑问语气</strong></h3><ul>
+<li>与陈述语气对应：<ul>
 <li>Did I eat the apple?</li>
 </ul>
-<h3 id="祈使语气（Imperative-Mood）"><a href="#祈使语气（Imperative-Mood）" class="headerlink" title="&#x3D;&#x3D;祈使语气（Imperative Mood）&#x3D;&#x3D;"></a>&#x3D;&#x3D;<strong>祈使语气（Imperative Mood）</strong>&#x3D;&#x3D;</h3><p>命令、请求：</p>
-<ul>
+</li>
+</ul>
+<h3 id="祈使语气（Imperative-Mood）"><a href="#祈使语气（Imperative-Mood）" class="headerlink" title="祈使语气（Imperative Mood）"></a><strong>祈使语气（Imperative Mood）</strong></h3><ul>
+<li>命令、请求：<ul>
 <li>Eat that apple. （实际上是第二人称的陈述语气的省略版 -&gt; You eat that apple.）</li>
 <li>Give me a five. -&gt; You give me five.</li>
 </ul>
-<h3 id="虚拟语气（Subjunctive-Mood）"><a href="#虚拟语气（Subjunctive-Mood）" class="headerlink" title="&#x3D;&#x3D;**虚拟语气（Subjunctive Mood）&#x3D;&#x3D;"></a>&#x3D;&#x3D;**虚拟语气（Subjunctive Mood）&#x3D;&#x3D;</h3><h4 id="1-表示对”不可能”的假设"><a href="#1-表示对”不可能”的假设" class="headerlink" title="1. 表示对”不可能”的假设"></a>1. 表示对”不可能”的假设</h4><p><strong>与现在事实相反</strong>：</p>
+</li>
+</ul>
+<h3 id="虚拟语气（Subjunctive-Mood）"><a href="#虚拟语气（Subjunctive-Mood）" class="headerlink" title="虚拟语气（Subjunctive Mood）"></a><strong>虚拟语气（Subjunctive Mood）</strong></h3><h4 id="1-表示对”不可能”的假设"><a href="#1-表示对”不可能”的假设" class="headerlink" title="1. 表示对”不可能”的假设"></a>1. 表示对”不可能”的假设</h4><ul>
+<li><p><strong>与现在事实相反</strong>：</p>
 <ul>
 <li>Chinglish: If I am a bird, I will fly to somewhere I enjoy.</li>
 <li>English: If I were a bird, I would fly to somewhere I enjoy.（这里不论人称全都用were）</li>
 </ul>
-<p><strong>与将来事实相反</strong>（将来要发生的事件可能性极小）：</p>
+</li>
+<li><p><strong>与将来事实相反</strong>（将来要发生的事件可能性极小）：</p>
 <ul>
-<li>&#x3D;&#x3D;NOTE: 这行不是虚拟语气&#x3D;&#x3D;：If I (shall) get 80 in English test next time, I will (can, may) be in the top 50 of my grade. （这句话合乎语法逻辑，但是表示未来发生可能性比较大，也被称之为<strong>条件语气</strong>）</li>
-<li>If I should（万一：这个should仅仅是shall的过去式） get 80 in English next time, I would (could, might) be in the top 50 of my grade.（合乎语法逻辑，表示将来发生可能性不大）</li>
+<li><p>NOTE: 这行不是虚拟语气：If I (shall) get 80 in English test next time, I will (can, may) be in the top 50 of my grade. （这句话合乎语法逻辑，但是表示未来发生可能性比较大，也被称之为<strong>条件语气</strong>）</p>
+</li>
+<li><p>If I should（万一：这个should仅仅是shall的过去式） get 80 in English next time, I would (could, might) be in the top 50 of my grade.（合乎语法逻辑，表示将来发生可能性不大）</p>
+</li>
 </ul>
-<p><strong>与过去事实相反</strong>：</p>
+</li>
+<li><p><strong>与过去事实相反</strong>：</p>
 <ul>
-<li>如果我当时英语考了80分，现在我已经是年级前50名了。</li>
-<li>Chinglish: If I got 80 in English test a week ago, I am now in the top 50 of my grade.<ul>
+<li><p>如果我当时英语考了80分，现在我已经是年级前50名了。</p>
+</li>
+<li><p>Chinglish: If I got 80 in English test a week ago, I am now in the top 50 of my grade.</p>
+<ul>
 <li>解释：主从句全部都是陈述语气，全部在表示一个客观事实，但很明显我现在并不是年级前50.</li>
 </ul>
 </li>
-<li>English: If I have got 80 in English test a week ago, I have been now in the top 50 of my grade.</li>
+<li><p>English: If I have got 80 in English test a week ago, I have been now in the top 50 of my grade.</p>
+</li>
 </ul>
-<h4 id="2-愿望，请求，建议，命令"><a href="#2-愿望，请求，建议，命令" class="headerlink" title="2. 愿望，请求，建议，命令"></a>2. 愿望，请求，建议，命令</h4><p>希望某个动作发生：</p>
-<ul>
+</li>
+</ul>
+<h4 id="2-愿望，请求，建议，命令"><a href="#2-愿望，请求，建议，命令" class="headerlink" title="2. 愿望，请求，建议，命令"></a>2. 愿望，请求，建议，命令</h4><ul>
+<li>希望某个动作发生：<ul>
 <li><strong>Wish</strong>: 希望可能性小的事情发生<ul>
 <li>对现在的愿望：<ul>
 <li>I wish that I were a bird.（无论是什么人称，在虚拟语气中全部使用were）</li>
@@ -396,6 +410,8 @@
 <li><strong>suggest</strong></li>
 <li><strong>insist</strong></li>
 <li><strong>order</strong></li>
+</ul>
+</li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAN8Z4VhtoAZ6VuBWPZ9mzVGOQVkchYAAuvBMRtZ7ShUj8_QYTaBasABAAMCAAN3AAM2BA" alt="image.png"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><blockquote>
