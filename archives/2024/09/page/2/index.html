@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>September 2024 | Welcome to Ethan's Homepage</title><meta name="author" content="Ethan Lee"><meta name="copyright" content="Ethan Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="September 2024">
+<meta property="og:url" content="http://blog.liweijun.online/archives/2024/09/page/2/index.html">
+<meta property="og:site_name" content="Welcome to Ethan&#39;s Homepage">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://blog.liweijun.online/img/favicon.jpg">
+<meta property="article:author" content="Ethan Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.liweijun.online/img/favicon.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://blog.liweijun.online/archives/2024/09/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-7LF23HRNFJ"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-7LF23HRNFJ')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-7LF23HRNFJ', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":2,"unescape":false,"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'September 2024',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://codebyzach.github.io/pace/#"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg" style="background-image: url(https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAOPZ7t0Pq90h8y-pYeZBdNE_OxRZfQAAubDMRsp6OFVBMRxGXyLqv4BAAMCAAN3AAM2BA);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fa-solid fa-pen-nib"></i><span> Diary</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Links</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-brands fa-square-twitter"></i><span> Social</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/LosFurina"><i class="fa-fw fa-brands fa-github"></i><span> Github</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://x.com/MicroNahida"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Twitter/X</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-link"></i><span> Notes</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/logseq/"><i class="fa-fw fa-solid fa-blog"></i><span> logseq</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://ethan0302.notion.site/Spoken-English-a5c9ab31be404619ac339ff208561179?pvs=73"><i class="fa-fw fa-solid fa-database"></i><span> Notion</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://music.liweijun.online/app/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/oss/"><i class="fa-fw fa-brands fa-docker"></i><span> OSS</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAOPZ7t0Pq90h8y-pYeZBdNE_OxRZfQAAubDMRsp6OFVBMRxGXyLqv4BAAMCAAN3AAM2BA);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.jpg" alt="Logo"><span class="site-name">Welcome to Ethan's Homepage</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fa-solid fa-pen-nib"></i><span> Diary</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Links</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-brands fa-square-twitter"></i><span> Social</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/LosFurina"><i class="fa-fw fa-brands fa-github"></i><span> Github</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://x.com/MicroNahida"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Twitter/X</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-link"></i><span> Notes</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/logseq/"><i class="fa-fw fa-solid fa-blog"></i><span> logseq</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://ethan0302.notion.site/Spoken-English-a5c9ab31be404619ac339ff208561179?pvs=73"><i class="fa-fw fa-solid fa-database"></i><span> Notion</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://music.liweijun.online/app/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/oss/"><i class="fa-fw fa-brands fa-docker"></i><span> OSS</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">September 2024</h1></div></header><main class="layout" id="content-inner"><div id="archive"><div class="article-sort-title">All Articles - 26</div><div class="article-sort"><div class="article-sort-item year">2024</div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/28/PersonInMedicine/" title="PersonInMedicine"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="PersonInMedicine" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-27T20:50:06.000Z" title="Created 2024-09-28 04:50:06">2024-09-28</time></div><a class="article-sort-item-title" href="/2024/09/28/PersonInMedicine/" title="PersonInMedicine">PersonInMedicine</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/28/PhoneCall/" title="Phone Call"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Phone Call" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-27T16:22:22.000Z" title="Created 2024-09-28 00:22:22">2024-09-28</time></div><a class="article-sort-item-title" href="/2024/09/28/PhoneCall/" title="Phone Call">Phone Call</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/27/IdealHouse/" title="Ideal House"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Ideal House" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-27T15:59:58.000Z" title="Created 2024-09-27 23:59:58">2024-09-27</time></div><a class="article-sort-item-title" href="/2024/09/27/IdealHouse/" title="Ideal House">Ideal House</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/27/Room/" title="Room"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Room" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-26T20:56:41.000Z" title="Created 2024-09-27 04:56:41">2024-09-27</time></div><a class="article-sort-item-title" href="/2024/09/27/Room/" title="Room">Room</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/27/Wildlife/" title="Wild life"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Wild life" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-26T19:53:10.000Z" title="Created 2024-09-27 03:53:10">2024-09-27</time></div><a class="article-sort-item-title" href="/2024/09/27/Wildlife/" title="Wild life">Wild life</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/26/Advice/" title="A Person offering Advice"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="A Person offering Advice" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-25T20:13:13.000Z" title="Created 2024-09-26 04:13:13">2024-09-26</time></div><a class="article-sort-item-title" href="/2024/09/26/Advice/" title="A Person offering Advice">A Person offering Advice</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/26/FavoritePlace/" title="Favorite Place"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Favorite Place" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-25T17:18:14.000Z" title="Created 2024-09-26 01:18:14">2024-09-26</time></div><a class="article-sort-item-title" href="/2024/09/26/FavoritePlace/" title="Favorite Place">Favorite Place</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/25/diskpart/" title="Cannot expand the storage of C driver -- Recovery partition in disk management"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Cannot expand the storage of C driver -- Recovery partition in disk management" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-25T03:50:45.000Z" title="Created 2024-09-25 11:50:45">2024-09-25</time></div><a class="article-sort-item-title" href="/2024/09/25/diskpart/" title="Cannot expand the storage of C driver -- Recovery partition in disk management">Cannot expand the storage of C driver -- Recovery partition in disk management</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/25/CulturalPlace/" title="Cultural Place"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Cultural Place" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-25T02:39:18.000Z" title="Created 2024-09-25 10:39:18">2024-09-25</time></div><a class="article-sort-item-title" href="/2024/09/25/CulturalPlace/" title="Cultural Place">Cultural Place</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2024/09/25/GoodServices/" title="Good Services from shopping"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Good Services from shopping" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-09-25T02:38:07.000Z" title="Created 2024-09-25 10:38:07">2024-09-25</time></div><a class="article-sort-item-title" href="/2024/09/25/GoodServices/" title="Good Services from shopping">Good Services from shopping</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/archives/2024/09/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/archives/2024/09/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2024/09/page/3/">3</a><a class="extend next" rel="next" href="/archives/2024/09/page/3/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ethan Lee</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/LosFurina"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/LosFurina" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Hope I can help you!</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/01/16/English-Preposition/" title="English Preposition"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="English Preposition"/></a><div class="content"><a class="title" href="/2025/01/16/English-Preposition/" title="English Preposition">English Preposition</a><time datetime="2025-01-16T09:18:06.000Z" title="Created 2025-01-16 17:18:06">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/16/English-WordRoot-WordPrefix-WordSuffix/" title="English-WordRoot-WordPrefix-WordSuffix"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="English-WordRoot-WordPrefix-WordSuffix"/></a><div class="content"><a class="title" href="/2025/01/16/English-WordRoot-WordPrefix-WordSuffix/" title="English-WordRoot-WordPrefix-WordSuffix">English-WordRoot-WordPrefix-WordSuffix</a><time datetime="2025-01-15T22:46:44.000Z" title="Created 2025-01-16 06:46:44">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/15/English-Derivative/" title="English Derivative Word"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAN_Z4aQbN2VvcVgqJ2E41C-n2DKn6sAAoXHMRtZ7TBUt3U0YwngteIBAAMCAANtAAM2BA" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="English Derivative Word"/></a><div class="content"><a class="title" href="/2025/01/15/English-Derivative/" title="English Derivative Word">English Derivative Word</a><time datetime="2025-01-14T16:20:38.000Z" title="Created 2025-01-15 00:20:38">2025-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/15/English-Word-Building/" title="English Word Building"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAN-Z4ZyfSKwX1zoAAGkWujOeHGKhaPSAAI7xzEbWe0wVCeqQDr5tgpmAQADAgADdwADNgQ" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="English Word Building"/></a><div class="content"><a class="title" href="/2025/01/15/English-Word-Building/" title="English Word Building">English Word Building</a><time datetime="2025-01-14T16:08:03.000Z" title="Created 2025-01-15 00:08:03">2025-01-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/14/English-Mood/" title="English Mood"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAN9Z4VliQABZ56oPFAN9DeexKW6D4UoAALvwTEbWe0oVCjAF02wijDVAQADAgADbQADNgQ" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="English Mood"/></a><div class="content"><a class="title" href="/2025/01/14/English-Mood/" title="English Mood">English Mood</a><time datetime="2025-01-13T19:03:25.000Z" title="Created 2025-01-14 03:03:25">2025-01-14</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>Latest Comments</span></div><div class="aside-list"><span>Loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/English-Study/"><span class="card-category-list-name">English Study</span><span class="card-category-list-count">35</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Git/"><span class="card-category-list-name">Git</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/windows/"><span class="card-category-list-name">windows</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/IELTS/" style="font-size: 1.45em; color: rgb(168, 158, 152);">IELTS</a><a href="/tags/Speaking/" style="font-size: 1.41em; color: rgb(137, 140, 50);">Speaking</a><a href="/tags/Docker/" style="font-size: 1.15em; color: rgb(50, 62, 91);">Docker</a><a href="/tags/Linux/" style="font-size: 1.28em; color: rgb(83, 50, 58);">Linux</a><a href="/tags/Network/" style="font-size: 1.24em; color: rgb(75, 64, 161);">Network</a><a href="/tags/English/" style="font-size: 1.32em; color: rgb(61, 141, 162);">English</a><a href="/tags/Word/" style="font-size: 1.24em; color: rgb(136, 52, 50);">Word</a><a href="/tags/Grammar/" style="font-size: 1.19em; color: rgb(55, 158, 50);">Grammar</a><a href="/tags/Writing/" style="font-size: 1.36em; color: rgb(50, 96, 130);">Writing</a><a href="/tags/Git/" style="font-size: 1.15em; color: rgb(50, 109, 102);">Git</a><a href="/tags/Proxy/" style="font-size: 1.19em; color: rgb(108, 178, 73);">Proxy</a><a href="/tags/OneDrive/" style="font-size: 1.15em; color: rgb(82, 50, 179);">OneDrive</a><a href="/tags/Tools/" style="font-size: 1.15em; color: rgb(152, 50, 91);">Tools</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
+    </div>
+    <ul class="card-archive-list">
+  
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2025/01/">
+          <span class="card-archive-list-date">January 2025</span>
+          <span class="card-archive-list-count">12</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/10/">
+          <span class="card-archive-list-date">October 2024</span>
+          <span class="card-archive-list-count">7</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/09/">
+          <span class="card-archive-list-date">September 2024</span>
+          <span class="card-archive-list-count">26</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">45</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-02-23T19:30:29.112Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAOPZ7t0Pq90h8y-pYeZBdNE_OxRZfQAAubDMRsp6OFVBMRxGXyLqv4BAAMCAAN3AAM2BA);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Ethan Lee</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional and Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>(() => {
+  const panguFn = () => {
+    if (typeof pangu === 'object') pangu.autoSpacingPage()
+    else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+        .then(() => {
+          pangu.autoSpacingPage()
+        })
+    }
+  }
+
+  const panguInit = () => {
+    if (false){
+      GLOBAL_CONFIG_SITE.isPost && panguFn()
+    } else {
+      panguFn()
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', panguInit, 'pangu')
+  document.addEventListener('DOMContentLoaded', panguInit)
+})()</script><div class="js-pjax"></div><script>window.newestComments = {
+  changeContent: content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[Image]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[Link]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[Code]') // replace code
+    content = content.replace(/<code>.*?<\/code>/gi, '[Code]') // replace code      
+    content = content.replace(/<[^>]+>/g, "") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0, 150) + '...'
+    }
+    return content
+  },
+
+  generateHtml: (array, ele) => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class="aside-list-item">'
+
+        if (true && array[i].avatar) {
+          const imgAttr = 'data-lazy-src'
+          result += `<a href="${array[i].url}" class="thumbnail"><img ${imgAttr}="${array[i].avatar}" alt="${array[i].nick}"></a>`
+        }
+
+        result += `<div class="content">
+        <a class="comment" href="${array[i].url}" title="${array[i].content}">${array[i].content}</a>
+        <div class="name"><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += 'No comments'
+    }
+
+    ele.innerHTML = result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh(ele)
+  },
+
+  newestCommentInit: (name, getComment) => {
+    const $dom = document.querySelector('#card-newest-comments .aside-list')
+    if ($dom) {
+      const data = btf.saveToLocal.get(name)
+      if (data) {
+        newestComments.generateHtml(JSON.parse(data), $dom)
+      } else {
+        getComment($dom)
+      }
+    }
+  },
+
+  run: (name, getComment) => {
+    newestComments.newestCommentInit(name, getComment)
+    btf.addGlobalFn('pjaxComplete', () => newestComments.newestCommentInit(name, getComment), name)
+  }
+}</script><script>window.addEventListener('load', () => {
+  const keyName = 'github-newest-comments'
+  const { changeContent, generateHtml, run } = window.newestComments
+
+  const findTrueUrl = (array, ele) => {
+    Promise.all(array.map(item =>
+      fetch(item.url).then(resp => resp.json()).then(data => {
+        let urlArray = data.body ? data.body.match(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/ig) : []
+        if (!Array.isArray(urlArray) || urlArray.length === 0) {
+          urlArray = [`${data.html_url}`]
+        }
+        if (data.user.login === 'utterances-bot') {
+          return urlArray.pop()
+        } else {
+          return urlArray.shift()
+        }
+      })
+    )).then(res => {
+        array = array.map((i,index)=> {
+          return {
+            ...i,
+            url: res[index]
+          }
+        })
+
+        btf.saveToLocal.set(keyName, JSON.stringify(array), 10/(60*24))
+        generateHtml(array, ele)
+    });
+  }
+
+  const getComment = ele => {
+    fetch('https://api.github.com/repos/LosFurina/LosFurina.github.io/issues/comments?sort=updated&direction=desc&per_page=6&page=1',{
+      "headers": {
+        Accept: 'application/vnd.github.v3.html+json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        const githubArray = data.map(item => {
+          return {
+            'avatar': item.user.avatar_url,
+            'content': changeContent(item.body_html || item.body),
+            'nick': item.user.login,
+            'url': item.issue_url,
+            'date': item.updated_at
+          }
+        })
+        findTrueUrl(githubArray, ele)
+      }).catch(e => {
+        console.error(e)
+        ele.textContent= "Unable to retrieve comments, please check the configuration"
+      })
+  }
+  run(keyName, getComment)
+})</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
