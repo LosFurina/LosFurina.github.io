@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Category: infra | Welcome to Ethan's Homepage</title><meta name="author" content="Ethan Lee"><meta name="copyright" content="Ethan Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Welcome to Ethan&#39;s Homepage">
+<meta property="og:url" content="http://blog.liweijun.online/categories/infra/page/2/index.html">
+<meta property="og:site_name" content="Welcome to Ethan&#39;s Homepage">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://blog.liweijun.online/img/favicon.jpg">
+<meta property="article:author" content="Ethan Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.liweijun.online/img/favicon.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://blog.liweijun.online/categories/infra/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-7LF23HRNFJ"></script><script>window.dataLayer = window.dataLayer || []
+function gtag(){dataLayer.push(arguments)}
+gtag('js', new Date())
+gtag('config', 'G-7LF23HRNFJ')
+btf.addGlobalFn('pjaxComplete', () => {
+  gtag('config', 'G-7LF23HRNFJ', {'page_path': window.location.pathname})
+}, 'google_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Category: infra',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'category'
+}</script><meta name="generator" content="Hexo 8.1.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="https://codebyzach.github.io/pace/#"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg" style="background-image: url(https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAOPZ7t0Pq90h8y-pYeZBdNE_OxRZfQAAubDMRsp6OFVBMRxGXyLqv4BAAMCAAN3AAM2BA);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fa-solid fa-pen-nib"></i><span> Diary</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Links</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-brands fa-square-twitter"></i><span> Social</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/LosFurina"><i class="fa-fw fa-brands fa-github"></i><span> Github</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://x.com/MicroNahida"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Twitter/X</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://driver.liweijun.top/CV_Ethan%40.pdf"><i class="fa-fw fas fa-file"></i><span> Resume</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-link"></i><span> Notes</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://ethan0302.notion.site/Spoken-English-a5c9ab31be404619ac339ff208561179?pvs=73"><i class="fa-fw fa-solid fa-database"></i><span> Notion</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://music.liweijun.online/app/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://movie.liweijun.online"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://file.liweijun.online/"><i class="fa-fw fa-solid fa-hard-drive"></i><span> MyDrive</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://latex.liweijun.online/"><i class="fa-fw fas fa-file-alt"></i><span> Overleaf</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://bit.liweijun.online/"><i class="fa-fw fas fa-lock"></i><span> Bitwarden</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://nezha.liweijun.online/"><i class="fa-fw fas fa-tachometer-alt"></i><span> Dashboard</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://img.liweijun.online/"><i class="fa-fw fas fa-image"></i><span> ImgHosting</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAOPZ7t0Pq90h8y-pYeZBdNE_OxRZfQAAubDMRsp6OFVBMRxGXyLqv4BAAMCAAN3AAM2BA);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.jpg" alt="Logo"><span class="site-name">Welcome to Ethan's Homepage</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/shuoshuo/"><i class="fa-fw fa-solid fa-pen-nib"></i><span> Diary</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Links</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa-brands fa-square-twitter"></i><span> Social</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/LosFurina"><i class="fa-fw fa-brands fa-github"></i><span> Github</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://x.com/MicroNahida"><i class="fa-fw fa-solid fa-up-right-from-square"></i><span> Twitter/X</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://driver.liweijun.top/CV_Ethan%40.pdf"><i class="fa-fw fas fa-file"></i><span> Resume</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-link"></i><span> Notes</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://ethan0302.notion.site/Spoken-English-a5c9ab31be404619ac339ff208561179?pvs=73"><i class="fa-fw fa-solid fa-database"></i><span> Notion</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> Tools</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://music.liweijun.online/app/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://movie.liweijun.online"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://file.liweijun.online/"><i class="fa-fw fa-solid fa-hard-drive"></i><span> MyDrive</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://latex.liweijun.online/"><i class="fa-fw fas fa-file-alt"></i><span> Overleaf</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://bit.liweijun.online/"><i class="fa-fw fas fa-lock"></i><span> Bitwarden</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://nezha.liweijun.online/"><i class="fa-fw fas fa-tachometer-alt"></i><span> Dashboard</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://img.liweijun.online/"><i class="fa-fw fas fa-image"></i><span> ImgHosting</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">infra</h1></div></header><main class="layout" id="content-inner"><div id="category"><div class="article-sort-title">Category - infra</div><div class="article-sort"><div class="article-sort-item year">2025</div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/05/22/infra/OpenVPN/" title="How to use OpenVPN"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="How to use OpenVPN" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-22T09:25:57.000Z" title="Created 2025-05-22 17:25:57">2025-05-22</time></div><a class="article-sort-item-title" href="/2025/05/22/infra/OpenVPN/" title="How to use OpenVPN">How to use OpenVPN</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/05/22/infra/Get-SSL-Certificates/" title="Get SSL Certificates"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Get SSL Certificates" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-22T09:21:38.000Z" title="Created 2025-05-22 17:21:38">2025-05-22</time></div><a class="article-sort-item-title" href="/2025/05/22/infra/Get-SSL-Certificates/" title="Get SSL Certificates">Get SSL Certificates</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/05/22/infra/Self-host-remote-git-repository/" title="Self-host remote git repository"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://driver.liweijun.top/git_repo.png" alt="Self-host remote git repository" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-22T09:13:23.000Z" title="Created 2025-05-22 17:13:23">2025-05-22</time></div><a class="article-sort-item-title" href="/2025/05/22/infra/Self-host-remote-git-repository/" title="Self-host remote git repository">Self-host remote git repository</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/05/21/infra/LaTex-local/" title="Compile LaTeX code at local environment"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" alt="Compile LaTeX code at local environment" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-05-21T19:11:42.000Z" title="Created 2025-05-22 03:11:42">2025-05-22</time></div><a class="article-sort-item-title" href="/2025/05/21/infra/LaTex-local/" title="Compile LaTeX code at local environment">Compile LaTeX code at local environment</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/01/10/infra/Linux-H-UI/" title="Deploy H-UI and Hysteria2 Protocol Proxy against Network Sanction"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://v2.hysteria.network/assets/logo.svg" alt="Deploy H-UI and Hysteria2 Protocol Proxy against Network Sanction" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-01-10T09:54:41.000Z" title="Created 2025-01-10 17:54:41">2025-01-10</time></div><a class="article-sort-item-title" href="/2025/01/10/infra/Linux-H-UI/" title="Deploy H-UI and Hysteria2 Protocol Proxy against Network Sanction">Deploy H-UI and Hysteria2 Protocol Proxy against Network Sanction</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/01/10/infra/Linux-3X-UI/" title="Deploy 3X-UI and Network Proxy against Network Sanction"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://github.com/MHSanaei/3x-ui/raw/main/media/3x-ui-light.png" alt="Deploy 3X-UI and Network Proxy against Network Sanction" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-01-10T08:11:33.000Z" title="Created 2025-01-10 16:11:33">2025-01-10</time></div><a class="article-sort-item-title" href="/2025/01/10/infra/Linux-3X-UI/" title="Deploy 3X-UI and Network Proxy against Network Sanction">Deploy 3X-UI and Network Proxy against Network Sanction</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/2025/01/08/infra/Linux-Mount-OneDriver/" title="Mount OneDriver on Linux"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://buckleyplanet.com/wp-content/uploads/2023/02/OneDrive-Symbol.png" alt="Mount OneDriver on Linux" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2025-01-08T18:12:17.000Z" title="Created 2025-01-09 02:12:17">2025-01-09</time></div><a class="article-sort-item-title" href="/2025/01/08/infra/Linux-Mount-OneDriver/" title="Mount OneDriver on Linux">Mount OneDriver on Linux</a></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/categories/infra/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/categories/infra/">1</a><span class="page-number current">2</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ethan Lee</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">76</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="http://github.com/LosFurina"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/LosFurina" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/work@liweijun.online" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Hope I can help you!</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/06/26/git/Git-Rebase/" title="Git Rebase"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git Rebase"/></a><div class="content"><a class="title" href="/2025/06/26/git/Git-Rebase/" title="Git Rebase">Git Rebase</a><time datetime="2025-06-26T17:52:10.000Z" title="Created 2025-06-27 01:52:10">2025-06-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/16/infra/self-hosting-email/" title="Manage your own email server via Gmail and Cloudflare"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANWZ31GedJtW8JLCKlPe0l3JbmdFawAAkfBMRvEEOlXdEsXmHOnslsBAAMCAAN3AAM2BA" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Manage your own email server via Gmail and Cloudflare"/></a><div class="content"><a class="title" href="/2025/06/16/infra/self-hosting-email/" title="Manage your own email server via Gmail and Cloudflare">Manage your own email server via Gmail and Cloudflare</a><time datetime="2025-06-17T06:09:12.000Z" title="Created 2025-06-17 14:09:12">2025-06-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/16/infra/Bitwarden/" title="How to install Bitwarden"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://github.com/dani-garcia/vaultwarden/raw/main/resources/vaultwarden-logo-auto.svg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="How to install Bitwarden"/></a><div class="content"><a class="title" href="/2025/06/16/infra/Bitwarden/" title="How to install Bitwarden">How to install Bitwarden</a><time datetime="2025-06-16T18:48:03.000Z" title="Created 2025-06-17 02:48:03">2025-06-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/24/infra/Filebrowser/" title="How to use Filebrowser"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://driver.liweijun.top/filebrowser.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="How to use Filebrowser"/></a><div class="content"><a class="title" href="/2025/05/24/infra/Filebrowser/" title="How to use Filebrowser">How to use Filebrowser</a><time datetime="2025-05-25T03:45:34.000Z" title="Created 2025-05-25 11:45:34">2025-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/24/infra/Install-Brew/" title="Install-Brew"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://driver.liweijun.top/homebrew.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Install-Brew"/></a><div class="content"><a class="title" href="/2025/05/24/infra/Install-Brew/" title="Install-Brew">Install-Brew</a><time datetime="2025-05-25T03:42:50.000Z" title="Created 2025-05-25 11:42:50">2025-05-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/docker/"><span class="card-category-list-name">docker</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/english/"><span class="card-category-list-name">english</span><span class="card-category-list-count">46</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/git/"><span class="card-category-list-name">git</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/infra/"><span class="card-category-list-name">infra</span><span class="card-category-list-count">17</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/linux/"><span class="card-category-list-name">linux</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/windows/"><span class="card-category-list-name">windows</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1.1em; color: #999">教程</a> <a href="/tags/Game-Server/" style="font-size: 1.1em; color: #999">Game Server</a> <a href="/tags/Grammar/" style="font-size: 1.14em; color: #999b9d">Grammar</a> <a href="/tags/OpenVPN/" style="font-size: 1.1em; color: #999">OpenVPN</a> <a href="/tags/OneDrive/" style="font-size: 1.1em; color: #999">OneDrive</a> <a href="/tags/Windows/" style="font-size: 1.23em; color: #999ea6">Windows</a> <a href="/tags/Certificates/" style="font-size: 1.1em; color: #999">Certificates</a> <a href="/tags/Bitwarden/" style="font-size: 1.1em; color: #999">Bitwarden</a> <a href="/tags/Automation/" style="font-size: 1.1em; color: #999">Automation</a> <a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.1em; color: #999">云服务器</a> <a href="/tags/Syncthing/" style="font-size: 1.1em; color: #999">Syncthing</a> <a href="/tags/Writing/" style="font-size: 1.32em; color: #99a2ae">Writing</a> <a href="/tags/Homebrew/" style="font-size: 1.1em; color: #999">Homebrew</a> <a href="/tags/IELTS/" style="font-size: 1.5em; color: #99a9bf">IELTS</a> <a href="/tags/Factorio/" style="font-size: 1.1em; color: #999">Factorio</a> <a href="/tags/Headless-Server/" style="font-size: 1.1em; color: #999">Headless Server</a> <a href="/tags/Linux/" style="font-size: 1.41em; color: #99a5b7">Linux</a> <a href="/tags/SSL/" style="font-size: 1.1em; color: #999">SSL</a> <a href="/tags/Configuration/" style="font-size: 1.1em; color: #999">Configuration</a> <a href="/tags/Docker/" style="font-size: 1.23em; color: #999ea6">Docker</a> <a href="/tags/Git/" style="font-size: 1.19em; color: #999da1">Git</a> <a href="/tags/Self-hosting/" style="font-size: 1.1em; color: #999">Self-hosting</a> <a href="/tags/Network/" style="font-size: 1.32em; color: #99a2ae">Network</a> <a href="/tags/MacOS/" style="font-size: 1.23em; color: #999ea6">MacOS</a> <a href="/tags/English/" style="font-size: 1.37em; color: #99a4b2">English</a> <a href="/tags/Word/" style="font-size: 1.19em; color: #999da1">Word</a> <a href="/tags/Grammar%EF%BC%8C-IELTS/" style="font-size: 1.1em; color: #999">Grammar， IELTS</a> <a href="/tags/Writing%EF%BC%8C-English/" style="font-size: 1.1em; color: #999">Writing， English</a> <a href="/tags/Installation/" style="font-size: 1.1em; color: #999">Installation</a> <a href="/tags/Proxy/" style="font-size: 1.23em; color: #999ea6">Proxy</a> <a href="/tags/Vaultwarden/" style="font-size: 1.1em; color: #999">Vaultwarden</a> <a href="/tags/LaTeX/" style="font-size: 1.1em; color: #999">LaTeX</a> <a href="/tags/Tools/" style="font-size: 1.14em; color: #999b9d">Tools</a> <a href="/tags/SSH/" style="font-size: 1.28em; color: #99a0aa">SSH</a> <a href="/tags/Speaking/" style="font-size: 1.46em; color: #99a7bb">Speaking</a> <a href="/tags/Password-Manager/" style="font-size: 1.1em; color: #999">Password Manager</a> <a href="/tags/Filebrowser/" style="font-size: 1.1em; color: #999">Filebrowser</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/06/">
+            <span class="card-archive-list-date">
+              June 2025
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">29</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/01/">
+            <span class="card-archive-list-date">
+              January 2025
+            </span>
+            <span class="card-archive-list-count">11</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/10/">
+            <span class="card-archive-list-date">
+              October 2024
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/09/">
+            <span class="card-archive-list-date">
+              September 2024
+            </span>
+            <span class="card-archive-list-count">26</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">76</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-11-04T23:54:59.876Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://img.liweijun.top/api/cfile/AgACAgUAAxkDAAOPZ7t0Pq90h8y-pYeZBdNE_OxRZfQAAubDMRsp6OFVBMRxGXyLqv4BAAMCAAN3AAM2BA);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2019 - 2025 By Ethan Lee</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Toggle Between Traditional and Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="local-search-input"><input placeholder="Search for Posts" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
