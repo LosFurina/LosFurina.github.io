@@ -1,0 +1,146 @@
+---
+interface Props {
+    url: string;
+    title: string;
+}
+
+const { url, title } = Astro.props;
+
+// Build share URLs
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+
+const shareUrls = {
+    twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
+};
+---
+
+<div class="share-buttons">
+    <span class="share-label">Share:</span>
+
+    <a
+        href={shareUrls.twitter}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="share-btn twitter"
+        title="Share on X"
+    >
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+            <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            ></path>
+        </svg>
+        <span>Post on X</span>
+    </a>
+
+    <button class="share-btn copy-link" id="copyLinkBtn" data-url={url}>
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            width="18"
+            height="18"
+        >
+            <path
+                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+            ></path>
+            <path
+                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+            ></path>
+        </svg>
+        <span class="copy-text">Copy Link</span>
+    </button>
+</div>
+
+<style>
+    .share-buttons {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .share-label {
+        font-size: 0.9rem;
+        color: rgb(var(--gray));
+        font-weight: 500;
+    }
+
+    .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.85rem;
+        font-family: inherit;
+        font-weight: 500;
+        text-decoration: none;
+        border: 1px solid rgba(var(--gray-light), 0.8);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.8);
+        color: rgb(var(--gray-dark));
+    }
+
+    :global([data-theme="dark"]) .share-btn {
+        background: rgba(40, 40, 45, 0.8);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .share-btn.twitter:hover {
+        background: #000;
+        color: white;
+        border-color: #000;
+    }
+
+    .share-btn.copy-link:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+    }
+
+    .share-btn.copied {
+        background: #22c55e;
+        color: white;
+        border-color: #22c55e;
+    }
+
+    @media (max-width: 480px) {
+        .share-btn span:not(.copy-text) {
+            display: none;
+        }
+
+        .share-btn {
+            padding: 0.5rem 0.7rem;
+        }
+    }
+</style>
+
+<script>
+    const copyBtn = document.getElementById("copyLinkBtn");
+    const copyText = copyBtn?.querySelector(".copy-text");
+
+    copyBtn?.addEventListener("click", async () => {
+        const url = copyBtn.dataset.url || window.location.href;
+
+        try {
+            await navigator.clipboard.writeText(url);
+            copyBtn.classList.add("copied");
+            if (copyText) copyText.textContent = "Copied!";
+
+            setTimeout(() => {
+                copyBtn.classList.remove("copied");
+                if (copyText) copyText.textContent = "Copy Link";
+            }, 2000);
+        } catch (err) {
+            console.error("Failed to copy:", err);
+        }
+    });
+</script>

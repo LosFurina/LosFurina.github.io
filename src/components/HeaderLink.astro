@@ -1,24 +1,141 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'a'>;
+interface Props extends HTMLAttributes<"a"> {
+	icon?: string;
+}
 
-const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const { href, icon, class: className, ...props } = Astro.props;
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
 const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<slot />
+	{icon && <span class="nav-icon">{icon}</span>}
+	<span class="nav-text"><slot /></span>
 </a>
+
 <style>
 	a {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		padding: 0.25rem 0.65rem;
 		text-decoration: none;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: rgb(var(--gray-dark));
+		border-radius: 10px;
+		/* 玻璃框效果 */
+		background: rgba(255, 255, 255, 0.4);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		border: 1px solid rgba(255, 255, 255, 0.5);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+		/* 缓动过渡 */
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		position: relative;
+		overflow: hidden;
 	}
+
+	/* 渐变光泽效果 */
+	a::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.4),
+			transparent
+		);
+		transition: left 0.5s ease;
+	}
+
+	a:hover::before {
+		left: 100%;
+	}
+
+	a:hover {
+		background: rgba(255, 255, 255, 0.7);
+		border-color: var(--accent);
+		color: var(--accent);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 16px rgba(var(--accent-rgb, 68, 115, 238), 0.2);
+	}
+
+	a:focus-visible {
+		outline: none;
+		background: rgba(255, 255, 255, 0.7);
+		border-color: var(--accent);
+		box-shadow:
+			0 0 0 3px rgba(var(--accent-rgb, 68, 115, 238), 0.3),
+			0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+
 	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
+		background: linear-gradient(
+			135deg,
+			var(--accent),
+			var(--accent-dark, var(--accent))
+		);
+		color: white;
+		border-color: transparent;
+		box-shadow: 0 4px 14px rgba(var(--accent-rgb, 68, 115, 238), 0.35);
+	}
+
+	a.active:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 4px 16px rgba(var(--accent-rgb, 68, 115, 238), 0.4);
+	}
+
+	.nav-icon {
+		font-size: 1rem;
+		line-height: 1;
+		transition: transform 0.3s ease;
+	}
+
+	a:hover .nav-icon {
+		transform: scale(1.15);
+	}
+
+	.nav-text {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* 暗色模式 */
+	:global([data-theme="dark"]) a {
+		background: rgba(50, 50, 55, 0.5);
+		border-color: rgba(255, 255, 255, 0.1);
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	:global([data-theme="dark"]) a:hover {
+		background: rgba(70, 70, 80, 0.7);
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	:global([data-theme="dark"]) a.active {
+		background: linear-gradient(
+			135deg,
+			var(--accent),
+			var(--accent-dark, var(--accent))
+		);
+		color: white;
+	}
+
+	:global([data-theme="dark"]) a::before {
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.15),
+			transparent
+		);
 	}
 </style>

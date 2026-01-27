@@ -1,0 +1,229 @@
+---
+import { Image } from "astro:assets";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  title: string;
+  pubDate: Date;
+  description?: string;
+  heroImage?: ImageMetadata;
+  href: string;
+  index?: number;
+}
+
+const { title, pubDate, description, heroImage, href, index = 0 } = Astro.props;
+
+// 精美渐变占位图 - 优雅的配色方案
+const gradients = [
+  "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+  "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+  "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+  "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+  "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+  "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+  "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+  "linear-gradient(135deg, #5ee7df 0%, #b490ca 100%)",
+];
+const defaultGradient = gradients[index % gradients.length];
+---
+
+<article class="blog-card">
+  <a href={href} class="card-link">
+    <div class="card-image">
+      {
+        heroImage ? (
+          <Image
+            src={heroImage}
+            alt={title}
+            width={600}
+            height={340}
+            class="hero-img"
+          />
+        ) : (
+          <div
+            class="placeholder-img"
+            style={`background: ${defaultGradient};`}
+          >
+            <span class="placeholder-icon">✦</span>
+          </div>
+        )
+      }
+      <div class="image-overlay"></div>
+    </div>
+    <div class="card-content">
+      <h3 class="card-title">{title}</h3>
+      <p class="card-date">
+        <FormattedDate date={pubDate} />
+      </p>
+      {description && <p class="card-description">{description}</p>}
+    </div>
+  </a>
+</article>
+
+<style>
+  .blog-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.04),
+      0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+  }
+
+  :global([data-theme="dark"]) .blog-card {
+    background: rgb(var(--gray-light));
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.1),
+      0 20px 48px rgba(0, 0, 0, 0.12);
+  }
+
+  :global([data-theme="dark"]) .blog-card:hover {
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.3),
+      0 20px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    margin-bottom: -1px;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .blog-card:hover .hero-img {
+    transform: scale(1.05);
+  }
+
+  .placeholder-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .blog-card:hover .placeholder-img {
+    transform: scale(1.05);
+  }
+
+  .placeholder-icon {
+    font-size: 3rem;
+    opacity: 0.4;
+    color: white;
+  }
+
+  .image-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50%;
+    background: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.7) 40%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  :global([data-theme="dark"]) .image-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(var(--gray-light), 0.95) 0%,
+      rgba(var(--gray-light), 0.7) 40%,
+      transparent 100%
+    );
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 1;
+    padding: 1.25rem 1.5rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+  }
+
+  :global([data-theme="dark"]) .card-content {
+    background: rgb(var(--gray-light));
+  }
+
+  .card-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: rgb(var(--gray-dark));
+    transition: color 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-card:hover .card-title {
+    color: var(--accent);
+  }
+
+  .card-date {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.8rem;
+    color: rgb(var(--gray));
+    letter-spacing: 0.02em;
+  }
+
+  .card-description {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgb(var(--gray));
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  @media (max-width: 720px) {
+    .card-content {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+    }
+
+    .card-description {
+      font-size: 0.85rem;
+    }
+  }
+</style>

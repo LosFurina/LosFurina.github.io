@@ -1,0 +1,218 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+
+// 最后更新时间
+const lastUpdated = new Date("2024-01-26");
+
+// 现在在做什么
+const sections = [
+    {
+        title: "🎯 Current Focus",
+        items: [
+            "Looking for DevOps / Infrastructure internship opportunities",
+            "Building and maintaining my homelab Kubernetes cluster",
+            "Contributing to open source DevOps tools",
+        ],
+    },
+    {
+        title: "📚 Learning",
+        items: [
+            "Advanced Kubernetes patterns (Operators, CRDs)",
+            "Service Mesh (Istio, Linkerd)",
+            "GitOps with ArgoCD",
+            "Go programming for cloud-native development",
+        ],
+    },
+    {
+        title: "🛠️ Working On",
+        items: [
+            "This personal website - continuous improvement",
+            "Automating my homelab with Ansible playbooks",
+            "Building a CI/CD pipeline template for side projects",
+        ],
+    },
+    {
+        title: "📖 Reading",
+        items: [
+            '"Site Reliability Engineering" - Google SRE Book',
+            '"Kubernetes Patterns" - Bilgin Ibryam',
+            "Various tech blogs and documentation",
+        ],
+    },
+    {
+        title: "🎮 Outside of Tech",
+        items: [
+            "Playing video games",
+            "Watching anime",
+            "Hiking and outdoor activities",
+        ],
+    },
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Now | ${SITE_TITLE}`}
+            description="What I'm currently doing"
+        />
+        <style>
+            main {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .page-header {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--accent),
+                    var(--accent-dark)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .page-header p {
+                color: rgb(var(--gray));
+                font-size: 1.1rem;
+            }
+
+            .updated-date {
+                display: inline-block;
+                margin-top: 0.5rem;
+                padding: 0.25rem 0.75rem;
+                background: rgba(var(--gray-light), 0.5);
+                border-radius: 20px;
+                font-size: 0.85rem;
+                color: rgb(var(--gray));
+            }
+
+            .section {
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .section-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .section-list li {
+                position: relative;
+                padding: 0.75rem 1rem 0.75rem 1.5rem;
+                margin-bottom: 0.5rem;
+                background: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(var(--gray-light), 0.8);
+                border-radius: 10px;
+                color: rgb(var(--gray-dark));
+                font-size: 0.95rem;
+            }
+
+            :global([data-theme="dark"]) .section-list li {
+                background: rgba(40, 40, 45, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .section-list li::before {
+                content: "→";
+                position: absolute;
+                left: 0.5rem;
+                color: var(--accent);
+            }
+
+            .now-page-info {
+                margin-top: 3rem;
+                padding: 1.5rem;
+                background: rgba(var(--gray-light), 0.3);
+                border-radius: 12px;
+                text-align: center;
+            }
+
+            .now-page-info h3 {
+                font-size: 1rem;
+                margin: 0 0 0.5rem;
+                color: rgb(var(--gray-dark));
+            }
+
+            .now-page-info p {
+                font-size: 0.9rem;
+                color: rgb(var(--gray));
+                margin: 0;
+            }
+
+            .now-page-info a {
+                color: var(--accent);
+            }
+
+            @media (max-width: 600px) {
+                main {
+                    padding: 1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="page-header">
+                <h1>⏰ Now</h1>
+                <p>What I'm currently up to</p>
+                <span class="updated-date">
+                    Last updated: {
+                        lastUpdated.toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })
+                    }
+                </span>
+            </div>
+
+            {
+                sections.map((section) => (
+                    <section class="section">
+                        <h2 class="section-title">{section.title}</h2>
+                        <ul class="section-list">
+                            {section.items.map((item) => (
+                                <li>{item}</li>
+                            ))}
+                        </ul>
+                    </section>
+                ))
+            }
+
+            <div class="now-page-info">
+                <h3>What is a /now page?</h3>
+                <p>
+                    It's a page that tells you what I'm focused on at this point
+                    in my life.
+                    <a
+                        href="https://nownownow.com/about"
+                        target="_blank"
+                        rel="noopener">Learn more</a
+                    >
+                </p>
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>

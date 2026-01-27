@@ -1,0 +1,440 @@
+---
+interface Props {
+    posts: Array<{
+        id: string;
+        title: string;
+        description: string;
+        pubDate: string;
+        heroImage?: string;
+        href: string;
+    }>;
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="blog-search">
+    <div class="search-container">
+        <div class="search-input-wrapper">
+            <svg
+                class="search-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                width="20"
+                height="20"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                ></path>
+            </svg>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="搜索文章..."
+                autocomplete="off"
+            />
+            <button
+                class="clear-btn"
+                id="clearBtn"
+                type="button"
+                aria-label="Clear search"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    width="16"
+                    height="16"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18 18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="search-modes">
+            <button
+                class="mode-btn active"
+                data-mode="keyword"
+                title="关键词搜索"
+            >
+                <span class="mode-icon">Aa</span>
+                <span class="mode-label">关键词</span>
+            </button>
+            <button class="mode-btn" data-mode="regex" title="正则表达式搜索">
+                <span class="mode-icon">.*</span>
+                <span class="mode-label">正则</span>
+            </button>
+            <button class="mode-btn" data-mode="fuzzy" title="模糊搜索">
+                <span class="mode-icon">~</span>
+                <span class="mode-label">模糊</span>
+            </button>
+        </div>
+    </div>
+    <div class="search-hint" id="searchHint"></div>
+</div>
+
+<style>
+    .blog-search {
+        margin-bottom: 2rem;
+    }
+
+    .search-container {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .search-input-wrapper {
+        flex: 1;
+        min-width: 280px;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 1rem;
+        color: rgb(var(--gray));
+        pointer-events: none;
+    }
+
+    #searchInput {
+        width: 100%;
+        padding: 0.75rem 2.5rem 0.75rem 2.75rem;
+        font-size: 0.95rem;
+        font-family: inherit;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border: 1px solid rgba(var(--gray-light), 0.8);
+        border-radius: 12px;
+        color: rgb(var(--gray-dark));
+        transition: all 0.2s ease;
+        outline: none;
+    }
+
+    :global([data-theme="dark"]) #searchInput {
+        background: rgba(40, 40, 45, 0.8);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    #searchInput:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(35, 55, 255, 0.1);
+    }
+
+    :global([data-theme="dark"]) #searchInput:focus {
+        box-shadow: 0 0 0 3px rgba(77, 94, 255, 0.2);
+    }
+
+    #searchInput::placeholder {
+        color: rgb(var(--gray));
+    }
+
+    .clear-btn {
+        position: absolute;
+        right: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        background: rgba(var(--gray), 0.15);
+        border: none;
+        border-radius: 50%;
+        color: rgb(var(--gray));
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+    }
+
+    .clear-btn.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .clear-btn:hover {
+        background: rgba(var(--gray), 0.25);
+        color: rgb(var(--gray-dark));
+    }
+
+    .search-modes {
+        display: flex;
+        gap: 0.25rem;
+        background: rgba(var(--gray-light), 0.5);
+        padding: 4px;
+        border-radius: 10px;
+    }
+
+    :global([data-theme="dark"]) .search-modes {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .mode-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        font-family: inherit;
+        font-weight: 500;
+        background: transparent;
+        border: none;
+        border-radius: 8px;
+        color: rgb(var(--gray));
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .mode-btn:hover {
+        color: rgb(var(--gray-dark));
+    }
+
+    .mode-btn.active {
+        background: white;
+        color: var(--accent);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    :global([data-theme="dark"]) .mode-btn.active {
+        background: rgba(var(--gray-light), 0.8);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .mode-icon {
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .search-hint {
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+        color: rgb(var(--gray));
+        min-height: 1.5em;
+    }
+
+    .search-hint.error {
+        color: #ef4444;
+    }
+
+    @media (max-width: 600px) {
+        .search-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .search-input-wrapper {
+            min-width: 100%;
+        }
+
+        .search-modes {
+            justify-content: center;
+        }
+
+        .mode-label {
+            display: none;
+        }
+
+        .mode-btn {
+            padding: 0.5rem 0.9rem;
+        }
+    }
+</style>
+
+<script define:vars={{ posts }}>
+    const searchInput = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearBtn");
+    const searchHint = document.getElementById("searchHint");
+    const modeButtons = document.querySelectorAll(".mode-btn");
+    const postsList = document.querySelector(".posts-list");
+
+    let currentMode = "keyword";
+    let postsData = posts;
+
+    // Simple fuzzy matching - checks if query characters appear in order in target
+    function fuzzyMatch(query, target) {
+        query = query.toLowerCase();
+        target = target.toLowerCase();
+
+        let queryIndex = 0;
+        for (let i = 0; i < target.length && queryIndex < query.length; i++) {
+            if (target[i] === query[queryIndex]) {
+                queryIndex++;
+            }
+        }
+        return queryIndex === query.length;
+    }
+
+    // Calculate fuzzy score (higher = better match)
+    function fuzzyScore(query, target) {
+        query = query.toLowerCase();
+        target = target.toLowerCase();
+
+        if (target.includes(query)) return 100; // Exact substring
+        if (fuzzyMatch(query, target)) return 50; // Characters in order
+
+        // Calculate similarity based on common subsequences
+        let score = 0;
+        let queryIndex = 0;
+        for (let i = 0; i < target.length && queryIndex < query.length; i++) {
+            if (target[i] === query[queryIndex]) {
+                score += 10;
+                queryIndex++;
+            }
+        }
+        return score;
+    }
+
+    function searchPosts(query) {
+        if (!query.trim()) {
+            return { results: postsData, hint: "" };
+        }
+
+        let results = [];
+        let hint = "";
+
+        try {
+            switch (currentMode) {
+                case "keyword":
+                    const keywords = query
+                        .toLowerCase()
+                        .split(/\s+/)
+                        .filter((k) => k);
+                    results = postsData.filter((post) => {
+                        const searchText =
+                            `${post.title} ${post.description}`.toLowerCase();
+                        return keywords.every((keyword) =>
+                            searchText.includes(keyword),
+                        );
+                    });
+                    hint = `找到 ${results.length} 篇文章`;
+                    break;
+
+                case "regex":
+                    const regex = new RegExp(query, "i");
+                    results = postsData.filter((post) => {
+                        return (
+                            regex.test(post.title) ||
+                            regex.test(post.description)
+                        );
+                    });
+                    hint = `找到 ${results.length} 篇文章 (正则: /${query}/i)`;
+                    break;
+
+                case "fuzzy":
+                    const scored = postsData.map((post) => {
+                        const titleScore = fuzzyScore(query, post.title);
+                        const descScore = fuzzyScore(query, post.description);
+                        return { post, score: Math.max(titleScore, descScore) };
+                    });
+                    results = scored
+                        .filter((item) => item.score > 0)
+                        .sort((a, b) => b.score - a.score)
+                        .map((item) => item.post);
+                    hint = `找到 ${results.length} 篇相似文章`;
+                    break;
+            }
+        } catch (e) {
+            if (currentMode === "regex") {
+                return { results: [], hint: "正则表达式语法错误", error: true };
+            }
+            results = [];
+        }
+
+        if (results.length === 0) {
+            hint = "没有找到匹配的文章";
+        }
+
+        return { results, hint };
+    }
+
+    function renderPosts(filteredPosts) {
+        // Re-query in case DOM wasn't ready earlier
+        const list = document.querySelector(".posts-list");
+        if (!list) return;
+
+        const allCards = list.querySelectorAll("li");
+        const matchingHrefs = new Set(
+            filteredPosts.map((post) => post.href.replace(/\/$/, "")),
+        );
+
+        allCards.forEach((card) => {
+            const link = card.querySelector("a");
+            if (!link) return;
+
+            const href = (link.getAttribute("href") || "").replace(/\/$/, "");
+            const isMatch = matchingHrefs.has(href);
+
+            if (isMatch) {
+                card.style.display = "";
+                const order = filteredPosts.findIndex(
+                    (p) => p.href.replace(/\/$/, "") === href,
+                );
+                card.style.order = String(order);
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+
+    function handleSearch() {
+        const query = searchInput?.value || "";
+
+        // Show/hide clear button
+        if (clearBtn) {
+            clearBtn.classList.toggle("visible", query.length > 0);
+        }
+
+        const { results, hint, error } = searchPosts(query);
+
+        if (searchHint) {
+            searchHint.textContent = hint;
+            searchHint.classList.toggle("error", !!error);
+        }
+
+        renderPosts(results);
+    }
+
+    // Event listeners
+    searchInput?.addEventListener("input", handleSearch);
+
+    clearBtn?.addEventListener("click", () => {
+        if (searchInput) {
+            searchInput.value = "";
+            searchInput.focus();
+            handleSearch();
+        }
+    });
+
+    modeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            modeButtons.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentMode = btn.dataset.mode || "keyword";
+            handleSearch();
+        });
+    });
+
+    // Keyboard shortcut: Cmd/Ctrl + K to focus search
+    document.addEventListener("keydown", (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+            e.preventDefault();
+            searchInput?.focus();
+        }
+    });
+</script>

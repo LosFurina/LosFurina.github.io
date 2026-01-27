@@ -1,0 +1,60 @@
+---
+interface Props {
+    content: string;
+}
+
+const { content } = Astro.props;
+
+// Calculate reading time
+// Chinese: ~300 characters per minute
+// English: ~200 words per minute
+
+// Count Chinese characters
+const chineseChars = (content.match(/[\u4e00-\u9fa5]/g) || []).length;
+
+// Count English words (remove Chinese chars first)
+const textWithoutChinese = content.replace(/[\u4e00-\u9fa5]/g, "");
+const englishWords = textWithoutChinese
+    .split(/\s+/)
+    .filter((word) => word.length > 0).length;
+
+// Calculate minutes
+const chineseMinutes = chineseChars / 300;
+const englishMinutes = englishWords / 200;
+const totalMinutes = Math.ceil(chineseMinutes + englishMinutes);
+
+// Format display
+const displayTime = totalMinutes < 1 ? "< 1" : String(totalMinutes);
+---
+
+<span class="reading-time">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        width="16"
+        height="16"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+    </svg>
+    {displayTime} min read
+</span>
+
+<style>
+    .reading-time {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.85rem;
+        color: rgb(var(--gray));
+    }
+
+    .reading-time svg {
+        flex-shrink: 0;
+    }
+</style>

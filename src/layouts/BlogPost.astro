@@ -1,86 +1,281 @@
 ---
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Comments from "../components/Comments.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import ReadingTime from "../components/ReadingTime.astro";
+import ShareButtons from "../components/ShareButtons.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
 
-type Props = CollectionEntry<'blog'>['data'];
+interface Props {
+	post: CollectionEntry<"blog">;
+	allPosts: CollectionEntry<"blog">[];
+	headings: Array<{ depth: number; slug: string; text: string }>;
+	rawContent: string;
+}
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { post, allPosts, headings, rawContent } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage } = post.data;
+
+// Build the full URL for sharing
+const url = Astro.url.href;
+
+// Check if TOC should be shown (at least 3 headings)
+const showToc =
+	headings.filter((h) => h.depth >= 2 && h.depth <= 3).length >= 3;
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
+			.blog-container {
+				max-width: 1200px;
 				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				padding: 2rem;
+				display: grid;
+				grid-template-columns: 1fr minmax(0, 720px) 1fr;
+				gap: 2rem;
 			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
+
+			.toc-sidebar {
+				position: relative;
+			}
+
+			.toc-wrapper {
+				position: sticky;
+				top: 6rem;
+			}
+
+			main {
+				min-width: 0;
+			}
+
+			.hero-image {
+				margin-bottom: 2rem;
+			}
+
+			.hero-image img {
+				width: 100%;
+				height: auto;
+				border-radius: 12px;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+			}
+
+			article {
 				color: rgb(var(--gray-dark));
 			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
+
+			.article-header {
+				margin-bottom: 2rem;
 			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
+
+			.article-title {
+				font-size: 2.5rem;
+				line-height: 1.2;
+				margin: 0 0 1rem;
 			}
-			.date {
-				margin-bottom: 0.5em;
+
+			.article-meta {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				flex-wrap: wrap;
 				color: rgb(var(--gray));
+				font-size: 0.9rem;
 			}
-			.last-updated-on {
+
+			.meta-divider {
+				width: 4px;
+				height: 4px;
+				background: rgb(var(--gray));
+				border-radius: 50%;
+				opacity: 0.5;
+			}
+
+			.last-updated {
 				font-style: italic;
+			}
+
+			.article-content {
+				line-height: 1.8;
+				font-size: 1.05rem;
+			}
+
+			.article-content :global(h2) {
+				font-size: 1.75rem;
+				margin: 2.5rem 0 1rem;
+				scroll-margin-top: 6rem;
+			}
+
+			.article-content :global(h3) {
+				font-size: 1.35rem;
+				margin: 2rem 0 0.75rem;
+				scroll-margin-top: 6rem;
+			}
+
+			.article-content :global(p) {
+				margin: 1.25rem 0;
+			}
+
+			.article-content :global(a) {
+				color: var(--accent);
+			}
+
+			.article-content :global(pre) {
+				padding: 1.25rem;
+				border-radius: 8px;
+				overflow-x: auto;
+				margin: 1.5rem 0;
+			}
+
+			.article-content :global(code) {
+				font-family: "JetBrains Mono", "Fira Code", monospace;
+				font-size: 0.9em;
+			}
+
+			.article-content :global(blockquote) {
+				border-left: 4px solid var(--accent);
+				padding-left: 1rem;
+				margin: 1.5rem 0;
+				color: rgb(var(--gray));
+				font-style: italic;
+			}
+
+			.article-content :global(img) {
+				max-width: 100%;
+				height: auto;
+				border-radius: 8px;
+			}
+
+			.article-content :global(ul),
+			.article-content :global(ol) {
+				margin: 1rem 0;
+				padding-left: 1.5rem;
+			}
+
+			.article-content :global(li) {
+				margin: 0.5rem 0;
+			}
+
+			.article-footer {
+				margin-top: 3rem;
+				padding-top: 2rem;
+				border-top: 1px solid rgba(var(--gray-light), 0.8);
+			}
+
+			.share-section {
+				margin-bottom: 2rem;
+			}
+
+			.right-sidebar {
+				/* Placeholder for future content */
+			}
+
+			@media (max-width: 1200px) {
+				.blog-container {
+					grid-template-columns: minmax(0, 720px) 280px;
+				}
+
+				.right-sidebar {
+					display: none;
+				}
+			}
+
+			@media (max-width: 900px) {
+				.blog-container {
+					grid-template-columns: 1fr;
+					padding: 1rem;
+				}
+
+				.toc-sidebar {
+					order: -1;
+				}
+
+				.toc-wrapper {
+					position: relative;
+					top: 0;
+				}
+
+				.article-title {
+					font-size: 1.75rem;
+				}
 			}
 		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
+		<div class="blog-container">
+			{
+				showToc && (
+					<aside class="toc-sidebar">
+						<div class="toc-wrapper">
+							<TableOfContents headings={headings} />
+						</div>
+					</aside>
+				)
+			}
+
+			<main>
+				<article>
+					{
+						heroImage && (
+							<div class="hero-image">
+								<Image
+									width={1020}
+									height={510}
+									src={heroImage}
+									alt={title}
+								/>
+							</div>
+						)
+					}
+
+					<header class="article-header">
+						<h1 class="article-title">{title}</h1>
+						<div class="article-meta">
 							<FormattedDate date={pubDate} />
+							<span class="meta-divider"></span>
+							<ReadingTime content={rawContent} />
 							{
 								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
+									<>
+										<span class="meta-divider" />
+										<span class="last-updated">
+											Updated{" "}
+											<FormattedDate date={updatedDate} />
+										</span>
+									</>
 								)
 							}
 						</div>
-						<h1>{title}</h1>
-						<hr />
+					</header>
+
+					<div class="article-content">
+						<slot />
 					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
+
+					<footer class="article-footer">
+						<div class="share-section">
+							<ShareButtons url={url} title={title} />
+						</div>
+
+						<RelatedPosts currentPost={post} allPosts={allPosts} />
+
+						<Comments />
+					</footer>
+				</article>
+			</main>
+
+			<aside class="right-sidebar">
+				<!-- Future content -->
+			</aside>
+		</div>
 		<Footer />
 	</body>
 </html>

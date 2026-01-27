@@ -1,0 +1,192 @@
+---
+title: English Derivative Word
+description: "Auto-generated description for English Derivative Word"
+pubDate: 2026-01-23
+---
+
+# 派生词
+
+英语派生构词是通过添加前缀（prefix）或后缀（suffix）来改变单词的意义或词性，形成新的单词。这种方法是英语词汇扩展的重要途径。以下是常见的前缀和后缀的归纳，以及对应的示例。
+
+---
+
+# 前缀（Prefix）
+
+前缀通常放在词根前面，改变单词的含义，但通常不改变单词的词性。
+
+## 1. 表示否定或反义的前缀
+
+- **un-**: 表示“否定、不”。
+
+    example: unhappy（不开心的）, unable（不能的）
+
+- **in-/im-**: 表示“否定、不”。
+
+    example: incorrect（不正确的）, impossible（不可能的）
+
+- **il-**: 表示“否定、不”（用于以 l 开头的单词）。
+
+    example: illegal（非法的）
+
+- **ir-**: 表示“否定、不”（用于以 r 开头的单词）。
+
+    example: irregular（不规则的）
+
+- **dis-**: 表示“否定、取消”。
+
+    example: dislike（不喜欢）, disconnect（断开）
+
+- **non-**: 表示“非、不”。
+
+  example: nonviolent（非暴力的）, nonlinear（非线性的）
+
+## 2. 表示方向或位置的前缀
+
+- **re-**: 表示“重新、再次”。
+
+    example: rebuild（重建）, rewrite（重写）
+
+- **pre-**: 表示“在……之前”。
+
+    example: preview（预览）, prehistoric（史前的）
+
+- **post-**: 表示“在……之后”。
+
+    example: postwar（战后的）, postgraduate（研究生的）
+
+- **sub-**: 表示“在……下面”。
+
+    example: submarine（潜艇）, subway（地铁）
+
+- **super-**: 表示“在……之上”。
+
+    example: superman（超人）, superstar（超级明星）
+
+## 3. 表示程度或大小的前缀
+
+- **over-**: 表示“过度、超过”。
+
+  example: overeat（吃得过多）, overwork（过度工作）
+
+- **under-**: 表示“不足、不够”。
+
+  example: underestimate（低估）, underpaid（薪水过低的）
+
+- **hyper-**: 表示“过度”。
+
+  example: hyperactive（过度活跃的）
+
+- **mini-**: 表示“小”。
+
+  example: minibus（小巴士）, miniskirt（迷你裙）
+
+## 4. 表示使动、状态或关系的前缀
+
+- **en-/em-**: 表示“使得、进入……状态”。
+
+  example: enable（使能够）, empower（授权）
+
+- **inter-**: 表示“在……之间”。
+
+  example: international（国际的）, interact（互动）
+
+- **mis-**: 表示“错误、误”。
+
+  example: misunderstand（误解）, mislead（误导）
+
+- **anti-**: 表示“反对、对抗”。
+
+  example: antiwar（反战的）, antibiotic（抗生素）
+
+---
+
+# 后缀（Suffix）
+
+后缀通常放在词根后面，改变单词的词性（如从名词变动词）或具体意义。
+
+## 1. 名词后缀
+
+- **-er/-or**: 表示“人或物”。
+
+  example: teacher（教师）, actor（演员）
+
+- **-ist**: 表示“从事某种职业或活动的人”。
+
+  example: artist（艺术家）, scientist（科学家）
+
+- **-ness**: 表示“抽象名词，性质或状态”。
+
+  example: kindness（善良）, darkness（黑暗）
+
+- **-ion/-tion/-sion**: 表示“动作或结果”。
+
+  example: action（行动）, decision（决定）
+
+- **-ment**: 表示“行为结果、状态”。
+
+  example: development（发展）, achievement（成就）
+
+- **-ity**: 表示“性质或状态”。
+
+  example: reality（现实）, creativity（创造力）
+
+- **-ship**: 表示“身份、性质、状态”。
+
+  example: friendship（友谊）, leadership（领导力）
+
+## 2. 动词后缀
+
+- **-en**: 表示“使得”。
+
+  example: strengthen（加强）, widen（加宽）
+
+- **-ify**: 表示“使……化”。
+
+  example: simplify（简化）, clarify（澄清）
+
+- **-ize/-ise**: 表示“使……化”。
+
+  example: modernize（现代化）, realize（实现）
+
+## 3. 形容词后缀
+
+- **-able/-ible**: 表示“能够……的”。
+
+  example: readable（可读的）, visible（可见的）
+
+- **-al**: 表示“有关的”。
+
+  example: natural（自然的）, cultural（文化的）
+
+- **-ful**: 表示“充满……的”。
+
+  example: helpful（有帮助的）, powerful（强大的）
+
+- **-less**: 表示“没有……的”。
+
+  example: useless（无用的）, homeless（无家的）
+
+- **-ous**: 表示“充满……的”。
+
+  example: dangerous（危险的）, famous（著名的）
+
+- **-ive**: 表示“具有……性质的”。
+
+  example: active（活跃的）, creative（有创造力的）
+
+## 4. 副词后缀
+
+- **-ly**: 表示“以……方式”。
+
+  example: quickly（快速地）, carefully（小心地）
+
+- **-ward**: 表示“朝向……的”。
+
+  example: forward（向前地）, backward（向后地）
+
+---
+
+## 总结
+
+英语派生构词是词汇扩展的重要手段，通过前缀和后缀的组合，可以构造出无数新词。熟悉常见的前后缀及其含义，能够帮助我们快速理解单词的意思，提高英语学习效率。
+

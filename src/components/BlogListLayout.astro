@@ -1,0 +1,116 @@
+---
+/**
+ * BlogListLayout - 共享的博客列表布局组件
+ * 用于 /blog 和 /tags/[tag] 页面，确保布局一致性
+ */
+import BaseHead from "./BaseHead.astro";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+import TagSidebar from "./TagSidebar.astro";
+import PersonalProfile from "./PersonalProfile.astro";
+import BlogSearch from "./BlogSearch.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+interface Props {
+    title?: string;
+    description?: string;
+    tags: Array<{ name: string; count: number }>;
+    currentTag?: string;
+    searchPosts: Array<{
+        id: string;
+        title: string;
+        description: string;
+        pubDate: string;
+        href: string;
+    }>;
+}
+
+const {
+    title = SITE_TITLE,
+    description = SITE_DESCRIPTION,
+    tags,
+    currentTag,
+    searchPosts,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={title} description={description} />
+        <style>
+            .page-wrapper {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: 1fr minmax(0, 800px) minmax(200px, 280px);
+                gap: 2rem;
+                align-items: start;
+                padding-top: 2rem;
+            }
+            .left-space {
+                position: sticky;
+                top: 2rem;
+                align-self: start;
+                margin-top: 3.75rem;
+            }
+            main {
+                min-width: 0;
+            }
+            .posts-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+            .posts-list li {
+                width: 100%;
+            }
+            @media (max-width: 1024px) {
+                .container {
+                    grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
+                }
+                .left-space {
+                    display: none;
+                }
+            }
+            @media (max-width: 720px) {
+                .page-wrapper {
+                    padding: 0 1rem;
+                }
+                .container {
+                    grid-template-columns: 1fr;
+                }
+                .posts-list {
+                    grid-template-columns: 1fr;
+                    gap: 1.25rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <div class="page-wrapper">
+            <div class="container">
+                <aside class="left-space">
+                    <PersonalProfile />
+                </aside>
+                <main>
+                    <section>
+                        <BlogSearch posts={searchPosts} />
+                        <ul class="posts-list">
+                            <slot />
+                        </ul>
+                    </section>
+                </main>
+                <TagSidebar tags={tags} currentTag={currentTag} />
+            </div>
+        </div>
+        <Footer />
+    </body>
+</html>

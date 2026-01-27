@@ -1,0 +1,340 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+
+const contactMethods = [
+    {
+        name: "Email",
+        value: "me@liweijun.com",
+        href: "mailto:me@liweijun.com",
+        icon: "email",
+        description: "Best way to reach me for professional inquiries",
+        primary: true,
+    },
+    {
+        name: "GitHub",
+        value: "@LosFurina",
+        href: "https://github.com/LosFurina",
+        icon: "github",
+        description: "Check out my open source projects",
+    },
+    {
+        name: "LinkedIn",
+        value: "Connect with me",
+        href: "https://linkedin.com/in/yourprofile",
+        icon: "linkedin",
+        description: "Professional network",
+    },
+    {
+        name: "X (Twitter)",
+        value: "@yourhandle",
+        href: "https://x.com/yourhandle",
+        icon: "twitter",
+        description: "Tech thoughts and updates",
+    },
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Contact | ${SITE_TITLE}`}
+            description="Get in touch with me"
+        />
+        <style>
+            main {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .page-header {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--accent),
+                    var(--accent-dark)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .page-header p {
+                color: rgb(var(--gray));
+                font-size: 1.1rem;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .contact-grid {
+                display: grid;
+                gap: 1rem;
+            }
+
+            .contact-card {
+                display: flex;
+                align-items: center;
+                gap: 1.25rem;
+                padding: 1.5rem;
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(var(--gray-light), 0.8);
+                border-radius: 16px;
+                text-decoration: none;
+                color: inherit;
+                transition: all 0.3s ease;
+            }
+
+            :global([data-theme="dark"]) .contact-card {
+                background: rgba(40, 40, 45, 0.8);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .contact-card:hover {
+                transform: translateX(8px);
+                border-color: var(--accent);
+            }
+
+            .contact-card.primary {
+                border-color: var(--accent);
+                border-width: 2px;
+                background: rgba(35, 55, 255, 0.05);
+            }
+
+            :global([data-theme="dark"]) .contact-card.primary {
+                background: rgba(77, 94, 255, 0.1);
+            }
+
+            .contact-icon {
+                width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(var(--gray-light), 0.5);
+                border-radius: 12px;
+                flex-shrink: 0;
+            }
+
+            :global([data-theme="dark"]) .contact-icon {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .contact-card.primary .contact-icon {
+                background: var(--accent);
+            }
+
+            .contact-icon svg {
+                width: 24px;
+                height: 24px;
+                color: rgb(var(--gray-dark));
+            }
+
+            .contact-card.primary .contact-icon svg {
+                color: white;
+            }
+
+            .contact-info {
+                flex: 1;
+            }
+
+            .contact-name {
+                font-size: 0.85rem;
+                color: rgb(var(--gray));
+                margin: 0 0 0.25rem;
+            }
+
+            .contact-value {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: rgb(var(--gray-dark));
+                margin: 0 0 0.25rem;
+            }
+
+            .contact-description {
+                font-size: 0.85rem;
+                color: rgb(var(--gray));
+                margin: 0;
+            }
+
+            .contact-arrow {
+                color: rgb(var(--gray));
+                transition: transform 0.2s ease;
+            }
+
+            .contact-card:hover .contact-arrow {
+                transform: translateX(4px);
+                color: var(--accent);
+            }
+
+            .availability {
+                margin-top: 3rem;
+                padding: 1.5rem;
+                background: rgba(34, 197, 94, 0.1);
+                border: 1px solid rgba(34, 197, 94, 0.3);
+                border-radius: 12px;
+                text-align: center;
+            }
+
+            :global([data-theme="dark"]) .availability {
+                background: rgba(34, 197, 94, 0.15);
+            }
+
+            .availability-dot {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: #22c55e;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.5;
+                }
+            }
+
+            .availability h3 {
+                margin: 0 0 0.5rem;
+                font-size: 1.1rem;
+                color: rgb(var(--gray-dark));
+            }
+
+            .availability p {
+                margin: 0;
+                color: rgb(var(--gray));
+                font-size: 0.95rem;
+            }
+
+            @media (max-width: 600px) {
+                main {
+                    padding: 1rem;
+                }
+
+                .contact-card {
+                    padding: 1rem;
+                }
+
+                .contact-icon {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="page-header">
+                <h1>👋 Get in Touch</h1>
+                <p>
+                    I'm always open to discussing DevOps, Infrastructure, and
+                    new opportunities
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                {
+                    contactMethods.map((method) => (
+                        <a
+                            href={method.href}
+                            target={
+                                method.href.startsWith("mailto")
+                                    ? undefined
+                                    : "_blank"
+                            }
+                            rel="noopener"
+                            class:list={[
+                                "contact-card",
+                                { primary: method.primary },
+                            ]}
+                        >
+                            <div class="contact-icon">
+                                {method.icon === "email" && (
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg>
+                                )}
+                                {method.icon === "github" && (
+                                    <svg
+                                        viewBox="0 0 16 16"
+                                        fill="currentColor"
+                                    >
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                    </svg>
+                                )}
+                                {method.icon === "linkedin" && (
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                    >
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                    </svg>
+                                )}
+                                {method.icon === "twitter" && (
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                    >
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                    </svg>
+                                )}
+                            </div>
+                            <div class="contact-info">
+                                <p class="contact-name">{method.name}</p>
+                                <p class="contact-value">{method.value}</p>
+                                <p class="contact-description">
+                                    {method.description}
+                                </p>
+                            </div>
+                            <svg
+                                class="contact-arrow"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                width="20"
+                                height="20"
+                            >
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                        </a>
+                    ))
+                }
+            </div>
+
+            <div class="availability">
+                <h3>
+                    <span class="availability-dot"></span>Open for Opportunities
+                </h3>
+                <p>
+                    I'm currently looking for DevOps / Infrastructure internship
+                    positions. Feel free to reach out!
+                </p>
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>

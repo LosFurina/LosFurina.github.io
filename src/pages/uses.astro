@@ -1,0 +1,332 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+
+// 我使用的工具 - 请根据实际情况修改
+const categories = [
+    {
+        name: "Development Environment",
+        icon: "💻",
+        items: [
+            {
+                name: "Neovim",
+                description:
+                    "Primary code editor with custom Lua configuration",
+                link: "https://neovim.io",
+            },
+            {
+                name: "VS Code",
+                description: "Secondary editor for quick edits and debugging",
+                link: "https://code.visualstudio.com",
+            },
+            {
+                name: "Zsh + Oh My Zsh",
+                description: "Shell with Powerlevel10k theme",
+                link: "https://ohmyz.sh",
+            },
+            {
+                name: "Tmux",
+                description: "Terminal multiplexer for session management",
+                link: "https://github.com/tmux/tmux",
+            },
+        ],
+    },
+    {
+        name: "DevOps & Cloud",
+        icon: "☁️",
+        items: [
+            {
+                name: "Docker",
+                description: "Containerization for local dev and production",
+                link: "https://docker.com",
+            },
+            {
+                name: "Kubernetes",
+                description: "Container orchestration platform",
+                link: "https://kubernetes.io",
+            },
+            {
+                name: "Terraform",
+                description: "Infrastructure as Code",
+                link: "https://terraform.io",
+            },
+            {
+                name: "Ansible",
+                description: "Configuration management and automation",
+                link: "https://ansible.com",
+            },
+            {
+                name: "GitHub Actions",
+                description: "CI/CD pipelines",
+                link: "https://github.com/features/actions",
+            },
+        ],
+    },
+    {
+        name: "Monitoring & Observability",
+        icon: "📊",
+        items: [
+            {
+                name: "Prometheus",
+                description: "Metrics collection and alerting",
+                link: "https://prometheus.io",
+            },
+            {
+                name: "Grafana",
+                description: "Visualization and dashboards",
+                link: "https://grafana.com",
+            },
+            {
+                name: "Loki",
+                description: "Log aggregation",
+                link: "https://grafana.com/oss/loki/",
+            },
+        ],
+    },
+    {
+        name: "Operating Systems",
+        icon: "🐧",
+        items: [
+            {
+                name: "Arch Linux",
+                description: "Daily driver on personal machines",
+                link: "https://archlinux.org",
+            },
+            {
+                name: "Ubuntu Server",
+                description: "Production server OS",
+                link: "https://ubuntu.com/server",
+            },
+            {
+                name: "macOS",
+                description: "Work laptop",
+            },
+        ],
+    },
+    {
+        name: "Hardware",
+        icon: "🖥️",
+        items: [
+            {
+                name: "Custom PC",
+                description: "AMD Ryzen 9, 64GB RAM, RTX 4080",
+            },
+            {
+                name: "Homelab Server",
+                description: "Proxmox VE with multiple VMs and containers",
+            },
+            {
+                name: "Mechanical Keyboard",
+                description: "Custom 75% with Gateron switches",
+            },
+        ],
+    },
+    {
+        name: "Productivity",
+        icon: "📝",
+        items: [
+            {
+                name: "Obsidian",
+                description: "Note-taking and knowledge management",
+                link: "https://obsidian.md",
+            },
+            {
+                name: "Raycast",
+                description: "Launcher and productivity tool (macOS)",
+                link: "https://raycast.com",
+            },
+            {
+                name: "1Password",
+                description: "Password manager",
+                link: "https://1password.com",
+            },
+        ],
+    },
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Uses | ${SITE_TITLE}`}
+            description="Tools, software, and hardware I use"
+        />
+        <style>
+            main {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .page-header {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--accent),
+                    var(--accent-dark)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .page-header p {
+                color: rgb(var(--gray));
+                font-size: 1.1rem;
+            }
+
+            .category {
+                margin-bottom: 2.5rem;
+            }
+
+            .category-header {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 2px solid rgba(var(--gray-light), 0.8);
+            }
+
+            .category-icon {
+                font-size: 1.5rem;
+            }
+
+            .items-grid {
+                display: grid;
+                gap: 1rem;
+            }
+
+            .item {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1rem;
+                background: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(var(--gray-light), 0.8);
+                border-radius: 12px;
+                text-decoration: none;
+                color: inherit;
+                transition: all 0.2s ease;
+            }
+
+            :global([data-theme="dark"]) .item {
+                background: rgba(40, 40, 45, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            a.item:hover {
+                transform: translateX(4px);
+                border-color: var(--accent);
+            }
+
+            .item-info {
+                flex: 1;
+            }
+
+            .item-name {
+                font-weight: 600;
+                font-size: 1rem;
+                color: rgb(var(--gray-dark));
+                margin: 0 0 0.25rem;
+            }
+
+            .item-description {
+                font-size: 0.9rem;
+                color: rgb(var(--gray));
+                margin: 0;
+            }
+
+            .item-arrow {
+                color: rgb(var(--gray));
+                transition: transform 0.2s ease;
+            }
+
+            a.item:hover .item-arrow {
+                transform: translateX(4px);
+                color: var(--accent);
+            }
+
+            @media (max-width: 600px) {
+                main {
+                    padding: 1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="page-header">
+                <h1>🛠️ Uses</h1>
+                <p>Tools, software, and hardware I use daily</p>
+            </div>
+
+            {
+                categories.map((category) => (
+                    <section class="category">
+                        <h2 class="category-header">
+                            <span class="category-icon">{category.icon}</span>
+                            {category.name}
+                        </h2>
+                        <div class="items-grid">
+                            {category.items.map((item) =>
+                                item.link ? (
+                                    <a
+                                        href={item.link}
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="item"
+                                    >
+                                        <div class="item-info">
+                                            <h3 class="item-name">
+                                                {item.name}
+                                            </h3>
+                                            <p class="item-description">
+                                                {item.description}
+                                            </p>
+                                        </div>
+                                        <svg
+                                            class="item-arrow"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            width="20"
+                                            height="20"
+                                        >
+                                            <polyline points="9 18 15 12 9 6" />
+                                        </svg>
+                                    </a>
+                                ) : (
+                                    <div class="item">
+                                        <div class="item-info">
+                                            <h3 class="item-name">
+                                                {item.name}
+                                            </h3>
+                                            <p class="item-description">
+                                                {item.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ),
+                            )}
+                        </div>
+                    </section>
+                ))
+            }
+        </main>
+        <Footer />
+    </body>
+</html>

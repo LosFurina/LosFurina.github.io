@@ -1,0 +1,159 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+
+// Giscus 配置
+const giscusConfig = {
+    repo: "LosFurina/LosFurina.github.io",
+    repoId: "YOUR_REPO_ID", // 需要从 giscus.app 获取
+    category: "Guestbook",
+    categoryId: "YOUR_CATEGORY_ID", // 需要从 giscus.app 获取
+};
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Guestbook | ${SITE_TITLE}`}
+            description="Leave a message!"
+        />
+        <style>
+            main {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .page-header {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--accent),
+                    var(--accent-dark)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .page-header p {
+                color: rgb(var(--gray));
+                font-size: 1.1rem;
+            }
+
+            .guestbook-intro {
+                padding: 1.5rem;
+                background: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(var(--gray-light), 0.8);
+                border-radius: 12px;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+
+            :global([data-theme="dark"]) .guestbook-intro {
+                background: rgba(40, 40, 45, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .guestbook-intro p {
+                margin: 0;
+                color: rgb(var(--gray));
+                font-size: 0.95rem;
+            }
+
+            .guestbook-intro .emoji {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .giscus-container {
+                min-height: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="page-header">
+                <h1>📝 Guestbook</h1>
+                <p>Leave a message, say hello!</p>
+            </div>
+
+            <div class="guestbook-intro">
+                <div class="emoji">👋</div>
+                <p>
+                    Feel free to leave a comment, share your thoughts, or just
+                    say hi!
+                    <br />
+                    You'll need a GitHub account to comment.
+                </p>
+            </div>
+
+            <div class="giscus-container">
+                <script
+                    src="https://giscus.app/client.js"
+                    data-repo={giscusConfig.repo}
+                    data-repo-id={giscusConfig.repoId}
+                    data-category={giscusConfig.category}
+                    data-category-id={giscusConfig.categoryId}
+                    data-mapping="specific"
+                    data-term="guestbook"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="top"
+                    data-theme="preferred_color_scheme"
+                    data-lang="en"
+                    data-loading="lazy"
+                    crossorigin="anonymous"
+                    async></script>
+            </div>
+        </main>
+        <Footer />
+
+        <script>
+            // Sync Giscus theme with site theme
+            function updateGiscusTheme() {
+                const theme =
+                    document.documentElement.getAttribute("data-theme");
+                const giscusFrame = document.querySelector<HTMLIFrameElement>(
+                    "iframe.giscus-frame",
+                );
+
+                if (giscusFrame) {
+                    const giscusTheme = theme === "dark" ? "dark" : "light";
+                    giscusFrame.contentWindow?.postMessage(
+                        { giscus: { setConfig: { theme: giscusTheme } } },
+                        "https://giscus.app",
+                    );
+                }
+            }
+
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === "data-theme") {
+                        updateGiscusTheme();
+                    }
+                });
+            });
+
+            observer.observe(document.documentElement, { attributes: true });
+
+            window.addEventListener("message", (event) => {
+                if (event.origin === "https://giscus.app") {
+                    updateGiscusTheme();
+                }
+            });
+        </script>
+    </body>
+</html>

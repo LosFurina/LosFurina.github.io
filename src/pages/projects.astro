@@ -1,0 +1,355 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+
+// 项目数据 - 请根据你的实际项目修改
+const projects = [
+    {
+        title: "Personal Blog & Portfolio",
+        description:
+            "使用 Astro 构建的个人博客和作品集网站，支持 MDX、暗色模式、全文搜索等功能。",
+        tags: ["Astro", "TypeScript", "CSS"],
+        github: "https://github.com/LosFurina/LosFurina.github.io",
+        demo: "https://losfurina.github.io",
+        featured: true,
+    },
+    {
+        title: "Kubernetes Cluster Setup",
+        description:
+            "使用 kubeadm 和 Ansible 自动化部署生产级 Kubernetes 集群，包含 Ingress、监控、日志等组件。",
+        tags: ["Kubernetes", "Ansible", "Docker", "Linux"],
+        github: "https://github.com/LosFurina/k8s-cluster",
+        featured: true,
+    },
+    {
+        title: "CI/CD Pipeline Template",
+        description:
+            "基于 GitHub Actions 的可复用 CI/CD 流水线模板，支持 Docker 构建、测试、部署到 K8s。",
+        tags: ["GitHub Actions", "Docker", "CI/CD"],
+        github: "https://github.com/LosFurina/cicd-template",
+        featured: true,
+    },
+    {
+        title: "Infrastructure as Code",
+        description:
+            "使用 Terraform 管理云基础设施，包含 AWS/GCP 多云部署模板。",
+        tags: ["Terraform", "AWS", "GCP", "IaC"],
+        github: "https://github.com/LosFurina/terraform-infra",
+    },
+    {
+        title: "Docker Compose Stack",
+        description:
+            "常用开发环境的 Docker Compose 配置集合，包含数据库、缓存、消息队列等。",
+        tags: ["Docker", "Docker Compose"],
+        github: "https://github.com/LosFurina/docker-stacks",
+    },
+    {
+        title: "Monitoring Stack",
+        description:
+            "基于 Prometheus + Grafana + AlertManager 的完整监控解决方案。",
+        tags: ["Prometheus", "Grafana", "Monitoring"],
+        github: "https://github.com/LosFurina/monitoring-stack",
+    },
+];
+
+const featuredProjects = projects.filter((p) => p.featured);
+const otherProjects = projects.filter((p) => !p.featured);
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Projects | ${SITE_TITLE}`}
+            description="My projects and portfolio showcasing DevOps and Infrastructure work"
+        />
+        <style>
+            main {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .page-header {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--accent),
+                    var(--accent-dark)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .page-header p {
+                color: rgb(var(--gray));
+                font-size: 1.1rem;
+                margin: 0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin: 2.5rem 0 1.5rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 2px solid rgba(var(--gray-light), 0.8);
+            }
+
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .project-card {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(var(--gray-light), 0.8);
+                border-radius: 16px;
+                padding: 1.5rem;
+                transition: all 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            :global([data-theme="dark"]) .project-card {
+                background: rgba(40, 40, 45, 0.8);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .project-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            }
+
+            :global([data-theme="dark"]) .project-card:hover {
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            }
+
+            .project-card.featured {
+                border-color: var(--accent);
+                border-width: 2px;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin: 0 0 0.75rem;
+                color: rgb(var(--gray-dark));
+            }
+
+            .project-description {
+                font-size: 0.9rem;
+                color: rgb(var(--gray));
+                line-height: 1.6;
+                margin: 0 0 1rem;
+                flex: 1;
+            }
+
+            .project-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .tag {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.6rem;
+                background: rgba(var(--gray-light), 0.5);
+                border-radius: 4px;
+                color: rgb(var(--gray-dark));
+            }
+
+            :global([data-theme="dark"]) .tag {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .project-links {
+                display: flex;
+                gap: 0.75rem;
+                margin-top: auto;
+            }
+
+            .project-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                font-size: 0.85rem;
+                color: var(--accent);
+                text-decoration: none;
+                padding: 0.4rem 0.8rem;
+                border-radius: 6px;
+                background: rgba(var(--gray-light), 0.3);
+                transition: background 0.2s ease;
+            }
+
+            .project-link:hover {
+                background: rgba(var(--gray-light), 0.5);
+            }
+
+            .project-link svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            @media (max-width: 600px) {
+                main {
+                    padding: 1rem;
+                }
+
+                .projects-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="page-header">
+                <h1>🚀 Projects</h1>
+                <p>DevOps & Infrastructure projects I've built</p>
+            </div>
+
+            <h2 class="section-title">⭐ Featured Projects</h2>
+            <div class="projects-grid">
+                {
+                    featuredProjects.map((project) => (
+                        <article class="project-card featured">
+                            <h3 class="project-title">{project.title}</h3>
+                            <p class="project-description">
+                                {project.description}
+                            </p>
+                            <div class="project-tags">
+                                {project.tags.map((tag) => (
+                                    <span class="tag">{tag}</span>
+                                ))}
+                            </div>
+                            <div class="project-links">
+                                {project.github && (
+                                    <a
+                                        href={project.github}
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="project-link"
+                                    >
+                                        <svg
+                                            viewBox="0 0 16 16"
+                                            fill="currentColor"
+                                        >
+                                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                        </svg>
+                                        GitHub
+                                    </a>
+                                )}
+                                {project.demo && (
+                                    <a
+                                        href={project.demo}
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="project-link"
+                                    >
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                        >
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                            <polyline points="15 3 21 3 21 9" />
+                                            <line
+                                                x1="10"
+                                                y1="14"
+                                                x2="21"
+                                                y2="3"
+                                            />
+                                        </svg>
+                                        Demo
+                                    </a>
+                                )}
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+
+            {
+                otherProjects.length > 0 && (
+                    <>
+                        <h2 class="section-title">📦 Other Projects</h2>
+                        <div class="projects-grid">
+                            {otherProjects.map((project) => (
+                                <article class="project-card">
+                                    <h3 class="project-title">
+                                        {project.title}
+                                    </h3>
+                                    <p class="project-description">
+                                        {project.description}
+                                    </p>
+                                    <div class="project-tags">
+                                        {project.tags.map((tag) => (
+                                            <span class="tag">{tag}</span>
+                                        ))}
+                                    </div>
+                                    <div class="project-links">
+                                        {project.github && (
+                                            <a
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noopener"
+                                                class="project-link"
+                                            >
+                                                <svg
+                                                    viewBox="0 0 16 16"
+                                                    fill="currentColor"
+                                                >
+                                                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                                </svg>
+                                                GitHub
+                                            </a>
+                                        )}
+                                        {project.demo && (
+                                            <a
+                                                href={project.demo}
+                                                target="_blank"
+                                                rel="noopener"
+                                                class="project-link"
+                                            >
+                                                <svg
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                >
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                    <polyline points="15 3 21 3 21 9" />
+                                                    <line
+                                                        x1="10"
+                                                        y1="14"
+                                                        x2="21"
+                                                        y2="3"
+                                                    />
+                                                </svg>
+                                                Demo
+                                            </a>
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </>
+                )
+            }
+        </main>
+        <Footer />
+    </body>
+</html>

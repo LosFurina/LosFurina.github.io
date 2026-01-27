@@ -1,0 +1,133 @@
+---
+/**
+ * Giscus Comments Component
+ *
+ * 使用 GitHub Discussions 作为评论系统
+ * 配置说明: https://giscus.app
+ *
+ * 需要在 GitHub 仓库中启用 Discussions 功能
+ */
+
+interface Props {
+    /** 用于评论的唯一标识符，通常是文章路径 */
+    term?: string;
+}
+
+const { term } = Astro.props;
+
+// Giscus 配置 - 请根据你的 GitHub 仓库修改
+const giscusConfig = {
+    repo: "LosFurina/LosFurina.github.io",
+    repoId: "YOUR_REPO_ID", // 需要从 giscus.app 获取
+    category: "Announcements",
+    categoryId: "YOUR_CATEGORY_ID", // 需要从 giscus.app 获取
+    mapping: "pathname", // 使用页面路径作为讨论标识
+    strict: "0",
+    reactionsEnabled: "1",
+    emitMetadata: "0",
+    inputPosition: "top",
+    lang: "en",
+};
+---
+
+<section class="comments-section" id="comments">
+    <h3 class="comments-title">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            width="22"
+            height="22"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+            ></path>
+        </svg>
+        Comments
+    </h3>
+
+    <div class="giscus-wrapper">
+        <script
+            src="https://giscus.app/client.js"
+            data-repo={giscusConfig.repo}
+            data-repo-id={giscusConfig.repoId}
+            data-category={giscusConfig.category}
+            data-category-id={giscusConfig.categoryId}
+            data-mapping={giscusConfig.mapping}
+            data-strict={giscusConfig.strict}
+            data-reactions-enabled={giscusConfig.reactionsEnabled}
+            data-emit-metadata={giscusConfig.emitMetadata}
+            data-input-position={giscusConfig.inputPosition}
+            data-theme="preferred_color_scheme"
+            data-lang={giscusConfig.lang}
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async></script>
+    </div>
+</section>
+
+<style>
+    .comments-section {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(var(--gray-light), 0.8);
+    }
+
+    .comments-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.25rem;
+        margin: 0 0 1.5rem;
+        color: rgb(var(--gray-dark));
+    }
+
+    .giscus-wrapper {
+        min-height: 200px;
+    }
+
+    /* Fix Giscus iframe styling */
+    .giscus-wrapper :global(.giscus) {
+        max-width: 100%;
+    }
+</style>
+
+<script>
+    // Sync Giscus theme with site theme
+    function updateGiscusTheme() {
+        const theme = document.documentElement.getAttribute("data-theme");
+        const giscusFrame = document.querySelector<HTMLIFrameElement>(
+            "iframe.giscus-frame",
+        );
+
+        if (giscusFrame) {
+            const giscusTheme = theme === "dark" ? "dark" : "light";
+            giscusFrame.contentWindow?.postMessage(
+                { giscus: { setConfig: { theme: giscusTheme } } },
+                "https://giscus.app",
+            );
+        }
+    }
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === "data-theme") {
+                updateGiscusTheme();
+            }
+        });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+
+    // Initial sync after Giscus loads
+    window.addEventListener("message", (event) => {
+        if (event.origin === "https://giscus.app") {
+            updateGiscusTheme();
+        }
+    });
+</script>

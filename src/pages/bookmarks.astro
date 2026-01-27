@@ -1,0 +1,332 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+
+// 书签数据 - 请根据实际情况修改
+const categories = [
+    {
+        name: "DevOps & SRE",
+        links: [
+            {
+                name: "Google SRE Books",
+                url: "https://sre.google/books/",
+                description: "Free online SRE books from Google",
+            },
+            {
+                name: "The Twelve-Factor App",
+                url: "https://12factor.net/",
+                description: "Methodology for building modern cloud apps",
+            },
+            {
+                name: "CNCF Landscape",
+                url: "https://landscape.cncf.io/",
+                description:
+                    "Cloud Native Computing Foundation project landscape",
+            },
+            {
+                name: "DevOps Roadmap",
+                url: "https://roadmap.sh/devops",
+                description: "Comprehensive DevOps learning path",
+            },
+        ],
+    },
+    {
+        name: "Kubernetes",
+        links: [
+            {
+                name: "Kubernetes Documentation",
+                url: "https://kubernetes.io/docs/",
+                description: "Official K8s documentation",
+            },
+            {
+                name: "Awesome Kubernetes",
+                url: "https://github.com/ramitsurana/awesome-kubernetes",
+                description: "Curated list of K8s resources",
+            },
+            {
+                name: "Learnk8s",
+                url: "https://learnk8s.io/",
+                description: "Kubernetes training and resources",
+            },
+            {
+                name: "CKAD Exercises",
+                url: "https://github.com/dgkanatsios/CKAD-exercises",
+                description: "Practice for Kubernetes certification",
+            },
+        ],
+    },
+    {
+        name: "Linux & CLI",
+        links: [
+            {
+                name: "Linux Journey",
+                url: "https://linuxjourney.com/",
+                description: "Learn Linux fundamentals",
+            },
+            {
+                name: "The Art of Command Line",
+                url: "https://github.com/jlevy/the-art-of-command-line",
+                description: "Master the command line",
+            },
+            {
+                name: "Explainshell",
+                url: "https://explainshell.com/",
+                description: "Explain shell commands",
+            },
+        ],
+    },
+    {
+        name: "Tech Blogs",
+        links: [
+            {
+                name: "Netflix Tech Blog",
+                url: "https://netflixtechblog.com/",
+                description: "Engineering at scale",
+            },
+            {
+                name: "Uber Engineering",
+                url: "https://www.uber.com/blog/engineering/",
+                description: "Infrastructure and systems at Uber",
+            },
+            {
+                name: "Cloudflare Blog",
+                url: "https://blog.cloudflare.com/",
+                description: "Internet and security insights",
+            },
+            {
+                name: "Martin Fowler",
+                url: "https://martinfowler.com/",
+                description: "Software architecture and design",
+            },
+        ],
+    },
+    {
+        name: "Learning Platforms",
+        links: [
+            {
+                name: "KodeKloud",
+                url: "https://kodekloud.com/",
+                description: "DevOps labs and courses",
+            },
+            {
+                name: "A Cloud Guru",
+                url: "https://acloudguru.com/",
+                description: "Cloud certification training",
+            },
+            {
+                name: "Katacoda",
+                url: "https://www.katacoda.com/",
+                description: "Interactive learning environments",
+            },
+        ],
+    },
+    {
+        name: "Tools & Utilities",
+        links: [
+            {
+                name: "DevDocs",
+                url: "https://devdocs.io/",
+                description: "Combined API documentation",
+            },
+            {
+                name: "regex101",
+                url: "https://regex101.com/",
+                description: "Regex testing and debugging",
+            },
+            {
+                name: "crontab.guru",
+                url: "https://crontab.guru/",
+                description: "Cron schedule expression editor",
+            },
+            {
+                name: "JSONPath Online",
+                url: "https://jsonpath.com/",
+                description: "JSONPath expression evaluator",
+            },
+        ],
+    },
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Bookmarks | ${SITE_TITLE}`}
+            description="Useful links and resources I've collected"
+        />
+        <style>
+            main {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .page-header {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(
+                    135deg,
+                    var(--accent),
+                    var(--accent-dark)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .page-header p {
+                color: rgb(var(--gray));
+                font-size: 1.1rem;
+            }
+
+            .categories-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 2rem;
+            }
+
+            .category {
+                background: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(var(--gray-light), 0.8);
+                border-radius: 16px;
+                padding: 1.5rem;
+            }
+
+            :global([data-theme="dark"]) .category {
+                background: rgba(40, 40, 45, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .category-title {
+                font-size: 1.1rem;
+                margin: 0 0 1rem;
+                color: rgb(var(--gray-dark));
+            }
+
+            .links-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .link-item {
+                margin-bottom: 0.75rem;
+            }
+
+            .link-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .link {
+                display: block;
+                padding: 0.6rem 0.75rem;
+                margin: 0 -0.75rem;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: background 0.2s ease;
+            }
+
+            .link:hover {
+                background: rgba(var(--gray-light), 0.5);
+            }
+
+            :global([data-theme="dark"]) .link:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+            .link-name {
+                font-weight: 500;
+                font-size: 0.95rem;
+                color: var(--accent);
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+            }
+
+            .link-name svg {
+                width: 14px;
+                height: 14px;
+                opacity: 0.7;
+            }
+
+            .link-description {
+                font-size: 0.85rem;
+                color: rgb(var(--gray));
+                margin-top: 0.2rem;
+            }
+
+            @media (max-width: 600px) {
+                main {
+                    padding: 1rem;
+                }
+
+                .categories-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="page-header">
+                <h1>🔖 Bookmarks</h1>
+                <p>Useful links and resources I've collected</p>
+            </div>
+
+            <div class="categories-grid">
+                {
+                    categories.map((category) => (
+                        <section class="category">
+                            <h2 class="category-title">{category.name}</h2>
+                            <ul class="links-list">
+                                {category.links.map((link) => (
+                                    <li class="link-item">
+                                        <a
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="link"
+                                        >
+                                            <span class="link-name">
+                                                {link.name}
+                                                <svg
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                >
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                    <polyline points="15 3 21 3 21 9" />
+                                                    <line
+                                                        x1="10"
+                                                        y1="14"
+                                                        x2="21"
+                                                        y2="3"
+                                                    />
+                                                </svg>
+                                            </span>
+                                            <span class="link-description">
+                                                {link.description}
+                                            </span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    ))
+                }
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>

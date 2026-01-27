@@ -1,0 +1,334 @@
+---
+interface TagInfo {
+  name: string;
+  count: number;
+}
+
+interface Props {
+  tags: TagInfo[];
+  currentTag?: string;
+}
+
+const { tags, currentTag } = Astro.props;
+---
+
+<aside class="tag-sidebar" id="tag-sidebar">
+  <button class="toggle-btn" id="toggle-sidebar" aria-label="Toggle sidebar">
+    <span class="toggle-icon">›</span>
+  </button>
+
+  <div class="sidebar-content">
+    <div class="sidebar-header">
+      <span class="sidebar-icon">📑</span>
+      <h3>Tags</h3>
+    </div>
+
+    <nav class="tag-nav">
+      <a
+        href="/blog"
+        class:list={["tag-item", "all-posts", { active: !currentTag }]}
+      >
+        <span class="tag-name">All Posts</span>
+        <span class="tag-count"
+          >{tags.reduce((sum, t) => sum + t.count, 0)}</span
+        >
+      </a>
+
+      {
+        tags.map((tag) => (
+          <a
+            href={`/tags/${tag.name}`}
+            class:list={["tag-item", { active: currentTag === tag.name }]}
+          >
+            <span class="tag-name">{tag.name}</span>
+            <span class="tag-count">{tag.count}</span>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</aside>
+
+<script>
+  const sidebar = document.getElementById("tag-sidebar");
+  const toggleBtn = document.getElementById("toggle-sidebar");
+
+  // 从 localStorage 恢复状态
+  const isCollapsed = localStorage.getItem("sidebar-collapsed") === "true";
+  if (isCollapsed) {
+    sidebar?.classList.add("collapsed");
+  }
+
+  toggleBtn?.addEventListener("click", () => {
+    sidebar?.classList.toggle("collapsed");
+    const nowCollapsed = sidebar?.classList.contains("collapsed");
+    localStorage.setItem("sidebar-collapsed", String(nowCollapsed));
+  });
+</script>
+
+<style>
+  .tag-sidebar {
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    align-items: flex-start;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 220px;
+    max-width: 280px;
+    margin-top: 3.75rem;
+  }
+
+  .toggle-btn {
+    position: absolute;
+    left: -16px;
+    top: 1.5rem;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(229, 233, 240, 0.8);
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
+    z-index: 10;
+  }
+
+  .toggle-btn:hover {
+    background: rgb(var(--gray-light));
+    transform: scale(1.1);
+  }
+
+  .toggle-icon {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: rgb(var(--gray-dark));
+    transition: transform 0.3s ease;
+    line-height: 1;
+  }
+
+  .sidebar-content {
+    flex: 1;
+    padding: 1.5rem;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(249, 250, 251, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(229, 233, 240, 0.8);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 10px 15px -3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  /* 收缩状态 */
+  .tag-sidebar.collapsed {
+    min-width: 48px;
+    max-width: 48px;
+  }
+
+  .tag-sidebar.collapsed .sidebar-content {
+    opacity: 0;
+    padding: 0;
+    width: 0;
+    overflow: hidden;
+  }
+
+  .tag-sidebar.collapsed .toggle-btn {
+    left: 8px;
+  }
+
+  .tag-sidebar.collapsed .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgb(var(--gray-light));
+    white-space: nowrap;
+  }
+
+  .sidebar-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .sidebar-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .tag-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tag-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: rgb(var(--gray-dark));
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid transparent;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .tag-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .tag-item:hover {
+    background: rgba(var(--gray-light), 0.4);
+    border-color: rgba(var(--gray-light), 0.8);
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .tag-item:hover::before {
+    opacity: 1;
+  }
+
+  .tag-item.active {
+    background: linear-gradient(
+      135deg,
+      rgba(35, 55, 255, 0.08) 0%,
+      rgba(0, 13, 138, 0.12) 100%
+    );
+    border-color: rgba(35, 55, 255, 0.2);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tag-item.active::before {
+    opacity: 1;
+  }
+
+  .tag-item.active .tag-count {
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    color: white;
+  }
+
+  .tag-name {
+    font-size: 0.95rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+  }
+
+  .tag-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgb(var(--gray));
+    background: rgba(var(--gray-light), 0.8);
+    border-radius: 999px;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .tag-item:hover .tag-count {
+    background: rgba(var(--gray-light), 1);
+    color: rgb(var(--gray-dark));
+  }
+
+  .all-posts {
+    margin-bottom: 0.5rem;
+    background: rgba(var(--gray-light), 0.3);
+  }
+
+  .all-posts .tag-name {
+    font-weight: 500;
+  }
+
+  /* 响应式设计 */
+  @media (max-width: 720px) {
+    .tag-sidebar {
+      position: relative;
+      top: 0;
+      max-width: 100%;
+      min-width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag-sidebar.collapsed {
+      min-width: 100%;
+      max-width: 100%;
+    }
+
+    .toggle-btn {
+      left: auto;
+      right: 1rem;
+      top: -16px;
+    }
+
+    .tag-sidebar.collapsed .toggle-btn {
+      left: auto;
+      right: 1rem;
+    }
+
+    .tag-sidebar.collapsed .toggle-icon {
+      transform: rotate(90deg);
+    }
+
+    .tag-sidebar:not(.collapsed) .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .tag-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag-item {
+      flex: 0 0 auto;
+      padding: 0.5rem 0.875rem;
+    }
+
+    .tag-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .tag-item::before {
+      width: 100%;
+      height: 2px;
+      top: auto;
+      bottom: 0;
+    }
+  }
+</style>
