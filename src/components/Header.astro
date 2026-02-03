@@ -6,19 +6,50 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<!-- Hamburger Menu Button (Mobile Only) -->
-		<button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
-			<span class="hamburger-line"></span>
-			<span class="hamburger-line"></span>
-			<span class="hamburger-line"></span>
-		</button>
+		<div class="nav-left">
+			<h2><a href="/">{SITE_TITLE}</a></h2>
+		</div>
 		<div class="internal-links" id="mobileMenu">
-			<HeaderLink href="/" icon="🏠">Home</HeaderLink>
-			<HeaderLink href="/blog" icon="📝">Blog</HeaderLink>
-			<HeaderLink href="/projects" icon="🚀">Projects</HeaderLink>
-			<HeaderLink href="/resume" icon="📄">Resume</HeaderLink>
-			<HeaderLink href="/contact" icon="✉️">Contact</HeaderLink>
+			<HeaderLink href="/">
+				<svg slot="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+					<path d="M3 11.5L12 4l9 7.5" />
+					<path d="M6.5 10.5V20h11V10.5" />
+				</svg>
+				Home
+			</HeaderLink>
+			<HeaderLink href="/blog">
+				<svg slot="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+					<rect x="6" y="4.5" width="12" height="15" rx="2" />
+					<path d="M9 9h6" />
+					<path d="M9 13h6" />
+				</svg>
+				Blog
+			</HeaderLink>
+			<HeaderLink href="/projects">
+				<svg slot="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+					<rect x="4" y="4" width="7" height="7" rx="1.5" />
+					<rect x="13" y="4" width="7" height="7" rx="1.5" />
+					<rect x="4" y="13" width="7" height="7" rx="1.5" />
+					<rect x="13" y="13" width="7" height="7" rx="1.5" />
+				</svg>
+				Projects
+			</HeaderLink>
+			<HeaderLink href="/resume">
+				<svg slot="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+					<path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" />
+					<path d="M14 3.5V8h4" />
+					<path d="M9 12h6" />
+					<path d="M9 16h6" />
+				</svg>
+				Resume
+			</HeaderLink>
+			<HeaderLink href="/contact">
+				<svg slot="icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+					<path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" />
+					<path d="M4 8l8 6 8-6" />
+				</svg>
+				Contact
+			</HeaderLink>
 			<!-- Tools Dropdown -->
 			<div class="dropdown" id="toolsDropdown">
 				<button class="dropdown-trigger" id="toolsBtn">
@@ -81,53 +112,48 @@ import ThemeToggle from "./ThemeToggle.astro";
 				</div>
 			</div>
 		</div>
-		<div class="social-links">
-			<a
-				href="https://github.com/LosFurina"
-				target="_blank"
-				title="GitHub"
-			>
-				<span class="sr-only">GitHub</span>
-				<svg
-					viewBox="0 0 16 16"
-					aria-hidden="true"
-					width="28"
-					height="28"
+		<div class="nav-right">
+			<div class="social-links">
+				<a
+					href="https://github.com/LosFurina"
+					target="_blank"
+					title="GitHub"
 				>
-					<path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path>
-				</svg>
-			</a>
-			<a href="https://twitter.com/astrodotbuild" target="_blank">
-				<span class="sr-only">Follow Astro on Twitter</span>
-				<svg
-					viewBox="0 0 16 16"
-					aria-hidden="true"
-					width="32"
-					height="32"
-					><path
-						fill="currentColor"
-						d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-					></path></svg
-				>
-			</a>
-			<a href="https://github.com/withastro/astro" target="_blank">
-				<span class="sr-only">Go to Astro's GitHub repo</span>
-				<svg
-					viewBox="0 0 16 16"
-					aria-hidden="true"
-					width="32"
-					height="32"
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
-			</a>
+					<span class="sr-only">GitHub</span>
+					<svg viewBox="0 0 16 16" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+						></path>
+					</svg>
+				</a>
+				<a href="https://twitter.com/astrodotbuild" target="_blank">
+					<span class="sr-only">Follow Astro on Twitter</span>
+					<svg viewBox="0 0 16 16" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
+						></path>
+					</svg>
+				</a>
+				<a href="https://github.com/withastro/astro" target="_blank">
+					<span class="sr-only">Go to Astro's GitHub repo</span>
+					<svg viewBox="0 0 16 16" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+						></path>
+					</svg>
+				</a>
+			</div>
+			<ThemeToggle />
+			<!-- Hamburger Menu Button (Mobile Only) -->
+			<button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+				<span class="hamburger-line"></span>
+			</button>
 		</div>
-		<ThemeToggle />
 	</nav>
 </header>
 <style>
@@ -138,96 +164,115 @@ import ThemeToggle from "./ThemeToggle.astro";
 		right: 0;
 		z-index: 1000;
 		margin: 0;
-		padding: 0 2em;
-		/* Apple-style glassmorphism */
-		background: rgba(255, 255, 255, 0.72);
-		backdrop-filter: saturate(180%) blur(20px);
-		-webkit-backdrop-filter: saturate(180%) blur(20px);
-		/* Subtle bottom border like Apple */
-		border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		padding: 0 2rem;
+		--header-bg: linear-gradient(
+			180deg,
+			rgba(251, 248, 244, 0.92),
+			rgba(245, 240, 234, 0.86)
+		);
+		--header-border: rgba(210, 191, 175, 0.55);
+		--header-text: rgba(64, 54, 47, 0.9);
+		--header-text-strong: rgba(48, 40, 34, 1);
+		--header-accent: #b36a4a;
+		--header-hover: rgba(179, 106, 74, 0.08);
+		--header-shadow: rgba(30, 24, 20, 0.08);
+		background: var(--header-bg);
+		backdrop-filter: blur(10px) saturate(120%);
+		-webkit-backdrop-filter: blur(10px) saturate(120%);
+		border-bottom: 1px solid var(--header-border);
+		transition: background 0.3s ease, border-color 0.3s ease;
+		color: var(--header-text);
+		isolation: isolate;
 	}
 
-	/* Dark mode glass effect */
 	:global([data-theme="dark"]) header {
-		background: rgba(29, 29, 31, 0.72);
-		border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+		--header-bg: linear-gradient(
+			180deg,
+			rgba(32, 28, 26, 0.92),
+			rgba(26, 23, 21, 0.88)
+		);
+		--header-border: rgba(120, 100, 90, 0.35);
+		--header-text: rgba(232, 220, 210, 0.9);
+		--header-text-strong: rgba(246, 238, 230, 1);
+		--header-accent: #d6a07f;
+		--header-hover: rgba(214, 160, 127, 0.12);
+		--header-shadow: rgba(0, 0, 0, 0.35);
+		background: var(--header-bg);
+		border-bottom-color: var(--header-border);
 	}
 
-	/* Header shrink effect on scroll */
 	header.scrolled {
-		padding: 0 2em;
-		background: rgba(255, 255, 255, 0.85);
+		background: linear-gradient(
+			180deg,
+			rgba(251, 248, 244, 0.98),
+			rgba(245, 240, 234, 0.94)
+		);
+		border-bottom-color: rgba(200, 180, 165, 0.8);
 	}
 
 	:global([data-theme="dark"]) header.scrolled {
-		background: rgba(29, 29, 31, 0.85);
+		background: linear-gradient(
+			180deg,
+			rgba(36, 31, 28, 0.98),
+			rgba(28, 24, 22, 0.94)
+		);
+		border-bottom-color: rgba(140, 120, 110, 0.6);
+	}
+
+	header::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image:
+			radial-gradient(
+				rgba(255, 255, 255, 0.25) 1px,
+				transparent 1px
+			),
+			radial-gradient(rgba(120, 100, 90, 0.06) 1px, transparent 1px);
+		background-size: 3px 3px, 6px 6px;
+		opacity: 0.35;
+		pointer-events: none;
+	}
+
+	nav {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		height: 58px;
+	}
+
+	.nav-left {
+		flex: 0 0 auto;
 	}
 
 	h2 {
 		margin: 0;
-		font-size: 1.1em;
+		font-size: 1.05em;
 		font-weight: 600;
-		letter-spacing: -0.02em;
+		letter-spacing: 0.02em;
 	}
 
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
-		color: rgb(var(--gray-dark));
-		transition: opacity 0.2s ease;
+		color: var(--header-text-strong);
+		transition: opacity 0.2s ease, color 0.2s ease;
 	}
 
 	h2 a:hover {
-		opacity: 0.7;
-	}
-
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		max-width: 1200px;
-		margin: 0 auto;
-		height: 56px;
+		opacity: 0.85;
 	}
 
 	.internal-links {
 		display: flex;
 		align-items: center;
-		gap: 0.5em;
-	}
-
-	nav a {
-		padding: 0.5em 0.9em;
-		color: rgb(var(--gray-dark));
-		text-decoration: none;
-		font-size: 0.9em;
-		font-weight: 500;
-		border-radius: 6px;
-		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-		position: relative;
-	}
-
-	nav a:hover {
-		background: rgba(var(--gray), 0.1);
-	}
-
-	nav a.active {
-		color: var(--accent);
-		background: rgba(var(--gray), 0.08);
-	}
-
-	/* Pill indicator for active link */
-	nav a.active::after {
-		content: "";
-		position: absolute;
-		bottom: 4px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 4px;
-		height: 4px;
-		background: var(--accent);
-		border-radius: 50%;
+		justify-content: center;
+		gap: 0.4rem;
+		flex: 1;
 	}
 
 	/* Dropdown Styles */
@@ -240,7 +285,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 		align-items: center;
 		gap: 0.3em;
 		padding: 0.5em 0.9em;
-		color: rgb(var(--gray-dark));
+		color: var(--header-text);
 		background: transparent;
 		border: none;
 		font-size: 0.9em;
@@ -252,11 +297,11 @@ import ThemeToggle from "./ThemeToggle.astro";
 	}
 
 	.dropdown-trigger:hover {
-		background: rgba(var(--gray), 0.1);
+		background: var(--header-hover);
 	}
 
 	.dropdown.open .dropdown-trigger {
-		background: rgba(var(--gray), 0.1);
+		background: var(--header-hover);
 	}
 
 	.dropdown-arrow {
@@ -273,14 +318,12 @@ import ThemeToggle from "./ThemeToggle.astro";
 		left: 50%;
 		transform: translateX(-50%) scale(0.95);
 		min-width: 180px;
-		background: rgba(255, 255, 255, 0.95);
-		backdrop-filter: saturate(180%) blur(20px);
-		-webkit-backdrop-filter: saturate(180%) blur(20px);
-		border: 0.5px solid rgba(0, 0, 0, 0.1);
-		border-radius: 12px;
-		box-shadow:
-			0 4px 24px rgba(0, 0, 0, 0.12),
-			0 0 0 0.5px rgba(0, 0, 0, 0.05);
+		background: rgba(252, 248, 243, 0.98);
+		backdrop-filter: blur(12px) saturate(120%);
+		-webkit-backdrop-filter: blur(12px) saturate(120%);
+		border: 1px solid var(--header-border);
+		border-radius: 14px;
+		box-shadow: 0 10px 24px var(--header-shadow);
 		padding: 6px;
 		opacity: 0;
 		visibility: hidden;
@@ -289,9 +332,9 @@ import ThemeToggle from "./ThemeToggle.astro";
 	}
 
 	:global([data-theme="dark"]) .dropdown-menu {
-		background: rgba(40, 40, 45, 0.95);
-		border: 0.5px solid rgba(255, 255, 255, 0.1);
-		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+		background: rgba(35, 30, 27, 0.98);
+		border: 1px solid rgba(120, 100, 90, 0.4);
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
 	}
 
 	.dropdown.open .dropdown-menu {
@@ -305,7 +348,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 		align-items: center;
 		gap: 0.6em;
 		padding: 0.6em 0.8em;
-		color: rgb(var(--gray-dark));
+		color: var(--header-text);
 		text-decoration: none;
 		font-size: 0.85em;
 		font-weight: 500;
@@ -314,7 +357,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 	}
 
 	.dropdown-item:hover {
-		background: rgba(var(--gray), 0.1);
+		background: var(--header-hover);
 	}
 
 	.item-icon {
@@ -324,47 +367,49 @@ import ThemeToggle from "./ThemeToggle.astro";
 	.external-icon {
 		margin-left: auto;
 		font-size: 0.75em;
-		color: rgb(var(--gray));
+		color: var(--header-text);
+		opacity: 0.6;
 	}
 
 	.dropdown-divider {
 		height: 1px;
-		background: rgba(var(--gray), 0.15);
+		background: rgba(190, 170, 155, 0.35);
 		margin: 4px 8px;
 	}
 
 	.social-links {
 		display: flex;
 		align-items: center;
-		gap: 0.5em;
+		gap: 0.3rem;
 	}
 
 	.social-links a {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 32px;
-		height: 32px;
-		border-radius: 8px;
-		color: rgb(var(--gray));
-		transition: all 0.2s ease;
+		width: 30px;
+		height: 30px;
+		border-radius: 10px;
+		color: var(--header-text);
+		transition: background 0.2s ease, color 0.2s ease;
 	}
 
 	.social-links a:hover {
-		background: rgba(var(--gray), 0.12);
-		color: rgb(var(--gray-dark));
+		background: var(--header-hover);
+		color: var(--header-text-strong);
 	}
 
 	.social-links svg {
-		width: 18px;
-		height: 18px;
+		width: 16px;
+		height: 16px;
 	}
 
 	/* Right side container */
 	.nav-right {
 		display: flex;
 		align-items: center;
-		gap: 0.75em;
+		gap: 0.5rem;
+		margin-left: auto;
 	}
 
 	/* Hamburger Menu Button - Hidden on Desktop */
@@ -381,18 +426,18 @@ import ThemeToggle from "./ThemeToggle.astro";
 		border: none;
 		cursor: pointer;
 		z-index: 1001;
-		border-radius: 8px;
+		border-radius: 10px;
 		transition: background 0.2s ease;
 	}
 
 	.hamburger:hover {
-		background: rgba(var(--gray), 0.1);
+		background: var(--header-hover);
 	}
 
 	.hamburger-line {
 		width: 20px;
 		height: 2px;
-		background: rgb(var(--gray-dark));
+		background: var(--header-text-strong);
 		border-radius: 2px;
 		transition: all 0.3s ease;
 	}
@@ -419,46 +464,37 @@ import ThemeToggle from "./ThemeToggle.astro";
 			display: flex;
 		}
 
-		.social-links {
-			display: none;
-		}
-
 		/* Mobile Menu - Slide Down */
 		.internal-links {
 			position: fixed;
-			top: 56px;
+			top: 58px;
 			left: 0;
 			right: 0;
 			flex-direction: column;
 			align-items: stretch;
 			gap: 0.5em;
-			padding: 1em;
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: saturate(180%) blur(20px);
-			-webkit-backdrop-filter: saturate(180%) blur(20px);
-			border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+			padding: 0.9em 1em 1.1em;
+			background: rgba(252, 248, 243, 0.98);
+			backdrop-filter: blur(12px) saturate(120%);
+			-webkit-backdrop-filter: blur(12px) saturate(120%);
+			border-bottom: 1px solid var(--header-border);
+			box-shadow: 0 12px 30px var(--header-shadow);
+			border-radius: 0 0 16px 16px;
 			transform: translateY(-100%);
 			opacity: 0;
 			visibility: hidden;
-			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 		}
 
 		:global([data-theme="dark"]) .internal-links {
-			background: rgba(29, 29, 31, 0.95);
-			border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+			background: rgba(35, 30, 27, 0.98);
+			border-bottom: 1px solid rgba(120, 100, 90, 0.4);
 		}
 
 		.internal-links.open {
 			transform: translateY(0);
 			opacity: 1;
 			visibility: visible;
-		}
-
-		nav a {
-			padding: 0.75em 1em;
-			font-size: 0.95em;
-			justify-content: flex-start;
 		}
 
 		h2 {
@@ -486,8 +522,13 @@ import ThemeToggle from "./ThemeToggle.astro";
 			overflow: hidden;
 			visibility: hidden;
 			box-shadow: none;
-			border: none;
-			background: rgba(var(--gray), 0.05);
+			border: 1px solid rgba(210, 191, 175, 0.35);
+			background: rgba(255, 248, 242, 0.7);
+		}
+
+		:global([data-theme="dark"]) .dropdown-menu {
+			background: rgba(40, 34, 30, 0.85);
+			border: 1px solid rgba(120, 100, 90, 0.4);
 		}
 
 		.dropdown.open .dropdown-menu {
@@ -495,11 +536,25 @@ import ThemeToggle from "./ThemeToggle.astro";
 			max-height: 500px;
 			visibility: visible;
 		}
+
+		.social-links {
+			display: none;
+		}
 	}
 
 	/* Add padding to body to account for fixed header */
 	:global(body) {
-		padding-top: 56px;
+		padding-top: 58px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		header,
+		.dropdown-menu,
+		.internal-links,
+		.hamburger-line,
+		.dropdown-arrow {
+			transition: none;
+		}
 	}
 </style>
 
