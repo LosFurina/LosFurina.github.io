@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><!-- Theme Initialization Script --><script>
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
+
+	if (theme === "dark") {
+		document.documentElement.setAttribute("data-theme", "dark");
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.classList.remove("dark");
+	}
+
+	window.localStorage.setItem("theme", theme);
+</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Wayne" href="https://losfurina.github.io/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://losfurina.github.io/blog/infra/openvpn/"><!-- Primary Meta Tags --><title>How to use OpenVPN</title><meta name="title" content="How to use OpenVPN"><meta name="description" content="Auto-generated description for How to use OpenVPN"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://losfurina.github.io/blog/infra/openvpn/"><meta property="og:title" content="How to use OpenVPN"><meta property="og:description" content="Auto-generated description for How to use OpenVPN"><meta property="og:image" content="https://losfurina.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://losfurina.github.io/blog/infra/openvpn/"><meta property="twitter:title" content="How to use OpenVPN"><meta property="twitter:description" content="Auto-generated description for How to use OpenVPN"><meta property="twitter:image" content="https://losfurina.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="/_astro/index.BMJYqOyi.css">
+<link rel="stylesheet" href="/_astro/about.BfrAnDAa.css"></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <div class="nav-left" data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Wayne</a></h2> </div> <div class="internal-links" id="mobileMenu" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M3 11.5L12 4l9 7.5" data-astro-cid-3ef6ksr2></path> <path d="M6.5 10.5V20h11V10.5" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Home
+</span> </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="6" y="4.5" width="12" height="15" rx="2" data-astro-cid-3ef6ksr2></rect> <path d="M9 9h6" data-astro-cid-3ef6ksr2></path> <path d="M9 13h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Blog
+</span> </a>  <a href="/projects" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="4" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="4" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Projects
+</span> </a>  <a href="/resume" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M14 3.5V8h4" data-astro-cid-3ef6ksr2></path> <path d="M9 12h6" data-astro-cid-3ef6ksr2></path> <path d="M9 16h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Resume
+</span> </a>  <a href="/contact" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M4 8l8 6 8-6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Contact
+</span> </a>  <!-- Tools Dropdown --> <div class="dropdown" id="toolsDropdown" data-astro-cid-3ef6ksr2> <button class="dropdown-trigger" id="toolsBtn" data-astro-cid-3ef6ksr2>
+More
+<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="dropdown-menu" id="toolsMenu" data-astro-cid-3ef6ksr2> <!-- 本站页面 --> <a href="/about" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>👤</span>
+About
+</a> <a href="/uses" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🛠️</span>
+Uses
+</a> <a href="/now" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>⏰</span>
+Now
+</a> <a href="/bookmarks" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔖</span>
+Bookmarks
+</a> <a href="/guestbook" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📝</span>
+Guestbook
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <a href="/keys" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔐</span>
+GPG Keys
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
+GitHub
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#install-openvpn-server" class="toc-link" data-astro-cid-xvrfupwn>Install OpenVPN Server</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#windows" class="toc-link" data-astro-cid-xvrfupwn>Windows</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#openvpn-client-sample-config" class="toc-link" data-astro-cid-xvrfupwn>OpenVPN Client Sample Config</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>How to use OpenVPN</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-01-23T00:00:00.000Z"> Jan 22, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 5 min read
+</span>   </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h1 id="openvpn-server">OpenVPN Server</h1>
+<h2 id="install-openvpn-server">Install OpenVPN Server</h2>
+<h3 id="windows">Windows</h3>
+<h4 id="1-download-setup-program">1. Download setup program</h4>
+<p><a href="https://openvpn.net/client/">OpenVPN Client Download for Windows</a></p>
+<h4 id="2-install-openvpn">2. Install OpenVPN</h4>
+<p>Remember click <code>Customize</code> instead of <code>Install Now</code></p>
+<p>Click <code>OpenVPN</code> -> <code>OpenVPN Service</code> -> <code>Entire feature will be installed on local hard drive</code>;</p>
+<p>Click<code>OpenSSL Utilities</code> -> <code>EasyRSA 3 Certificate Management Scripts</code> -> <code>Entire feature will be installed on local hard drive</code></p>
+<h4 id="3-config-server">3. Config Server</h4>
+<p>Enter default setup directory, and then enter the <code>Easy-RSA 3 Shell</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> 'C:\Program Files\OpenVPN\easy-rsa'</span></span>
+<span class="line"><span style="color:#79B8FF">.</span><span style="color:#E1E4E8">\</span><span style="color:#9ECBFF">EasyRSA-Start.bat</span></span></code></pre>
+<p>Initialize public key instruments directory:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> init-pki</span></span></code></pre>
+<p>Build <code>CA(Criteria Agent)</code> certificate, generated <code>ca.crt</code> will be saved at  <code>C：\Program Files\OpenVPN\easy-rsa\pki</code>, and the <code>ca.key</code> will be saved at <code>C：\Program Files\OpenVPN\easy-rsa\pki\private</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> build-ca</span><span style="color:#9ECBFF"> nopass</span></span></code></pre>
+<p>Generate Server  <code>crt</code> and <code>key</code>, <code>server.crt</code> will be saved at <code>C：\Program Files\OpenVPN\easy-rsa\pki\issued</code> and the <code>server.key</code> will be saved at <code>C：\Program Files\OpenVPN\easy-rsa\pki\private</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> build-client-full</span><span style="color:#9ECBFF"> client</span><span style="color:#9ECBFF"> nopass</span></span></code></pre>
+<p>Generate <code>Diffie-Hellman</code> key</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> gen-dh</span></span></code></pre>
+<p>Build <code>server.ovpn</code> config file:
+Sample config files locate at <code>C：\Program Files\OpenVPN\sample-config</code>, you should copy <code>server.ovpn</code> to <code>C：\Program Files\OpenVPN\config</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">port</span><span style="color:#79B8FF"> 1194</span></span>
+<span class="line"><span style="color:#B392F0">dh</span><span style="color:#9ECBFF"> dh.pem</span></span>
+<span class="line"><span style="color:#B392F0">duplicate-cn</span></span>
+<span class="line"><span style="color:#E1E4E8">;</span><span style="color:#B392F0">tls-auth</span><span style="color:#9ECBFF"> ta.key</span><span style="color:#79B8FF"> 0</span></span></code></pre>
+<p>Copy<code>ca.crt</code>，<code>dh.pem</code>，<code>server.crt</code> and <code>server.key</code> to directory <code>C：\Program Files\OpenVPN\config</code>.</p>
+<h4 id="4-start-and-connect">4. Start and Connect</h4>
+<p>Right click OpenVPN icon, select <code>connect</code>.</p>
+<h2 id="openvpn-client-sample-config">OpenVPN Client Sample Config</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>##############################################</span></span>
+<span class="line"><span># Sample client-side OpenVPN 2.6 config file #</span></span>
+<span class="line"><span># for connecting to multi-client server.     #</span></span>
+<span class="line"><span>#                                            #</span></span>
+<span class="line"><span># This configuration can be used by multiple #</span></span>
+<span class="line"><span># clients, however each client should have   #</span></span>
+<span class="line"><span># its own cert and key files.                #</span></span>
+<span class="line"><span>#                                            #</span></span>
+<span class="line"><span># On Windows, you might want to rename this  #</span></span>
+<span class="line"><span># file so it has a .ovpn extension           #</span></span>
+<span class="line"><span>##############################################</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Specify that we are a client and that we</span></span>
+<span class="line"><span># will be pulling certain config file directives</span></span>
+<span class="line"><span># from the server.</span></span>
+<span class="line"><span>client</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Use the same setting as you are using on</span></span>
+<span class="line"><span># the server.</span></span>
+<span class="line"><span># On most systems, the VPN will not function</span></span>
+<span class="line"><span># unless you partially or fully disable</span></span>
+<span class="line"><span># the firewall for the TUN/TAP interface.</span></span>
+<span class="line"><span>;dev tap</span></span>
+<span class="line"><span>dev tun</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Windows needs the TAP-Win32 adapter name</span></span>
+<span class="line"><span># from the Network Connections panel</span></span>
+<span class="line"><span># if you have more than one.  On XP SP2,</span></span>
+<span class="line"><span># you may need to disable the firewall</span></span>
+<span class="line"><span># for the TAP adapter.</span></span>
+<span class="line"><span>;dev-node MyTap</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Are we connecting to a TCP or</span></span>
+<span class="line"><span># UDP server?  Use the same setting as</span></span>
+<span class="line"><span># on the server.</span></span>
+<span class="line"><span>;proto tcp</span></span>
+<span class="line"><span>proto udp</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># The hostname/IP and port of the server.</span></span>
+<span class="line"><span># You can have multiple remote entries</span></span>
+<span class="line"><span># to load balance between the servers.</span></span>
+<span class="line"><span>remote 58.18.73.71 1194</span></span>
+<span class="line"><span>;remote my-server-2 1194</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Choose a random host from the remote</span></span>
+<span class="line"><span># list for load-balancing.  Otherwise</span></span>
+<span class="line"><span># try hosts in the order specified.</span></span>
+<span class="line"><span>;remote-random</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Keep trying indefinitely to resolve the</span></span>
+<span class="line"><span># host name of the OpenVPN server.  Very useful</span></span>
+<span class="line"><span># on machines which are not permanently connected</span></span>
+<span class="line"><span># to the internet such as laptops.</span></span>
+<span class="line"><span>resolv-retry infinite</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Most clients don't need to bind to</span></span>
+<span class="line"><span># a specific local port number.</span></span>
+<span class="line"><span>nobind</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Downgrade privileges after initialization (non-Windows only)</span></span>
+<span class="line"><span>;user openvpn</span></span>
+<span class="line"><span>;group openvpn</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Try to preserve some state across restarts.</span></span>
+<span class="line"><span>persist-key</span></span>
+<span class="line"><span>persist-tun</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># If you are connecting through an</span></span>
+<span class="line"><span># HTTP proxy to reach the actual OpenVPN</span></span>
+<span class="line"><span># server, put the proxy server/IP and</span></span>
+<span class="line"><span># port number here.  See the man page</span></span>
+<span class="line"><span># if your proxy server requires</span></span>
+<span class="line"><span># authentication.</span></span>
+<span class="line"><span>;http-proxy-retry # retry on connection failures</span></span>
+<span class="line"><span>;http-proxy [proxy server] [proxy port #]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Wireless networks often produce a lot</span></span>
+<span class="line"><span># of duplicate packets.  Set this flag</span></span>
+<span class="line"><span># to silence duplicate packet warnings.</span></span>
+<span class="line"><span>;mute-replay-warnings</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># SSL/TLS parms.</span></span>
+<span class="line"><span># See the server config file for more</span></span>
+<span class="line"><span># description.  It's best to use</span></span>
+<span class="line"><span># a separate .crt/.key file pair</span></span>
+<span class="line"><span># for each client.  A single ca</span></span>
+<span class="line"><span># file can be used for all clients.</span></span>
+<span class="line"><span>;ca ca.crt</span></span>
+<span class="line"><span>;cert client.crt</span></span>
+<span class="line"><span>;key client.key</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;ca></span></span>
+<span class="line"><span>-----BEGIN CERTIFICATE-----</span></span>
+<span class="line"><span>MIIDYzCCAkugAwIBAgIUa4wZbvlq9Fe2MIsMQ2T48vDEmmAwDQYJKoZIhvcNAQEL</span></span>
+<span class="line"><span>BQAwHjEcMBoGA1UEAwwTcm9nLmxpd2VpanVuLm9ubGluZTAeFw0yNTAzMjYwNzEy</span></span>
+<span class="line"><span>NTBaFw0zNTAzMjQwNzEyNTBaMB4xHDAaBgNVBAMME3JvZy5saXdlaWp1bi5vbmxp</span></span>
+<span class="line"><span>bmUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCeRGMGnx2rcXlOSt7B</span></span>
+<span class="line"><span>3JvwgM9phhjkoPRdH8uppljdkUcNgx204JwyaSs5mDNbAQGSsG</span></span>
+<span class="line"><span>9W7DAgMBAAGjgZgwgZUwDAYDVR0TBAUwAwEB/zAdBgNVHQ4EFgQUwSjWYwGB5ac3</span></span>
+<span class="line"><span>jOl7dgcKJnqzyzEwWQYDVR0jBFIwUIAUwSjWYwGB5ac3jOl7dgcKJnqzyzGhIqQg</span></span>
+<span class="line"><span>MB4xHDAaBgNVBAMME3JvZy5saXdlaWp1bi5vbmxpbmWCFGuMGW75avRXtjCLDENk</span></span>
+<span class="line"><span>+PLwxJpgMAsGA1UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAQEADs46S0j66Yqn</span></span>
+<span class="line"><span>jJ6stxgP/P86/yZukTrzpqMpktZ5QwzZwKs/9ZG9PCRsIypP5PtBYHBoEZG2IzNf</span></span>
+<span class="line"><span>RHIpdO8mMx4Lg7775XuvuX7oR22t98X5gbcdBBqO0K2NPPVKkfcYmaBpafjfHpZS</span></span>
+<span class="line"><span>nL3ddRWRv1iFklQ85gl5sea/ebWIYLK+ClLybxW9h+rI/A7s9dKlgQZubPLpycKe</span></span>
+<span class="line"><span>LDh+FLMSbEWOOA9ZVo0yt2cqP+UZZlJKtsEXaJCqcBhGtoQ2rNGtK0JdvcZbbXdF</span></span>
+<span class="line"><span>FOpR4NsHmfSaHVtKzPs+yLGziM8XUi1uQEiu/B6tryK+7Q0qRx+RsYxe8tzMpdmA</span></span>
+<span class="line"><span>28mCSB2teg==</span></span>
+<span class="line"><span>-----END CERTIFICATE-----</span></span>
+<span class="line"><span>&#x3C;/ca></span></span>
+<span class="line"><span>&#x3C;cert></span></span>
+<span class="line"><span>Certificate:</span></span>
+<span class="line"><span>    Data:</span></span>
+<span class="line"><span>        Version: 3 (0x2)</span></span>
+<span class="line"><span>        Serial Number:</span></span>
+<span class="line"><span>            2a:ac:00:f1:73:c9:2f:9b:fa:26:16:71:ac:4c:31:42</span></span>
+<span class="line"><span>        Signature Algorithm: sha256WithRSAEncryption</span></span>
+<span class="line"><span>        Issuer: CN=rog.liweijun.online</span></span>
+<span class="line"><span>        Validity</span></span>
+<span class="line"><span>            Not Before: Mar 26 07:15:58 2025 GMT</span></span>
+<span class="line"><span>            Not After : Jun 29 07:15:58 2027 GMT</span></span>
+<span class="line"><span>        Subject: CN=hjt</span></span>
+<span class="line"><span>        Subject Public Key Info:</span></span>
+<span class="line"><span>            Public Key Algorithm: rsaEncryption</span></span>
+<span class="line"><span>                Public-Key: (2048 bit)</span></span>
+<span class="line"><span>                Modulus:</span></span>
+<span class="line"><span>                    00:e0:7e:6e:91:06:7b:b0:e2:3d:c2:ea:25:3d:83:</span></span>
+<span class="line"><span>                    fa:b4:35:cd:d0:92:aa:c6:99:31:94:b2:44:9c:f0:</span></span>
+<span class="line"><span>                    be:30:61:20:09:75:89:26:a4:6f:0d:cc:c7:d7:15:</span></span>
+<span class="line"><span>                    7c:af:76:e5:16:52:ab:3e:d0:a8:f1:91:33:fe:c2:</span></span>
+<span class="line"><span>                    b6:1f:70:4d:13:47:b2:81:cc:6e:d0:c1:4e:d0:3c:</span></span>
+<span class="line"><span>                    29:26:8d:92:3f:c0:5b:2c:d1:3f:84:23:28:22:52:</span></span>
+<span class="line"><span>                    bd:b1:d8:2f:d3:f4:19:95:7a:61:64:dd:65:14:f7:</span></span>
+<span class="line"><span>                    55:48:df:04:51:2c:9:d4:5b:9f:a3:</span></span>
+<span class="line"><span>                    d6:7c:8e:0b:38:92:aa:a0:a9:dc:01:3b:76:33:26:</span></span>
+<span class="line"><span>                    c8:de:56:2c:c5:46:a6:0f:b7:76:13:f1:25:b2:e8:</span></span>
+<span class="line"><span>                    86:77:30:b9:a8:07:1f:6b:5c:ba:49:84:c0:63:db:</span></span>
+<span class="line"><span>                    97:03:1f:da:bc:0f:80:40:c2:34:eb:f2:98:4b:fb:</span></span>
+<span class="line"><span>                    e8:4d:2f:1c:6c:98:f2:87:df:f6:e2:91:6f:31:30:</span></span>
+<span class="line"><span>                    ae:f9:a9:d2:ea:c2:d2:37:ac:68:f8:a7:d3:d3:8f:</span></span>
+<span class="line"><span>                    1c:b6:ff:11:df:5a:2b:6d:80:d1:57:d7:af:10:d5:</span></span>
+<span class="line"><span>                    63:c9</span></span>
+<span class="line"><span>                Exponent: 65537 (0x10001)</span></span>
+<span class="line"><span>        X509v3 extensions:</span></span>
+<span class="line"><span>            X509v3 Basic Constraints: </span></span>
+<span class="line"><span>                CA:FALSE</span></span>
+<span class="line"><span>            X509v3 Subject Key Identifier: </span></span>
+<span class="line"><span>                B3:15:25:1B:22:4B:CA:26:64:3C:8B:70:70:43:FA:3A:63:76:DD:DB</span></span>
+<span class="line"><span>            X509v3 Authority Key Identifier: </span></span>
+<span class="line"><span>                keyid:C1:28:D6:63:01:81:E5:A7:37:8C:E9:7B:76:07:0A:26:7A:B3:CB:31</span></span>
+<span class="line"><span>                DirName:/CN=rog.liweijun.online</span></span>
+<span class="line"><span>                serial:6B:8C:19:6E:F9:6A:F4:57:B6:30:8B:0C:43:64:F8:F2:F0:C4:9A:60</span></span>
+<span class="line"><span>            X509v3 Extended Key Usage: </span></span>
+<span class="line"><span>                TLS Web Client Authentication</span></span>
+<span class="line"><span>            X509v3 Key Usage: </span></span>
+<span class="line"><span>                Digital Signature</span></span>
+<span class="line"><span>    Signature Algorithm: sha256WithRSAEncryption</span></span>
+<span class="line"><span>    Signature Value:</span></span>
+<span class="line"><span>        50:f1:34:c3:37:b5:6c:5c:90:0f:cd:e5:fc:e1:27:78:e3:63:</span></span>
+<span class="line"><span>        73:53:a5:e9:5e:2d:89:08:28:16:82:d9:88:7f:18:2e:f6:f2:</span></span>
+<span class="line"><span>        cf:d4:a9:e2:7f:ca:22:88:b1:c4:34:8f:8a:c5:45:8e:fa:65:</span></span>
+<span class="line"><span>        53:c8:47:66:e1:a4:9b:d5:d:a5:25:86:a1:c4:</span></span>
+<span class="line"><span>        88:35:b1:13:0d:7e:95:10:47:15:ff:e9:06:a0:5d:d5:35:0e:</span></span>
+<span class="line"><span>        1b:95:80:85:cf:97:f3:cb:1e:a6:67:fa:9d:42:b6:ef:5b:b5:</span></span>
+<span class="line"><span>        c9:86:f2:50:01:bb:67:6b:02:5d:bd:4d:cd:53:83:cd:7d:58:</span></span>
+<span class="line"><span>        6e:32:59:cb:33:3b:76:f2:a1:25:9f:30:c6:fd:92:c7:b0:92:</span></span>
+<span class="line"><span>        9a:63:a1:92:a5:4e:6e:e9:f5:2f:59:d0:e1:df:54:8d:7e:f9:</span></span>
+<span class="line"><span>        bc:5d:af:dd:e8:dc:67:ce:f7:72:2f:8c:85:e1:c2:00:03:53:</span></span>
+<span class="line"><span>        22:41:cc:71:bd:33:5a:f1:f3:31:a5:5e:c0:36:8e:2d:1d:b0:</span></span>
+<span class="line"><span>        8b:61:56:8b</span></span>
+<span class="line"><span>-----BEGIN CERTIFICATE-----</span></span>
+<span class="line"><span>MIIDYTCCAkmgAwIBAgIQKqwA8XPJL5v6JhZxrEwxQjANBgkqhkiG9w0BAQsFADAe</span></span>
+<span class="line"><span>MRwwGgYDVQQDDBNyb2cubGl3ZWlqdW4ub25saW5lMB4XDTI1MDMyNjA3MTU1OFoX</span></span>
+<span class="line"><span>DTI3MDYyOTA3MTU1OFowDjEMMAoGA1UEAwwDaGp0MIIBIjANBgkqhkiG9w0BAQEF</span></span>
+<span class="line"><span>AAOCAQ8AMIIBCgKCAQEA4H5ukQZ7sOI9wuolPYP6tDXN0JKqxpkxlLJEnPC+MGEg</span></span>
+<span class="line"><span>CXWJJqRvDczH1xV8r3blFlKncATt2MybI3lYsxUamD7d2E/El</span></span>
+<span class="line"><span>suiGdzC5qAcfa1y6SYTAY9uXAx/avA+AQMI06/KYS/voTS8cbJjyh9/24pFvMTCu</span></span>
+<span class="line"><span>+anS6sLSN6xo+KfT048ctv8R31orbYDRV9evENVjyQIDAQABo4GqMIGnMAkGA1Ud</span></span>
+<span class="line"><span>EwQCMAAwHQYDVR0OBBYEFLMVJRsiS8omZDyLcHBD+jpjdt3bMFkGA1UdIwRSMFCA</span></span>
+<span class="line"><span>FMEo1mMBgeWnN4zpe3YHCiZ6s8sxoSKkIDAeMRwwGgYDVQQDDBNyb2cubGl3ZWlq</span></span>
+<span class="line"><span>dW4ub25saW5lghRrjBlu+Wr0V7YwiwxDZPjy8MSaYDATBgNVHSUEDDAKBggrBgEF</span></span>
+<span class="line"><span>BQcDAjALBgNVHQ8EBAMCB4AwDQYJKoZIhvcNAQELBQADggEBAFDxNMM3tWxckA/N</span></span>
+<span class="line"><span>5fzhJ3jjY3NTpeleLYkIKBaC2Yh/GC728s/UqeJ/yiKIscQ0j4rFRY76ZVPIR2bh</span></span>
+<span class="line"><span>pJvVxtLUjlspy2LgE1UG04ifUvj516hpHej8Bja+dY0+M4/3+xoIvz6vaqBkYUeM</span></span>
+<span class="line"><span>3qJ9rd7+h6sJgnw4tw2lJYahxIg1sRMNfpUQRxX/6QagXdU1DhuVgIXPl/PLHqZn</span></span>
+<span class="line"><span>+p1Ctu9btcmG8lABu2drAl29Tc1Tg819WG4yWcszO3byoSWfMMb9ksewkppjoZKl</span></span>
+<span class="line"><span>Tm7p9S9Z0OHfVI1++bxdr93o3GfO93IvjIXhwgADUyJBzHG9M1rx8zGlXsA2ji0d</span></span>
+<span class="line"><span>sIthVos=</span></span>
+<span class="line"><span>-----END CERTIFICATE-----</span></span>
+<span class="line"><span>&#x3C;/cert></span></span>
+<span class="line"><span>&#x3C;key></span></span>
+<span class="line"><span>-----BEGIN PRIVATE KEY-----</span></span>
+<span class="line"><span>MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDgfm6RBnuw4j3C</span></span>
+<span class="line"><span>6iU9g/q0Nc3QkqrGmTGUskSc8L4wYSAJdYkmpG8NzMfXFXyvduUWUqs+0KjxkTP+</span></span>
+<span class="line"><span>wrYfcE0TR7KBzG7QwU7QPCkmjZI/wFss0T+EIygiUr2x2C/T9BmVemFk3WUU91VI</span></span>
+<span class="line"><span>3wRRLDY1pW+ytRflzryvDwQ3Xp3NmIGtFcF94BOtAGQTTA55JQGZ1Fufo9Z8jgs4</span></span>
+<span class="line"><span>kqqgqdwBO3YzJsjeVizFRqYPt3YT8SWy6IZ3MLmoBx9rXLpJhMBj25cDH9q8D4BA</span></span>
+<span class="line"><span>wjTr8phL++hNLxxsmPKH3/bikW8xMK75qdLqwtI3rGj4p9PTjxy2/xHfWittgNFX</span></span>
+<span class="line"><span>168Q1WPJAgMBAAECggEAH1u50RtBOueXbfssAYhGhFbBraFXJo+um9E9AVklj/d5</span></span>
+<span class="line"><span>NKkM4+9zLc/NmG9Bb/chL/mTPx6BguDgDPWg4ApdUdShjD0Eu7dM7YyByQdchvg1</span></span>
+<span class="line"><span>JDEEeM46ZHT/V3DV2XsO+dDS+vZsEL4t1RSF81rEJcE6tZFTScATnjZwRdW7IEUq</span></span>
+<span class="line"><span>2McSD2C8mFhwz0IRfQ5MMHv4vV7t9Q0E4ZpePo2VjYg5jLj/w9GwkB+7II5A21ju</span></span>
+<span class="line"><span>aFRrYFGMQonjPjLBuUDuzgh4b5XJgQhJFBngd/JjAxObWJ8fUZ4kEAFwGqy6f42I</span></span>
+<span class="line"><span>SszhF0PcvN0jbApm8BSshEDRcgkwV2bXvcF07bBMswKBgQDzTE9AqyLLqglkwB+B</span></span>
+<span class="line"><span>GmI/inh3U5nqS8uL1poME5qpiMTYBgd93sPSrRmQ4CU+fYzjCUMjfj1rcKTFDOf3</span></span>
+<span class="line"><span>yKg5SCT/hnuTWFvalwdKvE5MjfiV0nhYgr8noqF8I0rZdm3MPs3C+IRmaxsSQVAN</span></span>
+<span class="line"><span>gFHbTlvkGRa7CJt4DhwKrQ1cZwKBgQDsNs2cV3M35twQNbeK1f4wgu5nqgW4Amxl</span></span>
+<span class="line"><span>qoD6XD0DiwYg+y0teRebBNvE7xpELr9gD1fnz4X2a3MjQ0K/ZiaseDnJnIr39i9i</span></span>
+<span class="line"><span>7d3atnZPQLcX6mBptScqPGi3dGffJGVZX576JNxV/pl356gBUQbna982ebic/qq7</span></span>
+<span class="line"><span>Ppj9Nu8gTwKBgAOxneZqcr3K2Beqfw/zuZgjXw7YuxZ+jhmSaYZTad63D94DwWtc</span></span>
+<span class="line"><span>zXZOYHv9mzMmrtPnmRhZ207dR/Mh7geqCTvNZ5pljUzAY6ye7GJrF3k8EpEbv+4A</span></span>
+<span class="line"><span>Fizg4DjFRGam0KXwMimKol/3slKFoVSDJTsCJo0BAIJYcBvTgwN6eyBzAoGBAOvT</span></span>
+<span class="line"><span>JuFAOWqFFA0m4/A7BoQ+I2/hQcZcvQWe/Rd2gP+Ji3vf6FGuxE9iwVpScAHEPhHU</span></span>
+<span class="line"><span>H6nx+Ed1LMT2wKu/ezrS6LaMj/1QjiyRV92kLmefL2wz9T9zuP8kwlLtZ0pS1tAs</span></span>
+<span class="line"><span>c9Y+eK9t+J/J6mQuFdtzSazkRtiOM7uumiSq9H9nAoGBAIcKJTIBpubDNsa/bIgg</span></span>
+<span class="line"><span>6INFTB2Bnj0aqeVEP3QDh/DKyqMfMYwmXvEBOkhXGsIlV74L342ZpXkQTkwPRs0r</span></span>
+<span class="line"><span>6VFO8PsopabnYyTWqEtlzrog1M1zlG0lLB9HC/zn1CDqXO4/hxEi/CF47mqMyA7C</span></span>
+<span class="line"><span>7PcgTTYmlum50C+V5fw/izRP</span></span>
+<span class="line"><span>-----END PRIVATE KEY-----</span></span>
+<span class="line"><span>&#x3C;/key></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Verify server certificate by checking that the</span></span>
+<span class="line"><span># certificate has the correct key usage set.</span></span>
+<span class="line"><span># This is an important precaution to protect against</span></span>
+<span class="line"><span># a potential attack discussed here:</span></span>
+<span class="line"><span>#  http://openvpn.net/howto.html#mitm</span></span>
+<span class="line"><span>#</span></span>
+<span class="line"><span># To use this feature, you will need to generate</span></span>
+<span class="line"><span># your server certificates with the keyUsage set to</span></span>
+<span class="line"><span>#   digitalSignature, keyEncipherment</span></span>
+<span class="line"><span># and the extendedKeyUsage to</span></span>
+<span class="line"><span>#   serverAuth</span></span>
+<span class="line"><span># EasyRSA can do this for you.</span></span>
+<span class="line"><span>remote-cert-tls server</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Allow to connect to really old OpenVPN versions</span></span>
+<span class="line"><span># without AEAD support (OpenVPN 2.3.x or older)</span></span>
+<span class="line"><span># This adds AES-256-CBC as fallback cipher and</span></span>
+<span class="line"><span># keeps the modern ciphers as well.</span></span>
+<span class="line"><span>;data-ciphers AES-256-GCM:AES-128-GCM:?CHACHA20-POLY1305:AES-256-CBC</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># If a tls-auth key is used on the server</span></span>
+<span class="line"><span># then every client must also have the key.</span></span>
+<span class="line"><span>;tls-auth ta.key 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Set log file verbosity.</span></span>
+<span class="line"><span>verb 3</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Silence repeating messages</span></span>
+<span class="line"><span>;mute 20</span></span>
+<span class="line"><span></span></span></code></pre>
+<h1 id="reference">Reference</h1>
+<blockquote>
+<p><a href="https://www.moralok.com/2023/06/07/how-to-setup-OpenVPN-server-on-windows-10/">https://www.moralok.com/2023/06/07/how-to-setup-OpenVPN-server-on-windows-10/</a>
+<a href="https://www.moralok.com/2023/06/07/how-to-setup-OpenVPN-connect-client-on-iOS-and-macOS/">https://www.moralok.com/2023/06/07/how-to-setup-OpenVPN-connect-client-on-iOS-and-macOS/</a></p>
+</blockquote>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=How%20to%20use%20OpenVPN&url=https%3A%2F%2Flosfurina.github.io%2Fblog%2Finfra%2Fopenvpn%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://losfurina.github.io/blog/infra/openvpn/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+Related Posts
+</h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/infra/bandwidth/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>What is Bandwidth</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>Auto-generated description for What is Bandwidth</p></a><a href="/blog/infra/bitwarden/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>How to install Bitwarden</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>Auto-generated description for How to install Bitwarden</p></a><a href="/blog/infra/factorio-headless-server/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>How to Establish Factorio Linux Server from scratch</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>Auto-generated description for How to Establish Factorio Linux Server from scratch</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
+Comments
+</h3> <div class="giscus-wrapper" data-astro-cid-jvxsf75u> <script src="https://giscus.app/client.js" data-repo="LosFurina/LosFurina.github.io" data-repo-id="YOUR_REPO_ID" data-category="Announcements" data-category-id="YOUR_CATEGORY_ID" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </section>  <script type="module">function s(){const e=document.documentElement.getAttribute("data-theme"),t=document.querySelector("iframe.giscus-frame");if(t){const i=e==="dark"?"dark":"light";t.contentWindow?.postMessage({giscus:{setConfig:{theme:i}}},"https://giscus.app")}}const n=new MutationObserver(e=>{e.forEach(t=>{t.attributeName==="data-theme"&&s()})});n.observe(document.documentElement,{attributes:!0});window.addEventListener("message",e=>{e.origin==="https://giscus.app"&&s()});</script> </footer> </article> </main> <aside class="right-sidebar" data-astro-cid-bvzihdzo> <!-- Future content --> </aside> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="copyright" data-astro-cid-sz7xmlte>
+&copy; 2026 Wayne Li. All rights reserved.
+</p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://x.com/yourhandle" target="_blank" rel="noopener" title="X (Twitter)" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>LinkedIn</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:me@liweijun.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path> <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline> </svg> </a> <a href="/rss.xml" title="RSS Feed" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>RSS Feed</span> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> <p class="footer-note" data-astro-cid-sz7xmlte>
+Built with <a href="https://astro.build" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Astro</a> </p> </div> </footer>  </body></html>

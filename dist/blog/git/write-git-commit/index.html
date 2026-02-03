@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><!-- Theme Initialization Script --><script>
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
+
+	if (theme === "dark") {
+		document.documentElement.setAttribute("data-theme", "dark");
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.classList.remove("dark");
+	}
+
+	window.localStorage.setItem("theme", theme);
+</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Wayne" href="https://losfurina.github.io/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://losfurina.github.io/blog/git/write-git-commit/"><!-- Primary Meta Tags --><title>Write Git commit</title><meta name="title" content="Write Git commit"><meta name="description" content="Auto-generated description for Write Git commit"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://losfurina.github.io/blog/git/write-git-commit/"><meta property="og:title" content="Write Git commit"><meta property="og:description" content="Auto-generated description for Write Git commit"><meta property="og:image" content="https://losfurina.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://losfurina.github.io/blog/git/write-git-commit/"><meta property="twitter:title" content="Write Git commit"><meta property="twitter:description" content="Auto-generated description for Write Git commit"><meta property="twitter:image" content="https://losfurina.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><link rel="stylesheet" href="/_astro/index.BMJYqOyi.css">
+<link rel="stylesheet" href="/_astro/about.BfrAnDAa.css"></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <div class="nav-left" data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Wayne</a></h2> </div> <div class="internal-links" id="mobileMenu" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M3 11.5L12 4l9 7.5" data-astro-cid-3ef6ksr2></path> <path d="M6.5 10.5V20h11V10.5" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Home
+</span> </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="6" y="4.5" width="12" height="15" rx="2" data-astro-cid-3ef6ksr2></rect> <path d="M9 9h6" data-astro-cid-3ef6ksr2></path> <path d="M9 13h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Blog
+</span> </a>  <a href="/projects" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="4" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="4" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Projects
+</span> </a>  <a href="/resume" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M14 3.5V8h4" data-astro-cid-3ef6ksr2></path> <path d="M9 12h6" data-astro-cid-3ef6ksr2></path> <path d="M9 16h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Resume
+</span> </a>  <a href="/contact" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M4 8l8 6 8-6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Contact
+</span> </a>  <!-- Tools Dropdown --> <div class="dropdown" id="toolsDropdown" data-astro-cid-3ef6ksr2> <button class="dropdown-trigger" id="toolsBtn" data-astro-cid-3ef6ksr2>
+More
+<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="dropdown-menu" id="toolsMenu" data-astro-cid-3ef6ksr2> <!-- 本站页面 --> <a href="/about" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>👤</span>
+About
+</a> <a href="/uses" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🛠️</span>
+Uses
+</a> <a href="/now" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>⏰</span>
+Now
+</a> <a href="/bookmarks" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔖</span>
+Bookmarks
+</a> <a href="/guestbook" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📝</span>
+Guestbook
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <a href="/keys" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔐</span>
+GPG Keys
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
+GitHub
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#1-commit-结构的艺术-必学" class="toc-link" data-astro-cid-xvrfupwn>1. Commit 结构的艺术 (必学！)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#标题行-summary-line-简洁明了的概括" class="toc-link" data-astro-cid-xvrfupwn>标题行 (Summary Line): 简洁明了的概括</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主体-body-详细解释提交的内容" class="toc-link" data-astro-cid-xvrfupwn>主体 (Body): 详细解释提交的内容</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#2-内容选择的智慧commit-什么" class="toc-link" data-astro-cid-xvrfupwn>2. 内容选择的智慧：Commit 什么？</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#3-内容书写的技巧如何写得更好" class="toc-link" data-astro-cid-xvrfupwn>3. 内容书写的技巧：如何写得更好？</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#4-遵循约定式提交-conventional-commits可选但推荐" class="toc-link" data-astro-cid-xvrfupwn>4. 遵循约定式提交 (Conventional Commits)（可选但推荐）</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#5-养成良好的习惯" class="toc-link" data-astro-cid-xvrfupwn>5. 养成良好的习惯</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#关于-git-commit--m" class="toc-link" data-astro-cid-xvrfupwn>关于 git commit -m &quot;&quot;</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#1-commit-结构的艺术-必学-1" class="toc-link" data-astro-cid-xvrfupwn>1. Commit 结构的艺术 (必学！)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#标题行-简洁明了的概括" class="toc-link" data-astro-cid-xvrfupwn>标题行: 简洁明了的概括</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主体-详细解释提交的内容" class="toc-link" data-astro-cid-xvrfupwn>主体: 详细解释提交的内容</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#2-内容选择的智慧commit-什么-1" class="toc-link" data-astro-cid-xvrfupwn>2. 内容选择的智慧：Commit 什么？</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#3-内容书写的技巧如何写得更好-1" class="toc-link" data-astro-cid-xvrfupwn>3. 内容书写的技巧：如何写得更好？</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#4-遵循约定式提交可选但推荐" class="toc-link" data-astro-cid-xvrfupwn>4. 遵循约定式提交（可选但推荐）</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#5-养成良好的习惯-1" class="toc-link" data-astro-cid-xvrfupwn>5. 养成良好的习惯</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#关于-git-commit--m--1" class="toc-link" data-astro-cid-xvrfupwn>关于 git commit -m &quot;&quot;</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>Write Git commit</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-01-23T00:00:00.000Z"> Jan 22, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 9 min read
+</span>   </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h1 id="如何优雅地写-git-commit">如何优雅地写 Git Commit</h1>
+<p>写出优雅的 Git Commit 是一个持续改进的过程，不仅为了自己，更是为了团队协作和项目可维护性。</p>
+<p>核心原则：<strong>清晰、简洁、一致、可追踪</strong></p>
+<h2 id="1-commit-结构的艺术-必学">1. Commit 结构的艺术 (必学！)</h2>
+<p>标准的 Git Commit 结构包含两个主要部分：标题行（Summary Line）和主体（Body）。</p>
+<h3 id="标题行-summary-line-简洁明了的概括">标题行 (Summary Line): 简洁明了的概括</h3>
+<ul>
+<li><strong>必填，且是最重要的部分。</strong></li>
+<li><strong>不超过 50 个字符：</strong> 便于快速浏览。</li>
+<li><strong>使用祈使句（Imperative Mood）：</strong> 动词开头，像给代码下达命令。例如：<code>Add feature X</code>，<code>Fix bug Y</code>。</li>
+<li><strong>开头大写。</strong></li>
+<li><strong>不要在末尾加句号。</strong></li>
+<li><strong>简洁有力：</strong> 准确概括本次提交的主要目的。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<ul>
+<li><code>Fix: Correct typo in documentation</code></li>
+<li><code>Feat: Implement user authentication</code></li>
+<li><code>Refactor: Improve performance of data processing</code></li>
+</ul>
+<h3 id="主体-body-详细解释提交的内容">主体 (Body): 详细解释提交的内容</h3>
+<ul>
+<li><strong>可选，但强烈推荐用于复杂或重要的提交。</strong></li>
+<li><strong>在一行空行后开始：</strong> 分隔标题行与主体。</li>
+<li><strong>解释“为什么”（Why）：</strong> 说明解决了什么问题，引入了什么新功能，这样做的原因等。</li>
+<li><strong>提供上下文：</strong> 引用相关的 Issue 或需求（例如：<code>Closes #123</code>）。</li>
+<li><strong>详细说明：</strong> 如果必要，描述技术细节、设计决策、潜在副作用等。</li>
+<li><strong>换行：</strong> 每行控制在 72 字符左右。</li>
+<li><strong>使用列表或段落：</strong> 组织思路。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Fix: Correct typo in documentation</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>This commit corrects a typo in the installation instructions</span></span>
+<span class="line"><span>regarding the required version of Node.js. The previous version</span></span>
+<span class="line"><span>was incorrect and could lead to installation errors.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Relates to #789</span></span></code></pre>
+<h2 id="2-内容选择的智慧commit-什么">2. 内容选择的智慧：Commit 什么？</h2>
+<ul>
+<li><strong>一次提交只做一件事 (Single Concern)：</strong> 保持每个提交的粒度小且集中。</li>
+<li><strong>避免“大杂烩”提交：</strong> 将不相关的改动拆分为多个提交。</li>
+<li><strong>不要提交无效的文件：</strong> 使用 <code>.gitignore</code>。</li>
+</ul>
+<h2 id="3-内容书写的技巧如何写得更好">3. 内容书写的技巧：如何写得更好？</h2>
+<ul>
+<li><strong>使用一致的格式和语言：</strong> 遵循团队规范。</li>
+<li><strong>使用工具辅助填写：</strong> 利用 GUI 工具或命令行工具。</li>
+<li><strong>审视你的改动：</strong> 在提交前检查改动，确保 Commit 信息准确。</li>
+<li><strong>避免使用模糊的词语：</strong> 具体说明进行了哪些改动。</li>
+<li><strong>引用相关的 Issue 或 Pull Request：</strong> 方便追踪。</li>
+<li><strong>如果修复 Bug，说明现象和原因。</strong></li>
+<li><strong>如果引入新功能，说明用途和实现方式。</strong></li>
+</ul>
+<h2 id="4-遵循约定式提交-conventional-commits可选但推荐">4. 遵循约定式提交 (Conventional Commits)（可选但推荐）</h2>
+<p>一种轻量级约定，为提交消息提供规范，便于自动化工具处理。</p>
+<p><strong>格式：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;type>[optional scope]: &#x3C;description></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[optional body]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[optional footer(s)]</span></span></code></pre>
+<ul>
+<li><strong><code>&#x3C;type></code> (必填):</strong> 提交类型（<code>feat</code>, <code>fix</code>, <code>docs</code>, <code>style</code>, <code>refactor</code>, <code>perf</code>, <code>test</code>, <code>build</code>, <code>ci</code>, <code>chore</code> 等）。</li>
+<li><strong><code>[optional scope]</code>:</strong> 影响范围（如模块）。</li>
+<li><strong><code>&#x3C;description></code> (必填):</strong> 标题行，使用祈使句。</li>
+<li><strong><code>[optional body]</code>:</strong> 主体，详细说明。</li>
+<li>**<code>[optional footer(s)]:** 页脚，关联 Issue 或表明 Breaking Changes (</code>BREAKING CHANGE:`)。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>feat(parser): Add support for arrays</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>This commit adds support for parsing arrays in the configuration file.</span></span>
+<span class="line"><span>Previously, only basic key-value pairs were supported.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Closes #456</span></span></code></pre>
+<h2 id="5-养成良好的习惯">5. 养成良好的习惯</h2>
+<ul>
+<li><strong>经常提交：</strong> 小而频繁的提交更容易管理。</li>
+<li><strong>提交前进行代码审查：</strong> 发现问题并改进 Commit 信息。</li>
+<li><strong>学习团队的现有 Commit 规范：</strong> 保持一致性。</li>
+<li><strong>使用 Git Hooks：</strong> 自动化检查 Commit 信息格式。</li>
+</ul>
+<h2 id="关于-git-commit--m">关于 <code>git commit -m ""</code></h2>
+<p><strong>不建议在 <code>git commit -m ""</code> 后面写太多内容。</strong></p>
+<p>虽然技术上可行，但这不符合优雅 Git Commit 的最佳实践，原因如下：</p>
+<ol>
+<li><strong>违反标题行长度限制：</strong> 导致标题过长。</li>
+<li><strong>无法分离标题和主体：</strong> 强制将所有内容写在单行。</li>
+<li><strong>丢失详细的上下文：</strong> 无法提供“为什么”的解释或引用 Issue。</li>
+<li><strong>不利于自动化工具处理：</strong> 影响工具解析和显示。</li>
+<li><strong>降低可读性：</strong> 在历史记录中难以快速浏览。</li>
+</ol>
+<p><strong>正确的做法：</strong></p>
+<ul>
+<li><strong>对于非常简单且一句话能清晰概括的提交，才使用 <code>git commit -m ""</code>，且保持简洁（不超过 50 字符）。</strong></li>
+<li><strong>当需要详细说明时，请使用不带 <code>-m</code> 参数的 <code>git commit</code> 命令。</strong> Git 会打开编辑器，让你按照标准的 Git Commit 结构（标题 + 空行 + 主体）来编写提交信息。</li>
+</ul>
+<p><strong>使用不带 <code>-m</code> 参数的 <code>git commit</code> 示例：</strong></p>
+<ol>
+<li>
+<p>在终端输入 <code>git commit</code> 并回车。</p>
+</li>
+<li>
+<p>Git 会打开你的默认编辑器。</p>
+</li>
+<li>
+<p>在编辑器中按照以下格式编写：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 第一行是标题行 (约 50 字符)</span></span>
+<span class="line"><span>Feat: Add user profile page</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 空一行</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 接下来是主体部分，可详细描述 (每行约 72 字符)</span></span>
+<span class="line"><span>This commit introduces a new user profile page with the following features:</span></span>
+<span class="line"><span>- Display user's name and avatar.</span></span>
+<span class="line"><span>- Allow users to edit their bio.</span></span>
+<span class="line"><span>- Links to user's past activity.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The profile page is accessible at /profile/:userId.</span></span>
+<span class="line"><span>This addresses user request #789.</span></span></code></pre>
+</li>
+<li>
+<p>保存并关闭编辑器。</p>
+</li>
+</ol>
+<p><strong>总结：</strong> 优雅的 Git Commit 是通过遵循结构化的提交信息规范来实现的，而不是将所有内容塞进单行的 <code>-m</code> 参数中。这使得你的版本历史更清晰、更容易理解和维护。# 如何优雅地写 Git Commit</p>
+<p>写好 Git Commit 是一个不断改进的过程。这不仅对自己有帮助，也对团队合作和项目维护很重要。</p>
+<p>核心原则：<strong>清晰、简洁、一致、可追踪</strong></p>
+<h2 id="1-commit-结构的艺术-必学-1">1. Commit 结构的艺术 (必学！)</h2>
+<p>标准的 Git Commit 结构有两个主要部分：标题行和主体。</p>
+<h3 id="标题行-简洁明了的概括">标题行: 简洁明了的概括</h3>
+<ul>
+<li><strong>必填，且是最重要的部分。</strong></li>
+<li><strong>不超过 50 个字符：</strong> 便于快速浏览。</li>
+<li><strong>使用动词开头：</strong> 像给代码下达命令。例如：<code>Add feature X</code>，<code>Fix bug Y</code>。</li>
+<li><strong>开头大写。</strong></li>
+<li><strong>不要在末尾加句号。</strong></li>
+<li><strong>简洁有力：</strong> 准确概括本次提交的主要目的。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<ul>
+<li><code>Fix: Correct typo in documentation</code></li>
+<li><code>Feat: Implement user authentication</code></li>
+<li><code>Refactor: Improve performance of data processing</code></li>
+</ul>
+<h3 id="主体-详细解释提交的内容">主体: 详细解释提交的内容</h3>
+<ul>
+<li><strong>可选，但强烈推荐用于复杂或重要的提交。</strong></li>
+<li><strong>在一行空行后开始：</strong> 分隔标题行与主体。</li>
+<li><strong>解释“为什么”：</strong> 说明解决了什么问题，引入了什么新功能等。</li>
+<li><strong>提供上下文：</strong> 引用相关的 Issue 或需求（例如：<code>Closes #123</code>）。</li>
+<li><strong>详细说明：</strong> 如果必要，描述技术细节、设计决策等。</li>
+<li><strong>换行：</strong> 每行控制在 72 字符左右。</li>
+<li><strong>使用列表或段落：</strong> 组织思路。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Fix: Correct typo in documentation</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>This commit corrects a typo in the installation instructions</span></span>
+<span class="line"><span>regarding the required version of Node.js. The previous version</span></span>
+<span class="line"><span>was incorrect and could lead to installation errors.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Relates to #789</span></span></code></pre>
+<h2 id="2-内容选择的智慧commit-什么-1">2. 内容选择的智慧：Commit 什么？</h2>
+<ul>
+<li><strong>一次提交只做一件事：</strong> 保持每个提交的内容简单。</li>
+<li><strong>避免“大杂烩”提交：</strong> 将不相关的改动分开。</li>
+<li><strong>不要提交无效的文件：</strong> 使用 <code>.gitignore</code>。</li>
+</ul>
+<h2 id="3-内容书写的技巧如何写得更好-1">3. 内容书写的技巧：如何写得更好？</h2>
+<ul>
+<li><strong>使用一致的格式和语言：</strong> 遵循团队规范。</li>
+<li><strong>使用工具帮助填写：</strong> 利用 GUI 工具或命令行工具。</li>
+<li><strong>审视你的改动：</strong> 在提交前检查改动，确保信息准确。</li>
+<li><strong>避免模糊的词语：</strong> 具体说明进行了哪些改动。</li>
+<li><strong>引用相关的 Issue 或 Pull Request：</strong> 方便追踪。</li>
+<li><strong>如果修复 Bug，说明现象和原因。</strong></li>
+<li><strong>如果引入新功能，说明用途和实现方式。</strong></li>
+</ul>
+<h2 id="4-遵循约定式提交可选但推荐">4. 遵循约定式提交（可选但推荐）</h2>
+<p>这是一种简单的规则，帮助你写提交信息。</p>
+<p><strong>格式：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;type>[optional scope]: &#x3C;description></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[optional body]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[optional footer(s)]</span></span></code></pre>
+<ul>
+<li><strong><code>&#x3C;type></code> (必填):</strong> 提交类型（<code>feat</code>, <code>fix</code>, <code>docs</code>, <code>style</code>, <code>refactor</code>, <code>perf</code>, <code>test</code>, <code>build</code>, <code>ci</code>, <code>chore</code> 等）。</li>
+<li><strong><code>[optional scope]</code>:</strong> 影响范围（如模块）。</li>
+<li><strong><code>&#x3C;description></code> (必填):</strong> 标题行，使用动词开头。</li>
+<li><strong><code>[optional body]</code>:</strong> 主体，详细说明。</li>
+<li><strong>`[optional footer(s)]:</strong> 页脚，关联 Issue 或表明重要变化。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>feat(parser): Add support for arrays</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>This commit adds support for parsing arrays in the configuration file.</span></span>
+<span class="line"><span>Previously, only basic key-value pairs were supported.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Closes #456</span></span></code></pre>
+<h2 id="5-养成良好的习惯-1">5. 养成良好的习惯</h2>
+<ul>
+<li><strong>经常提交：</strong> 小而频繁的提交更容易管理。</li>
+<li><strong>提交前进行代码审查：</strong> 发现问题并改进信息。</li>
+<li><strong>学习团队的现有规范：</strong> 保持一致性。</li>
+<li><strong>使用 Git Hooks：</strong> 自动检查提交信息格式。</li>
+</ul>
+<h2 id="关于-git-commit--m--1">关于 <code>git commit -m ""</code></h2>
+<p><strong>不建议在 <code>git commit -m ""</code> 后面写太多内容。</strong></p>
+<p>虽然可以这样做，但这不符合好的 Git Commit 习惯，</p>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=Write%20Git%20commit&url=https%3A%2F%2Flosfurina.github.io%2Fblog%2Fgit%2Fwrite-git-commit%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://losfurina.github.io/blog/git/write-git-commit/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+Related Posts
+</h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/git/git-merge-code-elegantly/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Merge Code Elegantly</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>Auto-generated description for Merge Code Elegantly</p></a><a href="/blog/git/git-rebase/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Git Rebase</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>Auto-generated description for Git Rebase</p></a><a href="/blog/english/challenge/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Challenge</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>Auto-generated description for Challenge</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
+Comments
+</h3> <div class="giscus-wrapper" data-astro-cid-jvxsf75u> <script src="https://giscus.app/client.js" data-repo="LosFurina/LosFurina.github.io" data-repo-id="YOUR_REPO_ID" data-category="Announcements" data-category-id="YOUR_CATEGORY_ID" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </section>  <script type="module">function s(){const e=document.documentElement.getAttribute("data-theme"),t=document.querySelector("iframe.giscus-frame");if(t){const i=e==="dark"?"dark":"light";t.contentWindow?.postMessage({giscus:{setConfig:{theme:i}}},"https://giscus.app")}}const n=new MutationObserver(e=>{e.forEach(t=>{t.attributeName==="data-theme"&&s()})});n.observe(document.documentElement,{attributes:!0});window.addEventListener("message",e=>{e.origin==="https://giscus.app"&&s()});</script> </footer> </article> </main> <aside class="right-sidebar" data-astro-cid-bvzihdzo> <!-- Future content --> </aside> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="copyright" data-astro-cid-sz7xmlte>
+&copy; 2026 Wayne Li. All rights reserved.
+</p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://x.com/yourhandle" target="_blank" rel="noopener" title="X (Twitter)" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" title="LinkedIn" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>LinkedIn</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:me@liweijun.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path> <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline> </svg> </a> <a href="/rss.xml" title="RSS Feed" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>RSS Feed</span> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> <p class="footer-note" data-astro-cid-sz7xmlte>
+Built with <a href="https://astro.build" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Astro</a> </p> </div> </footer>  </body></html>
