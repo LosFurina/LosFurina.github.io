@@ -114,28 +114,29 @@ const { posts } = Astro.props;
         padding: 0.75rem 2.5rem 0.75rem 2.75rem;
         font-size: 0.95rem;
         font-family: inherit;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: saturate(180%) blur(20px);
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        border: 1px solid rgba(var(--gray-light), 0.8);
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: saturate(120%) blur(12px);
+        -webkit-backdrop-filter: saturate(120%) blur(12px);
+        border: 1px solid var(--border-soft);
         border-radius: 12px;
-        color: rgb(var(--gray-dark));
-        transition: all 0.2s ease;
+        color: rgb(var(--ink));
+        transition: border-color 0.2s ease, box-shadow 0.2s ease,
+            background 0.2s ease;
         outline: none;
     }
 
     :global([data-theme="dark"]) #searchInput {
-        background: rgba(40, 40, 45, 0.8);
-        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(35, 30, 27, 0.7);
+        border-color: var(--border-soft);
     }
 
     #searchInput:focus {
         border-color: var(--accent);
-        box-shadow: 0 0 0 3px rgba(35, 55, 255, 0.1);
+        box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
     }
 
     :global([data-theme="dark"]) #searchInput:focus {
-        box-shadow: 0 0 0 3px rgba(77, 94, 255, 0.2);
+        box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
     }
 
     #searchInput::placeholder {
@@ -151,14 +152,14 @@ const { posts } = Astro.props;
         width: 24px;
         height: 24px;
         padding: 0;
-        background: rgba(var(--gray), 0.15);
+        background: rgba(var(--accent-rgb), 0.12);
         border: none;
         border-radius: 50%;
-        color: rgb(var(--gray));
+        color: rgb(var(--ink-muted));
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.2s ease;
+        transition: background 0.2s ease, color 0.2s ease;
     }
 
     .clear-btn.visible {
@@ -167,20 +168,20 @@ const { posts } = Astro.props;
     }
 
     .clear-btn:hover {
-        background: rgba(var(--gray), 0.25);
-        color: rgb(var(--gray-dark));
+        background: rgba(var(--accent-rgb), 0.2);
+        color: var(--accent-dark);
     }
 
     .search-modes {
         display: flex;
         gap: 0.25rem;
-        background: rgba(var(--gray-light), 0.5);
+        background: rgba(var(--accent-rgb), 0.08);
         padding: 4px;
         border-radius: 10px;
     }
 
     :global([data-theme="dark"]) .search-modes {
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(var(--accent-rgb), 0.12);
     }
 
     .mode-btn {
@@ -194,25 +195,25 @@ const { posts } = Astro.props;
         background: transparent;
         border: none;
         border-radius: 8px;
-        color: rgb(var(--gray));
+        color: rgb(var(--ink-muted));
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: background 0.2s ease, color 0.2s ease;
         white-space: nowrap;
     }
 
     .mode-btn:hover {
-        color: rgb(var(--gray-dark));
+        color: rgb(var(--ink));
     }
 
     .mode-btn.active {
-        background: white;
-        color: var(--accent);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        background: rgba(var(--accent-rgb), 0.18);
+        color: var(--accent-dark);
+        box-shadow: 0 1px 3px rgba(38, 30, 25, 0.12);
     }
 
     :global([data-theme="dark"]) .mode-btn.active {
-        background: rgba(var(--gray-light), 0.8);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        background: rgba(var(--accent-rgb), 0.2);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
 
     .mode-icon {

@@ -76,22 +76,23 @@ const shareUrls = {
         font-family: inherit;
         font-weight: 500;
         text-decoration: none;
-        border: 1px solid rgba(var(--gray-light), 0.8);
-        border-radius: 8px;
+        border: 1px solid var(--border-soft);
+        border-radius: 999px;
         cursor: pointer;
-        transition: all 0.2s ease;
-        background: rgba(255, 255, 255, 0.8);
-        color: rgb(var(--gray-dark));
+        transition: background 0.2s ease, color 0.2s ease,
+            border-color 0.2s ease;
+        background: rgba(var(--accent-rgb), 0.08);
+        color: rgb(var(--ink));
     }
 
     :global([data-theme="dark"]) .share-btn {
-        background: rgba(40, 40, 45, 0.8);
-        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(35, 30, 27, 0.7);
+        border-color: var(--border-soft);
     }
 
     .share-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background: rgba(var(--accent-rgb), 0.14);
+        border-color: rgba(var(--accent-rgb), 0.35);
     }
 
     .share-btn.twitter:hover {

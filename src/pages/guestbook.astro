@@ -52,17 +52,17 @@ const giscusConfig = {
 
             .guestbook-intro {
                 padding: 1.5rem;
-                background: rgba(255, 255, 255, 0.6);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(var(--gray-light), 0.8);
+                background: rgba(255, 255, 255, 0.65);
+                border: 1px solid var(--border-soft);
+                box-shadow: var(--shadow-soft);
                 border-radius: 12px;
                 margin-bottom: 2rem;
                 text-align: center;
             }
 
             :global([data-theme="dark"]) .guestbook-intro {
-                background: rgba(40, 40, 45, 0.6);
-                border-color: rgba(255, 255, 255, 0.1);
+                background: rgba(35, 30, 27, 0.7);
+                border-color: var(--border-soft);
             }
 
             .guestbook-intro p {

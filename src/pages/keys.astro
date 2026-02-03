@@ -148,21 +148,21 @@ import { SITE_TITLE } from "../consts";
                 position: absolute;
                 top: 0.75rem;
                 right: 0.75rem;
-                background: rgba(var(--gray-light), 0.2);
-                border: 1px solid rgba(var(--gray-light), 0.3);
+                background: rgba(var(--accent-rgb), 0.2);
+                border: 1px solid rgba(var(--accent-rgb), 0.35);
                 color: rgb(var(--gray-light));
                 padding: 0.5em 1em;
-                border-radius: 6px;
+                border-radius: 999px;
                 cursor: pointer;
                 font-size: 0.85rem;
                 display: flex;
                 align-items: center;
                 gap: 0.4rem;
-                transition: all 0.2s ease;
+                transition: background 0.2s ease, border-color 0.2s ease;
             }
 
             .copy-btn:hover {
-                background: rgba(var(--gray-light), 0.3);
+                background: rgba(var(--accent-rgb), 0.3);
             }
 
             .copy-btn.copied {
@@ -186,18 +186,17 @@ import { SITE_TITLE } from "../consts";
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
-                padding: 0.75em 1.5em;
+                padding: 0.55em 1.2em;
                 background: var(--accent);
                 color: white;
                 text-decoration: none;
-                border-radius: 8px;
+                border-radius: 999px;
                 font-weight: 600;
-                transition: all 0.2s ease;
+                transition: background 0.2s ease;
             }
 
             .download-btn:hover {
                 background: var(--accent-dark);
-                transform: translateY(-2px);
             }
 
             .download-btn svg {

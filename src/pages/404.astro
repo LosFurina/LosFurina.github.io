@@ -67,11 +67,13 @@ import { SITE_TITLE } from "../consts";
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
-                padding: 0.75rem 1.5rem;
-                border-radius: 8px;
+                padding: 0.55rem 1.2rem;
+                border-radius: 999px;
+                border: 1px solid transparent;
                 text-decoration: none;
                 font-weight: 600;
-                transition: all 0.2s ease;
+                transition: background 0.2s ease, color 0.2s ease,
+                    border-color 0.2s ease;
             }
 
             .action-btn.primary {
@@ -81,16 +83,18 @@ import { SITE_TITLE } from "../consts";
 
             .action-btn.primary:hover {
                 background: var(--accent-dark);
-                transform: translateY(-2px);
             }
 
             .action-btn.secondary {
-                background: rgba(var(--gray-light), 0.5);
-                color: rgb(var(--gray-dark));
+                background: transparent;
+                border-color: var(--border-soft);
+                color: rgb(var(--ink));
             }
 
             .action-btn.secondary:hover {
-                background: rgba(var(--gray-light), 0.8);
+                background: rgba(var(--accent-rgb), 0.08);
+                border-color: rgba(var(--accent-rgb), 0.35);
+                color: var(--accent-dark);
             }
 
             .action-btn svg {
