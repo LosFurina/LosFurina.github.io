@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap");
+
 /*
   The CSS in this style tag is based off of Bear Blog's default CSS.
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
@@ -11,6 +13,8 @@ html {
 }
 
 :root {
+	--font-display: "Space Grotesk", "Atkinson", system-ui, sans-serif;
+	--font-sans: "Work Sans", "Atkinson", system-ui, sans-serif;
 	--paper: #f8f3ee;
 	--paper-2: #f2ece4;
 	--ink: 48, 40, 34;
@@ -69,7 +73,7 @@ html {
 }
 
 body {
-	font-family: "Atkinson", sans-serif;
+	font-family: var(--font-sans);
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -109,6 +113,7 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+	font-family: var(--font-display);
 }
 
 h1 {
