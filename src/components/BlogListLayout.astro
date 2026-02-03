@@ -57,6 +57,11 @@ const {
                 align-self: start;
                 margin-top: 3.75rem;
             }
+            .footer-row {
+                grid-column: 1 / -1;
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+            }
             main {
                 min-width: 0;
             }
@@ -109,8 +114,10 @@ const {
                     </section>
                 </main>
                 <TagSidebar tags={tags} currentTag={currentTag} />
+                <div class="footer-row">
+                    <Footer />
+                </div>
             </div>
         </div>
-        <Footer />
     </body>
 </html>
