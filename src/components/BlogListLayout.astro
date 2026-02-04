@@ -42,28 +42,67 @@ const {
             .page-wrapper {
                 max-width: 1400px;
                 margin: 0 auto;
-                padding: 0 2rem;
+                padding: var(--sidebar-top) 2rem 2.5rem;
+                --page-max: 1400px;
+                --page-pad: 2rem;
+                --header-height: 58px;
+                --sidebar-top: calc(var(--header-height) + 2rem);
+                --page-gutter: max(
+                    var(--page-pad),
+                    calc((100vw - var(--page-max)) / 2 + var(--page-pad))
+                );
             }
             .container {
                 display: grid;
-                grid-template-columns: 1fr minmax(0, 800px) minmax(200px, 280px);
-                gap: 2rem;
+                --side-min: 220px;
+                --side-max: 260px;
+                --side-width: clamp(var(--side-min), 22vw, var(--side-max));
+                grid-template-columns: var(--side-width) minmax(0, 1fr) var(--side-width);
+                gap: clamp(2.5rem, 4vw, 4rem);
                 align-items: start;
-                padding-top: 2rem;
+                padding-top: 0;
             }
             .left-space {
-                position: sticky;
-                top: 2rem;
+                position: relative;
                 align-self: start;
-                margin-top: 3.75rem;
+            }
+            .left-fixed {
+                position: fixed;
+                top: var(--blog-fixed-top, var(--sidebar-top));
+                left: var(--page-gutter);
+                width: var(--side-width);
+            }
+            .right-space {
+                position: relative;
+                align-self: start;
+            }
+            .right-fixed {
+                position: fixed;
+                top: var(--blog-fixed-top, var(--sidebar-top));
+                right: var(--page-gutter);
+                width: var(--side-width);
+            }
+            :global(.right-fixed .tag-sidebar) {
+                margin-top: 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            :global(.left-fixed .personal-profile) {
+                width: 100%;
+                box-sizing: border-box;
             }
             .footer-row {
                 grid-column: 1 / -1;
                 width: 100vw;
                 margin-left: calc(50% - 50vw);
             }
-            main {
+            .blog-main {
                 min-width: 0;
+                width: 100%;
+                max-width: 800px;
+                justify-self: center;
+                padding: 0;
+                margin: 0;
             }
             .posts-list {
                 display: grid;
@@ -78,18 +117,26 @@ const {
             }
             @media (max-width: 1024px) {
                 .container {
-                    grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
+                    grid-template-columns: minmax(0, 1fr) var(--side-width);
                 }
                 .left-space {
                     display: none;
                 }
+                .right-fixed {
+                    position: static;
+                    width: auto;
+                }
             }
             @media (max-width: 720px) {
                 .page-wrapper {
-                    padding: 0 1rem;
+                    padding: var(--sidebar-top) 1rem 2rem;
                 }
                 .container {
                     grid-template-columns: 1fr;
+                }
+                .right-fixed {
+                    position: static;
+                    width: 100%;
                 }
                 .posts-list {
                     grid-template-columns: 1fr;
@@ -103,9 +150,11 @@ const {
         <div class="page-wrapper">
             <div class="container">
                 <aside class="left-space">
-                    <PersonalProfile />
+                    <div class="left-fixed">
+                        <PersonalProfile />
+                    </div>
                 </aside>
-                <main>
+                <main class="blog-main">
                     <section>
                         <BlogSearch posts={searchPosts} />
                         <ul class="posts-list">
@@ -113,11 +162,37 @@ const {
                         </ul>
                     </section>
                 </main>
-                <TagSidebar tags={tags} currentTag={currentTag} />
+                <aside class="right-space">
+                    <div class="right-fixed">
+                        <TagSidebar tags={tags} currentTag={currentTag} />
+                    </div>
+                </aside>
                 <div class="footer-row">
                     <Footer />
                 </div>
             </div>
         </div>
+        <script is:inline>
+            const updateBlogFixedTop = () => {
+                const main = document.querySelector(".blog-main");
+                if (!main) return;
+                const { top } = main.getBoundingClientRect();
+                document.documentElement.style.setProperty(
+                    "--blog-fixed-top",
+                    `${Math.round(top)}px`,
+                );
+            };
+
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", updateBlogFixedTop, {
+                    once: true,
+                });
+            } else {
+                updateBlogFixedTop();
+            }
+
+            window.addEventListener("load", updateBlogFixedTop, { once: true });
+            window.addEventListener("resize", updateBlogFixedTop);
+        </script>
     </body>
 </html>
