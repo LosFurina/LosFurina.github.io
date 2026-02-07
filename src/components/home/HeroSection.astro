@@ -1,0 +1,139 @@
+---
+interface Props {
+	hero: {
+		greeting: string;
+		name: string;
+		headline: string;
+		subtitle: string;
+		keywords: string[];
+		ctas: Array<{
+			label: string;
+			href: string;
+			variant: "primary" | "secondary";
+		}>;
+	};
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="home-section home-hero">
+	<div class="home-container">
+		<p class="hero-greeting">{hero.greeting}</p>
+		<h1 class="hero-name">{hero.name}</h1>
+		<p class="hero-headline">{hero.headline}</p>
+		<p class="hero-subtitle">{hero.subtitle}</p>
+
+		<ul class="hero-chips">
+			{hero.keywords.map((keyword) => (
+				<li>{keyword}</li>
+			))}
+		</ul>
+
+		<div class="hero-cta">
+			{hero.ctas.map((cta) => (
+				<a href={cta.href} class={`cta-btn ${cta.variant}`}>
+					{cta.label}
+				</a>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.home-hero {
+		padding-top: 4.5rem;
+		padding-bottom: 3rem;
+	}
+
+	.hero-greeting {
+		color: rgb(var(--gray));
+		margin: 0 0 0.25rem;
+		font-size: 1rem;
+	}
+
+	.hero-name {
+		font-size: clamp(2.4rem, 5vw, 3.4rem);
+		margin: 0 0 0.5rem;
+	}
+
+	.hero-headline {
+		font-size: 1.15rem;
+		margin: 0 0 0.35rem;
+		color: rgb(var(--gray-dark));
+	}
+
+	.hero-subtitle {
+		font-size: 1rem;
+		color: rgb(var(--gray));
+		margin: 0 0 1.25rem;
+	}
+
+	.hero-chips {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.hero-chips li {
+		border: 1px solid var(--border-soft);
+		border-radius: 999px;
+		padding: 0.25rem 0.75rem;
+		font-size: 0.85rem;
+		color: rgb(var(--ink));
+		background: rgba(var(--accent-rgb), 0.05);
+	}
+
+	.hero-cta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.cta-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.55rem 1.2rem;
+		border-radius: 999px;
+		font-weight: 600;
+		text-decoration: none;
+		border: 1px solid transparent;
+		transition: background 0.2s ease, color 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.cta-btn.primary {
+		background: var(--accent);
+		color: #fff;
+	}
+
+	.cta-btn.primary:hover {
+		background: var(--accent-dark);
+	}
+
+	.cta-btn.secondary {
+		background: transparent;
+		border-color: var(--border-soft);
+		color: rgb(var(--ink));
+	}
+
+	.cta-btn.secondary:hover {
+		background: rgba(var(--accent-rgb), 0.08);
+		border-color: rgba(var(--accent-rgb), 0.35);
+		color: var(--accent-dark);
+	}
+
+	@media (max-width: 720px) {
+		.hero-cta {
+			flex-direction: column;
+		}
+
+		.cta-btn {
+			width: 100%;
+		}
+	}
+</style>
