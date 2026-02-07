@@ -100,5 +100,5 @@ Redesign the blog index and tag list pages for a reading-first experience: singl
 - Tag pages (`/tags/[tag]`) share the same list layout.
 
 ## Open Questions
-- Confirm the exact subtitle text for the blog title area.
-- Confirm how many tags per list item (default 1–2).
+- None. Subtitle set to: "What makes you different makes you powerful."
+- Tags per list item: 1–2.
