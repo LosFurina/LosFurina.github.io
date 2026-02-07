@@ -1,0 +1,76 @@
+---
+interface TimelineItem {
+	period: string;
+	tech: string;
+	detail: string;
+}
+
+interface Props {
+	items: TimelineItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="home-section">
+	<div class="home-container">
+		<div class="home-section__header">
+			<h2 class="home-section__title">技术路径 / Tech Timeline</h2>
+			<p class="home-section__subtitle">核心技术路径与积累</p>
+		</div>
+
+		<ul class="timeline">
+			{items.map((item) => (
+				<li class="timeline-item">
+					<div class="timeline-meta">{item.period}</div>
+					<h3>{item.tech}</h3>
+					<p>{item.detail}</p>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0 0 0 1.5rem;
+		display: grid;
+		gap: 1.25rem;
+		border-left: 1px solid var(--border-soft);
+	}
+
+	.timeline-item {
+		position: relative;
+		padding-left: 0.25rem;
+	}
+
+	.timeline-item::before {
+		content: "";
+		position: absolute;
+		left: -1.55rem;
+		top: 0.35rem;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--accent);
+	}
+
+	.timeline-meta {
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+		margin-bottom: 0.25rem;
+	}
+
+	.timeline-item h3 {
+		margin: 0 0 0.25rem;
+		font-size: 1.05rem;
+	}
+
+	.timeline-item p {
+		margin: 0;
+		color: rgb(var(--gray));
+		font-size: 0.95rem;
+	}
+</style>
