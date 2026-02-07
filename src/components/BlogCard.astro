@@ -8,222 +8,162 @@ interface Props {
   description?: string;
   heroImage?: ImageMetadata;
   href: string;
-  index?: number;
+  tags?: Array<{ name: string; href: string }>;
 }
 
-const { title, pubDate, description, heroImage, href, index = 0 } = Astro.props;
-
-// 精美渐变占位图 - 优雅的配色方案
-const gradients = [
-  "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-  "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-  "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-  "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-  "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
-  "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-  "linear-gradient(135deg, #5ee7df 0%, #b490ca 100%)",
-];
-const defaultGradient = gradients[index % gradients.length];
+const { title, pubDate, description, heroImage, href, tags = [] } = Astro.props;
 ---
 
-<article class="blog-card">
-  <a href={href} class="card-link">
-    <div class="card-image">
-      {
-        heroImage ? (
-          <Image
-            src={heroImage}
-            alt={title}
-            width={600}
-            height={340}
-            class="hero-img"
-          />
-        ) : (
-          <div
-            class="placeholder-img"
-            style={`background: ${defaultGradient};`}
-          >
-            <span class="placeholder-icon">✦</span>
-          </div>
-        )
-      }
-      <div class="image-overlay"></div>
-    </div>
-    <div class="card-content">
-      <h3 class="card-title">{title}</h3>
-      <p class="card-date">
+<article class="blog-list-item">
+  <a href={href} class="list-link">
+    <div class="list-text">
+      <h3 class="list-title">{title}</h3>
+      <p class="list-date">
         <FormattedDate date={pubDate} />
       </p>
-      {description && <p class="card-description">{description}</p>}
+      {tags.length > 0 && (
+        <div class="list-tags">
+          {tags.slice(0, 2).map((tag) => (
+            <a href={tag.href} class="list-tag">
+              {tag.name}
+            </a>
+          ))}
+        </div>
+      )}
+      {description && <p class="list-description">{description}</p>}
+    </div>
+    <div class="list-thumb" aria-hidden="true">
+      {heroImage && (
+        <Image
+          src={heroImage}
+          alt={title}
+          width={160}
+          height={120}
+          class="thumb-img"
+        />
+      )}
     </div>
   </a>
 </article>
 
 <style>
-  .blog-card {
+  .blog-list-item {
     position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    background: white;
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.04),
-      0 4px 16px rgba(0, 0, 0, 0.06);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%;
   }
 
-  :global([data-theme="dark"]) .blog-card {
-    background: rgb(var(--gray-light));
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      0 4px 16px rgba(0, 0, 0, 0.3);
-  }
-
-  .blog-card:hover {
-    transform: translateY(-6px);
-    box-shadow:
-      0 12px 32px rgba(0, 0, 0, 0.1),
-      0 20px 48px rgba(0, 0, 0, 0.12);
-  }
-
-  :global([data-theme="dark"]) .blog-card:hover {
-    box-shadow:
-      0 12px 32px rgba(0, 0, 0, 0.3),
-      0 20px 48px rgba(0, 0, 0, 0.4);
-  }
-
-  .card-link {
+  .list-link {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
     text-decoration: none;
     color: inherit;
-    height: 100%;
   }
 
-  .card-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    margin-bottom: -1px;
-  }
-
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .blog-card:hover .hero-img {
-    transform: scale(1.05);
-  }
-
-  .placeholder-img {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .blog-card:hover .placeholder-img {
-    transform: scale(1.05);
-  }
-
-  .placeholder-icon {
-    font-size: 3rem;
-    opacity: 0.4;
-    color: white;
-  }
-
-  .image-overlay {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 50%;
-    background: linear-gradient(
-      to top,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(255, 255, 255, 0.7) 40%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    pointer-events: none;
-  }
-
-  :global([data-theme="dark"]) .image-overlay {
-    background: linear-gradient(
-      to top,
-      rgba(var(--gray-light), 0.95) 0%,
-      rgba(var(--gray-light), 0.7) 40%,
-      transparent 100%
-    );
-  }
-
-  .card-content {
-    position: relative;
-    z-index: 1;
-    padding: 1.25rem 1.5rem 1.5rem;
+  .list-text {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.7);
+    gap: 0.35rem;
   }
 
-  :global([data-theme="dark"]) .card-content {
-    background: rgba(35, 30, 27, 0.8);
-  }
-
-  .card-title {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.15rem;
+  .list-title {
+    margin: 0;
+    font-size: 1.45rem;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.35;
     color: rgb(var(--gray-dark));
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  .blog-card:hover .card-title {
+  .list-link:hover .list-title {
     color: var(--accent);
   }
 
-  .card-date {
-    margin: 0 0 0.75rem 0;
-    font-size: 0.8rem;
+  .list-date {
+    margin: 0;
+    font-size: 0.85rem;
     color: rgb(var(--gray));
     letter-spacing: 0.02em;
   }
 
-  .card-description {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.6;
+  .list-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .list-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-soft);
+    color: rgb(var(--ink-muted));
+    font-size: 0.78rem;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .list-tag:hover {
+    border-color: rgba(var(--accent-rgb), 0.35);
+    color: var(--accent-dark);
+    background: rgba(var(--accent-rgb), 0.08);
+  }
+
+  .list-description {
+    margin: 0.25rem 0 0;
+    font-size: 0.98rem;
+    line-height: 1.65;
     color: rgb(var(--gray));
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    flex: 1;
+  }
+
+  .list-thumb {
+    flex: 0 0 140px;
+    height: 100px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: transparent;
+    border: 1px solid transparent;
+  }
+
+  .thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .list-link:hover .thumb-img {
+    transform: scale(1.02);
   }
 
   @media (max-width: 720px) {
-    .card-content {
-      padding: 1rem 1.25rem 1.25rem;
+    .list-link {
+      gap: 1rem;
     }
 
-    .card-title {
-      font-size: 1.05rem;
+    .list-title {
+      font-size: 1.25rem;
     }
 
-    .card-description {
-      font-size: 0.85rem;
+    .list-description {
+      font-size: 0.92rem;
+    }
+
+    .list-thumb {
+      flex-basis: 96px;
+      height: 72px;
+      border-radius: 10px;
     }
   }
 </style>
