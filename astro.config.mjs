@@ -10,7 +10,7 @@ export default defineConfig({
 
   // 2. 如果你是部署到 GitHub Pages (LosFurina.github.io)
   // 且你的项目不是在子路径下，site 应该如下配置：
-  site: 'https://LosFurina.github.io',
+  site: 'https://blog.liweijun.com',
 
   markdown: {
     remarkPlugins: [remarkBreaks],
