@@ -13,6 +13,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 interface Props {
     title?: string;
+    subtitle?: string;
     description?: string;
     tags: Array<{ name: string; count: number }>;
     currentTag?: string;
@@ -27,6 +28,7 @@ interface Props {
 
 const {
     title = SITE_TITLE,
+    subtitle,
     description = SITE_DESCRIPTION,
     tags,
     currentTag,
@@ -54,8 +56,8 @@ const {
             }
             .container {
                 display: grid;
-                --side-min: 220px;
-                --side-max: 260px;
+                --side-min: 200px;
+                --side-max: 220px;
                 --side-width: clamp(var(--side-min), 22vw, var(--side-max));
                 grid-template-columns: var(--side-width) minmax(0, 1fr) var(--side-width);
                 gap: clamp(2.5rem, 4vw, 4rem);
@@ -81,6 +83,9 @@ const {
                 top: var(--blog-fixed-top, var(--sidebar-top));
                 right: var(--page-gutter);
                 width: var(--side-width);
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
             }
             :global(.right-fixed .tag-sidebar) {
                 margin-top: 0;
@@ -99,15 +104,31 @@ const {
             .blog-main {
                 min-width: 0;
                 width: 100%;
-                max-width: 800px;
+                max-width: 780px;
                 justify-self: center;
                 padding: 0;
                 margin: 0;
             }
+            .blog-title {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                margin: 0 0 2.5rem;
+            }
+            .blog-title h1 {
+                font-size: clamp(2.2rem, 3vw, 2.6rem);
+                letter-spacing: -0.02em;
+            }
+            .blog-title p {
+                margin: 0;
+                font-size: 1.05rem;
+                color: rgb(var(--ink-muted));
+                max-width: 40ch;
+            }
             .posts-list {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
+                grid-template-columns: 1fr;
+                gap: 2rem;
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
@@ -138,9 +159,14 @@ const {
                     position: static;
                     width: 100%;
                 }
+                .blog-title {
+                    margin-bottom: 2rem;
+                }
+                .blog-title p {
+                    font-size: 1rem;
+                }
                 .posts-list {
-                    grid-template-columns: 1fr;
-                    gap: 1.25rem;
+                    gap: 1.5rem;
                 }
             }
         </style>
@@ -155,8 +181,11 @@ const {
                     </div>
                 </aside>
                 <main class="blog-main">
+                    <header class="blog-title">
+                        <h1>{title}</h1>
+                        {subtitle && <p>{subtitle}</p>}
+                    </header>
                     <section>
-                        <BlogSearch posts={searchPosts} />
                         <ul class="posts-list">
                             <slot />
                         </ul>
@@ -164,6 +193,7 @@ const {
                 </main>
                 <aside class="right-space">
                     <div class="right-fixed">
+                        <BlogSearch posts={searchPosts} />
                         <TagSidebar tags={tags} currentTag={currentTag} />
                     </div>
                 </aside>
