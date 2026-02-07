@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'Wayne';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const BLOG_SUBTITLE = 'What makes you different makes you powerful.';
