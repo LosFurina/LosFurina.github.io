@@ -64,6 +64,15 @@ const hasReadingTime = rawContent.trim().length > 0;
 				gap: 2rem;
 			}
 
+			.blog-container.no-toc {
+				grid-template-columns: minmax(0, 720px);
+				justify-content: center;
+			}
+
+			.blog-container.no-toc .right-sidebar {
+				display: none;
+			}
+
 			.toc-sidebar {
 				position: relative;
 			}
@@ -199,7 +208,7 @@ const hasReadingTime = rawContent.trim().length > 0;
 			}
 
 			@media (max-width: 1200px) {
-				.blog-container {
+				.blog-container:not(.no-toc) {
 					grid-template-columns: minmax(0, 720px) 280px;
 				}
 
@@ -232,7 +241,7 @@ const hasReadingTime = rawContent.trim().length > 0;
 
 	<body>
 		<Header />
-		<div class="blog-container">
+		<div class:list={["blog-container", { "no-toc": !showToc }]}>
 			{
 				showToc && (
 					<aside class="toc-sidebar">

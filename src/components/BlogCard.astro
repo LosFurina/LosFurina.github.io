@@ -15,9 +15,13 @@ const { title, pubDate, description, heroImage, href, tags = [] } = Astro.props;
 ---
 
 <article class="blog-list-item">
-  <a href={href} class="list-link">
+  <div class="list-row">
     <div class="list-text">
-      <h3 class="list-title">{title}</h3>
+      <h3 class="list-title">
+        <a href={href} class="list-title-link">
+          {title}
+        </a>
+      </h3>
       <p class="list-date">
         <FormattedDate date={pubDate} />
       </p>
@@ -32,7 +36,7 @@ const { title, pubDate, description, heroImage, href, tags = [] } = Astro.props;
       )}
       {description && <p class="list-description">{description}</p>}
     </div>
-    <div class="list-thumb" aria-hidden="true">
+    <div class="list-thumb">
       {heroImage && (
         <Image
           src={heroImage}
@@ -43,7 +47,7 @@ const { title, pubDate, description, heroImage, href, tags = [] } = Astro.props;
         />
       )}
     </div>
-  </a>
+  </div>
 </article>
 
 <style>
@@ -51,12 +55,10 @@ const { title, pubDate, description, heroImage, href, tags = [] } = Astro.props;
     position: relative;
   }
 
-  .list-link {
+  .list-row {
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
-    text-decoration: none;
-    color: inherit;
   }
 
   .list-text {
@@ -80,7 +82,12 @@ const { title, pubDate, description, heroImage, href, tags = [] } = Astro.props;
     overflow: hidden;
   }
 
-  .list-link:hover .list-title {
+  .list-title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .blog-list-item:hover .list-title-link {
     color: var(--accent);
   }
 
@@ -143,12 +150,12 @@ const { title, pubDate, description, heroImage, href, tags = [] } = Astro.props;
     transition: transform 0.3s ease;
   }
 
-  .list-link:hover .thumb-img {
+  .blog-list-item:hover .thumb-img {
     transform: scale(1.02);
   }
 
   @media (max-width: 720px) {
-    .list-link {
+    .list-row {
       gap: 1rem;
     }
 
