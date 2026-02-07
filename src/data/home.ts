@@ -4,6 +4,7 @@ export const hero = {
 	headline: "专注可靠系统与自动化的基础设施工程师",
 	subtitle: "DevOps · Cloud · Automation · Linux · IaC",
 	keywords: ["DevOps", "Cloud", "Automation", "Linux", "IaC"],
+	avatarUrl: "https://github.com/LosFurina.png?size=200",
 	ctas: [
 		{ label: "View Resume", href: "/resume", variant: "primary" },
 		{ label: "Projects", href: "/projects", variant: "secondary" },
@@ -44,39 +45,41 @@ export const featuredProjects = [
 
 export const techTimeline = [
 	{
-		period: "2018",
-		tech: "Linux 基础",
-		detail: "系统管理、Shell 脚本与日常运维",
-	},
-	{
-		period: "2019",
-		tech: "网络与服务",
-		detail: "TCP/IP、DNS、Nginx 与基础服务部署",
-	},
-	{
 		period: "2020",
-		tech: "Docker & 容器化",
-		detail: "镜像管理、服务编排、容器最佳实践",
+		tech: "编程基础",
+		detail: "C/C++（本科基础课程），Java 面向对象基础",
 	},
 	{
 		period: "2021",
-		tech: "Kubernetes",
-		detail: "集群搭建、工作负载与可观测性",
+		tech: "二进制安全",
+		detail: "CTF Pwn / Reverse / Misc（两年持续训练，具备实战分析能力）",
 	},
 	{
 		period: "2022",
-		tech: "IaC",
-		detail: "Terraform / Ansible 自动化配置",
+		tech: "Linux 与系统实践",
+		detail: "Kali / Ubuntu / Arch / Unix 发行版实践与运维",
 	},
 	{
 		period: "2023",
-		tech: "CI/CD",
-		detail: "流水线设计、质量门禁与发布流程",
+		tech: "网络与安全协议",
+		detail:
+			"Vmess / Vless / Hysteria / Trojan；SSH / GPG / WireGuard；公私钥体系、Diffie-Hellman、TLS 证书与凭据管理",
 	},
 	{
-		period: "2024+",
-		tech: "平台工程",
-		detail: "内平台与开发者体验优化",
+		period: "2024",
+		tech: "科研与 AI",
+		detail: "Python + ML/DL（两年实验室研究，成熟项目与论文产出）",
+	},
+	{
+		period: "2025",
+		tech: "云原生与 DevOps",
+		detail: "Docker / Compose；CI（GitHub Actions）+ CD（ArgoCD）；k3s 实践",
+	},
+	{
+		period: "2026",
+		tech: "工程化与平台进阶",
+		detail:
+			"Go（同态加密实名投票系统，软著/论文）；Rust（所有权模型）；AI Infra 工具链（Claude Code / Codex / vibe coding）",
 	},
 ];
 

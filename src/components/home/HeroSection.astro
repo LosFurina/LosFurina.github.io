@@ -6,6 +6,7 @@ interface Props {
 		headline: string;
 		subtitle: string;
 		keywords: string[];
+		avatarUrl?: string;
 		ctas: Array<{
 			label: string;
 			href: string;
@@ -19,6 +20,18 @@ const { hero } = Astro.props;
 
 <section class="home-section home-hero">
 	<div class="home-container">
+		{hero.avatarUrl && (
+			<div class="hero-avatar">
+				<img
+					src={hero.avatarUrl}
+					alt={`${hero.name} avatar`}
+					width="88"
+					height="88"
+					loading="eager"
+					decoding="async"
+				/>
+			</div>
+		)}
 		<p class="hero-greeting">{hero.greeting}</p>
 		<h1 class="hero-name">{hero.name}</h1>
 		<p class="hero-headline">{hero.headline}</p>
@@ -50,6 +63,30 @@ const { hero } = Astro.props;
 		color: rgb(var(--gray));
 		margin: 0 0 0.25rem;
 		font-size: 1rem;
+	}
+
+	.hero-avatar {
+		width: 88px;
+		height: 88px;
+		border-radius: 50%;
+		border: 1px solid var(--border-soft);
+		background: rgba(255, 255, 255, 0.6);
+		box-shadow: var(--shadow-soft);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		margin-bottom: 1rem;
+	}
+
+	:global([data-theme="dark"]) .hero-avatar {
+		background: rgba(35, 30, 27, 0.65);
+	}
+
+	.hero-avatar img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.hero-name {
