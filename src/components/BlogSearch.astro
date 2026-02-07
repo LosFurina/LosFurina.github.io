@@ -84,19 +84,20 @@ const { posts } = Astro.props;
 
 <style>
     .blog-search {
-        margin-bottom: 2rem;
+        margin-bottom: 0;
     }
 
     .search-container {
         display: flex;
-        gap: 0.75rem;
-        align-items: center;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: stretch;
     }
 
     .search-input-wrapper {
         flex: 1;
-        min-width: 280px;
+        min-width: 0;
+        width: 100%;
         position: relative;
         display: flex;
         align-items: center;
@@ -111,14 +112,12 @@ const { posts } = Astro.props;
 
     #searchInput {
         width: 100%;
-        padding: 0.75rem 2.5rem 0.75rem 2.75rem;
-        font-size: 0.95rem;
+        padding: 0.65rem 2.25rem 0.65rem 2.5rem;
+        font-size: 0.9rem;
         font-family: inherit;
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: saturate(120%) blur(12px);
-        -webkit-backdrop-filter: saturate(120%) blur(12px);
+        background: rgba(255, 255, 255, 0.6);
         border: 1px solid var(--border-soft);
-        border-radius: 12px;
+        border-radius: 10px;
         color: rgb(var(--ink));
         transition: border-color 0.2s ease, box-shadow 0.2s ease,
             background 0.2s ease;
@@ -126,7 +125,7 @@ const { posts } = Astro.props;
     }
 
     :global([data-theme="dark"]) #searchInput {
-        background: rgba(35, 30, 27, 0.7);
+        background: rgba(35, 30, 27, 0.6);
         border-color: var(--border-soft);
     }
 
@@ -152,7 +151,7 @@ const { posts } = Astro.props;
         width: 24px;
         height: 24px;
         padding: 0;
-        background: rgba(var(--accent-rgb), 0.12);
+        background: rgba(var(--accent-rgb), 0.1);
         border: none;
         border-radius: 50%;
         color: rgb(var(--ink-muted));
@@ -175,9 +174,9 @@ const { posts } = Astro.props;
     .search-modes {
         display: flex;
         gap: 0.25rem;
-        background: rgba(var(--accent-rgb), 0.08);
-        padding: 4px;
-        border-radius: 10px;
+        background: rgba(var(--accent-rgb), 0.06);
+        padding: 3px;
+        border-radius: 8px;
     }
 
     :global([data-theme="dark"]) .search-modes {
@@ -188,8 +187,8 @@ const { posts } = Astro.props;
         display: flex;
         align-items: center;
         gap: 0.35rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.8rem;
+        padding: 0.45rem 0.65rem;
+        font-size: 0.75rem;
         font-family: inherit;
         font-weight: 500;
         background: transparent;
@@ -206,9 +205,9 @@ const { posts } = Astro.props;
     }
 
     .mode-btn.active {
-        background: rgba(var(--accent-rgb), 0.18);
+        background: rgba(var(--accent-rgb), 0.16);
         color: var(--accent-dark);
-        box-shadow: 0 1px 3px rgba(38, 30, 25, 0.12);
+        box-shadow: none;
     }
 
     :global([data-theme="dark"]) .mode-btn.active {
@@ -223,8 +222,8 @@ const { posts } = Astro.props;
     }
 
     .search-hint {
-        margin-top: 0.75rem;
-        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
         color: rgb(var(--gray));
         min-height: 1.5em;
     }
@@ -234,25 +233,12 @@ const { posts } = Astro.props;
     }
 
     @media (max-width: 600px) {
-        .search-container {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .search-input-wrapper {
-            min-width: 100%;
-        }
-
         .search-modes {
             justify-content: center;
         }
 
         .mode-label {
             display: none;
-        }
-
-        .mode-btn {
-            padding: 0.5rem 0.9rem;
         }
     }
 </style>

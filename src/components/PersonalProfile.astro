@@ -83,33 +83,15 @@
 
 <style>
     .personal-profile {
-        background: linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(249, 250, 251, 0.9) 100%
-        );
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.7);
         border-radius: 16px;
-        border: 1px solid rgba(229, 233, 240, 0.8);
-        padding: 1.5rem;
+        border: 1px solid var(--border-soft);
+        padding: 1.25rem;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
-        box-shadow:
-            0 4px 6px -1px rgba(0, 0, 0, 0.05),
-            0 10px 15px -3px rgba(0, 0, 0, 0.08);
-        transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
+        gap: 1.25rem;
         align-items: center;
         text-align: center;
-    }
-
-    .personal-profile:hover {
-        transform: translateY(-2px);
-        box-shadow:
-            0 10px 20px -5px rgba(0, 0, 0, 0.1),
-            0 8px 10px -6px rgba(0, 0, 0, 0.1);
     }
 
     .profile-header {
@@ -122,12 +104,11 @@
 
     .avatar-container {
         position: relative;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
-        padding: 3px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-        box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.2);
+        padding: 2px;
+        border: 1px solid var(--border-soft);
     }
 
     .avatar {
@@ -135,44 +116,41 @@
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid white;
-        background-color: white;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        background-color: transparent;
     }
 
     .name {
         margin: 0;
-        font-size: 1.5rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: rgb(var(--gray-dark));
         letter-spacing: -0.02em;
     }
 
     .signature {
         margin: 0.25rem 0 0;
         font-size: 0.875rem;
-        color: rgb(var(--gray));
-        font-weight: 500;
+        color: rgb(var(--ink-muted));
+        font-weight: 400;
     }
 
     .motto-container {
         width: 100%;
         position: relative;
-        padding: 1rem;
-        background: rgba(var(--gray-light), 0.3);
+        padding: 0.85rem;
+        background: rgba(255, 255, 255, 0.5);
         border-radius: 12px;
-        border: 1px dashed rgba(var(--gray), 0.3);
+        border: 1px dashed var(--border-soft);
     }
 
     .motto {
         margin: 0;
         font-size: 0.85rem;
         line-height: 1.6;
-        color: rgb(var(--gray-dark));
-        font-style: italic;
-        font-family: "Georgia", serif;
+        color: rgb(var(--ink-muted));
+        font-style: normal;
+        font-family: var(--font-sans);
     }
 
     .social-links {
@@ -188,18 +166,16 @@
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        background: white;
-        color: rgb(var(--gray-dark));
-        border: 1px solid rgba(229, 233, 240, 0.8);
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        background: transparent;
+        color: rgb(var(--ink-muted));
+        border: 1px solid var(--border-soft);
+        transition: color 0.2s ease, border-color 0.2s ease,
+            background 0.2s ease;
     }
 
     .social-btn:hover {
-        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-        color: white;
-        transform: translateY(-2px) scale(1.1);
-        border-color: transparent;
-        box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
+        background: rgba(var(--accent-rgb), 0.08);
+        color: var(--accent-dark);
+        border-color: rgba(var(--accent-rgb), 0.35);
     }
 </style>
