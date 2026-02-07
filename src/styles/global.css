@@ -18,19 +18,19 @@ html {
 	--paper: #f8f3ee;
 	--paper-2: #f2ece4;
 	--ink: 48, 40, 34;
-	--ink-muted: 86, 75, 66;
+	--ink-muted: 78, 68, 60;
 	--accent: #b36a4a;
 	--accent-dark: #8f4f36;
 	--accent-rgb: 179, 106, 74;
 	--black: var(--ink);
-	--gray: 120, 106, 95;
+	--gray: 110, 98, 88;
 	--gray-light: 236, 229, 221;
 	--gray-dark: 58, 50, 44;
 	--gray-gradient: rgba(var(--gray-light), 65%), var(--paper);
 	--border-soft: rgba(190, 170, 155, 0.45);
-	--shadow-soft: 0 10px 24px rgba(38, 30, 25, 0.08);
-	--box-shadow: 0 2px 6px rgba(var(--gray), 18%), 0 8px 24px rgba(var(--gray), 22%),
-		0 16px 32px rgba(var(--gray), 24%);
+	--shadow-soft: 0 8px 18px rgba(38, 30, 25, 0.06);
+	--box-shadow: 0 2px 6px rgba(var(--gray), 14%), 0 8px 20px rgba(var(--gray), 18%),
+		0 12px 24px rgba(var(--gray), 20%);
 }
 
 [data-theme="dark"] {
@@ -43,17 +43,17 @@ html {
 	--accent-rgb: 214, 160, 127;
 	--black: var(--ink);
 	/* Light text on dark bg */
-	--gray: 155, 140, 130;
+	--gray: 165, 150, 140;
 	--gray-light: 45, 38, 35;
 	/* Darker bg elements */
 	--gray-dark: 228, 220, 212;
 	/* Light text */
 	--gray-gradient: rgba(var(--gray-light), 60%), var(--paper);
 	--border-soft: rgba(120, 100, 90, 0.4);
-	--shadow-soft: 0 14px 28px rgba(0, 0, 0, 0.4);
+	--shadow-soft: 0 12px 22px rgba(0, 0, 0, 0.35);
 	/* Dark gradient */
-	--box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5),
-		0 16px 32px rgba(0, 0, 0, 0.5);
+	--box-shadow: 0 2px 6px rgba(0, 0, 0, 0.32), 0 8px 20px rgba(0, 0, 0, 0.4),
+		0 12px 24px rgba(0, 0, 0, 0.45);
 }
 
 @font-face {
