@@ -2,7 +2,8 @@
 import { getCollection } from "astro:content";
 import BlogCard from "../../components/BlogCard.astro";
 import BlogListLayout from "../../components/BlogListLayout.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { BLOG_SUBTITLE, SITE_DESCRIPTION } from "../../consts";
+import { getPrimaryTag } from "../../utils/blogTags";
 
 const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -38,23 +39,29 @@ const tagsWithCount = Object.entries(tagCounts)
 ---
 
 <BlogListLayout
-	title={SITE_TITLE}
+	title="Blog"
+	subtitle={BLOG_SUBTITLE}
 	description={SITE_DESCRIPTION}
 	tags={tagsWithCount}
 	searchPosts={searchPosts}
 >
 	{
-		posts.map((post, index) => (
-			<li>
-				<BlogCard
-					title={post.data.title}
-					pubDate={post.data.pubDate}
-					description={post.data.description}
-					heroImage={post.data.heroImage}
-					href={`/blog/${post.id}/`}
-					index={index}
-				/>
-			</li>
-		))
+		posts.map((post, index) => {
+			const tag = getPrimaryTag(post.id);
+			const tags = [{ name: tag, href: `/tags/${tag}` }];
+			return (
+				<li>
+					<BlogCard
+						title={post.data.title}
+						pubDate={post.data.pubDate}
+						description={post.data.description}
+						heroImage={post.data.heroImage}
+						href={`/blog/${post.id}/`}
+						index={index}
+						tags={tags}
+					/>
+				</li>
+			);
+		})
 	}
 </BlogListLayout>

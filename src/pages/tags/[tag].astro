@@ -2,7 +2,8 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import BlogCard from "../../components/BlogCard.astro";
 import BlogListLayout from "../../components/BlogListLayout.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { BLOG_SUBTITLE, SITE_DESCRIPTION } from "../../consts";
+import { getPrimaryTag } from "../../utils/blogTags";
 
 export async function getStaticPaths() {
     const allPosts = await getCollection("blog");
@@ -68,24 +69,30 @@ const tagsWithCount = Object.entries(tagCounts)
 ---
 
 <BlogListLayout
-    title={`${tag} - ${SITE_TITLE}`}
+    title={`Tag: ${tag}`}
+    subtitle={BLOG_SUBTITLE}
     description={SITE_DESCRIPTION}
     tags={tagsWithCount}
     currentTag={tag}
     searchPosts={searchPosts}
 >
     {
-        posts.map((post, index) => (
-            <li>
-                <BlogCard
-                    title={post.data.title}
-                    pubDate={post.data.pubDate}
-                    description={post.data.description}
-                    heroImage={post.data.heroImage}
-                    href={`/blog/${post.id}/`}
-                    index={index}
-                />
-            </li>
-        ))
+        posts.map((post, index) => {
+            const tagName = getPrimaryTag(post.id);
+            const tags = [{ name: tagName, href: `/tags/${tagName}` }];
+            return (
+                <li>
+                    <BlogCard
+                        title={post.data.title}
+                        pubDate={post.data.pubDate}
+                        description={post.data.description}
+                        heroImage={post.data.heroImage}
+                        href={`/blog/${post.id}/`}
+                        index={index}
+                        tags={tags}
+                    />
+                </li>
+            );
+        })
     }
 </BlogListLayout>
