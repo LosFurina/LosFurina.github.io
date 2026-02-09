@@ -4,6 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import HeroSection from "../components/home/HeroSection.astro";
+import NowStatus from "../components/home/NowStatus.astro";
 import FeaturedProjects from "../components/home/FeaturedProjects.astro";
 import TechTimeline from "../components/home/TechTimeline.astro";
 import LatestPosts from "../components/home/LatestPosts.astro";
@@ -11,6 +12,7 @@ import HomeCTA from "../components/home/HomeCTA.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import {
 	hero,
+	nowStatus,
 	featuredProjects,
 	techTimeline,
 	homeCta,
@@ -65,6 +67,7 @@ const latestPosts = (await getCollection("blog"))
 	<body>
 		<Header />
 		<HeroSection hero={hero} />
+		<NowStatus nowStatus={nowStatus} />
 		<FeaturedProjects projects={featuredProjects} />
 		<TechTimeline items={techTimeline} />
 		<LatestPosts posts={latestPosts} />

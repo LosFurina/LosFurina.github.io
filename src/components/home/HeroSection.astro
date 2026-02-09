@@ -20,35 +20,37 @@ const { hero } = Astro.props;
 
 <section class="home-section home-hero">
 	<div class="home-container">
-		{hero.avatarUrl && (
-			<div class="hero-avatar">
-				<img
-					src={hero.avatarUrl}
-					alt={`${hero.name} avatar`}
-					width="88"
-					height="88"
-					loading="eager"
-					decoding="async"
-				/>
+		<div class="hero-left">
+			{hero.avatarUrl && (
+				<div class="hero-avatar">
+					<img
+						src={hero.avatarUrl}
+						alt={`${hero.name} avatar`}
+						width="88"
+						height="88"
+						loading="eager"
+						decoding="async"
+					/>
+				</div>
+			)}
+			<p class="hero-greeting">{hero.greeting}</p>
+			<h1 class="hero-name">{hero.name}</h1>
+			<p class="hero-headline">{hero.headline}</p>
+			<p class="hero-subtitle">{hero.subtitle}</p>
+
+			<ul class="hero-chips">
+				{hero.keywords.map((keyword) => (
+					<li>{keyword}</li>
+				))}
+			</ul>
+
+			<div class="hero-cta">
+				{hero.ctas.map((cta) => (
+					<a href={cta.href} class={`cta-btn ${cta.variant}`}>
+						{cta.label}
+					</a>
+				))}
 			</div>
-		)}
-		<p class="hero-greeting">{hero.greeting}</p>
-		<h1 class="hero-name">{hero.name}</h1>
-		<p class="hero-headline">{hero.headline}</p>
-		<p class="hero-subtitle">{hero.subtitle}</p>
-
-		<ul class="hero-chips">
-			{hero.keywords.map((keyword) => (
-				<li>{keyword}</li>
-			))}
-		</ul>
-
-		<div class="hero-cta">
-			{hero.ctas.map((cta) => (
-				<a href={cta.href} class={`cta-btn ${cta.variant}`}>
-					{cta.label}
-				</a>
-			))}
 		</div>
 	</div>
 </section>
@@ -57,6 +59,10 @@ const { hero } = Astro.props;
 	.home-hero {
 		padding-top: 4.5rem;
 		padding-bottom: 3rem;
+	}
+
+	.hero-left {
+		max-width: 760px;
 	}
 
 	.hero-greeting {

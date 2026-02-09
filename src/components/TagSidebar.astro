@@ -94,6 +94,10 @@ const { tags, currentTag } = Astro.props;
     z-index: 10;
   }
 
+  :global([data-theme="dark"]) .toggle-btn {
+    background: rgba(35, 30, 27, 0.7);
+  }
+
   .toggle-btn:hover {
     background: rgba(var(--accent-rgb), 0.08);
     border-color: rgba(var(--accent-rgb), 0.35);
@@ -115,6 +119,10 @@ const { tags, currentTag } = Astro.props;
     border: 1px solid var(--border-soft);
     transition: border-color 0.2s ease, background 0.2s ease;
     overflow: hidden;
+  }
+
+  :global([data-theme="dark"]) .sidebar-content {
+    background: rgba(35, 30, 27, 0.7);
   }
 
   /* 收缩状态 */
@@ -183,6 +191,11 @@ const { tags, currentTag } = Astro.props;
     white-space: nowrap;
   }
 
+  :global([data-theme="dark"]) .tag-item {
+    background: rgba(255, 255, 255, 0.02);
+    color: rgb(var(--gray-dark));
+  }
+
   .tag-item:hover {
     background: rgba(var(--accent-rgb), 0.06);
     border-color: rgba(var(--accent-rgb), 0.3);
@@ -224,6 +237,11 @@ const { tags, currentTag } = Astro.props;
     flex-shrink: 0;
   }
 
+  :global([data-theme="dark"]) .tag-count {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgb(var(--gray-dark));
+  }
+
   .tag-item:hover .tag-count {
     background: rgba(var(--gray-light), 1);
     color: rgb(var(--gray-dark));
@@ -232,6 +250,10 @@ const { tags, currentTag } = Astro.props;
   .all-posts {
     margin-bottom: 0.5rem;
     background: rgba(var(--gray-light), 0.3);
+  }
+
+  :global([data-theme="dark"]) .all-posts {
+    background: rgba(255, 255, 255, 0.04);
   }
 
   .all-posts .tag-name {

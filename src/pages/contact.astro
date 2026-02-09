@@ -2,35 +2,30 @@
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import { SITE_TITLE } from "../consts";
+import TokenProtectedReveal from "../components/TokenProtectedReveal.astro";
+import { privateContactPayload } from "../data/privateContact";
+import { SITE_TITLE, SOCIALS } from "../consts";
 
 const contactMethods = [
     {
         name: "Email",
-        value: "me@liweijun.com",
-        href: "mailto:me@liweijun.com",
+        value: SOCIALS.email,
+        href: `mailto:${SOCIALS.email}`,
         icon: "email",
         description: "Best way to reach me for professional inquiries",
         primary: true,
     },
     {
         name: "GitHub",
-        value: "@LosFurina",
-        href: "https://github.com/LosFurina",
+        value: SOCIALS.githubHandle,
+        href: SOCIALS.githubUrl,
         icon: "github",
         description: "Check out my open source projects",
     },
     {
-        name: "LinkedIn",
-        value: "Connect with me",
-        href: "https://linkedin.com/in/yourprofile",
-        icon: "linkedin",
-        description: "Professional network",
-    },
-    {
         name: "X (Twitter)",
-        value: "@yourhandle",
-        href: "https://x.com/yourhandle",
+        value: SOCIALS.xHandle,
+        href: SOCIALS.xUrl,
         icon: "twitter",
         description: "Tech thoughts and updates",
     },
@@ -334,6 +329,13 @@ const contactMethods = [
                     positions. Feel free to reach out!
                 </p>
             </div>
+
+            <TokenProtectedReveal
+                title="Protected Contact Details"
+                description="Need access? Email me first for authorization. After approval, enter the token I sent to decrypt private contact info."
+                iv={privateContactPayload.iv}
+                ciphertext={privateContactPayload.ciphertext}
+            />
         </main>
         <Footer />
     </body>

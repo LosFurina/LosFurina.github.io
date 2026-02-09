@@ -4,7 +4,7 @@
 import "../styles/global.css";
 import type { ImageMetadata } from "astro";
 import FallbackImage from "../assets/blog-placeholder-1.jpg";
-import { SITE_TITLE } from "../consts";
+import { SITE_TITLE, SITE_DESCRIPTION, SOCIALS } from "../consts";
 
 interface Props {
 	title: string;
@@ -15,6 +15,25 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: SITE_TITLE,
+	description: SITE_DESCRIPTION,
+	url: Astro.site,
+	inLanguage: "en",
+};
+
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Wayne Li",
+	url: Astro.site,
+	email: `mailto:${SOCIALS.email}`,
+	sameAs: [SOCIALS.githubUrl, SOCIALS.xUrl],
+	jobTitle: "DevOps / Infrastructure Engineer",
+};
 ---
 
 <!-- Global Metadata -->
@@ -94,3 +113,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />

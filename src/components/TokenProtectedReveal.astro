@@ -1,0 +1,167 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+	iv: string;
+	ciphertext: string;
+}
+
+const {
+	title = "Authorized Info",
+	description = "Enter your token to unlock protected details.",
+	iv,
+	ciphertext,
+} = Astro.props;
+---
+
+<section class="token-gate card-soft" data-token-gate data-iv={iv} data-ciphertext={ciphertext}>
+	<h3>{title}</h3>
+	<p>{description}</p>
+	<div class="token-gate__controls">
+		<input type="password" placeholder="Paste token" autocomplete="off" />
+		<button type="button">Unlock</button>
+	</div>
+	<p class="token-gate__status" aria-live="polite"></p>
+	<div class="token-gate__content" hidden></div>
+</section>
+
+<style>
+	.token-gate {
+		padding: 1.25rem;
+		border-radius: 16px;
+		border: 1px solid var(--border-soft);
+		margin-top: 1.25rem;
+	}
+
+	.token-gate h3 {
+		font-size: 1.05rem;
+		margin: 0 0 0.35rem;
+	}
+
+	.token-gate p {
+		margin: 0 0 0.75rem;
+		color: rgb(var(--gray));
+		font-size: 0.92rem;
+	}
+
+	.token-gate__controls {
+		display: flex;
+		gap: 0.6rem;
+		flex-wrap: wrap;
+	}
+
+	.token-gate input {
+		flex: 1;
+		min-width: 220px;
+		border: 1px solid var(--border-soft);
+		border-radius: 10px;
+		padding: 0.5rem 0.65rem;
+		background: rgba(255, 255, 255, 0.85);
+	}
+
+	:global([data-theme="dark"]) .token-gate input {
+		background: rgba(35, 30, 27, 0.8);
+		color: rgb(var(--ink));
+	}
+
+	.token-gate button {
+		border: 0;
+		border-radius: 10px;
+		padding: 0.5rem 0.95rem;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.token-gate button:hover {
+		background: var(--accent-dark);
+	}
+
+	.token-gate__status {
+		min-height: 1.2rem;
+		margin: 0.65rem 0 0;
+	}
+
+	.token-gate__content {
+		margin-top: 0.8rem;
+		padding-top: 0.8rem;
+		border-top: 1px dashed var(--border-soft);
+	}
+
+	.token-gate__content ul {
+		margin: 0;
+		padding-left: 1rem;
+	}
+
+	.token-gate__content li {
+		margin-bottom: 0.35rem;
+	}
+</style>
+
+<script>
+	const decodeBase64 = (input) => Uint8Array.from(atob(input), (c) => c.charCodeAt(0));
+
+	const toKey = async (token) => {
+		const encoder = new TextEncoder();
+		const digest = await crypto.subtle.digest("SHA-256", encoder.encode(token.trim()));
+		return crypto.subtle.importKey("raw", digest, "AES-GCM", false, ["decrypt"]);
+	};
+
+	const renderValue = (key, value) => {
+		const li = document.createElement("li");
+		const strong = document.createElement("strong");
+		strong.textContent = `${key}: `;
+		li.appendChild(strong);
+
+		if (typeof value === "string" && /^https?:\/\//.test(value)) {
+			const link = document.createElement("a");
+			link.href = value;
+			link.target = "_blank";
+			link.rel = "noopener";
+			link.textContent = value;
+			li.appendChild(link);
+		} else {
+			li.appendChild(document.createTextNode(String(value)));
+		}
+		return li;
+	};
+
+	document.querySelectorAll("[data-token-gate]").forEach((gate) => {
+		const input = gate.querySelector("input");
+		const button = gate.querySelector("button");
+		const status = gate.querySelector(".token-gate__status");
+		const content = gate.querySelector(".token-gate__content");
+		const iv = gate.getAttribute("data-iv") || "";
+		const ciphertext = gate.getAttribute("data-ciphertext") || "";
+
+		button?.addEventListener("click", async () => {
+			const token = input?.value || "";
+			if (!token) {
+				status.textContent = "Token required.";
+				return;
+			}
+
+			try {
+				const key = await toKey(token);
+				const plain = await crypto.subtle.decrypt(
+					{ name: "AES-GCM", iv: decodeBase64(iv) },
+					key,
+					decodeBase64(ciphertext),
+				);
+				const json = JSON.parse(new TextDecoder().decode(plain));
+				const ul = document.createElement("ul");
+				Object.entries(json).forEach(([k, v]) => ul.appendChild(renderValue(k, v)));
+				content.innerHTML = "";
+				content.appendChild(ul);
+				content.hidden = false;
+				status.textContent = "Authorized.";
+			} catch {
+				content.hidden = true;
+				content.innerHTML = "";
+				status.textContent = "Invalid token.";
+			}
+		});
+	});
+</script>
+

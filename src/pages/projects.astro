@@ -3,56 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_TITLE } from "../consts";
-
-// 项目数据 - 请根据你的实际项目修改
-const projects = [
-    {
-        title: "Personal Blog & Portfolio",
-        description:
-            "使用 Astro 构建的个人博客和作品集网站，支持 MDX、暗色模式、全文搜索等功能。",
-        tags: ["Astro", "TypeScript", "CSS"],
-        github: "https://github.com/LosFurina/LosFurina.github.io",
-        demo: "https://losfurina.github.io",
-        featured: true,
-    },
-    {
-        title: "Kubernetes Cluster Setup",
-        description:
-            "使用 kubeadm 和 Ansible 自动化部署生产级 Kubernetes 集群，包含 Ingress、监控、日志等组件。",
-        tags: ["Kubernetes", "Ansible", "Docker", "Linux"],
-        github: "https://github.com/LosFurina/k8s-cluster",
-        featured: true,
-    },
-    {
-        title: "CI/CD Pipeline Template",
-        description:
-            "基于 GitHub Actions 的可复用 CI/CD 流水线模板，支持 Docker 构建、测试、部署到 K8s。",
-        tags: ["GitHub Actions", "Docker", "CI/CD"],
-        github: "https://github.com/LosFurina/cicd-template",
-        featured: true,
-    },
-    {
-        title: "Infrastructure as Code",
-        description:
-            "使用 Terraform 管理云基础设施，包含 AWS/GCP 多云部署模板。",
-        tags: ["Terraform", "AWS", "GCP", "IaC"],
-        github: "https://github.com/LosFurina/terraform-infra",
-    },
-    {
-        title: "Docker Compose Stack",
-        description:
-            "常用开发环境的 Docker Compose 配置集合，包含数据库、缓存、消息队列等。",
-        tags: ["Docker", "Docker Compose"],
-        github: "https://github.com/LosFurina/docker-stacks",
-    },
-    {
-        title: "Monitoring Stack",
-        description:
-            "基于 Prometheus + Grafana + AlertManager 的完整监控解决方案。",
-        tags: ["Prometheus", "Grafana", "Monitoring"],
-        github: "https://github.com/LosFurina/monitoring-stack",
-    },
-];
+import { projectEntries as projects } from "../data/projects";
 
 const featuredProjects = projects.filter((p) => p.featured);
 const otherProjects = projects.filter((p) => !p.featured);
@@ -217,7 +168,7 @@ const otherProjects = projects.filter((p) => !p.featured);
         <main>
             <div class="page-header">
                 <h1>🚀 Projects</h1>
-                <p>DevOps & Infrastructure projects I've built</p>
+                <p>Projects and research repos I've built</p>
             </div>
 
             <h2 class="section-title">⭐ Featured Projects</h2>

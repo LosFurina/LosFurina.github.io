@@ -2,6 +2,7 @@
 
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import remarkBreaks from 'remark-breaks';
 
 export default defineConfig({
@@ -15,6 +16,8 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkBreaks],
   },
+
+  integrations: [sitemap()],
 
   // 3. 检查这里！绝对不要有 adapter 这一项
   // adapter: ... <--- 如果有，请整行删掉

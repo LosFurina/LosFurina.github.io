@@ -1,0 +1,63 @@
+---
+interface Props {
+	nowStatus: {
+		title: string;
+		status: string;
+		highlights: string[];
+	};
+}
+
+const { nowStatus } = Astro.props;
+---
+
+<section class="home-section home-now-status">
+	<div class="home-container">
+		<article class="status-card card-soft">
+			<p class="status-title">{nowStatus.title}</p>
+			<h2>{nowStatus.status}</h2>
+			<ul>
+				{nowStatus.highlights.map((item) => (
+					<li>{item}</li>
+				))}
+			</ul>
+		</article>
+	</div>
+</section>
+
+<style>
+	.home-now-status {
+		padding-top: 0.25rem;
+	}
+
+	.status-card {
+		padding: 1.25rem 1.35rem;
+		border-radius: 16px;
+	}
+
+	.status-title {
+		margin: 0 0 0.35rem;
+		font-size: 0.85rem;
+		color: rgb(var(--gray));
+	}
+
+	.status-card h2 {
+		margin: 0 0 0.8rem;
+		font-size: 1.15rem;
+	}
+
+	.status-card ul {
+		margin: 0;
+		padding-left: 1.1rem;
+	}
+
+	.status-card li {
+		margin-bottom: 0.4rem;
+		color: rgb(var(--ink-muted));
+		font-size: 0.93rem;
+	}
+
+	.status-card li:last-child {
+		margin-bottom: 0;
+	}
+</style>
+

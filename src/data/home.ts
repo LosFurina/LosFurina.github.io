@@ -1,3 +1,5 @@
+import { projectEntries } from "./projects";
+
 export const hero = {
 	greeting: "Hi, I'm",
 	name: "Wayne Li",
@@ -12,36 +14,25 @@ export const hero = {
 	],
 };
 
-export const featuredProjects = [
-	{
-		title: "Personal Blog & Portfolio",
-		description: "Astro 构建的个人网站，包含博客、项目和简历",
-		tags: ["Astro", "TypeScript", "CSS"],
+export const featuredProjects = projectEntries
+	.filter((project) => project.homeFeatured)
+	.map((project) => ({
+		title: project.title,
+		description: project.description,
+		tags: project.tags,
 		linkLabel: "GitHub",
-		linkHref: "https://github.com/LosFurina/LosFurina.github.io",
-	},
-	{
-		title: "Kubernetes Cluster Setup",
-		description: "kubeadm 搭建生产级集群，包含监控与日志",
-		tags: ["Kubernetes", "Docker", "Prometheus"],
-		linkLabel: "GitHub",
-		linkHref: "https://github.com/LosFurina",
-	},
-	{
-		title: "CI/CD Pipeline Template",
-		description: "GitHub Actions 模板，覆盖多语言项目",
-		tags: ["CI/CD", "GitHub Actions", "Docker"],
-		linkLabel: "GitHub",
-		linkHref: "https://github.com/LosFurina",
-	},
-	{
-		title: "Infra Automation Scripts",
-		description: "常用运维自动化脚本与实践合集",
-		tags: ["Automation", "Linux", "Shell"],
-		linkLabel: "GitHub",
-		linkHref: "https://github.com/LosFurina",
-	},
-];
+		linkHref: project.github,
+	}));
+
+export const nowStatus = {
+	title: "Now / 当前状态",
+	status: "正在积极寻找 DevOps / Infrastructure Intern 机会",
+	highlights: [
+		"持续维护 RevieU 的 GitOps 基础设施与 CI/CD 流程",
+		"整理技术博客内容，沉淀实战经验（Linux / Docker / Infra）",
+		"优化 AI Infra 工具链与实验环境自动化效率",
+	],
+};
 
 export const techTimeline = [
 	{
