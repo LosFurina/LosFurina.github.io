@@ -1,24 +1,24 @@
 ---
-title: Connect your Remote Service from SSH forwarding
-description: "Auto-generated description for Connect your Remote Service from SSH forwarding"
+title: Access Private Services with SSH Port Forwarding
+description: "SSH 本地/远程/动态端口转发原理与典型使用场景。"
 pubDate: 2026-01-23
 ---
 
-# Introduction
+## Introduction
 
 Connect your private service from SSH is really meaningful, if you visit your Personal Document/Information/Private Key, this is a good method.
 
-# 1. Start your remote service on your cloud computer
+## 1. Start your remote service on your cloud computer
 
 
 We can see that our opened service is a web service, to speak of, I have already deploy my service on https, if you have not deploy your ssl certification, the best way is accessing your service from ssh forwarding.
 
 
-# 2. Install and Config SSH Connection
+## 2. Install and Config SSH Connection
 
 
 
-# 3. Connect SSH and Set SSH forwarding
+## 3. Connect SSH and Set SSH forwarding
 
 We can easily get your external IP from your VPS server.
 
@@ -41,7 +41,7 @@ ssh -L [local_port]:[remote_address]:[remote_port] [user]@[ssh_server]
 
 Why 127.0.0.1: After we connected cloud computer, the remote ip address for "ali.liweijun.online" is itself, so we can replace it with "localhost".
 
-# 4. Try it
+## 4. Try it
 
 
 We now connect our server successfully.
@@ -56,4 +56,3 @@ Connect it from browser:
 
 
 We success now.
-

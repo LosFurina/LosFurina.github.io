@@ -1,16 +1,16 @@
 ---
 title: Compile LaTeX code at local environment
-description: "Auto-generated description for Compile LaTeX code at local environment"
+description: "本地 LaTeX 编译环境搭建笔记，覆盖工具链安装与 PDF 输出流程。"
 pubDate: 2026-01-23
 ---
 
-# Introduction
+## Introduction
 
 When you are writing your paper or documents on LaTeX, you have to face an inevitable issue, that is compiling you LaTeX code to pdf. As for beginners of researchers, they may choose to use [Overleaf](https://www.overleaf.com/), it is very simple to use, but when your documents or paper are becoming more and more bigger, overleaf will charge to you. So why don't I compile it by myself?
 
 In this section, I will record how to compile LaTeX code in local.
 
-# 1. Prepare your LaTeX code.
+## 1. Prepare your LaTeX code.
 
 ## 1.1. Edit with your VScode(Strongly recommend by me)
 
@@ -22,7 +22,7 @@ Edit your LaTeX code.
 
 ## 1.2 Download whole folder(project) from overleaf.
 
-# 2. Prepare Compile Environment.
+## 2. Prepare Compile Environment.
 
 Before we start this section, we have to know, in order to compile LaTeX, we have to use `tex` compile tools, and there are some different distributions of tex[1]:
 

@@ -1,6 +1,6 @@
 ---
-title: Prize
-description: "Auto-generated description for Prize"
+title: "Describe a Prize You Received Recently"
+description: "IELTS speaking sample about receiving a provincial scholarship and the preparation behind it."
 pubDate: 2026-01-23
 ---
 

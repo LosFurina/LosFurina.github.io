@@ -1,6 +1,6 @@
 ---
-title: Park
-description: "Auto-generated description for Park"
+title: "Describe a Public Park: Wuhai Lake Park"
+description: "IELTS speaking sample about Wuhai Lake Park, including location, activities, and personal memories."
 pubDate: 2026-01-23
 ---
 

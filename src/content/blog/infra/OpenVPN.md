@@ -1,10 +1,10 @@
 ---
-title: How to use OpenVPN
-description: "Auto-generated description for How to use OpenVPN"
+title: OpenVPN Server Setup Guide
+description: "Step-by-step OpenVPN server setup notes, including certificate generation and client configuration."
 pubDate: 2026-01-23
 ---
 
-# OpenVPN Server
+## OpenVPN Server
 
 ## Install OpenVPN Server
 
@@ -322,9 +322,8 @@ verb 3
 
 ```
 
-# Reference
+## Reference
 
 > https://www.moralok.com/2023/06/07/how-to-setup-OpenVPN-server-on-windows-10/
 > https://www.moralok.com/2023/06/07/how-to-setup-OpenVPN-connect-client-on-iOS-and-macOS/
-
 

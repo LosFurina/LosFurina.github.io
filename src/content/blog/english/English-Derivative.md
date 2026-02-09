@@ -1,6 +1,6 @@
 ---
-title: English Derivative Word
-description: "Auto-generated description for English Derivative Word"
+title: English Derivation Basics
+description: "A practical overview of English derivation with common prefixes and suffixes plus example words."
 pubDate: 2026-01-23
 ---
 
@@ -189,4 +189,3 @@ pubDate: 2026-01-23
 ## 总结
 
 英语派生构词是词汇扩展的重要手段，通过前缀和后缀的组合，可以构造出无数新词。熟悉常见的前后缀及其含义，能够帮助我们快速理解单词的意思，提高英语学习效率。
-

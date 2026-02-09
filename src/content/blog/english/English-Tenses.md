@@ -1,6 +1,6 @@
 ---
 title: Why do you think the English Tenses is so confused?
-description: "Auto-generated description for Why do you think the English Tenses is so confused?"
+description: "因此，我们需要知道时间和状态其实是两个概念，而完整的时态是由时间和状态排列组合而成的。"
 pubDate: 2026-01-23
 ---
 

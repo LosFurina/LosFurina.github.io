@@ -1,11 +1,11 @@
 ---
-title: Change Bind Port of Docker Container
-description: "Auto-generated description for Change Bind Port of Docker Container"
+title: Modify Docker Container Port Bindings
+description: "Change host port mappings by editing container config files and restarting Docker safely."
 pubDate: 2026-01-23
 ---
 
-# 1. 老办法就是打包再启动
-# 2. 修改配置文件
+## 1. 老办法就是打包再启动
+## 2. 修改配置文件
 ## 2.1. 先关闭已经启动的所有容器
 ```
 docker stop [ID/Name]
@@ -13,11 +13,11 @@ docker stop [ID/Name]
 ## 2.2. 关闭docker服务
 ```
 systemctl stop docker
-systemctl stop docket.socket
+systemctl stop docker.socket
 ```
 ## 2.3. 找到docker配置文件
 ```
-cd /var/lib/docker/containors/your_containor_id
+cd /var/lib/docker/containers/your_container_id
 ```
 在找这个ID的时候要先在之前docker没关闭之前查看
 ```
@@ -290,11 +290,11 @@ docker ps -a
     }
 }
 ```
-# 3. 重启docker服务
+## 3. 重启docker服务
 ```bash
 systemctl start docker
 ```
-# 4. 查看容器端口映射
+## 4. 查看容器端口映射
 ```bash
 docker start [your_containor_id/name]
 docker post [your_containor_id/name]

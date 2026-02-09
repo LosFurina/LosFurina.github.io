@@ -1,6 +1,6 @@
 ---
 title: Good Services from shopping
-description: "Auto-generated description for Good Services from shopping"
+description: "IELTS speaking sample about a memorable customer service experience at a phone repair shop."
 pubDate: 2026-01-23
 ---
 

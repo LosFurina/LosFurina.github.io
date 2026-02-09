@@ -1,6 +1,6 @@
 ---
 title: Investment in Education
-description: "Auto-generated description for Investment in Education"
+description: "IELTS writing discussion on tuition responsibility between students and government."
 pubDate: 2026-01-23
 ---
 

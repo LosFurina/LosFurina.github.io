@@ -1,9 +1,10 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import { filterVisiblePosts } from "../../utils/blogVisibility";
 
 export async function getStaticPaths() {
-	const posts = await getCollection("blog");
+	const posts = filterVisiblePosts(await getCollection("blog"));
 	return posts.map((post) => ({
 		params: { slug: post.id },
 		props: { post, allPosts: posts },

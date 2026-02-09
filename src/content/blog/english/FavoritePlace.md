@@ -1,6 +1,6 @@
 ---
 title: Favorite Place
-description: "Auto-generated description for Favorite Place"
+description: "IELTS speaking sample about a favorite place and personal reasons for revisiting it."
 pubDate: 2026-01-23
 ---
 

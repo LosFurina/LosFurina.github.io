@@ -1,6 +1,6 @@
 ---
-title: Tourism
-description: "Auto-generated description for Tourism"
+title: "International Tourism: Benefits and Risks"
+description: "IELTS essay practice on whether societies benefit from international tourism and global business."
 pubDate: 2026-01-23
 ---
 

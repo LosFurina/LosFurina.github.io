@@ -1,6 +1,6 @@
 ---
-title: TraditionalFood
-description: "Auto-generated description for TraditionalFood"
+title: "Describe Traditional Festival Food You Like"
+description: "IELTS speaking sample about favorite traditional festival food and why it matters."
 pubDate: 2026-01-23
 ---
 

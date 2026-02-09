@@ -1,10 +1,10 @@
 ---
-title: Git Rebase
-description: "Auto-generated description for Git Rebase"
+title: Git Rebase Safety Guide
+description: "Understand rebase with a safe workflow, including conflict handling and history cleanup tips."
 pubDate: 2026-01-23
 ---
 
-# 安全 Rebase 手册 🚦
+## 安全 Rebase 手册
 
 ---
 
@@ -31,7 +31,7 @@ pubDate: 2026-01-23
 
 ---
 
-# 安全 Rebase 操作步骤 🛡️
+## 安全 Rebase 操作步骤
 
 ```bash
 # 1. 确保工作区干净（无未提交改动）
@@ -69,7 +69,7 @@ git push -f origin feature_branch
   
 ---
 
-# 冲突解决小Tips 💡
+## 冲突解决小 Tips
 - 打开冲突文件，Git 会标记冲突区域：
 
 ```markdown
@@ -85,7 +85,7 @@ git push -f origin feature_branch
 
 - 避免随意“全用某一方代码”，除非很确定
 
-# Rebase 常见误区 ⚠️
+## Rebase 常见误区
 
 | 错误操作               | 可能结果           | 正确做法                          |
 | ------------------ | -------------- | ----------------------------- |
@@ -93,7 +93,7 @@ git push -f origin feature_branch
 | 中断冲突解决直接退出 rebase  | Git 状态半完成，分支混乱 | 解决冲突后 `git rebase --continue` |
 | 多人对同一分支强制推送        | 代码历史被覆盖，别人代码丢失 | 约定分支管理和推送规则                   |
 
-# 画个流程图，帮你理解更清楚 🔄
+## 画个流程图，帮你理解更清楚
 
 ```less
 [开始]
@@ -122,7 +122,7 @@ git push -f origin feature_branch
 [回到出现冲突?]
 
 ```
-# 小结
+## 小结
 
 - 保证工作区干净，提交或 stash 先行
 

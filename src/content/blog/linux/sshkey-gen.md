@@ -1,19 +1,19 @@
 ---
-title: How to manage SSH key pair
-description: "Auto-generated description for How to manage SSH key pair"
+title: SSH Key Pair Management Guide
+description: "Generate, rotate, and troubleshoot SSH key pairs with practical `ssh-keygen` commands and options."
 pubDate: 2026-01-23
 ---
 
-# 1. Generate SSH key
+## 1. Generate SSH key
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-ssh-keygen: 
+`ssh-keygen`:
 
-# SSH-Keygen 参数详解
+## SSH-Keygen 参数详解
 `ssh-keygen` 是一个生成、管理和转换 SSH 密钥的工具。以下是其主要参数的详细讲解：
 
 ---
@@ -56,18 +56,18 @@ ssh-keygen:
  指定输出密钥的格式：
  - `PEM`：传统 PEM 格式（较老）。
  - `RFC4716`：标准化的 SSH 公钥格式。
-9. `-p`  
- 修改现有私钥的密码短语：
- ``bash
- ssh-keygen -p -f ~/.ssh/id_rsa
- ``
+9. `-p`  
+ 修改现有私钥的密码短语：
+ ```bash
+ ssh-keygen -p -f ~/.ssh/id_rsa
+ ```
 10. `-y`  
   从私钥生成公钥。
-11. `-l`  
-  显示公钥或私钥的指纹（指纹是公钥的哈希值）：
-  ``bash
-  ssh-keygen -l -f ~/.ssh/id_rsa.pub
-  ``
+11. `-l`  
+ 显示公钥或私钥的指纹（指纹是公钥的哈希值）：
+ ```bash
+ ssh-keygen -l -f ~/.ssh/id_rsa.pub
+ ```
 12. `-B`  
   以 Base64 形式显示密钥指纹。
 13. `-r hostname`  
@@ -152,4 +152,3 @@ ssh-keygen -t ed25519 -C "user@example.com" -f ~/.ssh/id_ed25519
 
 ## 3. 总结
 `ssh-keygen` 参数非常丰富，可以满足不同的密钥管理需求。在生产环境中，建议使用现代加密算法（如 Ed25519），并为私钥设置密码短语以增加安全性。
-

@@ -1,6 +1,6 @@
 ---
 title: UK_language
-description: "Auto-generated description for UK_language"
+description: "IELTS writing note on language distribution charts for university students in the UK."
 pubDate: 2026-01-23
 ---
 

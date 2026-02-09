@@ -1,14 +1,14 @@
 ---
 title: Synchronize Folder with Syncthing
-description: "Auto-generated description for Synchronize Folder with Syncthing"
+description: "Syncthing 跨平台文件同步实战，覆盖设备配对、共享目录与权限策略。"
 pubDate: 2026-01-23
 ---
 
-# Introduction
+## Introduction
 
 `Syncthing` is a famous open-source app which can help us synchronize shared folders through different platforms including windows, MacOS and Linux. For more details, you can access [official website](https://syncthing.net/)
 
-# Install
+## Install
 
 ## Windows
 
@@ -49,7 +49,7 @@ sudo apt-get update
 sudo apt-get install syncthing
 ```
 
-# Usage
+## Usage
 
 ## Windows
 
@@ -79,7 +79,7 @@ I recommend Connect your Remote Service from SSH forwarding
 
 And then, config as you like.
 
-# Reference
+## Reference
 
 > https://docs.syncthing.net/
 

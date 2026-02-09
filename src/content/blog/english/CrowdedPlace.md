@@ -1,6 +1,6 @@
 ---
 title: Crowded Place
-description: "Auto-generated description for Crowded Place"
+description: "IELTS speaking sample about a crowded place experience on city public transit."
 pubDate: 2026-01-23
 ---
 

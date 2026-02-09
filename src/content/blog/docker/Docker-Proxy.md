@@ -1,12 +1,12 @@
 ---
-title: How to set network proxy for Docker
-description: "Auto-generated description for How to set network proxy for Docker"
+title: Configure Docker Daemon Proxy
+description: "Set HTTP/HTTPS proxy in Docker daemon.json and restart Docker to fix restricted-network pull failures."
 pubDate: 2026-01-23
 ---
 
 Sometimes, you may encounter network problems, at this time, you need set proxy through `daemon` file of docker.
 
-# Daemon Config
+## Daemon Config
 
 The config file of docker located at: `/etc/docker/daemon.json`
 
@@ -24,13 +24,12 @@ And past the content below to the config file.
 }
 ```
 
-# Restart Docker
+## Restart Docker
 
 ```bash
 sudo systemctl restart docker
 ```
 
-# Reference
+## Reference
 
 > https://docs.docker.com/engine/daemon/proxy/
-

@@ -1,6 +1,6 @@
 ---
-title: English-WordRoot-WordPrefix-WordSuffix
-description: "Auto-generated description for English-WordRoot-WordPrefix-WordSuffix"
+title: English Roots, Prefixes, and Suffixes
+description: "A structured cheat sheet for English word formation with grouped prefix and suffix patterns."
 pubDate: 2026-01-23
 ---
 

@@ -1,14 +1,14 @@
 ---
-title: How to install Bitwarden
-description: "Auto-generated description for How to install Bitwarden"
+title: "Self-host Vaultwarden (Bitwarden Compatible)"
+description: "使用 Docker 部署 Vaultwarden，并通过反向代理与 HTTPS 提供可用的密码管理服务。"
 pubDate: 2026-01-23
 ---
 
-# Introduction
+## Introduction
 
 An alternative server implementation of the Bitwarden Client API, written in Rust and compatible with official Bitwarden clients disclaimer, perfect for self-hosted deployment where running the official resource-heavy service might not be ideal. Click Here to visit the [official website](https://github.com/dani-garcia/vaultwarden)
 
-# Install Vaultwarden
+## Install Vaultwarden
 
 ## Install Docker
 
@@ -32,19 +32,19 @@ services:
       - 8081:80
 ```
 
-# Start the service
+## Start the service
 
 ```bash
 docker compose up -d
 ```
 
-# Get ssl certificate
+## Get ssl certificate
 
 Click [here](/2025/05/22/Get-SSL-Certificates/) for more details.
 
-# Set certificate to your nginx config
+## Set certificate to your nginx config
 
-```config
+```nginx
 server {
     listen 443 ssl;
     server_name vw.domain.tld;
@@ -62,15 +62,15 @@ server {
 }
 ```
 
-# Restart nginx
+## Restart nginx
 
 ```bash
 systemctl restart nginx
 ```
-# Access Vaultwarden
+## Access Vaultwarden
 
 Open your web browser and navigate to `https://vw.domain.tld`. You should see the Vaultwarden login page.
 
-# References
+## References
 
 > [Vaultwarden GitHub Repository](https://github.com/dani-garcia/vaultwarden)

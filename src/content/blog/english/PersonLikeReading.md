@@ -1,6 +1,6 @@
 ---
 title: Person Like Reading
-description: "Auto-generated description for Person Like Reading"
+description: "IELTS speaking sample about a person who enjoys reading and why that habit matters."
 pubDate: 2026-01-23
 ---
 

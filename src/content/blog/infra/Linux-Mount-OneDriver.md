@@ -1,10 +1,10 @@
 ---
 title: Mount OneDriver on Linux
-description: "Auto-generated description for Mount OneDriver on Linux"
+description: "Mount OneDriver on Linux Install rclone Official website: RCLONE 1.1."
 pubDate: 2026-01-23
 ---
 
-# Mount OneDriver on Linux
+## Mount OneDriver on Linux
 
 ## 1. Install rclone
 
@@ -282,7 +282,7 @@ OneDrive reading file ERROR: IO error: unauthenticated: Unauthenticated
 - You should download a fix from {% btn 'https://beta.rclone.org/branch/fix-onedrive-auth/v1.66.0-beta.7749.4e7fddd10.fix-onedrive-auth/', fix-onedriver-auth %}
 - Select a decent version of yourself and run it.
 
-# Reference
+## Reference
 
 > 1. https://rclone.org/
 > 2. https://www.youtube.com/watch?v=pvGUxxsibVE

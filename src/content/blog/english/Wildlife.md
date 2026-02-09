@@ -1,6 +1,6 @@
 ---
-title: Wild life
-description: "Auto-generated description for Wild life"
+title: "Wildlife Observation Place"
+description: "IELTS speaking sample describing a place where people can easily observe wildlife."
 pubDate: 2026-01-23
 ---
 

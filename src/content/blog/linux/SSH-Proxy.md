@@ -1,26 +1,26 @@
 ---
-title: Establish SSH connection through SOCKS5 proxy
-description: "Auto-generated description for Establish SSH connection through SOCKS5 proxy"
+title: SSH over SOCKS5 Proxy
+description: "Connect to remote servers through a SOCKS5 proxy using SSH ProxyCommand on Linux or terminal clients on Windows."
 pubDate: 2026-01-23
 ---
 
-# 1. Introduction
+## Introduction
 
 As we all know, sometimes, it's hard for us to connect our remote server directly or the connection is not stable, we have to conduct some method to access our remote server.
 
-# 2. Method
+## Method
 
-## 2.1. Using some 3rd party application
+### Using some 3rd party application
 
 [FinalShell](https://www.hostbuf.com/): We can set proxy directly
 
-## 2.2. Windows
+### Windows
 
 It's not friendly to Windows
 
-TODO
+Note: on Windows, an easy option is using PuTTY/FinalShell and configuring the SOCKS5 proxy in the client settings.
 
-## 2.3. Linux
+### Linux
 
 We can use `nc` and `ssh` itself to proxy ssh trafic.
 ```bash
@@ -61,4 +61,3 @@ root
 ```
 
 NOTE: If you can't access your server through `proxy`, that could because your proxy service banned traffic through port 22. The best way is to find and change a proxy server merchant who allow traffic through port 22.
-

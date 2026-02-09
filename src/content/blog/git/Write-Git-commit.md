@@ -1,6 +1,6 @@
 ---
-title: Write Git commit
-description: "Auto-generated description for Write Git commit"
+title: Write Better Git Commits
+description: "A practical guide to clear, traceable commit messages with structure, examples, and team-friendly conventions."
 pubDate: 2026-01-23
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: DevelopmentCountry
-description: "Auto-generated description for DevelopmentCountry"
+title: "Economic Growth vs Other National Priorities"
+description: "IELTS writing practice discussing economic progress and other equally important goals for a country."
 pubDate: 2026-01-23
 ---
 

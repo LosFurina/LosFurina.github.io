@@ -1,6 +1,6 @@
 ---
 title: Movie-Truman's world(The show of Truman)
-description: "Auto-generated description for Movie-Trumans world(The show of Truman)"
+description: "This is not just for IELTS, but also for sharing my understanding of the world i'm living."
 pubDate: 2026-01-23
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Why MacOS Doesn't Use `systemd`?
-description: "Auto-generated description for Why MacOS Doesnt Use `systemd`?"
+title: Why macOS Doesn't Use systemd
+description: "Compare macOS launchd/log tools with Linux systemd/journalctl from architecture and UX perspectives."
 pubDate: 2026-01-23
 ---
 

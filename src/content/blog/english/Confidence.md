@@ -1,6 +1,6 @@
 ---
-title: Confidence
-description: "Auto-generated description for Confidence"
+title: "Describe Something That Made You Confident"
+description: "IELTS speaking sample about a study experience that built confidence through results."
 pubDate: 2026-01-23
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Challenge
-description: "Auto-generated description for Challenge"
+title: "Describe a Difficult Challenge You Faced"
+description: "IELTS speaking sample about handling the pressure of applying for a master's degree."
 pubDate: 2026-01-23
 ---
 

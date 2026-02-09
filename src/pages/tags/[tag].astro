@@ -4,9 +4,10 @@ import BlogCard from "../../components/BlogCard.astro";
 import BlogListLayout from "../../components/BlogListLayout.astro";
 import { BLOG_SUBTITLE, SITE_DESCRIPTION } from "../../consts";
 import { getPrimaryTag } from "../../utils/blogTags";
+import { filterVisiblePosts } from "../../utils/blogVisibility";
 
 export async function getStaticPaths() {
-    const allPosts = await getCollection("blog");
+    const allPosts = filterVisiblePosts(await getCollection("blog"));
     const allTags = [
         ...new Set(
             allPosts.map((post) =>
@@ -46,7 +47,7 @@ const searchPosts = posts.map((post) => ({
     href: `/blog/${post.id}/`,
 }));
 
-const allPosts = await getCollection("blog");
+const allPosts = filterVisiblePosts(await getCollection("blog"));
 
 // 计算每个标签的文章数量
 const tagCounts = allPosts.reduce(

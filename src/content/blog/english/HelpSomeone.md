@@ -1,6 +1,6 @@
 ---
 title: Help Someone
-description: "Auto-generated description for Help Someone"
+description: "When we were young, we studied at same primary schoold, junior high schoold and senoir high school together."
 pubDate: 2026-01-23
 ---
 

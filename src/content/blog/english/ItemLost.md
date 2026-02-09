@@ -1,6 +1,6 @@
 ---
 title: Item Lost
-description: "Auto-generated description for Item Lost"
+description: "IELTS speaking sample about losing an item, what happened, and how the issue was handled."
 pubDate: 2026-01-23
 ---
 

@@ -1,10 +1,10 @@
 ---
-title: How to install Docker officially
-description: "Auto-generated description for How to install Docker officially"
+title: Install Docker from Official Repositories
+description: "Cross-platform installation notes for Docker on Ubuntu/Debian, Arch Linux, Windows, and macOS."
 pubDate: 2026-01-23
 ---
 
-# Ubuntu/Debian
+## Ubuntu/Debian
 
 ## Install following official tutorial
 
@@ -45,7 +45,7 @@ Verify that the installation is successful by running the `hello-world` image:
 sudo docker run hello-world
 ```
 
-# ArchLinux
+## Arch Linux
 
 ## Install through `pacman`
 
@@ -61,29 +61,29 @@ sudo systemctl start docker
 sudo systemctl enable docker
 ```
 
-# Windows
+## Windows
 
 ## Download DockerDesktop
 
 [Docker Download](https://www.docker.com/)
 
-# MacOS
-## Download DockerDesktop
+## macOS
+### Download Docker Desktop
 [Docker Download](https://www.docker.com/)
-# Install Docker Desktop for Mac
+### Install Docker Desktop for Mac
 1. Download the Docker Desktop installer from the [Docker website](https://www.docker.com/products/docker-desktop).
 2. Open the downloaded `.dmg` file and drag the Docker icon to your Applications folder.
 3. Open Docker from your Applications folder.
 4. Follow the on-screen instructions to complete the installation.
-# Verify Docker Installation
+### Verify Docker Installation
 To verify that Docker is installed correctly, open a terminal and run the following command:
 
 ```bash
 docker --version
 ```
-# Troubleshooting
+### Troubleshooting
 If you encounter issues with Docker Desktop, you can check the logs or reset Docker to factory defaults from the Docker Desktop menu.
-# Uninstall Docker
+### Uninstall Docker
 To uninstall Docker Desktop from Mac, follow these steps:
 1. Open Docker Desktop.
 2. Click on the Docker icon in the menu bar and select "Preferences."
@@ -93,5 +93,4 @@ To uninstall Docker Desktop from Mac, follow these steps:
 # Reference
 
 > https://docs.docker.com/engine/install/ubuntu/
-
 

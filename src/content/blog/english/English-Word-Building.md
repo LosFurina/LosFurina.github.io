@@ -1,6 +1,6 @@
 ---
-title: English Word Building
-description: "Auto-generated description for English Word Building"
+title: English Word Building Notes
+description: "Notes on roots, prefixes, and suffixes with Chinese analogies and high-frequency examples."
 pubDate: 2026-01-23
 ---
 
@@ -179,5 +179,4 @@ Logseq: {% btn '/logseq/#/page/派生', 派生词 %}
 # Reference
 
 > https://www.youtube.com/watch?v=QZ4yuGaFQMc&list=PLiRHe7F8P0-1FEbOtek-V1GgLHvW8eoac&index=2
-
 

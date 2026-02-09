@@ -1,6 +1,6 @@
 ---
 title: Ideal House
-description: "Auto-generated description for Ideal House"
+description: "IELTS speaking sample describing an ideal living place and why it suits future plans."
 pubDate: 2026-01-23
 ---
 

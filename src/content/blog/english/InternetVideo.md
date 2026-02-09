@@ -1,6 +1,6 @@
 ---
 title: Internet Video
-description: "Auto-generated description for Internet Video"
+description: "To speak of, I am really fond of computer science and I am also a student majoring in computer science."
 pubDate: 2026-01-23
 ---
 

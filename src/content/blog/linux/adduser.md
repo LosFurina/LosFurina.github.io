@@ -1,6 +1,6 @@
 ---
-title: How to add user in Linux and MacOS
-description: "Auto-generated description for How to add user in Linux and MacOS"
+title: User Management in Linux and macOS
+description: "A command-oriented guide to creating users and managing account defaults on Linux and macOS."
 pubDate: 2026-01-23
 ---
 

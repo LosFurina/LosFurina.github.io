@@ -1,6 +1,6 @@
 ---
-title: Newzland Tourism
-description: "Auto-generated description for Newzland Tourism"
+title: "New Zealand Tourism Spending Analysis"
+description: "IELTS Task 1 analysis of visitor spending trends across categories in New Zealand."
 pubDate: 2026-01-23
 ---
 

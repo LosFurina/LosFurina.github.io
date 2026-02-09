@@ -1,6 +1,6 @@
 ---
-title: PersonInMedicine
-description: "Auto-generated description for PersonInMedicine"
+title: "Describe Someone Working in Medicine"
+description: "IELTS speaking sample about a person who chose a medical career and its impact."
 pubDate: 2026-01-23
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Room
-description: "Auto-generated description for Room"
+title: "Describe Someone Else's Room You Enjoy"
+description: "IELTS speaking sample about spending time in a close friend's room during school years."
 pubDate: 2026-01-23
 ---
 

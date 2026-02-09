@@ -1,6 +1,6 @@
 ---
-title: A Person offering Advice
-description: "Auto-generated description for A Person offering Advice"
+title: "Describe a Person People Ask for Advice"
+description: "IELTS speaking sample about a mentor who gives practical study and career advice."
 pubDate: 2026-01-23
 ---
 

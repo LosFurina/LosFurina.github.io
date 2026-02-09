@@ -17,8 +17,9 @@ import {
 	techTimeline,
 	homeCta,
 } from "../data/home";
+import { filterVisiblePosts } from "../utils/blogVisibility";
 
-const latestPosts = (await getCollection("blog"))
+const latestPosts = filterVisiblePosts(await getCollection("blog"))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
 ---

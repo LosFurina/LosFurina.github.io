@@ -1,15 +1,15 @@
 ---
-title: Deploy 3X-UI and Network Proxy against Network Sanction
-description: "Auto-generated description for Deploy 3X-UI and Network Proxy against Network Sanction"
+title: "Deploy 3X-UI for Network Proxy"
+description: "Deploy 3X-UI on Linux and configure proxy nodes in restricted-network environments."
 pubDate: 2026-01-23
 ---
 
-# Introduction
+## Introduction
 
 **3X-UI can help us deploy network proxy easily, especially for those who live in district with restricted network sanction.**
 
 
-# Install 3X-UI
+## Install 3X-UI
 
 Official project location: {% btn 'https://github.com/MHSanaei/3x-ui', 3x-ui %}
 
@@ -27,7 +27,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 ![image.png](https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANjZ4DY2ekztb9MvMoDAijTgQRBsBkAAuXFMRvxdglU-CTqSTD6Iq8BAAMCAAN5AAM2BA)
 
 
-# Config 3x-ui
+## Config 3x-ui
 
 **Before that, you need a domian for yourself.**
 
@@ -250,7 +250,7 @@ Set as below:
 
 ![image.png](https://img.liweijun.top/api/cfile/AgACAgUAAxkDAANrZ4Dra6N35jP--SCzahg_HY5xoDQAAiTGMRvxdglUlzwZcAnhnKQBAAMCAAN5AAM2BA)
 
-# Acknowledgement
+## Acknowledgement
 
 > https://www.youtube.com/watch?v=7GHh91AYAmM
 > https://github.com/MHSanaei/3x-ui

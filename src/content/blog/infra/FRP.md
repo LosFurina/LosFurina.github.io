@@ -1,11 +1,11 @@
 ---
-title: How to penetrate NAT via FRP
-description: "Auto-generated description for Execute command via SSH without login"
+title: Penetrate NAT with FRP
+description: "从下载到配置，记录 FRP 服务端与客户端的内网穿透部署流程。"
 pubDate: 2026-01-23
 ---
-# Deploy FRP Server
+## Deploy FRP Server
 
-# Install FRP
+## Install FRP
 
   Official Repository: [FRP](https://github.com/fatedier/frp)
 
@@ -20,7 +20,7 @@ pubDate: 2026-01-23
   frp_0.62.1_linux_amd64.tar.gz
   ```
 
-  Extract the archive using `tar` (see [[tar]] for more information):
+  Extract the archive using `tar`:
   ```bash
   root@cc:~/download# tar -zxvf ./frp_0.62.1_linux_amd64.tar.gz 
   frp_0.62.1_linux_amd64/
@@ -74,7 +74,7 @@ firstsnow@cc:~/Download/frp$ which frps
 
 Now, `frp` is installed successfully.
 
-# Configure `frps`
+## Configure `frps`
 
 For easier management, place your config files in `~/.config/frp`:
 ```bash
@@ -88,7 +88,7 @@ bindPort = 7000
 # Set to your desired port. Default is 7000.
 ```
 
-# Run `frps` in the Background (Debian/Ubuntu)
+## Run `frps` in the Background (Debian/Ubuntu)
 
 More information: [Run in the Background](/2025/05/22/Run-in-background/)
 
@@ -141,7 +141,7 @@ sudo systemctl enable frps.service
 sudo systemctl start frps.service
 ```
 
-# Run `frps` in the Background (MacOS)
+## Run `frps` in the Background (MacOS)
 
 > **Note:** `sudo` is not required on MacOS, unlike Linux.
 
@@ -215,7 +215,7 @@ To stop the service:
 launchctl unload ~/Library/LaunchAgents/com.example.myservice.plist
 ```
 
-# Check Your Service
+## Check Your Service
 
 ### Linux
 
@@ -274,13 +274,13 @@ tail -n 4 /tmp/log/[name].log
 ```
 Where `-n` specifies the number of lines to print.
 
-# Deploy FRP Client
+## Deploy FRP Client
 
-# Install FRP
+## Install FRP
 
 Follow the same steps as for the server.
 
-# Configure `frpc`
+## Configure `frpc`
 
 Your config file is at `~/.config/frp/frpc.toml` (already set up):
 
@@ -322,7 +322,7 @@ remotePort = 4533
 > - The remote port 22 is usually occupied by sshd.
 > - For security, port 22 should be hidden.
 
-# Run `frpc` in the Background
+## Run `frpc` in the Background
 
 Register your `.plist` (MacOS) or `.service` (Linux) in the appropriate location.
 
@@ -372,7 +372,7 @@ WantedBy=multi-user.target
 </plist>
 ```
 
-# Check Your Service
+## Check Your Service
 
 Same as above.  
 [See section 1.5](#Check-Your-Service)

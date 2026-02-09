@@ -1,6 +1,6 @@
 ---
-title: Merge Code Elegantly
-description: "Auto-generated description for Merge Code Elegantly"
+title: Git Merge Workflow Best Practices
+description: "A practical workflow for safer merges with review gates instead of pushing directly to main."
 pubDate: 2026-01-23
 ---
 
@@ -150,4 +150,3 @@ By following this structured **Git merge workflow**, you:
 # 📖 **Reference:**
 
 - [Git Merge Best Practices (YouTube)](https://www.youtube.com/watch?v=uj8hjLyEBmU&t=3s)
-

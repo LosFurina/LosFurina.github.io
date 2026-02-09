@@ -1,6 +1,6 @@
 ---
 title: English Preposition
-description: "Auto-generated description for English Preposition"
+description: "Concept-first notes for understanding English prepositions with concrete sentence patterns."
 pubDate: 2026-01-23
 ---
 

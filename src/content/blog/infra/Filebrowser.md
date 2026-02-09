@@ -1,10 +1,10 @@
 ---
-title: How to use Filebrowser
-description: "Auto-generated description for How to use Filebrowser"
+title: "Filebrowser 部署与配置指南"
+description: "整理 Filebrowser 的安装方式、基础配置命令与常见启动参数。"
 pubDate: 2026-01-23
 ---
 
-# Installation
+## Installation
 
 Filebrowser is a single binary that can be used as a standalone executable. Alternatively, you can use it with [Docker](https://www.docker.com/) or [Caddy](https://caddyserver.com/), a fantastic web server that enables HTTPS by default. Its installation is straightforward regardless of the system you use.
 
@@ -24,7 +24,7 @@ filebrowser -r /path/to/your/files
 
 Once configured, your Filebrowser instance should be running successfully!
 
-# Configuration
+## Configuration
 
 Filebrowser offers flexible configuration options, including an official [CLI](https://filebrowser.org/cli).
 
@@ -48,7 +48,7 @@ filebrowser config export [output path]
 
 Next time, you can load this configuration file to restore your settings.
 
-# Starting Filebrowser
+## Starting Filebrowser
 
 ## Direct Execution
 
@@ -94,7 +94,7 @@ filebrowser -c [your config file path] -d [database path]
 
 ### Example for Ubuntu
 
-```service
+```ini
 [Unit]
 Description=Filebrowser Service
 After=network.target

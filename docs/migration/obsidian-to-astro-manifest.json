@@ -1,0 +1,723 @@
+{
+  "summary": {
+    "totalCandidates": 79,
+    "imported": 61,
+    "existingSlug": 0,
+    "existingTitle": 4,
+    "similarSkip": 13,
+    "needsReview": 1
+  },
+  "manifest": [
+    {
+      "sourcePath": "ComputerScience/A powerful powershell.md",
+      "title": "Fluent",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.033
+    },
+    {
+      "sourcePath": "ComputerScience/Arch Linux From Scratch.md",
+      "title": "在 iwctl 交互模式下执行",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.025
+    },
+    {
+      "sourcePath": "ComputerScience/Bandwidth.md",
+      "title": "云服务器带宽和流量的区别",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "infra/Bandwidth",
+      "similarity": 0.917
+    },
+    {
+      "sourcePath": "ComputerScience/Connect your Remote Service from SSH forwarding.md",
+      "title": "Introduction",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "linux/SSH-forwarding",
+      "similarity": 0.955
+    },
+    {
+      "sourcePath": "ComputerScience/Download and install docker.md",
+      "title": "Ubuntu/Debian",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.488
+    },
+    {
+      "sourcePath": "ComputerScience/Establish SSH connection through SOCKS5 proxy.md",
+      "title": "1. Introduction",
+      "category": "infra",
+      "status": "needs_review",
+      "reason": "medium_similarity",
+      "matchedWith": "linux/SSH-Proxy",
+      "similarity": 0.778
+    },
+    {
+      "sourcePath": "ComputerScience/GPG Key.md",
+      "title": "创建目录（如果不存在）",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.042
+    },
+    {
+      "sourcePath": "ComputerScience/Generate SSH Key.md",
+      "title": "1. Command to Generate SSH key",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "linux/sshkey-gen",
+      "similarity": 0.942
+    },
+    {
+      "sourcePath": "ComputerScience/Get SSL certificate.md",
+      "title": "1. Apply certificate via ACME",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.536
+    },
+    {
+      "sourcePath": "ComputerScience/Git/Git Branch View.md",
+      "title": "Excalidraw Data",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.035
+    },
+    {
+      "sourcePath": "ComputerScience/Git/Git Command.md",
+      "title": "Add Remote Repository",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.083
+    },
+    {
+      "sourcePath": "ComputerScience/Git/Git Workflow 视频脚本：RevieU Git 协作工作流详解.md",
+      "title": "Git Workflow 视频脚本：RevieU Git 协作工作流详解",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.046
+    },
+    {
+      "sourcePath": "ComputerScience/Git/优雅编写git commit信息.md",
+      "title": "如何优雅地写 Git Commit",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "git/Write-Git-commit",
+      "similarity": 1
+    },
+    {
+      "sourcePath": "ComputerScience/How to compile LaTeX locally%3F.md",
+      "title": "How to compile LaTeX locally?",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "infra/LaTex-local",
+      "similarity": 0.926
+    },
+    {
+      "sourcePath": "ComputerScience/How to install brew.md",
+      "title": "Introduction",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "infra/Install-Brew",
+      "similarity": 1
+    },
+    {
+      "sourcePath": "ComputerScience/How to penetrate NAT via FRP.md",
+      "title": "1. Deploy FRP Server",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.364
+    },
+    {
+      "sourcePath": "ComputerScience/Hysteria2 Installation.md",
+      "title": "Why we need Hysteria2?",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.36
+    },
+    {
+      "sourcePath": "ComputerScience/Infra-DevOps工程师成长之路：从技能入门到实战项目.md",
+      "title": "Infra-DevOps工程师成长之路：从技能入门到实战项目",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.014
+    },
+    {
+      "sourcePath": "ComputerScience/Install BBRv3 for your VPS.md",
+      "title": "1. [Github Link](https://github.com/opiran-club/VPS-Optimizer)",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.019
+    },
+    {
+      "sourcePath": "ComputerScience/Install and Config SSH Connection.md",
+      "title": "1. Install SSH",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.568
+    },
+    {
+      "sourcePath": "ComputerScience/Jupyter.md",
+      "title": "Jupyter",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.01
+    },
+    {
+      "sourcePath": "ComputerScience/K8s 避坑指南：那个由 `echo` 带来的隐形刺客——Secret 认证失败惨案.md",
+      "title": "输出: dXNlcm5hbWUK",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.018
+    },
+    {
+      "sourcePath": "ComputerScience/Kubernetes Deployment 配置详解笔记.md",
+      "title": "📌 总结",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.03
+    },
+    {
+      "sourcePath": "ComputerScience/Linux and Windows 上的 AirDrop.md",
+      "title": "Linux and Windows 上的 AirDrop",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.033
+    },
+    {
+      "sourcePath": "ComputerScience/Linux 与 MacOS 用户管理命令详解.md",
+      "title": "Linux 与 MacOS 用户管理命令详解",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "linux/adduser",
+      "similarity": 1
+    },
+    {
+      "sourcePath": "ComputerScience/Linux 终端终极配置指南：Zsh + Zplug + Powerlevel10k.md",
+      "title": "Linux 终端终极配置指南：Zsh + Zplug + Powerlevel10k",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.028
+    },
+    {
+      "sourcePath": "ComputerScience/LinuxCommand/BasicLinuxCommand.md",
+      "title": "BasicLinuxCommand",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.007
+    },
+    {
+      "sourcePath": "ComputerScience/LinuxCommand/tar.md",
+      "title": "Here, `v` is used for verbose output which is optional.",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.069
+    },
+    {
+      "sourcePath": "ComputerScience/LinuxCommand/useradd.md",
+      "title": "useradd",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.028
+    },
+    {
+      "sourcePath": "ComputerScience/Md to PDF Pandoc.md",
+      "title": "Md to PDF Pandoc",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.032
+    },
+    {
+      "sourcePath": "ComputerScience/OpenVPN 服务器搭建指南：实现客户端互通.md",
+      "title": "更新软件包列表",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.029
+    },
+    {
+      "sourcePath": "ComputerScience/OpenVPN.md",
+      "title": "Introduction",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.16
+    },
+    {
+      "sourcePath": "ComputerScience/Overleaf Install.md",
+      "title": "Overleaf Install",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.051
+    },
+    {
+      "sourcePath": "ComputerScience/Photoshop.md",
+      "title": "Photoshop",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.029
+    },
+    {
+      "sourcePath": "ComputerScience/Purchase Cloud Computer.md",
+      "title": "1. Ali Cloud",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.134
+    },
+    {
+      "sourcePath": "ComputerScience/Run the command in the background.md",
+      "title": "/etc/systemd/system",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.723
+    },
+    {
+      "sourcePath": "ComputerScience/SelfHosting/Filebrowser.md",
+      "title": "Installation",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.434
+    },
+    {
+      "sourcePath": "ComputerScience/SelfHosting/How to Establish Factorio Linux Server from scratch.md",
+      "title": "1. Purchase Cloud Computer",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.219
+    },
+    {
+      "sourcePath": "ComputerScience/SelfHosting/How to establish a Remote Git Repository for yourself？.md",
+      "title": "1. Introduction",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.673
+    },
+    {
+      "sourcePath": "ComputerScience/Synchronize Folder with Syncthing.md",
+      "title": "Introduction",
+      "category": "infra",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "infra/Synchronize-via-Syncthing",
+      "similarity": 0.962
+    },
+    {
+      "sourcePath": "ComputerScience/WSl clean.md",
+      "title": "WSl clean",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.023
+    },
+    {
+      "sourcePath": "ComputerScience/Why MacOS no systemd.md",
+      "title": "Why MacOS no systemd",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.165
+    },
+    {
+      "sourcePath": "ComputerScience/Win+MacOS.md",
+      "title": "Win+MacOS",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.005
+    },
+    {
+      "sourcePath": "ComputerScience/k8s/Install ks3.md",
+      "title": "查看节点状态 (需要 sudo，除非你配置了用户权限)",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.015
+    },
+    {
+      "sourcePath": "ComputerScience/sshfs.md",
+      "title": "Introduction",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.034
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/1. 预备知识.md",
+      "title": "1. 怎么使用Linux命令",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.009
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/2. SSH连接远程服务器.md",
+      "title": "1. 直接连接",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.021
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/3. 自建代理服务.md",
+      "title": "QA",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.143
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/4. 配置 Clash 代理规则.md",
+      "title": "QA",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.066
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/5. 安装 Docker.md",
+      "title": "配置 Docker Engine 的网络代理",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.152
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/6. 安装 Nginx Proxy Manager.md",
+      "title": "1. 安装 Docker",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.063
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/Hexo.md",
+      "title": "Hexo",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/SSH 公私钥.md",
+      "title": "SSH-Keygen 参数详解",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.234
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/TUN.md",
+      "title": "Excalidraw Data",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.041
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/购买云服务器.md",
+      "title": "1. 阿里云",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.025
+    },
+    {
+      "sourcePath": "ComputerScience/从0开始搭建你的服务/购买域名.md",
+      "title": "1. CloudFlare",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.027
+    },
+    {
+      "sourcePath": "ComputerScience/配置 Docker Engine 的网络代理.md",
+      "title": "1. 查看官方文档",
+      "category": "infra",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.087
+    },
+    {
+      "sourcePath": "English Study/NGSL(New General Service List).md",
+      "title": "NGSL(New General Service List)",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.054
+    },
+    {
+      "sourcePath": "English Study/VISA QA.md",
+      "title": "1. 询问学习目的",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.101
+    },
+    {
+      "sourcePath": "English Study/VISA.md",
+      "title": "QA",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.083
+    },
+    {
+      "sourcePath": "English Study/Why do you think the English Tenses is so confused%3F.md",
+      "title": "时间&状态未分清",
+      "category": "english",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "english/English-Tenses",
+      "similarity": 1
+    },
+    {
+      "sourcePath": "English Study/一般现在时.md",
+      "title": "1. 表述事实",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.063
+    },
+    {
+      "sourcePath": "English Study/介词.md",
+      "title": "介词的原理",
+      "category": "english",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "english/English-Preposition",
+      "similarity": 0.984
+    },
+    {
+      "sourcePath": "English Study/动词.md",
+      "title": "英文动词的三大特点",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.016
+    },
+    {
+      "sourcePath": "English Study/助动词（非实义动词）.md",
+      "title": "基本助动词",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.016
+    },
+    {
+      "sourcePath": "English Study/及物动词.md",
+      "title": "使役动词",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0
+    },
+    {
+      "sourcePath": "English Study/句子成分.md",
+      "title": "主语（名词性质）",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.045
+    },
+    {
+      "sourcePath": "English Study/如何在 Windows 中删除 EFI 分区并重新分配磁盘.md",
+      "title": "示例：选择磁盘 1",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.017
+    },
+    {
+      "sourcePath": "English Study/完形填空.md",
+      "title": "1. 了解完形填空（Introduction）",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.011
+    },
+    {
+      "sourcePath": "English Study/实义动词.md",
+      "title": "谓语动词",
+      "category": "english",
+      "status": "existing",
+      "reason": "title_match",
+      "matchedWith": "english/谓语动词",
+      "similarity": 0
+    },
+    {
+      "sourcePath": "English Study/时态.md",
+      "title": "时态",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.024
+    },
+    {
+      "sourcePath": "English Study/派生.md",
+      "title": "派生",
+      "category": "english",
+      "status": "existing",
+      "reason": "title_match",
+      "matchedWith": "english/派生",
+      "similarity": 0
+    },
+    {
+      "sourcePath": "English Study/现在进行时（Present Progressive Tenses）.md",
+      "title": "现在进行时（Present Progressive Tenses）",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.082
+    },
+    {
+      "sourcePath": "English Study/英语构词法.md",
+      "title": "派生",
+      "category": "english",
+      "status": "existing",
+      "reason": "title_match",
+      "matchedWith": "english/派生",
+      "similarity": 0
+    },
+    {
+      "sourcePath": "English Study/词根、前缀、后缀.md",
+      "title": "英语单词构词法",
+      "category": "english",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "english/English-WordRoot-WordPrefix-WordSuffix",
+      "similarity": 1
+    },
+    {
+      "sourcePath": "English Study/词类.md",
+      "title": "动词",
+      "category": "english",
+      "status": "new_draft",
+      "reason": "",
+      "matchedWith": "",
+      "similarity": 0.008
+    },
+    {
+      "sourcePath": "English Study/语气.md",
+      "title": "谓语动词的三大本领",
+      "category": "english",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "english/语气",
+      "similarity": 0.93
+    },
+    {
+      "sourcePath": "English Study/谓语动词.md",
+      "title": "谓语动词",
+      "category": "english",
+      "status": "existing",
+      "reason": "title_match",
+      "matchedWith": "english/谓语动词",
+      "similarity": 0
+    },
+    {
+      "sourcePath": "English Study/非谓语动词.md",
+      "title": "特点",
+      "category": "english",
+      "status": "existing",
+      "reason": "high_similarity",
+      "matchedWith": "english/非谓语动词",
+      "similarity": 1
+    }
+  ]
+}

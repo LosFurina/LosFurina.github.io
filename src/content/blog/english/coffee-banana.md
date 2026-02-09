@@ -1,6 +1,6 @@
 ---
-title: Coffee and Banana
-description: "Auto-generated description for Coffee and Banana"
+title: "Coffee and Banana Trade Data"
+description: "IELTS Task 1 practice comparing Fairtrade coffee and banana sales across years."
 pubDate: 2026-01-23
 ---
 

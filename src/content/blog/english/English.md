@@ -1,6 +1,6 @@
 ---
 title: The impact of the English
-description: "Auto-generated description for The impact of the English"
+description: "English English has become a universal language."
 pubDate: 2026-01-23
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Craftman
-description: "Auto-generated description for Craftman"
+title: "Describe Someone Who Makes Things by Hand"
+description: "IELTS speaking sample about a person who enjoys handmade crafts and why it is meaningful."
 pubDate: 2026-01-23
 ---
 

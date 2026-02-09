@@ -1,6 +1,6 @@
 ---
 title: Strong Opinion
-description: "Auto-generated description for Strong Opinion"
+description: "After we entered the university we met each other at out domitory."
 pubDate: 2026-01-23
 ---
 

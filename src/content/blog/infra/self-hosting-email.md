@@ -1,19 +1,19 @@
 ---
-title: Manage your own email server via Gmail and Cloudflare
-description: "Auto-generated description for Manage your own email server via Gmail and Cloudflare"
+title: Set Up Custom Domain Email with Cloudflare and Gmail
+description: "Configure Cloudflare Email Routing and Gmail to send and receive mail using your own domain."
 pubDate: 2026-01-23
 ---
 
-# Introduction
+## Introduction
 
 This article will guide you through the process of setting up your own email server using Gmail and Cloudflare. By following these steps, you can manage your email without relying on third-party services, ensuring greater control and privacy.
 
-# Prerequisites
+## Prerequisites
 1. **Domain Name**: You need a registered domain name to set up your email server.
 2. **Gmail Account**: A Gmail account to use as your email client.
 3. **Cloudflare Account**: To manage your DNS settings and enhance security.
 
-# Step 1: Set Up Your Domain in Cloudflare
+## Step 1: Set Up Your Domain in Cloudflare
 1. Log in to your Cloudflare account.
 2. Add your domain to Cloudflare if you haven't already.
 3. Go to the **email** tab in the Cloudflare dashboard.
@@ -27,11 +27,11 @@ This article will guide you through the process of setting up your own email ser
 
 6. Cloudflare will provide you with MX records.
 
-# Step 2: Test Your Email Routing
+## Step 2: Test Your Email Routing
 1. Send an email to your custom domain email address (e.g., `work@yourdomain.com`).
 2. Check if the email is successfully forwarded to your Gmail inbox.
 
-# Step 3: Configure Gmail to Send Emails from Your Custom Domain
+## Step 3: Configure Gmail to Send Emails from Your Custom Domain
 1. Open Gmail and go to **Settings**.
 2. Click on the **Accounts and Import** tab.
 3. Under the **Send mail as** section, click on **Add another email address**.
@@ -49,7 +49,7 @@ This article will guide you through the process of setting up your own email ser
 8. Click on **Add Account**.
 9. Gmail will send a verification email to your custom email address. Click the verification link in that email.
 
-# Step 4: Test Sending Emails
+## Step 4: Test Sending Emails
 1. Compose a new email in Gmail.
 2. Select your custom email address in the "From" field.
 3. Send the email to another address (e.g., your personal email).

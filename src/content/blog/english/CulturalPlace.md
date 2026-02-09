@@ -1,6 +1,6 @@
 ---
 title: Cultural Place
-description: "Auto-generated description for Cultural Place"
+description: "IELTS speaking sample about a cultural place worth visiting to learn local traditions."
 pubDate: 2026-01-23
 ---
 

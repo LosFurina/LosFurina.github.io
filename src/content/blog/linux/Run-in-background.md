@@ -1,6 +1,6 @@
 ---
 title: Run the command in the background
-description: "Auto-generated description for Run the command in the background"
+description: "Linux 后台运行任务的方法对比：nohup、screen/tmux 与 systemd。"
 pubDate: 2026-01-23
 ---
 
@@ -18,7 +18,7 @@ There are some methods I will introduce here:
 
 3. `crtl + b` and then `d`: exit tmux tty but keep it in background
 
-LATER but this command or we call it shortcut sometimes don't work, if I find the reason, I will update here.
+Note: in some terminals this shortcut may fail because keybindings are intercepted. In that case, remap the terminal shortcut or use a different tmux prefix.
 
 ## 2. nohup: 
 
@@ -28,7 +28,7 @@ LATER but this command or we call it shortcut sometimes don't work, if I find th
 
 ## 3. <span style="color:red">systemctl(Systemd)</span>
 
-<span style="font-size: 150; font-weight: bold; color: yellow">TODO: MacOS: launchctl(launchd)</span>
+Note: on macOS, use `launchctl` (`launchd`) instead of `systemctl`.
  
 
 I recommend you use `systemctl`, but that is not absolute, different methods have different using scenario. Because we can easily control services via simple commands, and all the journal will be set at journalctl. But if you don't have root authority, you should give up this method.
@@ -89,5 +89,4 @@ journalctl -u factorio.service -f
 # -u: unit name
 # -f follow
 ```
-
 

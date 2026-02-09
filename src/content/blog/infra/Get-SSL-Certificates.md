@@ -1,12 +1,12 @@
 ---
-title: Get SSL Certificates
-description: "Auto-generated description for Get SSL Certificates"
+title: "ACME 申请 SSL 证书指南"
+description: "记录 ACME 申请证书及在 3X-UI 中执行签发与校验的核心步骤。"
 pubDate: 2026-01-23
 ---
 
-# 1. Apply certificate via ACME
+## 1. Apply certificate via ACME
 
-# 2. Apply certificate via ACME integrated by 3X-UI
+## 2. Apply certificate via ACME integrated by 3X-UI
 
 ## 2.1. Install 3X-UI
 

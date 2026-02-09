@@ -1,6 +1,6 @@
 ---
-title: How to Establish Factorio Linux Server from scratch
-description: "Auto-generated description for How to Establish Factorio Linux Server from scratch"
+title: Build a Factorio Headless Server on Linux
+description: "Step-by-step notes for setting up a Linux headless Factorio server from cloud host to runtime."
 pubDate: 2026-01-23
 ---
 

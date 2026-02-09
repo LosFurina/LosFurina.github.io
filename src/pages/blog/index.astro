@@ -4,8 +4,9 @@ import BlogCard from "../../components/BlogCard.astro";
 import BlogListLayout from "../../components/BlogListLayout.astro";
 import { BLOG_SUBTITLE, SITE_DESCRIPTION } from "../../consts";
 import { getPrimaryTag } from "../../utils/blogTags";
+import { filterVisiblePosts } from "../../utils/blogVisibility";
 
-const posts = (await getCollection("blog")).sort(
+const posts = filterVisiblePosts(await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
@@ -18,7 +19,7 @@ const searchPosts = posts.map((post) => ({
 	href: `/blog/${post.id}/`,
 }));
 
-const allPosts = await getCollection("blog");
+const allPosts = filterVisiblePosts(await getCollection("blog"));
 
 // 自动计算所有存在的文件夹（Tags）及其文章数量
 const tagCounts = allPosts.reduce(

@@ -56,16 +56,16 @@ const hasReadingTime = rawContent.trim().length > 0;
 		<BaseHead title={resolvedTitle} description={resolvedDescription} />
 		<style>
 			.blog-container {
-				max-width: 1200px;
+				max-width: 1700px;
 				margin: 0 auto;
 				padding: 2rem;
 				display: grid;
-				grid-template-columns: 1fr minmax(0, 720px) 1fr;
+				grid-template-columns: 1fr minmax(0, 1200px) 1fr;
 				gap: 2rem;
 			}
 
 			.blog-container.no-toc {
-				grid-template-columns: minmax(0, 720px);
+				grid-template-columns: minmax(0, 1200px);
 				justify-content: center;
 			}
 
@@ -84,6 +84,10 @@ const hasReadingTime = rawContent.trim().length > 0;
 
 			main {
 				min-width: 0;
+				max-width: none;
+				width: 100%;
+				margin: 0;
+				padding: 0;
 			}
 
 			.hero-image {
@@ -209,7 +213,7 @@ const hasReadingTime = rawContent.trim().length > 0;
 
 			@media (max-width: 1200px) {
 				.blog-container:not(.no-toc) {
-					grid-template-columns: minmax(0, 720px) 280px;
+					grid-template-columns: minmax(0, 1200px) 280px;
 				}
 
 				.right-sidebar {

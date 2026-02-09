@@ -1,6 +1,6 @@
 ---
 title: Investment in the Art
-description: "Auto-generated description for Investment in the Art"
+description: "IELTS writing discussion on balancing art investment and public service spending."
 pubDate: 2026-01-23
 ---
 

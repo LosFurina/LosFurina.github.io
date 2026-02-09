@@ -202,14 +202,19 @@ const {
                 </div>
             </div>
         </div>
-        <script is:inline>
+        <script is:inline data-astro-rerun>
             const updateBlogFixedTop = () => {
                 const main = document.querySelector(".blog-main");
                 if (!main) return;
+                const header = document.querySelector("header");
+                const headerBottom = header
+                    ? header.getBoundingClientRect().bottom
+                    : 58;
+                const minTop = Math.max(64, Math.round(headerBottom + 16));
                 const { top } = main.getBoundingClientRect();
                 document.documentElement.style.setProperty(
                     "--blog-fixed-top",
-                    `${Math.round(top)}px`,
+                    `${Math.max(Math.round(top), minTop)}px`,
                 );
             };
 
@@ -222,6 +227,8 @@ const {
             }
 
             window.addEventListener("load", updateBlogFixedTop, { once: true });
+            window.addEventListener("pageshow", updateBlogFixedTop);
+            document.addEventListener("astro:page-load", updateBlogFixedTop);
             window.addEventListener("resize", updateBlogFixedTop);
         </script>
     </body>

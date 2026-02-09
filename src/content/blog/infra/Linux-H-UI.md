@@ -1,14 +1,14 @@
 ---
-title: Deploy H-UI and Hysteria2 Protocol Proxy against Network Sanction
-description: "Auto-generated description for Deploy H-UI and Hysteria2 Protocol Proxy against Network Sanction"
+title: "Deploy H-UI with Hysteria2"
+description: "Set up H-UI and Hysteria2 proxy services on Linux with practical routing notes."
 pubDate: 2026-01-23
 ---
 
-# Introduction
+## Introduction
 
 **Generally speaking, the internet that what we are using almost transfers our traffic through ==TCP== proxy. As we all know, tcp is a stable proxy, but there are also much disadvantages, including slow transfer speed.**
 
-# Install H-UI
+## Install H-UI
 
 Official project location: {% btn 'https://github.com/jonssonyan/h-ui', H-UI %}
 
@@ -36,7 +36,7 @@ h-ui Connection Password: xxx.xxx
 
 **Now you can visit you h-ui panel through ==http==, please notice, http is not secure!!! We will set HTTPS at next step.**
 
-# Config H-UI
+## Config H-UI
 
 ## 1. [Get SSL Credential](/2025/01/10/Linux-3X-UI/)
 
@@ -98,7 +98,7 @@ fullchain.pem  privkey.pem
 
 - **Now, it can work!**
 
-# Acknowledgement
+## Acknowledgement
 
 > https://github.com/jonssonyan/h-ui/issues/71
 > https://github.com/jonssonyan/h-ui

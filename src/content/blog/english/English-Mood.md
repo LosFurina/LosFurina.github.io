@@ -1,6 +1,6 @@
 ---
 title: English Mood
-description: "Auto-generated description for English Mood"
+description: "Quick notes on English mood: indicative, imperative, interrogative, and subjunctive usage."
 pubDate: 2026-01-23
 ---
 

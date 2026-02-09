@@ -1,6 +1,6 @@
 ---
 title: Old Friend
-description: "Auto-generated description for Old Friend"
+description: "IELTS speaking sample about reconnecting with an old friend and shared memories."
 pubDate: 2026-01-23
 ---
 
