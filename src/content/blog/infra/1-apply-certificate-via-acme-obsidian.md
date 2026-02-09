@@ -3,7 +3,6 @@ title: "通过 ACME 申请 SSL 证书（含 3X-UI 流程）"
 description: "记录 ACME 自动签发证书的基础流程，以及在 3X-UI 中集成申请与校验的步骤。"
 pubDate: "2025-01-14"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Get SSL certificate.md"

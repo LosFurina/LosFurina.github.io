@@ -3,7 +3,6 @@ title: "完形填空入门：核心思路与题型"
 description: "这篇笔记总结完形填空的基础做题流程、常见题型和实用策略，适合用作中学英语完形训练的入门提纲。"
 pubDate: "2025-01-02"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/完形填空.md"

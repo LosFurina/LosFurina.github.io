@@ -3,7 +3,6 @@ title: "OpenVPN 基础配置笔记"
 description: "整理 OpenVPN 服务端与客户端的安装、证书签发与连接验证流程。"
 pubDate: "2025-12-12"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/OpenVPN.md"

@@ -3,7 +3,6 @@ title: "useradd 与 adduser 区别"
 description: "对比 Linux 中 `useradd` 与 `adduser` 的定位、参数风格与实际使用场景。"
 pubDate: "2025-05-23"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/LinuxCommand/useradd.md"

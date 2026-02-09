@@ -3,7 +3,6 @@ title: "助动词总览：基础、情态与半助动词"
 description: "整理助动词的核心作用，包括时态、人称、语态与语气表达。"
 pubDate: "2025-01-16"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/助动词（非实义动词）.md"

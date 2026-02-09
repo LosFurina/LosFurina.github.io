@@ -3,7 +3,6 @@ title: "域名注册商与 DNS 托管对比"
 description: "域名注册商与 DNS 托管实践对比，重点说明迁移到 Cloudflare 的常见方案。"
 pubDate: "2025-11-21"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/从0开始搭建你的服务/购买域名.md"

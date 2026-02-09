@@ -3,7 +3,6 @@ title: "SSHFS 挂载指南"
 description: "介绍如何通过 SSHFS 将本地磁盘挂载到远程 Linux 服务器。"
 pubDate: "2025-05-26"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/sshfs.md"

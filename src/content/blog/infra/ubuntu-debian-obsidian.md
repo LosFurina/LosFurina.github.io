@@ -3,7 +3,6 @@ title: "Ubuntu/Debian 安装 Docker（官方仓库）"
 description: "按 Docker 官方文档在 Ubuntu/Debian 配置仓库并安装 Docker Engine。"
 pubDate: "2025-02-17"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Download and install docker.md"

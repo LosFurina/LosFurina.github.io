@@ -3,7 +3,6 @@ title: "Pandoc：Markdown 转 PDF"
 description: "记录 Pandoc 安装方式与 Markdown 转 PDF 的常用命令参数。"
 pubDate: "2025-11-04"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Md to PDF Pandoc.md"

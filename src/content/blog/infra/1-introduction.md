@@ -3,7 +3,6 @@ title: "自建远程 Git 仓库：背景与目标"
 description: "介绍从托管平台过渡到自建远程 Git 仓库的动机、适用场景与准备工作。"
 pubDate: "2025-09-22"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/SelfHosting/How to establish a Remote Git Repository for yourself？.md"

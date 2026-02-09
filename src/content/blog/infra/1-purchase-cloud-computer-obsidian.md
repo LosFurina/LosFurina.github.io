@@ -3,7 +3,6 @@ title: "云服务器购买与 SSH 连接实操（Factorio 场景）"
 description: "从购买云服务器到 SSH 登录，再到下载 Factorio Headless Server 的完整流程。"
 pubDate: "2025-01-07"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/SelfHosting/How to Establish Factorio Linux Server from scratch.md"

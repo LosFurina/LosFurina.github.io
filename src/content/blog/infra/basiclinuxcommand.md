@@ -3,7 +3,6 @@ title: "Linux 基础命令笔记"
 description: "收录常见 Linux 基础命令与参数说明，适合日常查询与复习。"
 pubDate: "2025-09-22"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/LinuxCommand/BasicLinuxCommand.md"

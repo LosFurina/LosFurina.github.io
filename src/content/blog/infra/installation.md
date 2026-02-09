@@ -3,7 +3,6 @@ title: "File Browser 安装指南"
 description: "记录 File Browser 的安装方式与基础运行方法，适合作为自托管文件管理入口。"
 pubDate: "2025-05-25"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/SelfHosting/Filebrowser.md"

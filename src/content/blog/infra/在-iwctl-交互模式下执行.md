@@ -3,7 +3,6 @@ title: "Arch Linux 从零安装（UEFI + iwctl）"
 description: "一份面向新手的 Arch Linux 安装实操笔记，覆盖 UEFI 启动、分区思路、iwctl 连接 Wi-Fi 与常见故障排查。"
 pubDate: "2026-02-06"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Arch Linux From Scratch.md"

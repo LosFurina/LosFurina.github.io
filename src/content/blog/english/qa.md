@@ -3,7 +3,6 @@ title: "英语口语问答：学习经历与职业规划"
 description: "一份可复用的英语问答提纲，覆盖学习经历、项目实践、当前计划与职业方向表达。"
 pubDate: "2025-05-04"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/VISA.md"

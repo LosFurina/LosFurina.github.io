@@ -3,7 +3,6 @@ title: "词类总览（Parts of Speech）"
 description: "快速回顾英语十大词类与基本作用，作为语法学习的导航页。"
 pubDate: "2025-01-16"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/词类.md"

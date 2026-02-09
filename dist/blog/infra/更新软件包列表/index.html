@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><!-- Theme Initialization Script --><script>
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
+
+	if (theme === "dark") {
+		document.documentElement.setAttribute("data-theme", "dark");
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.classList.remove("dark");
+	}
+
+	window.localStorage.setItem("theme", theme);
+</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Wayne" href="https://blog.liweijun.com/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://blog.liweijun.com/blog/infra/%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%97%E8%A1%A8/"><!-- Primary Meta Tags --><title>OpenVPN 服务器搭建（双客户端互通）</title><meta name="title" content="OpenVPN 服务器搭建（双客户端互通）"><meta name="description" content="从安装 OpenVPN 到签发证书与客户端配置，完整记录双客户端互通部署流程。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.liweijun.com/blog/infra/%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%97%E8%A1%A8/"><meta property="og:title" content="OpenVPN 服务器搭建（双客户端互通）"><meta property="og:description" content="从安装 OpenVPN 到签发证书与客户端配置，完整记录双客户端互通部署流程。"><meta property="og:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.liweijun.com/blog/infra/%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%97%E8%A1%A8/"><meta property="twitter:title" content="OpenVPN 服务器搭建（双客户端互通）"><meta property="twitter:description" content="从安装 OpenVPN 到签发证书与客户端配置，完整记录双客户端互通部署流程。"><meta property="twitter:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Wayne","description":"DevOps and infrastructure engineering notes, projects, and practical automation experiments by Wayne Li.","url":"https://blog.liweijun.com/","inLanguage":"en"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Wayne Li","url":"https://blog.liweijun.com/","email":"mailto:me@liweijun.com","sameAs":["https://github.com/LosFurina","https://x.com/MicroNahida"],"jobTitle":"DevOps / Infrastructure Engineer"}</script><link rel="stylesheet" href="/_astro/index.DCFK0IPC.css">
+<link rel="stylesheet" href="/_astro/about.DVvCJqHw.css">
+<style>a[data-astro-cid-eimmu3lg]{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .75rem;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--header-text, rgb(var(--gray-dark)));border-radius:999px;transition:color .2s ease,background .2s ease;position:relative}a[data-astro-cid-eimmu3lg]:hover{background:var(--header-hover, rgba(179, 106, 74, .08));color:var(--header-text-strong, rgb(var(--gray-dark)))}a[data-astro-cid-eimmu3lg]:focus-visible{outline:2px solid var(--header-accent, #b36a4a);outline-offset:2px}a[data-astro-cid-eimmu3lg].active{color:var(--header-accent, #b36a4a)}a[data-astro-cid-eimmu3lg].active:after{content:"";position:absolute;left:50%;bottom:4px;width:4px;height:4px;margin-left:-2px;border-radius:999px;background:var(--header-accent, #b36a4a)}.nav-icon[data-astro-cid-eimmu3lg]{display:inline-flex;width:16px;height:16px}.nav-icon[data-astro-cid-eimmu3lg] svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}@media(max-width:720px){a[data-astro-cid-eimmu3lg]{width:100%;justify-content:flex-start;padding:.6rem .9rem}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <div class="nav-left" data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Wayne</a></h2> </div> <div class="internal-links" id="mobileMenu" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M3 11.5L12 4l9 7.5" data-astro-cid-3ef6ksr2></path> <path d="M6.5 10.5V20h11V10.5" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Home
+</span> </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="6" y="4.5" width="12" height="15" rx="2" data-astro-cid-3ef6ksr2></rect> <path d="M9 9h6" data-astro-cid-3ef6ksr2></path> <path d="M9 13h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Blog
+</span> </a>  <a href="/projects" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="4" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="4" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Projects
+</span> </a>  <a href="/resume" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M14 3.5V8h4" data-astro-cid-3ef6ksr2></path> <path d="M9 12h6" data-astro-cid-3ef6ksr2></path> <path d="M9 16h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Resume
+</span> </a>  <a href="/contact" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M4 8l8 6 8-6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Contact
+</span> </a>  <!-- Tools Dropdown --> <div class="dropdown" id="toolsDropdown" data-astro-cid-3ef6ksr2> <button class="dropdown-trigger" id="toolsBtn" data-astro-cid-3ef6ksr2>
+More
+<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="dropdown-menu" id="toolsMenu" data-astro-cid-3ef6ksr2> <!-- 本站页面 --> <a href="/about" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>👤</span>
+About
+</a> <a href="/uses" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🛠️</span>
+Uses
+</a> <a href="/now" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>⏰</span>
+Now
+</a> <a href="/bookmarks" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔖</span>
+Bookmarks
+</a> <a href="/guestbook" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📝</span>
+Guestbook
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <a href="/keys" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔐</span>
+GPG Keys
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
+GitHub
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#目录" class="toc-link" data-astro-cid-xvrfupwn>目录</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#1-准备工作" class="toc-link" data-astro-cid-xvrfupwn>1. 准备工作</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#2-第一步安装-openvpn-和-easy-rsa" class="toc-link" data-astro-cid-xvrfupwn>2. 第一步：安装 OpenVPN 和 Easy-RSA</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#3-第二步设置证书颁发机构-ca-及证书" class="toc-link" data-astro-cid-xvrfupwn>3. 第二步：设置证书颁发机构 (CA) 及证书</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#31-初始化-easy-rsa-环境" class="toc-link" data-astro-cid-xvrfupwn>3.1 初始化 Easy-RSA 环境</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#32-创建公钥基础设施-pki-和-ca" class="toc-link" data-astro-cid-xvrfupwn>3.2 创建公钥基础设施 (PKI) 和 CA</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#33-生成服务器证书和密钥" class="toc-link" data-astro-cid-xvrfupwn>3.3 生成服务器证书和密钥</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#34-生成客户端证书和密钥" class="toc-link" data-astro-cid-xvrfupwn>3.4 生成客户端证书和密钥</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#35-生成加密相关参数" class="toc-link" data-astro-cid-xvrfupwn>3.5 生成加密相关参数</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#36-将文件复制到-openvpn-目录" class="toc-link" data-astro-cid-xvrfupwn>3.6 将文件复制到 OpenVPN 目录</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#4-第三步配置-openvpn-服务器" class="toc-link" data-astro-cid-xvrfupwn>4. 第三步：配置 OpenVPN 服务器</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#52-配置防火墙-ufw" class="toc-link" data-astro-cid-xvrfupwn>5.2 配置防火墙 (UFW)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#6-第五步启动并验证-openvpn-服务" class="toc-link" data-astro-cid-xvrfupwn>6. 第五步：启动并验证 OpenVPN 服务</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#7-第六步创建客户端配置文件" class="toc-link" data-astro-cid-xvrfupwn>7. 第六步：创建客户端配置文件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#71-创建基础配置文件" class="toc-link" data-astro-cid-xvrfupwn>7.1 创建基础配置文件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#72-编写脚本自动生成-ovpn-文件" class="toc-link" data-astro-cid-xvrfupwn>7.2 编写脚本自动生成 .ovpn 文件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#73-生成两个客户端的配置文件" class="toc-link" data-astro-cid-xvrfupwn>7.3 生成两个客户端的配置文件</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#8-第七步客户端连接与测试" class="toc-link" data-astro-cid-xvrfupwn>8. 第七步：客户端连接与测试</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>OpenVPN 服务器搭建（双客户端互通）</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-08-27T00:00:00.000Z"> Aug 26, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 8 min read
+</span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
+Updated  <time datetime="2026-02-09T00:00:00.000Z"> Feb 8, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <p>本指南将详细介绍如何在一台 Linux 服务器上安装和配置 OpenVPN，并生成两个客户端的配置文件，使这两个客户端连接后可以互相访问。</p>
+<h2 id="目录">目录</h2>
+<ol>
+<li><a href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">准备工作</a></li>
+<li><a href="#2-%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%AE%89%E8%A3%85-openvpn-%E5%92%8C-easy-rsa">第一步：安装 OpenVPN 和 Easy-RSA</a></li>
+<li><a href="#3-%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E8%AE%BE%E7%BD%AE%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84-ca-%E5%8F%8A%E8%AF%81%E4%B9%A6">第二步：设置证书颁发机构 (CA) 及证书</a></li>
+<li><a href="#4-%E7%AC%AC%E4%B8%89%E6%AD%A5-%E9%85%8D%E7%BD%AE-openvpn-%E6%9C%8D%E5%8A%A1%E5%99%A8">第三步：配置 OpenVPN 服务器</a></li>
+<li><a href="#5-%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E4%B8%8E%E9%98%B2%E7%81%AB%E5%A2%99">第四步：配置服务器网络与防火墙</a></li>
+<li><a href="#6-%E7%AC%AC%E4%BA%94%E6%AD%A5-%E5%90%AF%E5%8A%A8%E5%B9%B6%E9%AA%8C%E8%AF%81-openvpn-%E6%9C%8D%E5%8A%A1">第五步：启动并验证 OpenVPN 服务</a></li>
+<li><a href="#7-%E7%AC%AC%E5%85%AD%E6%AD%A5-%E5%88%9B%E5%BB%BA%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">第六步：创建客户端配置文件</a></li>
+<li><a href="#8-%E7%AC%AC%E4%B8%83%E6%AD%A5-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%B5%8B%E8%AF%95">第七步：客户端连接与测试</a></li>
+</ol>
+<h2 id="1-准备工作">1. 准备工作</h2>
+<ul>
+<li><strong>一台服务器</strong>：拥有公网 IP，建议使用 Debian 11/12 或 Ubuntu 20.04/22.04。</li>
+<li><strong>Root 权限</strong>：拥有服务器的 <code>root</code> 或 <code>sudo</code> 权限。</li>
+<li><strong>两台客户端设备</strong>：例如两台 PC 或笔记本电脑。</li>
+</ul>
+<h2 id="2-第一步安装-openvpn-和-easy-rsa">2. 第一步：安装 OpenVPN 和 Easy-RSA</h2>
+<p>首先，更新系统并安装必要的软件包。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 更新软件包列表</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> update</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 安装 OpenVPN 和 Easy-RSA</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> openvpn</span><span style="color:#9ECBFF"> easy-rsa</span><span style="color:#79B8FF"> -y</span></span></code></pre>
+<h2 id="3-第二步设置证书颁发机构-ca-及证书">3. 第二步：设置证书颁发机构 (CA) 及证书</h2>
+<p>我们将使用 Easy-RSA 来创建和管理 OpenVPN 所需的 TLS 证书。</p>
+<h3 id="31-初始化-easy-rsa-环境">3.1 初始化 Easy-RSA 环境</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 创建一个工作目录</span></span>
+<span class="line"><span style="color:#B392F0">mkdir</span><span style="color:#9ECBFF"> ~/easy-rsa</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 将 Easy-RSA 脚本链接到工作目录</span></span>
+<span class="line"><span style="color:#B392F0">ln</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> /usr/share/easy-rsa/</span><span style="color:#79B8FF">*</span><span style="color:#9ECBFF"> ~/easy-rsa/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 设置安全权限</span></span>
+<span class="line"><span style="color:#B392F0">chmod</span><span style="color:#79B8FF"> 700</span><span style="color:#9ECBFF"> ~/easy-rsa</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 进入工作目录</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> ~/easy-rsa</span></span></code></pre>
+<h3 id="32-创建公钥基础设施-pki-和-ca">3.2 创建公钥基础设施 (PKI) 和 CA</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 初始化 PKI</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> init-pki</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 构建 CA 证书（nopass 选项表示不加密 CA 密钥）</span></span>
+<span class="line"><span style="color:#6A737D"># 系统会提示输入一个通用名称(Common Name)，直接回车即可</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> build-ca</span><span style="color:#9ECBFF"> nopass</span></span></code></pre>
+<h3 id="33-生成服务器证书和密钥">3.3 生成服务器证书和密钥</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 1. 生成服务器证书请求（同样，直接回车使用默认名 server）</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> gen-req</span><span style="color:#9ECBFF"> server</span><span style="color:#9ECBFF"> nopass</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 2. 签署服务器证书（需要输入 "yes" 确认）</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> sign-req</span><span style="color:#9ECBFF"> server</span><span style="color:#9ECBFF"> server</span></span></code></pre>
+<h3 id="34-生成客户端证书和密钥">3.4 生成客户端证书和密钥</h3>
+<p>为每个需要连接的客户端生成唯一的证书。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 为 client1 生成证书</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> gen-req</span><span style="color:#9ECBFF"> client1</span><span style="color:#9ECBFF"> nopass</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> sign-req</span><span style="color:#9ECBFF"> client</span><span style="color:#9ECBFF"> client1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 为 client2 生成证书</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> gen-req</span><span style="color:#9ECBFF"> client2</span><span style="color:#9ECBFF"> nopass</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> sign-req</span><span style="color:#9ECBFF"> client</span><span style="color:#9ECBFF"> client2</span></span></code></pre>
+<h3 id="35-生成加密相关参数">3.5 生成加密相关参数</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 生成 Diffie-Hellman 参数，用于密钥交换</span></span>
+<span class="line"><span style="color:#B392F0">./easyrsa</span><span style="color:#9ECBFF"> gen-dh</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 生成 HMAC 签名，防止 DoS 攻击</span></span>
+<span class="line"><span style="color:#B392F0">openvpn</span><span style="color:#79B8FF"> --genkey</span><span style="color:#79B8FF"> --secret</span><span style="color:#9ECBFF"> pki/ta.key</span></span></code></pre>
+<h3 id="36-将文件复制到-openvpn-目录">3.6 将文件复制到 OpenVPN 目录</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 将所有必需的服务器端文件复制到 /etc/openvpn/</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> cp</span><span style="color:#9ECBFF"> pki/ca.crt</span><span style="color:#9ECBFF"> /etc/openvpn/</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> cp</span><span style="color:#9ECBFF"> pki/issued/server.crt</span><span style="color:#9ECBFF"> /etc/openvpn/</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> cp</span><span style="color:#9ECBFF"> pki/private/server.key</span><span style="color:#9ECBFF"> /etc/openvpn/</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> cp</span><span style="color:#9ECBFF"> pki/dh.pem</span><span style="color:#9ECBFF"> /etc/openvpn/</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> cp</span><span style="color:#9ECBFF"> pki/ta.key</span><span style="color:#9ECBFF"> /etc/openvpn/</span></span></code></pre>
+<h2 id="4-第三步配置-openvpn-服务器">4. 第三步：配置 OpenVPN 服务器</h2>
+<p>我们将创建一个 <code>server.conf</code> 文件来定义服务器的行为。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 创建并编辑服务器配置文件</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> nano</span><span style="color:#9ECBFF"> /etc/openvpn/server.conf</span></span></code></pre>
+<p>将以下内容<strong>完整复制</strong>到 <code>server.conf</code> 文件中：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="properties"><code><span class="line"><span style="color:#6A737D"># 端口和协议</span></span>
+<span class="line"><span style="color:#E1E4E8">port 1194</span></span>
+<span class="line"><span style="color:#E1E4E8">proto udp</span></span>
+<span class="line"><span style="color:#E1E4E8">dev tun</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 证书和密钥路径</span></span>
+<span class="line"><span style="color:#E1E4E8">ca ca.crt</span></span>
+<span class="line"><span style="color:#E1E4E8">cert server.crt</span></span>
+<span class="line"><span style="color:#E1E4E8">key server.key</span></span>
+<span class="line"><span style="color:#E1E4E8">dh dh.pem</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># VPN 子网配置</span></span>
+<span class="line"><span style="color:#E1E4E8">server 10.8.0.0 255.255.255.0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 将路由推送到客户端，使其可以访问其他客户端</span></span>
+<span class="line"><span style="color:#E1E4E8">push </span><span style="color:#9ECBFF">"route 10.8.0.0 255.255.255.0"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 关键：允许客户端之间互相通信</span></span>
+<span class="line"><span style="color:#E1E4E8">client-to-client</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 保持连接</span></span>
+<span class="line"><span style="color:#E1E4E8">keepalive 10 120</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 加密配置</span></span>
+<span class="line"><span style="color:#E1E4E8">cipher AES-256-GCM</span></span>
+<span class="line"><span style="color:#E1E4E8">auth SHA256</span></span>
+<span class="line"><span style="color:#E1E4E8">tls-auth ta.key 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 权限和持久化</span></span>
+<span class="line"><span style="color:#E1E4E8">user nobody</span></span>
+<span class="line"><span style="color:#E1E4E8">group nogroup</span></span>
+<span class="line"><span style="color:#E1E4E8">persist-key</span></span>
+<span class="line"><span style="color:#E1E4E8">persist-tun</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 日志配置</span></span>
+<span class="line"><span style="color:#E1E4E8">status /var/log/openvpn/openvpn-status.log</span></span>
+<span class="line"><span style="color:#E1E4E8">log-append /var/log/openvpn/openvpn.log</span></span>
+<span class="line"><span style="color:#E1E4E8">verb 3</span></span>
+<span class="line"><span style="color:#E1E4E8">```> **注意**: 创建日志目录以避免启动失败。</span></span>
+<span class="line"><span style="color:#E1E4E8">> ```bash</span></span>
+<span class="line"><span style="color:#E1E4E8">> sudo mkdir -p /var/log/openvpn</span></span>
+<span class="line"><span style="color:#E1E4E8">> ```</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">## 5. 第四步：配置服务器网络与防火墙</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">### 5.1 开启 IP 转发</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">```bash</span></span>
+<span class="line"><span style="color:#6A737D"># 编辑 sysctl 配置文件</span></span>
+<span class="line"><span style="color:#E1E4E8">sudo nano /etc/sysctl.conf</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 找到并取消下面这行的注释（删除前面的 #）</span></span>
+<span class="line"><span style="color:#6A737D"># net.ipv4.ip_forward=1</span></span>
+<span class="line"><span style="color:#F97583">net.ipv4.ip_forward</span><span style="color:#E1E4E8">=1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 保存文件后，应用更改</span></span>
+<span class="line"><span style="color:#E1E4E8">sudo sysctl -p</span></span></code></pre>
+<h3 id="52-配置防火墙-ufw">5.2 配置防火墙 (UFW)</h3>
+<blockquote>
+<p><strong>警告</strong>: 在启用防火墙前，请确保已允许 SSH 端口，否则可能会断开与服务器的连接。<br>
+<code>sudo ufw allow OpenSSH</code></p>
+</blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 1. 允许 OpenVPN 默认端口</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> ufw</span><span style="color:#9ECBFF"> allow</span><span style="color:#9ECBFF"> 1194/udp</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 2. 设置默认转发策略</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> nano</span><span style="color:#9ECBFF"> /etc/default/ufw</span></span>
+<span class="line"><span style="color:#6A737D"># 将 DEFAULT_FORWARD_POLICY 从 "DROP" 修改为 "ACCEPT"</span></span>
+<span class="line"><span style="color:#E1E4E8">DEFAULT_FORWARD_POLICY</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"ACCEPT"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 3. 添加 NAT 转发规则</span></span>
+<span class="line"><span style="color:#6A737D"># 注意：将 eth0 替换为你的服务器公网网卡名称（可通过 ip a 命令查看）</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> nano</span><span style="color:#9ECBFF"> /etc/ufw/before.rules</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 在文件顶部的 *filter 之前，添加以下内容</span></span>
+<span class="line"><span style="color:#F97583">*</span><span style="color:#E1E4E8">nat</span></span>
+<span class="line"><span style="color:#B392F0">:POSTROUTING</span><span style="color:#9ECBFF"> ACCEPT</span><span style="color:#E1E4E8"> [0:0]</span></span>
+<span class="line"><span style="color:#B392F0">-A</span><span style="color:#9ECBFF"> POSTROUTING</span><span style="color:#79B8FF"> -s</span><span style="color:#9ECBFF"> 10.8.0.0/24</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> eth0</span><span style="color:#79B8FF"> -j</span><span style="color:#9ECBFF"> MASQUERADE</span></span>
+<span class="line"><span style="color:#B392F0">COMMIT</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 4. 启用防火墙</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> ufw</span><span style="color:#9ECBFF"> enable</span></span></code></pre>
+<h2 id="6-第五步启动并验证-openvpn-服务">6. 第五步：启动并验证 OpenVPN 服务</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 启动 OpenVPN 服务</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> systemctl</span><span style="color:#9ECBFF"> start</span><span style="color:#9ECBFF"> openvpn@server</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 设置开机自启</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> systemctl</span><span style="color:#9ECBFF"> enable</span><span style="color:#9ECBFF"> openvpn@server</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 检查服务状态</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> systemctl</span><span style="color:#9ECBFF"> status</span><span style="color:#9ECBFF"> openvpn@server</span></span></code></pre>
+<p>如果状态显示 <code>active (running)</code>，则表示服务器端已成功启动。</p>
+<h2 id="7-第六步创建客户端配置文件">7. 第六步：创建客户端配置文件</h2>
+<p>为了方便，我们将所有证书和密钥嵌入到一个 <code>.ovpn</code> 文件中。</p>
+<h3 id="71-创建基础配置文件">7.1 创建基础配置文件</h3>
+<p>在服务器上创建一个基础配置文件 <code>client.conf</code>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 在主目录下创建一个临时目录</span></span>
+<span class="line"><span style="color:#B392F0">mkdir</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> ~/client-configs/files</span></span>
+<span class="line"><span style="color:#B392F0">chmod</span><span style="color:#79B8FF"> 700</span><span style="color:#9ECBFF"> ~/client-configs</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 创建基础配置文件</span></span>
+<span class="line"><span style="color:#B392F0">nano</span><span style="color:#9ECBFF"> ~/client-configs/base.conf</span></span></code></pre>
+<p>将以下内容粘贴到 <code>base.conf</code> 文件中，<strong>将 <code>&#x3C;你的服务器公网IP></code> 替换为实际 IP</strong>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="properties"><code><span class="line"><span style="color:#E1E4E8">client</span></span>
+<span class="line"><span style="color:#E1E4E8">dev tun</span></span>
+<span class="line"><span style="color:#E1E4E8">proto udp</span></span>
+<span class="line"><span style="color:#E1E4E8">remote &#x3C;你的服务器公网IP> 1194</span></span>
+<span class="line"><span style="color:#E1E4E8">resolv-retry infinite</span></span>
+<span class="line"><span style="color:#E1E4E8">nobind</span></span>
+<span class="line"><span style="color:#E1E4E8">persist-key</span></span>
+<span class="line"><span style="color:#E1E4E8">persist-tun</span></span>
+<span class="line"><span style="color:#E1E4E8">remote-cert-tls server</span></span>
+<span class="line"><span style="color:#E1E4E8">cipher AES-256-GCM</span></span>
+<span class="line"><span style="color:#E1E4E8">auth SHA256</span></span>
+<span class="line"><span style="color:#E1E4E8">key-direction 1</span></span>
+<span class="line"><span style="color:#E1E4E8">verb 3</span></span></code></pre>
+<h3 id="72-编写脚本自动生成-ovpn-文件">7.2 编写脚本自动生成 <code>.ovpn</code> 文件</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 创建一个脚本文件</span></span>
+<span class="line"><span style="color:#B392F0">nano</span><span style="color:#9ECBFF"> ~/client-configs/make_config.sh</span></span></code></pre>
+<p>将以下脚本内容粘贴进去：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#!/bin/bash</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 第一个参数是客户端名称，例如 client1</span></span>
+<span class="line"><span style="color:#E1E4E8">CLIENT</span><span style="color:#F97583">=</span><span style="color:#FFAB70">$1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 基础配置文件路径</span></span>
+<span class="line"><span style="color:#E1E4E8">BASE_CONFIG</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">~/client-configs/base.conf</span></span>
+<span class="line"><span style="color:#6A737D"># Easy-RSA 工作目录</span></span>
+<span class="line"><span style="color:#E1E4E8">EASYRSA_DIR</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">~/easy-rsa</span></span>
+<span class="line"><span style="color:#6A737D"># 输出目录</span></span>
+<span class="line"><span style="color:#E1E4E8">OUTPUT_DIR</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">~/client-configs/files</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 检查客户端名称是否提供</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> [ </span><span style="color:#F97583">-z</span><span style="color:#9ECBFF"> "</span><span style="color:#E1E4E8">$CLIENT</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8"> ]; </span><span style="color:#F97583">then</span></span>
+<span class="line"><span style="color:#79B8FF">    echo</span><span style="color:#9ECBFF"> "Usage: </span><span style="color:#79B8FF">$0</span><span style="color:#9ECBFF"> &#x3C;client-name>"</span></span>
+<span class="line"><span style="color:#79B8FF">    exit</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#F97583">fi</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 生成完整的 .ovpn 文件</span></span>
+<span class="line"><span style="color:#B392F0">cat</span><span style="color:#E1E4E8"> ${BASE_CONFIG} </span><span style="color:#79B8FF">\</span></span>
+<span class="line"><span style="color:#9ECBFF">    &#x3C;(</span><span style="color:#79B8FF">echo</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> '&#x3C;ca>')</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#E1E4E8">    ${EASYRSA_DIR}</span><span style="color:#9ECBFF">/pki/ca.crt</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">    &#x3C;(</span><span style="color:#79B8FF">echo</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> '&#x3C;/ca>\n&#x3C;cert>')</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#E1E4E8">    ${EASYRSA_DIR}</span><span style="color:#9ECBFF">/pki/issued/</span><span style="color:#E1E4E8">${CLIENT}</span><span style="color:#9ECBFF">.crt</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">    &#x3C;(</span><span style="color:#79B8FF">echo</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> '&#x3C;/cert>\n&#x3C;key>')</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#E1E4E8">    ${EASYRSA_DIR}</span><span style="color:#9ECBFF">/pki/private/</span><span style="color:#E1E4E8">${CLIENT}</span><span style="color:#9ECBFF">.key</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">    &#x3C;(</span><span style="color:#79B8FF">echo</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> '&#x3C;/key>\n&#x3C;tls-auth>')</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#E1E4E8">    ${EASYRSA_DIR}</span><span style="color:#9ECBFF">/pki/ta.key</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">    &#x3C;(</span><span style="color:#79B8FF">echo</span><span style="color:#79B8FF"> -e</span><span style="color:#9ECBFF"> '&#x3C;/tls-auth>')</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#F97583">    ></span><span style="color:#E1E4E8"> ${OUTPUT_DIR}</span><span style="color:#9ECBFF">/</span><span style="color:#E1E4E8">${CLIENT}</span><span style="color:#9ECBFF">.ovpn</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">echo</span><span style="color:#9ECBFF"> "Generated config file: ${</span><span style="color:#E1E4E8">OUTPUT_DIR</span><span style="color:#9ECBFF">}/${</span><span style="color:#E1E4E8">CLIENT</span><span style="color:#9ECBFF">}.ovpn"</span></span></code></pre>
+<h3 id="73-生成两个客户端的配置文件">7.3 生成两个客户端的配置文件</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 给脚本执行权限</span></span>
+<span class="line"><span style="color:#B392F0">chmod</span><span style="color:#9ECBFF"> +x</span><span style="color:#9ECBFF"> ~/client-configs/make_config.sh</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 生成 client1.ovpn</span></span>
+<span class="line"><span style="color:#F97583">~</span><span style="color:#E1E4E8">/client-configs/make_config.sh client1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 生成 client2.ovpn</span></span>
+<span class="line"><span style="color:#F97583">~</span><span style="color:#E1E4E8">/client-configs/make_config.sh client2</span></span></code></pre>
+<p>现在，<code>client1.ovpn</code> 和 <code>client2.ovpn</code> 文件已生成在 <code>~/client-configs/files</code> 目录下。</p>
+<h2 id="8-第七步客户端连接与测试">8. 第七步：客户端连接与测试</h2>
+<ol>
+<li>
+<p><strong>下载配置文件</strong>：使用 <code>scp</code> 或 <code>sftp</code> 等工具，将 <code>client1.ovpn</code> 和 <code>client2.ovpn</code> 分别安全地下载到两台客户端设备上。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># 例如，在你的本地电脑上执行</span></span>
+<span class="line"><span style="color:#B392F0">scp</span><span style="color:#9ECBFF"> your_user@</span><span style="color:#F97583">&#x3C;</span><span style="color:#9ECBFF">你的服务器公网I</span><span style="color:#E1E4E8">P</span><span style="color:#F97583">></span><span style="color:#9ECBFF">:~/client-configs/files/client1.ovpn</span><span style="color:#9ECBFF"> .</span></span>
+<span class="line"><span style="color:#B392F0">scp</span><span style="color:#9ECBFF"> your_user@</span><span style="color:#F97583">&#x3C;</span><span style="color:#9ECBFF">你的服务器公网I</span><span style="color:#E1E4E8">P</span><span style="color:#F97583">></span><span style="color:#9ECBFF">:~/client-configs/files/client2.ovpn</span><span style="color:#9ECBFF"> .</span></span></code></pre>
+</li>
+<li>
+<p><strong>安装客户端软件</strong>：</p>
+<ul>
+<li><strong>Windows</strong>: <a href="https://openvpn.net/client-connect-v3-for-windows/">OpenVPN Connect</a> 或 Community Client。</li>
+<li><strong>macOS</strong>: <a href="https://tunnelblick.net/">Tunnelblick</a>。</li>
+<li><strong>Linux</strong>: 使用 <code>sudo apt install openvpn</code> 或 <code>sudo yum install openvpn</code> 安装，然后通过 <code>sudo openvpn --config client1.ovpn</code> 连接。</li>
+</ul>
+</li>
+<li>
+<p><strong>导入并连接</strong>：<br>
+在两台客户端上分别导入对应的 <code>.ovpn</code> 配置文件并连接。</p>
+</li>
+<li>
+<p><strong>测试互通</strong>：</p>
+<ul>
+<li>连接成功后，<code>client1</code> 会被分配 IP <code>10.8.0.2</code>，<code>client2</code> 会被分配 <code>10.8.0.3</code>（通常情况下）。</li>
+<li>在 <code>client1</code> 的命令行/终端上，ping <code>client2</code>：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ping</span><span style="color:#79B8FF"> 10.8.0.3</span></span></code></pre>
+</li>
+<li>在 <code>client2</code> 的命令行/终端上，ping <code>client1</code>：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ping</span><span style="color:#79B8FF"> 10.8.0.2</span></span></code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p>如果两边都能 ping 通，则说明配置成功，两台主机已通过 OpenVPN 服务器实现了网络互通。</p>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=OpenVPN%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%EF%BC%88%E5%8F%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BA%92%E9%80%9A%EF%BC%89&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Finfra%2F%25E6%259B%25B4%25E6%2596%25B0%25E8%25BD%25AF%25E4%25BB%25B6%25E5%258C%2585%25E5%2588%2597%25E8%25A1%25A8%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/infra/%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%97%E8%A1%A8/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+Related Posts
+</h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/infra/在-iwctl-交互模式下执行/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch Linux 从零安装（UEFI + iwctl）</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>一份面向新手的 Arch Linux 安装实操笔记，覆盖 UEFI 启动、分区思路、iwctl 连接 Wi-Fi 与常见故障排查。</p></a><a href="/blog/infra/创建目录-如果不存在/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>GPG 密钥生成与 Git 签名配置</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>从安装 GPG 到生成密钥、配置 Git 签名与上传公钥的完整步骤。</p></a><a href="/blog/infra/bandwidth/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>云服务器带宽与流量区别</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>解释带宽上限与流量上限的差异，帮助按业务峰值和成本选择合适配置。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
+Comments
+</h3> <div class="giscus-wrapper" data-astro-cid-jvxsf75u> <script src="https://giscus.app/client.js" data-repo="LosFurina/LosFurina.github.io" data-repo-id="R_kgDOQ_gmWQ" data-category="General" data-category-id="DIC_kwDOQ_gmWc4C2A9-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </section>  <script type="module">function s(){const e=document.documentElement.getAttribute("data-theme"),t=document.querySelector("iframe.giscus-frame");if(t){const i=e==="dark"?"dark":"light";t.contentWindow?.postMessage({giscus:{setConfig:{theme:i}}},"https://giscus.app")}}const n=new MutationObserver(e=>{e.forEach(t=>{t.attributeName==="data-theme"&&s()})});n.observe(document.documentElement,{attributes:!0});window.addEventListener("message",e=>{e.origin==="https://giscus.app"&&s()});</script> </footer> </article> </main> <aside class="right-sidebar" data-astro-cid-bvzihdzo> <!-- Future content --> </aside> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="copyright" data-astro-cid-sz7xmlte>
+&copy; 2026 Wayne Li. All rights reserved.
+</p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" title="X (Twitter)" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:me@liweijun.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path> <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline> </svg> </a> <a href="/rss.xml" title="RSS Feed" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>RSS Feed</span> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> <p class="footer-note" data-astro-cid-sz7xmlte>
+Built with <a href="https://astro.build" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Astro</a> </p> </div> </footer>  </body></html>

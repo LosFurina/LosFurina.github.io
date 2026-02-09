@@ -3,7 +3,6 @@ title: "阿里云 ECS 购买与初始化配置"
 description: "以阿里云 ECS 为例，记录实例选型、系统配置与 SSH 首次登录准备。"
 pubDate: "2025-01-06"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Purchase Cloud Computer.md"

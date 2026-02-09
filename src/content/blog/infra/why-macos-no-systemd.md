@@ -3,7 +3,6 @@ title: "为什么 macOS 不使用 systemd"
 description: "对比 macOS 的 launchd/log 与 Linux systemd/journalctl 的设计差异。"
 pubDate: "2025-05-23"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Why MacOS no systemd.md"

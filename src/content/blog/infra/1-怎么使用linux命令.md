@@ -3,7 +3,6 @@ title: "Linux 命令入门：帮助文档与上手方法"
 description: "介绍通过 man 等方式快速理解 Linux 命令参数，降低日常运维操作门槛。"
 pubDate: "2025-11-21"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/从0开始搭建你的服务/1. 预备知识.md"

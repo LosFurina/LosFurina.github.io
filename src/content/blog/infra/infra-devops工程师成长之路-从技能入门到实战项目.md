@@ -3,7 +3,6 @@ title: "Infra/DevOps 工程师成长路线：从基础到实战"
 description: "梳理 Infra/DevOps 的技能地图、面试考点与项目实践方向。"
 pubDate: "2025-08-26"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Infra-DevOps工程师成长之路：从技能入门到实战项目.md"

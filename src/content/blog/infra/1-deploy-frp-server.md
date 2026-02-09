@@ -3,7 +3,6 @@ title: "Deploy FRP Server on Linux"
 description: "记录 FRP 服务端部署流程，包括安装、配置、systemd 托管与基础连通性验证。"
 pubDate: "2025-11-21"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/How to penetrate NAT via FRP.md"

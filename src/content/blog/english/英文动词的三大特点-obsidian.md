@@ -3,7 +3,6 @@ title: "英文动词三要素：时态、语气、动词类别"
 description: "提炼英文动词学习框架，帮助建立时态、语气与助动词系统之间的关联。"
 pubDate: "2025-01-16"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/动词.md"

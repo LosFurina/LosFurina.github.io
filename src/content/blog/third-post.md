@@ -3,7 +3,6 @@ title: "Template Archive: Third Post"
 description: "Archived template article kept for Astro content pipeline testing."
 pubDate: 'Jul 22 2022'
 heroImage: '../../assets/blog-placeholder-2.jpg'
-draft: true
 category: "misc"
 tags: ["template"]
 ---

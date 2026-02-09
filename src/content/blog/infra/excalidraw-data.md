@@ -3,7 +3,6 @@ title: "Excalidraw Source: Git Branch Diagram"
 description: "Excalidraw 原始绘图数据文件，用于保存 Git 分支示意图。"
 pubDate: "2026-01-02"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Git/Git Branch View.md"

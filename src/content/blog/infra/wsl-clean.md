@@ -3,7 +3,6 @@ title: "WSL 磁盘清理指南"
 description: "按风险分级整理 WSL 空间清理方法，覆盖 apt、缓存、日志与镜像瘦身。"
 pubDate: "2025-11-05"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/WSl clean.md"

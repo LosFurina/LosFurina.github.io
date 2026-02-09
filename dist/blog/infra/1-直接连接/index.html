@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><!-- Theme Initialization Script --><script>
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
+
+	if (theme === "dark") {
+		document.documentElement.setAttribute("data-theme", "dark");
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.classList.remove("dark");
+	}
+
+	window.localStorage.setItem("theme", theme);
+</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Wayne" href="https://blog.liweijun.com/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://blog.liweijun.com/blog/infra/1-%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5/"><!-- Primary Meta Tags --><title>SSH 直接连接与配置速查</title><meta name="title" content="SSH 直接连接与配置速查"><meta name="description" content="介绍 SSH 直连命令、端口指定与 ~/.ssh/config 常用字段，适合远程登录入门。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.liweijun.com/blog/infra/1-%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5/"><meta property="og:title" content="SSH 直接连接与配置速查"><meta property="og:description" content="介绍 SSH 直连命令、端口指定与 ~/.ssh/config 常用字段，适合远程登录入门。"><meta property="og:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.liweijun.com/blog/infra/1-%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5/"><meta property="twitter:title" content="SSH 直接连接与配置速查"><meta property="twitter:description" content="介绍 SSH 直连命令、端口指定与 ~/.ssh/config 常用字段，适合远程登录入门。"><meta property="twitter:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Wayne","description":"DevOps and infrastructure engineering notes, projects, and practical automation experiments by Wayne Li.","url":"https://blog.liweijun.com/","inLanguage":"en"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Wayne Li","url":"https://blog.liweijun.com/","email":"mailto:me@liweijun.com","sameAs":["https://github.com/LosFurina","https://x.com/MicroNahida"],"jobTitle":"DevOps / Infrastructure Engineer"}</script><link rel="stylesheet" href="/_astro/index.DCFK0IPC.css">
+<link rel="stylesheet" href="/_astro/about.DVvCJqHw.css">
+<style>a[data-astro-cid-eimmu3lg]{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .75rem;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--header-text, rgb(var(--gray-dark)));border-radius:999px;transition:color .2s ease,background .2s ease;position:relative}a[data-astro-cid-eimmu3lg]:hover{background:var(--header-hover, rgba(179, 106, 74, .08));color:var(--header-text-strong, rgb(var(--gray-dark)))}a[data-astro-cid-eimmu3lg]:focus-visible{outline:2px solid var(--header-accent, #b36a4a);outline-offset:2px}a[data-astro-cid-eimmu3lg].active{color:var(--header-accent, #b36a4a)}a[data-astro-cid-eimmu3lg].active:after{content:"";position:absolute;left:50%;bottom:4px;width:4px;height:4px;margin-left:-2px;border-radius:999px;background:var(--header-accent, #b36a4a)}.nav-icon[data-astro-cid-eimmu3lg]{display:inline-flex;width:16px;height:16px}.nav-icon[data-astro-cid-eimmu3lg] svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}@media(max-width:720px){a[data-astro-cid-eimmu3lg]{width:100%;justify-content:flex-start;padding:.6rem .9rem}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <div class="nav-left" data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Wayne</a></h2> </div> <div class="internal-links" id="mobileMenu" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M3 11.5L12 4l9 7.5" data-astro-cid-3ef6ksr2></path> <path d="M6.5 10.5V20h11V10.5" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Home
+</span> </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="6" y="4.5" width="12" height="15" rx="2" data-astro-cid-3ef6ksr2></rect> <path d="M9 9h6" data-astro-cid-3ef6ksr2></path> <path d="M9 13h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Blog
+</span> </a>  <a href="/projects" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="4" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="4" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Projects
+</span> </a>  <a href="/resume" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M14 3.5V8h4" data-astro-cid-3ef6ksr2></path> <path d="M9 12h6" data-astro-cid-3ef6ksr2></path> <path d="M9 16h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Resume
+</span> </a>  <a href="/contact" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M4 8l8 6 8-6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Contact
+</span> </a>  <!-- Tools Dropdown --> <div class="dropdown" id="toolsDropdown" data-astro-cid-3ef6ksr2> <button class="dropdown-trigger" id="toolsBtn" data-astro-cid-3ef6ksr2>
+More
+<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="dropdown-menu" id="toolsMenu" data-astro-cid-3ef6ksr2> <!-- 本站页面 --> <a href="/about" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>👤</span>
+About
+</a> <a href="/uses" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🛠️</span>
+Uses
+</a> <a href="/now" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>⏰</span>
+Now
+</a> <a href="/bookmarks" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔖</span>
+Bookmarks
+</a> <a href="/guestbook" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📝</span>
+Guestbook
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <a href="/keys" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔐</span>
+GPG Keys
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
+GitHub
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#1-直接连接" class="toc-link" data-astro-cid-xvrfupwn>1. 直接连接</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#2-ssh客户端" class="toc-link" data-astro-cid-xvrfupwn>2. SSH客户端</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#21-finalshell" class="toc-link" data-astro-cid-xvrfupwn>2.1. FinalShell</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#22-windterm" class="toc-link" data-astro-cid-xvrfupwn>2.2. WindTerm</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#23-vs-code" class="toc-link" data-astro-cid-xvrfupwn>2.3. VS Code</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#3-配置公私钥" class="toc-link" data-astro-cid-xvrfupwn>3. 配置公私钥</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#公私钥登录-vs-密码登录到底差在哪" class="toc-link" data-astro-cid-xvrfupwn>公私钥登录 vs 密码登录：到底差在哪？</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-验证方式不一样原理差别" class="toc-link" data-astro-cid-xvrfupwn>1. 验证方式不一样（原理差别）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-安全性差距巨大" class="toc-link" data-astro-cid-xvrfupwn>2. 安全性差距巨大</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-使用体验的区别" class="toc-link" data-astro-cid-xvrfupwn>3. 使用体验的区别</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-管理上的区别" class="toc-link" data-astro-cid-xvrfupwn>4. 管理上的区别</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-常见实际使用场景" class="toc-link" data-astro-cid-xvrfupwn>5. 常见实际使用场景</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#基础配置" class="toc-link" data-astro-cid-xvrfupwn>基础配置</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#4-ssh-进阶配置" class="toc-link" data-astro-cid-xvrfupwn>4. SSH 进阶配置</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#1-修改默认端口" class="toc-link" data-astro-cid-xvrfupwn>1. 修改默认端口</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#2-配置防火墙" class="toc-link" data-astro-cid-xvrfupwn>2. 配置防火墙</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>SSH 直接连接与配置速查</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-11-21T00:00:00.000Z"> Nov 20, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 5 min read
+</span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
+Updated  <time datetime="2026-02-09T00:00:00.000Z"> Feb 8, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="1-直接连接">1. 直接连接</h2>
+<p>主流的 Linux 发行版和 Windows 都自带了 ssh，因此<span style="color:red">绝大多数情况下</span>都可以直接使用。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">usage:</span><span style="color:#9ECBFF"> ssh</span><span style="color:#E1E4E8"> [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface] [-b bind_address]</span></span>
+<span class="line"><span style="color:#E1E4E8">           [-c cipher_spec] [-D [bind_address:]port] [-E log_file]</span></span>
+<span class="line"><span style="color:#E1E4E8">           [-e escape_char] [-F configfile] [-I pkcs11] [-i identity_file]</span></span>
+<span class="line"><span style="color:#E1E4E8">           [-J destination] [-L address] [-l login_name] [-m mac_spec]</span></span>
+<span class="line"><span style="color:#E1E4E8">           [-O ctl_cmd] [-o option] [-P tag] [-p port] [-R address]</span></span>
+<span class="line"><span style="color:#E1E4E8">           [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]</span></span>
+<span class="line"><span style="color:#B392F0">           destination</span><span style="color:#E1E4E8"> [command [argument </span><span style="color:#9ECBFF">...]]</span></span>
+<span class="line"><span style="color:#B392F0">       ssh</span><span style="color:#E1E4E8"> [-Q </span><span style="color:#9ECBFF">query_option]</span></span></code></pre>
+<p>有关 Linux 命令使用见：1. 预备知识</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ssh</span><span style="color:#E1E4E8"> [username]@[host ip or hostname]</span></span></code></pre>
+<p>这里<code>ssh</code>的默认端口是<code>22</code>，有一些VPS，云服务厂商会修改默认的ssh端口号，因此需要额外指定端口的<code>OPTION</code>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ssh</span><span style="color:#79B8FF"> -p</span><span style="color:#79B8FF"> 2222</span><span style="color:#E1E4E8"> [username]@[host ip or hostname]</span></span></code></pre>
+<p><strong>配置.ssh</strong></p>
+<p>懒惰的开发人员肯定不想每次连接服务器都要输入这么多命令，因此只需要简单配置一下<code>ssh</code>的配置文件，即可实现快速登陆。</p>
+<p>在 Windows 下，ssh 的配置文件在<code>C:\Users\{username}\.ssh\config</code></p>
+<p>在 Linux 下，ssh 的配置文件在<code>~/.ssh/config</code></p>
+<p>需要按照样板填入即可：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Host MacOS</span></span>
+<span class="line"><span>  HostName 192.168.1.237</span></span>
+<span class="line"><span>  User wayne</span></span>
+<span class="line"><span>  IdentityFile ~/.ssh/id_ed25519</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Host CC</span></span>
+<span class="line"><span>  HostName cc.example.com</span></span>
+<span class="line"><span>  User root</span></span>
+<span class="line"><span>  Port 10086</span></span></code></pre>
+<ul>
+<li><code>Host</code>: 主机名，可以自定义，目前相当于一个别名</li>
+<li><code>HostName</code>: 主机<code>ip</code>或<code>绑定主机 ip 的域名</code></li>
+<li><code>User</code>: 将要登陆的该主机上的用户，在 Linux 下一个系统可以拥有很多用户，此时要指定其中一个用户登陆</li>
+<li><code>IdentityFile</code>: 公私钥加密的私钥文件path</li>
+<li><code>Port</code>: 指定端口</li>
+</ul>
+<h2 id="2-ssh客户端">2. SSH客户端</h2>
+<p>在现如今，为了方便登陆和管理多个 <code>ssh</code> 连接，更推荐的办法还是使用工具。</p>
+<h2 id="21-finalshell">2.1. FinalShell</h2>
+<p><a href="https://www.hostbuf.com/">FinalShell下载官网</a></p>
+<p>跨三平台，使用 Java 编写，有内置付费功能，但付费功能用途不大，推荐新手使用。</p>
+<h2 id="22-windterm">2.2. WindTerm</h2>
+<p><a href="https://github.com/kingToolbox/WindTerm">GitHub官网</a></p>
+<p>对 Windows 高度适配的 Terminal 客户端，同样跨三平台，自定义功能多。</p>
+<h2 id="23-vs-code">2.3. VS Code</h2>
+<h2 id="3-配置公私钥">3. 配置公私钥</h2>
+<h2 id="公私钥登录-vs-密码登录到底差在哪">公私钥登录 vs 密码登录：到底差在哪？</h2>
+<h3 id="1-验证方式不一样原理差别">1. <strong>验证方式不一样（原理差别）</strong></h3>
+<h4 id="密码登录">密码登录</h4>
+<p>你连上服务器 → 服务器说“报暗号” → 你把密码发过去 → 服务器验证对不对。<br>
+整个过程就像：<br>
+<strong>“门卫问你密码，你直接说出来。门卫记得对照一下，是你就放你进来。”</strong></p>
+<p>缺点显而易见：<br>
+密码是<strong>传过去</strong>的，中途要是有人窃听、截包，理论上就可能被偷走。</p>
+<h4 id="公私钥登录">公私钥登录</h4>
+<p>你有一对钥匙：<strong>公钥（放服务器）+ 私钥（你自己保管）</strong>。<br>
+本质是个非对称加密：<br>
+你连上服务器 → 服务器给你出一道“只有私钥才能解”的题 → 你成功解出来 → 服务器确认你身份。<br>
+整个过程像：<br>
+<strong>“门卫给你一把奇怪的锁，你能用你自己的钥匙把它打开，就证明你就是房主。”</strong></p>
+<p>好处是：<br>
+你<strong>不会把钥匙（私钥）传出去</strong>，只展示你能“开锁”。<br>
+中间人截消息也没用。</p>
+<h3 id="2-安全性差距巨大">2. <strong>安全性差距巨大</strong></h3>
+<h4 id="密码登录-1">密码登录：</h4>
+<ul>
+<li>
+<p>密码强度不够容易被暴力破解（撞库、爆破）。</p>
+</li>
+<li>
+<p>密码可被钓鱼、窃听、键盘记录器偷走。</p>
+</li>
+<li>
+<p>很多人习惯多站点复用密码，风险更大。</p>
+</li>
+</ul>
+<h4 id="公私钥登录-1">公私钥登录：</h4>
+<ul>
+<li>
+<p>私钥长度巨大（Ed25519 或 4096-bit RSA），<strong>暴力破解基本不可能</strong>。</p>
+</li>
+<li>
+<p>私钥不会在网络上传输，拦截流量也没意义。</p>
+</li>
+<li>
+<p>可以设置私钥密码（passphrase），双保险。</p>
+</li>
+</ul>
+<p>一句话：<br>
+<strong>密码登录像用四位数密码锁门，公私钥登录像用银行金库级别的锁。</strong></p>
+<h3 id="3-使用体验的区别">3. <strong>使用体验的区别</strong></h3>
+<h4 id="密码登录-2">密码登录：</h4>
+<p>每次都得输密码，尤其 SSH 登录频繁时非常麻烦。</p>
+<h4 id="公私钥登录-2">公私钥登录：</h4>
+<ul>
+<li>
+<p>私钥在本地，一般不用输密码（除非设置了私钥 passphrase）。</p>
+</li>
+<li>
+<p><code>ssh-agent</code> 帮你记住密钥，一整天不用重复认证。</p>
+</li>
+</ul>
+<p>就像：<br>
+<strong>密码登录每次走大门都要“查身份证”，公私钥登录直接刷卡过闸。</strong></p>
+<h3 id="4-管理上的区别">4. <strong>管理上的区别</strong></h3>
+<h4 id="密码登录-3">密码登录</h4>
+<ul>
+<li>
+<p>多人共用一个帐号时，只能共用同一个密码。</p>
+</li>
+<li>
+<p>修改密码会影响所有人。</p>
+</li>
+<li>
+<p>不便于审计。</p>
+</li>
+</ul>
+<h4 id="公私钥登录-3">公私钥登录</h4>
+<ul>
+<li>
+<p>每个人一把自己的公钥 → 分发到服务器。</p>
+</li>
+<li>
+<p>某个人离职/撤销权限 → 直接删掉那个人的公钥即可。</p>
+</li>
+<li>
+<p>不影响其他人。</p>
+</li>
+<li>
+<p>更安全、可控。</p>
+</li>
+</ul>
+<p>这个区别超级关键，尤其多人维护服务器的时候。</p>
+<h3 id="5-常见实际使用场景">5. <strong>常见实际使用场景</strong></h3>
+<ul>
+<li>
+<p><strong>线上生产服务器</strong>：绝大多数会关闭密码登录，只允许公私钥。</p>
+</li>
+<li>
+<p><strong>Git（GitHub/GitLab）</strong>：默认也是公私钥。</p>
+</li>
+<li>
+<p><strong>自动化脚本/CI/CD</strong>：很难存密码，基本都是用 SSH Key。</p>
+</li>
+</ul>
+<h2 id="基础配置">基础配置</h2>
+<p>SSH 公私钥配置流程</p>
+<h2 id="4-ssh-进阶配置">4. SSH 进阶配置</h2>
+<h2 id="1-修改默认端口">1. 修改默认端口</h2>
+<h2 id="2-配置防火墙">2. 配置防火墙</h2>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=SSH%20%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5%E4%B8%8E%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Finfra%2F1-%25E7%259B%25B4%25E6%258E%25A5%25E8%25BF%259E%25E6%258E%25A5%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/infra/1-%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+Related Posts
+</h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/infra/在-iwctl-交互模式下执行/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch Linux 从零安装（UEFI + iwctl）</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>一份面向新手的 Arch Linux 安装实操笔记，覆盖 UEFI 启动、分区思路、iwctl 连接 Wi-Fi 与常见故障排查。</p></a><a href="/blog/infra/创建目录-如果不存在/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>GPG 密钥生成与 Git 签名配置</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>从安装 GPG 到生成密钥、配置 Git 签名与上传公钥的完整步骤。</p></a><a href="/blog/infra/bandwidth/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>云服务器带宽与流量区别</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>解释带宽上限与流量上限的差异，帮助按业务峰值和成本选择合适配置。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
+Comments
+</h3> <div class="giscus-wrapper" data-astro-cid-jvxsf75u> <script src="https://giscus.app/client.js" data-repo="LosFurina/LosFurina.github.io" data-repo-id="R_kgDOQ_gmWQ" data-category="General" data-category-id="DIC_kwDOQ_gmWc4C2A9-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </section>  <script type="module">function s(){const e=document.documentElement.getAttribute("data-theme"),t=document.querySelector("iframe.giscus-frame");if(t){const i=e==="dark"?"dark":"light";t.contentWindow?.postMessage({giscus:{setConfig:{theme:i}}},"https://giscus.app")}}const n=new MutationObserver(e=>{e.forEach(t=>{t.attributeName==="data-theme"&&s()})});n.observe(document.documentElement,{attributes:!0});window.addEventListener("message",e=>{e.origin==="https://giscus.app"&&s()});</script> </footer> </article> </main> <aside class="right-sidebar" data-astro-cid-bvzihdzo> <!-- Future content --> </aside> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="copyright" data-astro-cid-sz7xmlte>
+&copy; 2026 Wayne Li. All rights reserved.
+</p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" title="X (Twitter)" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:me@liweijun.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path> <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline> </svg> </a> <a href="/rss.xml" title="RSS Feed" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>RSS Feed</span> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> <p class="footer-note" data-astro-cid-sz7xmlte>
+Built with <a href="https://astro.build" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Astro</a> </p> </div> </footer>  </body></html>

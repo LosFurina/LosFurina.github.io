@@ -1,0 +1,2593 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><!-- Theme Initialization Script --><script>
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
+
+	if (theme === "dark") {
+		document.documentElement.setAttribute("data-theme", "dark");
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.classList.remove("dark");
+	}
+
+	window.localStorage.setItem("theme", theme);
+</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Wayne" href="https://blog.liweijun.com/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://blog.liweijun.com/blog/infra/%E5%9C%A8-iwctl-%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%89%A7%E8%A1%8C/"><!-- Primary Meta Tags --><title>Arch Linux 从零安装（UEFI + iwctl）</title><meta name="title" content="Arch Linux 从零安装（UEFI + iwctl）"><meta name="description" content="一份面向新手的 Arch Linux 安装实操笔记，覆盖 UEFI 启动、分区思路、iwctl 连接 Wi-Fi 与常见故障排查。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.liweijun.com/blog/infra/%E5%9C%A8-iwctl-%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%89%A7%E8%A1%8C/"><meta property="og:title" content="Arch Linux 从零安装（UEFI + iwctl）"><meta property="og:description" content="一份面向新手的 Arch Linux 安装实操笔记，覆盖 UEFI 启动、分区思路、iwctl 连接 Wi-Fi 与常见故障排查。"><meta property="og:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.liweijun.com/blog/infra/%E5%9C%A8-iwctl-%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%89%A7%E8%A1%8C/"><meta property="twitter:title" content="Arch Linux 从零安装（UEFI + iwctl）"><meta property="twitter:description" content="一份面向新手的 Arch Linux 安装实操笔记，覆盖 UEFI 启动、分区思路、iwctl 连接 Wi-Fi 与常见故障排查。"><meta property="twitter:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Wayne","description":"DevOps and infrastructure engineering notes, projects, and practical automation experiments by Wayne Li.","url":"https://blog.liweijun.com/","inLanguage":"en"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Wayne Li","url":"https://blog.liweijun.com/","email":"mailto:me@liweijun.com","sameAs":["https://github.com/LosFurina","https://x.com/MicroNahida"],"jobTitle":"DevOps / Infrastructure Engineer"}</script><link rel="stylesheet" href="/_astro/index.DCFK0IPC.css">
+<link rel="stylesheet" href="/_astro/about.DVvCJqHw.css">
+<style>a[data-astro-cid-eimmu3lg]{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .75rem;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--header-text, rgb(var(--gray-dark)));border-radius:999px;transition:color .2s ease,background .2s ease;position:relative}a[data-astro-cid-eimmu3lg]:hover{background:var(--header-hover, rgba(179, 106, 74, .08));color:var(--header-text-strong, rgb(var(--gray-dark)))}a[data-astro-cid-eimmu3lg]:focus-visible{outline:2px solid var(--header-accent, #b36a4a);outline-offset:2px}a[data-astro-cid-eimmu3lg].active{color:var(--header-accent, #b36a4a)}a[data-astro-cid-eimmu3lg].active:after{content:"";position:absolute;left:50%;bottom:4px;width:4px;height:4px;margin-left:-2px;border-radius:999px;background:var(--header-accent, #b36a4a)}.nav-icon[data-astro-cid-eimmu3lg]{display:inline-flex;width:16px;height:16px}.nav-icon[data-astro-cid-eimmu3lg] svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}@media(max-width:720px){a[data-astro-cid-eimmu3lg]{width:100%;justify-content:flex-start;padding:.6rem .9rem}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <div class="nav-left" data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Wayne</a></h2> </div> <div class="internal-links" id="mobileMenu" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M3 11.5L12 4l9 7.5" data-astro-cid-3ef6ksr2></path> <path d="M6.5 10.5V20h11V10.5" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Home
+</span> </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="6" y="4.5" width="12" height="15" rx="2" data-astro-cid-3ef6ksr2></rect> <path d="M9 9h6" data-astro-cid-3ef6ksr2></path> <path d="M9 13h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Blog
+</span> </a>  <a href="/projects" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="4" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="4" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Projects
+</span> </a>  <a href="/resume" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M14 3.5V8h4" data-astro-cid-3ef6ksr2></path> <path d="M9 12h6" data-astro-cid-3ef6ksr2></path> <path d="M9 16h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Resume
+</span> </a>  <a href="/contact" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M4 8l8 6 8-6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Contact
+</span> </a>  <!-- Tools Dropdown --> <div class="dropdown" id="toolsDropdown" data-astro-cid-3ef6ksr2> <button class="dropdown-trigger" id="toolsBtn" data-astro-cid-3ef6ksr2>
+More
+<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="dropdown-menu" id="toolsMenu" data-astro-cid-3ef6ksr2> <!-- 本站页面 --> <a href="/about" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>👤</span>
+About
+</a> <a href="/uses" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🛠️</span>
+Uses
+</a> <a href="/now" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>⏰</span>
+Now
+</a> <a href="/bookmarks" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔖</span>
+Bookmarks
+</a> <a href="/guestbook" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📝</span>
+Guestbook
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <a href="/keys" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔐</span>
+GPG Keys
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
+GitHub
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#1-准备与启动" class="toc-link" data-astro-cid-xvrfupwn>1. 准备与启动</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#2-环境检查与网络连接" class="toc-link" data-astro-cid-xvrfupwn>2. 环境检查与网络连接</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-验证启动模式-关键" class="toc-link" data-astro-cid-xvrfupwn>1. 验证启动模式 (关键)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-配置网络" class="toc-link" data-astro-cid-xvrfupwn>2. 配置网络</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-验证网络连通性" class="toc-link" data-astro-cid-xvrfupwn>3. 验证网络连通性</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-更新系统时间" class="toc-link" data-astro-cid-xvrfupwn>4. 更新系统时间</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#3-磁盘分区" class="toc-link" data-astro-cid-xvrfupwn>3. 磁盘分区</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-确认目标磁盘" class="toc-link" data-astro-cid-xvrfupwn>1. 确认目标磁盘</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-进入分区工具" class="toc-link" data-astro-cid-xvrfupwn>2. 进入分区工具</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-删除旧分区-如果有" class="toc-link" data-astro-cid-xvrfupwn>3. 删除旧分区 (如果有)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-创建新分区-严格按照顺序" class="toc-link" data-astro-cid-xvrfupwn>4. 创建新分区 (严格按照顺序)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-写入并退出" class="toc-link" data-astro-cid-xvrfupwn>5. 写入并退出</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#4-格式化与挂载" class="toc-link" data-astro-cid-xvrfupwn>4. 格式化与挂载。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-格式化-建立文件系统" class="toc-link" data-astro-cid-xvrfupwn>1. 格式化 (建立文件系统)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-挂载分区-顺序极重要" class="toc-link" data-astro-cid-xvrfupwn>2. 挂载分区 (顺序极重要)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-二次检查" class="toc-link" data-astro-cid-xvrfupwn>3. 二次检查</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#5-安装核心系统-base-system" class="toc-link" data-astro-cid-xvrfupwn>5. 安装核心系统 (Base System)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-优化下载源-镜像" class="toc-link" data-astro-cid-xvrfupwn>1. 优化下载源 (镜像)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-执行安装-pacstrap" class="toc-link" data-astro-cid-xvrfupwn>2. 执行安装 (Pacstrap)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-生成-fstab-文件" class="toc-link" data-astro-cid-xvrfupwn>3. 生成 Fstab 文件</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#6-系统内部配置-chroot" class="toc-link" data-astro-cid-xvrfupwn>6. 系统内部配置 (Chroot)。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-进入新系统-chroot" class="toc-link" data-astro-cid-xvrfupwn>1. 进入新系统 (Chroot)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-设置时区" class="toc-link" data-astro-cid-xvrfupwn>2. 设置时区</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-设置语言-locale" class="toc-link" data-astro-cid-xvrfupwn>3. 设置语言 (Locale)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-设置主机名-hostname" class="toc-link" data-astro-cid-xvrfupwn>4. 设置主机名 (Hostname)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-设置-root-密码-重要" class="toc-link" data-astro-cid-xvrfupwn>5. 设置 Root 密码 (重要)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#7-创建用户与安装引导-关键" class="toc-link" data-astro-cid-xvrfupwn>7. 创建用户与安装引导 (关键)。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-创建普通用户" class="toc-link" data-astro-cid-xvrfupwn>1. 创建普通用户</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-安装引导程序-grub" class="toc-link" data-astro-cid-xvrfupwn>2. 安装引导程序 (GRUB)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-启用网络服务-最后一步配置" class="toc-link" data-astro-cid-xvrfupwn>3. 启用网络服务 (最后一步配置)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#8-收尾与重启" class="toc-link" data-astro-cid-xvrfupwn>8. 收尾与重启。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-退出-chroot-环境" class="toc-link" data-astro-cid-xvrfupwn>1. 退出 Chroot 环境</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-卸载分区" class="toc-link" data-astro-cid-xvrfupwn>2. 卸载分区</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-重启电脑" class="toc-link" data-astro-cid-xvrfupwn>3. 重启电脑</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#重启后会发生什么" class="toc-link" data-astro-cid-xvrfupwn>重启后会发生什么？</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#进入系统后的第一件事连网" class="toc-link" data-astro-cid-xvrfupwn>进入系统后的第一件事：连网</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#9-安装显卡驱动与桌面环境-kde-plasma" class="toc-link" data-astro-cid-xvrfupwn>9. 安装显卡驱动与桌面环境 (KDE Plasma)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步安装显卡驱动-️-核心步骤" class="toc-link" data-astro-cid-xvrfupwn>第一步：安装显卡驱动 (⚠️ 核心步骤)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步安装-kde-plasma-全家桶" class="toc-link" data-astro-cid-xvrfupwn>第二步：安装 KDE Plasma 全家桶</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步启用并进入桌面" class="toc-link" data-astro-cid-xvrfupwn>第三步：启用并进入桌面</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#10-安装后配置-第一阶段基础软件与中文环境" class="toc-link" data-astro-cid-xvrfupwn>10. 安装后配置 (第一阶段：基础软件与中文环境)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-安装浏览器-firefox" class="toc-link" data-astro-cid-xvrfupwn>1. 安装浏览器 (Firefox)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-修复中文乱码-拒绝豆腐块" class="toc-link" data-astro-cid-xvrfupwn>2. 修复中文乱码 (拒绝“豆腐块”) 🧊</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-安装中文输入法-fcitx5" class="toc-link" data-astro-cid-xvrfupwn>3. 安装中文输入法 (Fcitx5)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-启用输入法-️-必做" class="toc-link" data-astro-cid-xvrfupwn>4. 启用输入法 (⚠️ 必做)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#11-配置第二阶段解锁-aur-arch-user-repository" class="toc-link" data-astro-cid-xvrfupwn>11. 配置第二阶段：解锁 AUR (Arch User Repository)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-安装-yay-三步走" class="toc-link" data-astro-cid-xvrfupwn>1. 安装 yay (三步走)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-使用-yay-安装软件" class="toc-link" data-astro-cid-xvrfupwn>2. 使用 yay 安装软件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-推荐给-cs-学生的软件清单-可选" class="toc-link" data-astro-cid-xvrfupwn>3. 推荐给 CS 学生的软件清单 (可选)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#12-美化登录界面-sddm-与--紧急救援指南" class="toc-link" data-astro-cid-xvrfupwn>12. 美化登录界面 (SDDM) 与 🚑 紧急救援指南</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-part-1-更换高颜值主题" class="toc-link" data-astro-cid-xvrfupwn>🎨 Part 1: 更换高颜值主题</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-part-2-紧急救援-如果黑屏了怎么办" class="toc-link" data-astro-cid-xvrfupwn>🚑 Part 2: 紧急救援 (如果黑屏了怎么办？)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#13-进阶美化打造-mac-风格登录界面-防黑屏版" class="toc-link" data-astro-cid-xvrfupwn>13. 进阶美化：打造 Mac 风格登录界面 (防黑屏版) 🍎</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#️-第一步安装核心绘图依赖-防黑屏补丁" class="toc-link" data-astro-cid-xvrfupwn>🛡️ 第一步：安装核心绘图依赖 (防黑屏补丁)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-第二步安装-white-sur-主题" class="toc-link" data-astro-cid-xvrfupwn>🎨 第二步：安装 White Sur 主题</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#️-第三步应用主题-修改配置文件" class="toc-link" data-astro-cid-xvrfupwn>⚙️ 第三步：应用主题 (修改配置文件)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-第四步测试预览" class="toc-link" data-astro-cid-xvrfupwn>🧪 第四步：测试预览</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#14-开启神级特效-果冻--妙控灯" class="toc-link" data-astro-cid-xvrfupwn>14. 开启神级特效 (果冻 + 妙控灯)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#15-终端美化-zplug-版zplug--powerlevel10k" class="toc-link" data-astro-cid-xvrfupwn>15. 终端美化 (Zplug 版)：Zplug + Powerlevel10k 🚀</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步安装核心字体-meslo-nerd-font" class="toc-link" data-astro-cid-xvrfupwn>第一步：安装核心字体 (Meslo Nerd Font)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步安装-zplug" class="toc-link" data-astro-cid-xvrfupwn>第二步：安装 Zplug</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步配置-zshrc-写入插件列表" class="toc-link" data-astro-cid-xvrfupwn>第三步：配置 .zshrc (写入插件列表)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第四步激活与配置-见证奇迹" class="toc-link" data-astro-cid-xvrfupwn>第四步：激活与配置 (见证奇迹) ✨</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-常见问题修正" class="toc-link" data-astro-cid-xvrfupwn>💡 常见问题修正</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步确认-zplug-已安装" class="toc-link" data-astro-cid-xvrfupwn>第一步：确认 Zplug 已安装</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步修改-zshrc-路径" class="toc-link" data-astro-cid-xvrfupwn>第二步：修改 .zshrc 路径</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步重新加载" class="toc-link" data-astro-cid-xvrfupwn>第三步：重新加载</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步手动克隆到家目录" class="toc-link" data-astro-cid-xvrfupwn>第一步：手动克隆到家目录</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步修改配置文件" class="toc-link" data-astro-cid-xvrfupwn>第二步：修改配置文件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步再次激活" class="toc-link" data-astro-cid-xvrfupwn>第三步：再次激活</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#16-安装常用软件与-arch-软件包原则-steam--微信避坑指南" class="toc-link" data-astro-cid-xvrfupwn>16. 安装常用软件与 Arch 软件包原则 (Steam &amp; 微信避坑指南) 🎮</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-核心原则为什么不能直接下载官网的-debrpm" class="toc-link" data-astro-cid-xvrfupwn>🛑 核心原则：为什么不能直接下载官网的 .deb/.rpm？</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步开启-multilib-steam-必做" class="toc-link" data-astro-cid-xvrfupwn>第一步：开启 Multilib (Steam 必做)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步正确安装-steam-修复闪退版" class="toc-link" data-astro-cid-xvrfupwn>第二步：正确安装 Steam (修复闪退版)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步安装-docker-devops-吃饭家伙" class="toc-link" data-astro-cid-xvrfupwn>第三步：安装 Docker (DevOps 吃饭家伙)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第四步安装-aur-必备-微信spotify" class="toc-link" data-astro-cid-xvrfupwn>第四步：安装 AUR 必备 (微信/Spotify)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-清单核对" class="toc-link" data-astro-cid-xvrfupwn>✅ 清单核对</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#17-核心知识软件去哪找pacman-vs-aur" class="toc-link" data-astro-cid-xvrfupwn>17. 核心知识：软件去哪找？(Pacman vs AUR) 📦</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-第一梯队官方仓库-official-repos" class="toc-link" data-astro-cid-xvrfupwn>1. 第一梯队：官方仓库 (Official Repos)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-第二梯队aur-arch-user-repository" class="toc-link" data-astro-cid-xvrfupwn>2. 第二梯队：AUR (Arch User Repository)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-总结arch-用户的安装逻辑" class="toc-link" data-astro-cid-xvrfupwn>🧠 总结：Arch 用户的安装逻辑</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#18-终极输入法配置fcitx5--雾凇拼音--磨砂皮肤" class="toc-link" data-astro-cid-xvrfupwn>18. 终极输入法配置：Fcitx5 + 雾凇拼音 + 磨砂皮肤 🧊</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步安装核心组件-官方仓库" class="toc-link" data-astro-cid-xvrfupwn>第一步：安装核心组件 (官方仓库)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步配置环境变量-️-必做" class="toc-link" data-astro-cid-xvrfupwn>第二步：配置环境变量 (⚠️ 必做)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步让-kde-托管输入法" class="toc-link" data-astro-cid-xvrfupwn>第三步：让 KDE 托管输入法</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第四步安装并激活雾凇拼音-rime-ice" class="toc-link" data-astro-cid-xvrfupwn>第四步：安装并激活“雾凇拼音” (Rime-Ice)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第五步换上高颜值磨砂皮肤-fluentdark" class="toc-link" data-astro-cid-xvrfupwn>第五步：换上高颜值磨砂皮肤 (FluentDark)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#19-硬件驱动补全修复蓝牙与声音-intel-ultra-专用" class="toc-link" data-astro-cid-xvrfupwn>19. 硬件驱动补全：修复蓝牙与声音 (Intel Ultra 专用) 🔊</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-1-修复蓝牙-bluetooth" class="toc-link" data-astro-cid-xvrfupwn>Part 1: 修复蓝牙 (Bluetooth) 🦷</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-2-修复声音-pipewire--sof-固件" class="toc-link" data-astro-cid-xvrfupwn>Part 2: 修复声音 (PipeWire + SOF 固件) 🎵</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-3-知识点纠正与重启" class="toc-link" data-astro-cid-xvrfupwn>Part 3: 知识点纠正与重启</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#20-补全-mac-体验拼图日常必备工具与效率神器" class="toc-link" data-astro-cid-xvrfupwn>20. 补全 Mac 体验拼图：日常必备工具与效率神器 🧩</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-你的时光机器timeshift-保命神器" class="toc-link" data-astro-cid-xvrfupwn>1. 你的“时光机器”：Timeshift (保命神器) ⏳</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-你的spotlight-聚焦搜索krunner-vs-albert" class="toc-link" data-astro-cid-xvrfupwn>2. 你的“Spotlight (聚焦搜索)”：KRunner vs Albert 🔍</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-你的触控板手势touchpad-gestures-️" class="toc-link" data-astro-cid-xvrfupwn>3. 你的“触控板手势”：Touchpad Gestures 🖐️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-你的office-办公套件onlyoffice" class="toc-link" data-astro-cid-xvrfupwn>4. 你的“Office 办公套件”：OnlyOffice 📝</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-你的iina-播放器haruna" class="toc-link" data-astro-cid-xvrfupwn>5. 你的“IINA 播放器”：Haruna 🎬</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-终极建议关于键位映射-cmd-vs-ctrl" class="toc-link" data-astro-cid-xvrfupwn>💡 终极建议：关于键位映射 (Cmd vs Ctrl)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#21-效率神器现代化终端工具链--截图配置" class="toc-link" data-astro-cid-xvrfupwn>21. 效率神器：现代化终端工具链 &amp; 截图配置 ⚡</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-1-安装现代命令行工具-rust-全家桶" class="toc-link" data-astro-cid-xvrfupwn>Part 1: 安装现代命令行工具 (Rust 全家桶) 🦀</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-2-配置-zshrc-让工具生效-️" class="toc-link" data-astro-cid-xvrfupwn>Part 2: 配置 .zshrc (让工具生效) 🛠️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-3-截图神器-flameshot-替换-spectacle" class="toc-link" data-astro-cid-xvrfupwn>Part 3: 截图神器 Flameshot (替换 Spectacle) 📸</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-4-清理战场-系统大扫除" class="toc-link" data-astro-cid-xvrfupwn>Part 4: 清理战场 (系统大扫除) 🧹</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#22-效率与颜值从终端到笔记的geek-化武装" class="toc-link" data-astro-cid-xvrfupwn>22. 效率与颜值：从终端到笔记的“Geek 化”武装 ⚡</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-1-命令行特种部队-rust-全家桶" class="toc-link" data-astro-cid-xvrfupwn>Part 1: 命令行“特种部队” (Rust 全家桶) 🦀</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-2-注入灵魂-zshrc-配置-️" class="toc-link" data-astro-cid-xvrfupwn>Part 2: 注入灵魂 (.zshrc 配置) 🛠️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-3-桌面端的降维打击工具-️" class="toc-link" data-astro-cid-xvrfupwn>Part 3: 桌面端的“降维打击”工具 🖥️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-4-最后的强迫症大扫除" class="toc-link" data-astro-cid-xvrfupwn>Part 4: 最后的“强迫症”大扫除 🧹</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#23-进阶生存指南正确的找软件姿势-aur-官网-️" class="toc-link" data-astro-cid-xvrfupwn>23. 进阶生存指南：正确的“找软件”姿势 (AUR 官网) 🕵️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-aur-官网-社区最活跃的集市" class="toc-link" data-astro-cid-xvrfupwn>1. AUR 官网 (社区最活跃的“集市”)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-arch-官方包查询" class="toc-link" data-astro-cid-xvrfupwn>2. Arch 官方包查询</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-cs-研究生的逛街流程" class="toc-link" data-astro-cid-xvrfupwn>💡 CS 研究生的“逛街”流程</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#24-asus-笔记本专用优化-lunar-lake-版" class="toc-link" data-astro-cid-xvrfupwn>24. ASUS 笔记本专用优化 (Lunar Lake 版) 💻</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-1-安装-asus-续命全家桶-️" class="toc-link" data-astro-cid-xvrfupwn>Part 1: 安装 ASUS 续命全家桶 🛠️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-2-硬件控制指南-新版-asusctl-用法" class="toc-link" data-astro-cid-xvrfupwn>Part 2: 硬件控制指南 (新版 asusctl 用法) 🎮</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-3-硬件状态确认-lunar-lake-特性" class="toc-link" data-astro-cid-xvrfupwn>Part 3: 硬件状态确认 (Lunar Lake 特性) 🚀</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#25-终极解锁在-lunar-lake-上实现红外人脸识别-howdy-️" class="toc-link" data-astro-cid-xvrfupwn>25. 终极解锁：在 Lunar Lake 上实现红外人脸识别 (Howdy) 👁️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-1-正确的安装姿势-避坑指南" class="toc-link" data-astro-cid-xvrfupwn>Part 1: 正确的安装姿势 (避坑指南) 🛑</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-2-硬件识别与配置" class="toc-link" data-astro-cid-xvrfupwn>Part 2: 硬件识别与配置 📷</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-3-录入与应用" class="toc-link" data-astro-cid-xvrfupwn>Part 3: 录入与应用 🔓</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-最终效果" class="toc-link" data-astro-cid-xvrfupwn>🎉 最终效果</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-解决方案-1最快进-timeshift-的方法-绕过-bug" class="toc-link" data-astro-cid-xvrfupwn>✅ 解决方案 1：最快进 Timeshift 的方法 (绕过 Bug)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-解决方案-2彻底修复-治本" class="toc-link" data-astro-cid-xvrfupwn>✅ 解决方案 2：彻底修复 (治本)</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#26-开会全家桶视频通话与屏幕共享-zoom腾讯会议" class="toc-link" data-astro-cid-xvrfupwn>26. 开会全家桶：视频通话与屏幕共享 (Zoom/腾讯会议) 📹</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-1-照镜子调试神器-kamoso" class="toc-link" data-astro-cid-xvrfupwn>Part 1: 照镜子调试神器 (Kamoso) 🪞</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-2-必备会议软件-aur" class="toc-link" data-astro-cid-xvrfupwn>Part 2: 必备会议软件 (AUR) 💻</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-3-解决屏幕共享黑屏-关键补丁-️" class="toc-link" data-astro-cid-xvrfupwn>Part 3: 解决屏幕共享黑屏 (关键补丁) 🛠️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#part-4-声音控制总台-pavucontrol-️" class="toc-link" data-astro-cid-xvrfupwn>Part 4: 声音控制总台 (Pavucontrol) 🎚️</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#-一键安装清单" class="toc-link" data-astro-cid-xvrfupwn>✅ 一键安装清单</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#27-安装-paru" class="toc-link" data-astro-cid-xvrfupwn>27. 安装 Paru</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#为什么可以随意切换" class="toc-link" data-astro-cid-xvrfupwn>为什么可以随意切换？</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#现场验证" class="toc-link" data-astro-cid-xvrfupwn>现场验证</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#唯一的区别配置文件" class="toc-link" data-astro-cid-xvrfupwn>唯一的区别：配置文件</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#28-安装-nvim-与配置" class="toc-link" data-astro-cid-xvrfupwn>28. 安装 nvim 与配置</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#为什么-neovim-是神why-nvim" class="toc-link" data-astro-cid-xvrfupwn>为什么 Neovim 是“神”？(Why Nvim?)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步备料-安装基础环境" class="toc-link" data-astro-cid-xvrfupwn>第一步：备料 (安装基础环境)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步上主菜-配置方案" class="toc-link" data-astro-cid-xvrfupwn>第二步：上主菜 (配置方案)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步开吃首次启动与使用" class="toc-link" data-astro-cid-xvrfupwn>第三步：开吃！(首次启动与使用)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第四步cs-研究生必备操作指南" class="toc-link" data-astro-cid-xvrfupwn>第四步：CS 研究生必备操作指南</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第五步进阶调优-为了你的论文和项目" class="toc-link" data-astro-cid-xvrfupwn>第五步：进阶调优 (为了你的论文和项目)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#总结" class="toc-link" data-astro-cid-xvrfupwn>总结</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>Arch Linux 从零安装（UEFI + iwctl）</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-02-06T00:00:00.000Z"> Feb 5, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 78 min read
+</span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
+Updated  <time datetime="2026-02-09T00:00:00.000Z"> Feb 8, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <p>Arch Linux 以其高度的可定制性和“Keep It Simple, Stupid” (KISS) 原则著称，是深入理解 Linux 系统工作原理的绝佳途径。</p>
+<p>以下将基于 <strong>UEFI 模式</strong>（现代电脑主流模式）的从零开始安装指南。这不仅仅是复制粘贴命令，更是构建系统的过程。</p>
+<hr>
+<h2 id="1-准备与启动">1. 准备与启动</h2>
+<p>在这一步，我们需要把 Arch Linux 的安装镜像写入 U 盘，并让电脑从这个 U 盘启动进入到安装环境。</p>
+<h4 id="1-下载镜像"><strong>1. 下载镜像</strong></h4>
+<ul>
+<li>去 <a href="https://archlinux.org/download/">Arch Linux 官网下载页面</a>找到 <strong>合适</strong> 的区域，随便选一个链接（如清华源、阿里源），下载 <code>.iso</code> 结尾的文件（例如 <code>archlinux-202x.xx.xx-x86_64.iso</code>）。</li>
+</ul>
+<h4 id="2-制作启动-u-盘"><strong>2. 制作启动 U 盘</strong></h4>
+<ul>
+<li>准备一个 <strong>4GB 以上</strong> 的空 U 盘（数据会被清空，请备份）。</li>
+<li><strong>如果你在 Windows 下</strong>：
+<ul>
+<li>下载软件 <strong>Rufus</strong>。</li>
+<li>打开 Rufus，设备选你的 U 盘。</li>
+<li>“引导类型选择” 点击“选择”，找到刚才下载的 ISO 文件。</li>
+<li><strong>分区类型</strong>选 <strong>GPT</strong>，<strong>目标系统</strong>选 <strong>UEFI</strong>（这很重要）。</li>
+<li>点击“开始”，如果弹出模式选择，选 <strong>DD 模式</strong> 或 <strong>ISO 模式</strong> 均可（推荐默认 ISO 模式，如果启动失败再试 DD）。</li>
+</ul>
+</li>
+<li>如果你现在的环境是 <strong>Linux</strong> 或者 <strong>macOS</strong>，或者你单纯喜欢用命令行，<code>dd</code> 是最快也最直接的方法。但请务必小心：<code>dd</code> 也有个外号叫 <strong>“Disk Destroyer” (硬盘毁灭者)</strong>。因为如果你写错了目标盘符（比如把 U 盘写成了你的系统盘），数据瞬间就没了。</li>
+<li>请按照以下步骤小心操作：
+<ul>
+<li><strong>1. 确认 U 盘的设备名 (最关键的一步)</strong>
+<ul>
+<li>先插入 U 盘，打开终端：
+<ul>
+<li><strong>Linux 用户</strong>：输入 <code>lsblk</code>，你会看到类似 <code>sda</code>, <code>sdb</code>, <code>nvme0n1</code> 的设备。通过<strong>容量</strong>来判断哪个是你的 U 盘（比如 16G、32G 的那个）。</li>
+<li>记下设备名，例如 <code>/dev/sdb</code> (<strong>注意：是 <code>/dev/sdb</code>，不是 <code>/dev/sdb1</code></strong>，我们要写入整个设备，而不是某个分区)。</li>
+</ul>
+</li>
+<li><strong>macOS 用户</strong>：输入 <code>diskutil list</code>
+<ul>
+<li>找到你的 U 盘（通常是 <code>/dev/disk2</code> 之类，标记为 external）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>2. 执行 dd 命令</strong>
+<ul>
+<li>假设：
+<ul>
+<li>你的 ISO 文件路径是：<code>~/Downloads/archlinux.iso</code></li>
+<li>你的 U 盘设备名是：<code>/dev/sdb</code> (<strong>请务必替换成你实际查到的！</strong>)</li>
+</ul>
+</li>
+<li>命令格式如下：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> dd</span><span style="color:#9ECBFF"> if=~/Downloads/archlinux.iso</span><span style="color:#9ECBFF"> of=/dev/sdb</span><span style="color:#9ECBFF"> bs=4M</span><span style="color:#9ECBFF"> status=progress</span><span style="color:#E1E4E8"> &#x26;&#x26; </span><span style="color:#B392F0">sync</span></span></code></pre>
+<blockquote>
+<p><strong>参数解释：</strong></p>
+<ul>
+<li><code>if=</code> (Input File)：输入文件，也就是你的 ISO 镜像路径。</li>
+<li><code>of=</code> (Output File)：输出文件，也就是你的 U 盘设备路径。</li>
+<li><code>bs=4M</code>：块大小设为 4MB，能加快写入速度。</li>
+<li><code>status=progress</code>：显示进度条（不然你会以为卡死了）。</li>
+<li><code>&#x26;&#x26; sync</code>：写入完成后强制同步缓存，确保数据完全写入 U 盘后再结束。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>为什么用 GPT： <strong>GPT 是新标准，MBR 是旧标准</strong>。<br>
+在你的 Arch Linux 安装过程中，我们选择 <strong>GPT</strong> 是因为它更现代、更稳定，且完美支持 UEFI 启动模式。<br>
+以下是它们的核心区别对比：<br>
+核心区别速查表</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>特性</th><th>GPT (GUID Partition Table)</th><th>MBR (Master Boot Record)</th></tr></thead><tbody><tr><td><strong>年代</strong></td><td><strong>现代标准</strong> (90年代末推出，现在主流)</td><td><strong>老旧标准</strong> (1983年推出，DOS时代产物)</td></tr><tr><td><strong>支持硬盘大小</strong></td><td><strong>无限</strong> (理论上到 18EB，目前随便买多大都行)</td><td><strong>最大 2TB</strong> (超过 2TB 的硬盘如果不转 GPT，多出的空间无法识别)</td></tr><tr><td><strong>分区数量</strong></td><td><strong>几乎无限</strong> (Windows 限制 128 个，Linux 下更多)</td><td><strong>最多 4 个主分区</strong> (想分更多得用“扩展分区”这种麻烦的逻辑)</td></tr><tr><td><strong>启动模式</strong></td><td><strong>UEFI</strong> (现代电脑标配，启动更快、界面更现代)</td><td><strong>Legacy BIOS</strong> (老式蓝底白字 BIOS，启动慢)</td></tr><tr><td><strong>安全性</strong></td><td><strong>高</strong> (分区表有备份，头部存一份，尾部存一份，损坏了能救)</td><td><strong>低</strong> (分区表只有一份在硬盘开头，坏了整个盘分区全丢)</td></tr></tbody></table>
+<blockquote>
+<p>为什么你的安装教程选 GPT？<br>
+<strong>因为你用的是 UEFI 启动</strong>：我在教程开头让你检查 <code>/sys/firmware/efi/efivars</code>，就是为了确认你是 UEFI 模式。UEFI 模式强制要求启动盘（系统盘）必须是 <strong>GPT</strong> 格式。<br>
+<strong>未来兼容性</strong>：Windows 11 等新系统已经强制要求 GPT + UEFI。<br>
+<strong>方便管理</strong>：GPT 没有“主分区”、“扩展分区”、“逻辑分区”这种烧脑的概念，所有分区地位平等，想分几个分几个。<br>
+<strong>除非你在给 10 年前的老古董电脑装系统，否则无脑选 GPT。</strong></p>
+</blockquote>
+<blockquote>
+<p>在 Rufus 界面上：<br>
+<strong>文件系统 (File System)</strong> 请选择 <strong>FAT32</strong> (或者默认的 Large FAT32)<br>
+为什么？<br>
+因为你之前设置了 <strong>UEFI</strong> 启动模式。绝大多数主板的 UEFI 固件<strong>只能</strong>读取 FAT32 格式的启动盘。如果你选了 NTFS，电脑可能根本识别不到这个 U 盘，导致无法启动。</p>
+</blockquote>
+<blockquote>
+<p><strong>还有一个重要弹窗：</strong><br>
+当你点底部的 <strong>“开始 (START)”</strong> 按钮后，Rufus 可能会弹出一个对话框，让你选择写入模式：<br>
+<strong>推荐选择：以 DD 镜像模式写入 (Write in DD Image mode)</strong><br>
+Arch Linux 官方镜像结构特殊，DD 模式是“原样克隆”，最稳，绝对能启动。<br>
+选了 DD 模式后，前面的“文件系统”选项其实就被忽略了，Rufus 会完全按照镜像原本的格式复刻进去。<br>
+<strong>备选：以 ISO 镜像模式写入 (Write in ISO Image mode)</strong><br>
+如果 DD 模式失败了，再试这个。<br>
+<strong>总结：界面上选 FAT32 -> 点击开始 -> 弹窗里选 DD 模式 -> 确定。</strong></p>
+</blockquote>
+<p>写完后拔插一下 U 盘，如果电脑能识别，就插入要装系统的电脑准备启动。</p>
+<h4 id="3-等待结束"><strong>3. 等待结束</strong></h4>
+<p>当命令跑完，出现新的命令提示符时，说明刻录完成。此时拔掉 U 盘，插入你要安装 Arch 的那台电脑，准备启动。</p>
+<h4 id="4-bios-设置-关键"><strong>4. BIOS 设置 (关键)</strong></h4>
+<ul>
+<li>重启电脑，狂按启动热键（通常是 F2, F12, Del 或 Esc，视主板品牌而定）进入 BIOS/UEFI 设置。</li>
+<li><strong>必须做的两件事</strong>：
+<ol>
+<li>找到 <strong>Secure Boot (安全启动)</strong>，设置为 <strong>Disabled (关闭)</strong>。</li>
+<li>找到 <strong>Boot Mode (启动模式)</strong>，确保是 <strong>UEFI</strong> (不要选 Legacy 或 CSM)。</li>
+</ol>
+</li>
+<li>保存设置并重启。</li>
+</ul>
+<h4 id="4-从-u-盘启动"><strong>4. 从 U 盘启动</strong></h4>
+<ul>
+<li>再次重启，进入 <strong>Boot Menu (启动菜单)</strong>，选择你的 U 盘启动（通常名字前带有 <code>UEFI: Kingston...</code> 之类的前缀）。</li>
+<li>屏幕会出现一个黑色背景的菜单（Arch Linux Install Medium）。</li>
+<li>直接按 <strong>Enter</strong> 选择第一项 <code>Arch Linux install medium (x86_64, UEFI)</code>。</li>
+</ul>
+<hr>
+<h4 id="5-等待确认"><strong>5. 等待确认</strong></h4>
+<p>等待屏幕上一堆代码跑完，直到画面停止不动。</p>
+<p>确认你是否看到了类似下面的提示符：**</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>root@archiso ~ #</span></span></code></pre>
+<p>（光标在闪烁，可以输入字）</p>
+<hr>
+<h2 id="2-环境检查与网络连接">2. 环境检查与网络连接</h2>
+<p>Arch Linux 采用“在线安装”模式，<strong>网络连接</strong>是后续下载系统文件的基础。</p>
+<h3 id="1-验证启动模式-关键">1. 验证启动模式 (关键)</h3>
+<p>必须确认当前环境为 <strong>UEFI 模式</strong>。</p>
+<p><strong>操作命令：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ls /sys/firmware/efi/efivars</span></span></code></pre>
+<p><strong>结果判断：</strong></p>
+<ul>
+<li>
+<p>✅ <strong>成功 (合格)</strong>：屏幕输出大量文件名。 -> <strong>继续下一步</strong>。</p>
+</li>
+<li>
+<p>❌ <strong>失败 (不合格)</strong>：提示 <code>No such file or directory</code>。</p>
+<ul>
+<li>
+<p><strong>原因</strong>：当前为 Legacy (BIOS) 启动。</p>
+</li>
+<li>
+<p><strong>动作</strong>：<strong>立即停止</strong>。重启进入 BIOS，关闭 CSM/Legacy，强制开启 UEFI 模式。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-配置网络">2. 配置网络</h3>
+<h4 id="情况-a有线连接-推荐">情况 A：有线连接 (推荐)</h4>
+<p>通常插入网线即可自动连接。</p>
+<h4 id="情况-b无线连接-wifi">情况 B：无线连接 (WiFi)</h4>
+<p>使用 <code>iwctl</code> 工具进行交互式配置。</p>
+<p><strong>标准步骤：</strong></p>
+<ol>
+<li>进入交互模式：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">iwctl</span></span></code></pre>
+</li>
+<li>查看设备名 (记下你的网卡名，例如 <code>wlan0</code>)：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[iwd]# device list</span></span></code></pre>
+</li>
+<li>扫描网络：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[iwd]# station wlan0 scan</span></span></code></pre>
+</li>
+<li>列出 WiFi 列表：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[iwd]# station wlan0 get-networks</span></span></code></pre>
+</li>
+<li>连接 WiFi (按提示输入密码)：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[iwd]# station wlan0 connect &#x3C;你的WiFi名称></span></span></code></pre>
+</li>
+<li>退出工具：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[iwd]# exit</span></span></code></pre>
+</li>
+</ol>
+<h4 id="️-wifi-故障排查-可选">🛠️ WiFi 故障排查 (可选)</h4>
+<p>如果在步骤 2 中发现设备状态为 <code>Powered: off</code> 或无法连接，请尝试以下方法。</p>
+<p><strong>方法一：在 iwctl 内部开启电源</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 在 iwctl 交互模式下执行</span></span>
+<span class="line"><span>device wlan0 set-property Powered on</span></span></code></pre>
+<p><em>执行后再次输入 <code>device list</code> 确认 Powered 变为 <code>on</code>。</em></p>
+<p>方法二：解除 RFKill 锁定 (如果方法一无效)</p>
+<p>如果系统底层锁住了网卡，需退出 iwctl 回到终端执行：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 解锁所有无线设备</span></span>
+<span class="line"><span>rfkill unblock wifi</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 强制拉起网卡接口 (注意替换 wlan0 为实际设备名)</span></span>
+<span class="line"><span>ip link set wlan0 up</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 3. 重新进入 iwctl 尝试连接</span></span>
+<span class="line"><span>iwctl</span></span></code></pre>
+<h3 id="3-验证网络连通性">3. 验证网络连通性</h3>
+<p>Ping Arch Linux 官网测试网络是否畅通。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ping -c 3 archlinux.org</span></span></code></pre>
+<ul>
+<li><strong>成功标志</strong>：看到 <code>64 bytes from ...</code> 的回显。</li>
+</ul>
+<h3 id="4-更新系统时间">4. 更新系统时间</h3>
+<p><strong>目的</strong>：确保系统时间准确，防止 HTTPS 证书验证失败导致无法下载软件包。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">timedatectl</span><span style="color:#9ECBFF"> set-ntp</span><span style="color:#79B8FF"> true</span></span></code></pre>
+<h4 id="-命令详解">🧩 命令详解</h4>
+<ul>
+<li>
+<p><strong><code>timedatectl</code></strong>：Linux 系统中用于管理“时间”和“日期”的控制工具。</p>
+</li>
+<li>
+<p><strong><code>set-ntp</code></strong>：设置 <strong>N</strong>etwork <strong>T</strong>ime <strong>P</strong>rotocol（网络时间协议）。</p>
+</li>
+<li>
+<p><strong><code>true</code></strong>：设置为“开启”状态。</p>
+</li>
+</ul>
+<h4 id="️-为什么这一步是致命级关键">⚠️ 为什么这一步是“致命级”关键？</h4>
+<p>不要以为“装好系统再改时间”也可以，在 Arch 安装过程中，时间错误会导致严重后果：</p>
+<ol>
+<li>
+<p><strong>HTTPS 证书验证失败（最常见错误）</strong></p>
+<ul>
+<li>
+<p><strong>现象</strong>：<code>pacman</code> 下载软件全部报错，提示无法连接或证书错误。</p>
+</li>
+<li>
+<p><strong>原因</strong>：HTTPS 协议极其依赖时间准确性。如果你的电脑时间是错的（例如显示 2000 年），服务器的安全证书会被判定为“尚未生效”或“已过期”，连接会被强制拒绝。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件时间戳混乱</strong></p>
+<ul>
+<li><strong>后果</strong>：安装时写入的文件会带有错误的时间戳，这会导致日后系统更新、日志记录或软件编译时出现严重的逻辑冲突。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>效果</strong>：执行命令后，系统后台会自动寻找互联网时间服务器，将本机时间瞬间校准，分秒不差。</p>
+</blockquote>
+<h2 id="3-磁盘分区">3. <strong>磁盘分区</strong></h2>
+<p>这是最容易出错的一步，所以我们用最直观的工具 <code>cfdisk</code> 来做。</p>
+<p><strong>⚠️ 警告：接下来的操作会清空目标磁盘的所有数据。请确保你没选错盘！</strong></p>
+<h3 id="1-确认目标磁盘"><strong>1. 确认目标磁盘</strong></h3>
+<p>输入命令：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lsblk</span></span></code></pre>
+<ul>
+<li>查看列表。通常你的系统盘（非 U 盘）名字是 <code>/dev/nvme0n1</code>（如果是 SSD）或者 <code>/dev/sda</code>（如果是机械硬盘或 SATA SSD）。</li>
+<li>记住这个名字，比如我们假设是 <code>/dev/nvme0n1</code>。</li>
+</ul>
+<h3 id="2-进入分区工具"><strong>2. 进入分区工具</strong></h3>
+<p>输入命令（请把设备名替换成你自己的）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>cfdisk /dev/nvme0n1</span></span></code></pre>
+<ul>
+<li><strong>如果你看到 <code>Select label type</code> 的界面</strong>：
+<ul>
+<li>用键盘上下键选择 <strong>gpt</strong>，回车。</li>
+</ul>
+</li>
+<li><strong>如果你直接进去了</strong>：
+<ul>
+<li>也没事，看底下只要显示 <code>Label: gpt</code> 就行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-删除旧分区-如果有"><strong>3. 删除旧分区 (如果有)</strong></h3>
+<ul>
+<li>如果界面里已经有分区（比如以前的 Windows 分区），用上下键选中它们，按左右键选择底部的 <code>[ Delete ]</code>，回车。</li>
+<li>重复此操作，直到整个列表只剩下一行：<code>Free space</code>（空闲空间）。</li>
+</ul>
+<h3 id="4-创建新分区-严格按照顺序"><strong>4. 创建新分区 (严格按照顺序)</strong></h3>
+<p>你需要创建 3 个分区。请按步骤操作：</p>
+<p><strong>第一分区：EFI 引导分区 (关键)</strong></p>
+<ol>
+<li>选中 <code>Free space</code>，选择 <code>[ New ]</code>，回车。</li>
+<li><strong>Partition size</strong>: 输入 <code>512M</code>，回车。</li>
+<li><strong>Type</strong>: 默认可能是 <code>Linux filesystem</code>，你需要按左右键选 <code>[ Type ]</code>，然后找到 <strong>EFI System</strong>，回车选中。
+<ul>
+<li><em>(这一步很重要，类型不对会导致无法启动)</em></li>
+</ul>
+</li>
+</ol>
+<p><strong>第二分区：Swap 交换分区 (虚拟内存)</strong></p>
+<ol>
+<li>选中剩下的 <code>Free space</code>，选择 <code>[ New ]</code>，回车。</li>
+<li><strong>Partition size</strong>: 输入 <code>16G</code> (如果你的内存是 16G 或 32G，给 16G 够用了；如果内存小，给 8G 也行)，回车。</li>
+<li><strong>Type</strong>: 选中刚建好的这个分区，选 <code>[ Type ]</code>，找到 <strong>Linux swap</strong>，回车。</li>
+</ol>
+<p><strong>第三分区：根分区 (所有剩余空间)</strong></p>
+<ol>
+<li>选中最后剩下的 <code>Free space</code>，选择 <code>[ New ]</code>，回车。</li>
+<li><strong>Partition size</strong>: 默认会填满剩余空间，直接回车即可。</li>
+<li><strong>Type</strong>: 默认就是 <strong>Linux filesystem</strong>，不用改。</li>
+</ol>
+<h3 id="5-写入并退出"><strong>5. 写入并退出</strong></h3>
+<ol>
+<li>检查一下你的列表，应该有 3 行：
+<ul>
+<li><code>EFI System</code> (512M)</li>
+<li><code>Linux swap</code> (16G)</li>
+<li><code>Linux filesystem</code> (剩余全部)</li>
+</ul>
+</li>
+<li>按左右键选择底部的 <code>[ Write ]</code>，回车。</li>
+<li><strong>输入 <code>yes</code></strong> 并回车（它会问你是否确定写入）。</li>
+<li>选择 <code>[ Quit ]</code> 退出。</li>
+</ol>
+<hr>
+<p><strong>做完后，输入 <code>lsblk</code> 确认一下现在的结构。</strong> 你应该能看到 <code>/dev/nvme0n1</code> 下面分出了 <code>p1</code>, <code>p2</code>, <code>p3</code> (或者 <code>sda1</code>, <code>sda2</code>, <code>sda3</code>)。</p>
+<h2 id="4-格式化与挂载">4. <strong>格式化与挂载</strong>。</h2>
+<p>既然“房子”（分区）已经建好了，现在要开始“装修”（格式化）并把门打开（挂载），这样才能往里面搬家具（安装系统）。</p>
+<p>请先再次输入 <code>lsblk</code>，确认你的分区编号。</p>
+<ul>
+<li><strong>假设</strong>你的结构是：
+<ul>
+<li><code>p1</code> (或 <code>sda1</code>): EFI 分区 (512M)</li>
+<li><code>p2</code> (或 <code>sda2</code>): Swap 分区 (16G)</li>
+<li><code>p3</code> (或 <code>sda3</code>): 根分区 (剩余空间)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="1-格式化-建立文件系统"><strong>1. 格式化 (建立文件系统)</strong></h3>
+<p>请依次执行下面的命令（<strong>注意把 <code>nvme0n1pX</code> 换成你实际的编号</strong>）：</p>
+<p><strong>A. 格式化 EFI 分区 (必须是 FAT32)</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mkfs.fat -F 32 /dev/nvme0n1p1</span></span></code></pre>
+<p><strong>B. 启用 Swap 分区</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mkswap /dev/nvme0n1p2</span></span>
+<span class="line"><span>swapon /dev/nvme0n1p2</span></span></code></pre>
+<p><strong>C. 格式化根分区 (使用 ext4)</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mkfs.ext4 /dev/nvme0n1p3</span></span></code></pre>
+<p><em>(这步可能需要几秒钟，等待它跑完)</em></p>
+<hr>
+<h3 id="2-挂载分区-顺序极重要"><strong>2. 挂载分区 (顺序极重要)</strong></h3>
+<p>Linux 的挂载逻辑像搭积木，必须<strong>先挂载根目录</strong>，再挂载子目录。</p>
+<p><strong>A. 挂载根分区</strong> 把你的主分区挂载到 <code>/mnt</code> 目录（这是安装介质专门预留给我们要装的系统的位置）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mount /dev/nvme0n1p3 /mnt</span></span></code></pre>
+<p><strong>B. 挂载 EFI 分区</strong> 先在刚才挂载好的新盘里创建一个 <code>/boot</code> 文件夹，然后把 EFI 分区挂上去：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mkdir /mnt/boot</span></span>
+<span class="line"><span>mount /dev/nvme0n1p1 /mnt/boot</span></span></code></pre>
+<hr>
+<h3 id="3-二次检查"><strong>3. 二次检查</strong></h3>
+<p>输入命令：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lsblk</span></span></code></pre>
+<p>请仔细看输出的 <strong>MOUNTPOINTS</strong> (挂载点) 这一列：</p>
+<ol>
+<li>你的根分区 (p3) 后面应该显示 <code>/mnt</code>。</li>
+<li>你的 EFI 分区 (p1) 后面应该显示 <code>/mnt/boot</code>。</li>
+<li>你的 Swap 分区 (p2) 后面应该显示 <code>[SWAP]</code>。</li>
+</ol>
+<h2 id="5-安装核心系统-base-system">5. 安装核心系统 (Base System)</h2>
+<p>这一步是将 Arch Linux 的“灵魂”从互联网下载并注入到你的硬盘 (<code>/mnt</code>) 中。</p>
+<h3 id="1-优化下载源-镜像">1. 优化下载源 (镜像)</h3>
+<p>下载速度决定了安装体验。我们优先尝试自动优化，如果失败则手动干预。</p>
+<h4 id="-方案一自动筛选-首选">✅ 方案一：自动筛选 (首选)</h4>
+<p>使用 <code>reflector</code> 筛选最新的、按速率排序的 5 个镜像源。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">reflector</span><span style="color:#79B8FF"> --latest</span><span style="color:#79B8FF"> 5</span><span style="color:#79B8FF"> --sort</span><span style="color:#9ECBFF"> rate</span><span style="color:#79B8FF"> --save</span><span style="color:#9ECBFF"> /etc/pacman.d/mirrorlist</span></span></code></pre>
+<ul>
+<li>
+<p><strong>成功标志</strong>：命令运行几秒钟后结束，无报错。 -> <strong>直接跳到第 2 步</strong>。</p>
+</li>
+<li>
+<p><strong>失败/报错</strong>：如果网络不稳定或工具报错，请执行下面的 <strong>方案二</strong>。</p>
+</li>
+</ul>
+<h4 id="️-方案二手动指定-备选">⚠️ 方案二：手动指定 (备选)</h4>
+<p>如果方案一失败，或者下载速度极慢（几十 KB/s），需手动修改镜像列表。</p>
+<p>A. 简单粗暴法</p>
+<p>直接运行下面的安装命令（第2步）。如果是运气好，默认源速度不错 (>1MB/s)，就不用折腾。如果不幸很慢，按 Ctrl+C 停止，执行 B。</p>
+<p><strong>B. 手动编辑法 (Vim 操作)</strong></p>
+<ol>
+<li>
+<p><strong>打开列表</strong>：<code>vim /etc/pacman.d/mirrorlist</code></p>
+</li>
+<li>
+<p><strong>搜索</strong>：输入 <code>/United States</code> 或 <code>/China</code> 回车。</p>
+</li>
+<li>
+<p><strong>置顶优质源</strong>：</p>
+<ul>
+<li>
+<p>找到目标行 (如 <code>kernel.org</code> 或 <code>ustc</code> 等)。</p>
+</li>
+<li>
+<p><strong>剪切</strong>：按两次 <code>d</code> (<code>dd</code>)。</p>
+</li>
+<li>
+<p><strong>去顶部</strong>：按 <code>g</code> <code>g</code>。</p>
+</li>
+<li>
+<p><strong>粘贴</strong>：按 <code>P</code> (大写)。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>保存</strong>：输入 <code>:wq</code> 回车。</p>
+</li>
+<li>
+<p><strong>刷新</strong>：<code>pacman -Syy</code></p>
+</li>
+</ol>
+<h3 id="2-执行安装-pacstrap">2. 执行安装 (Pacstrap)</h3>
+<p>这是安装过程的核心命令，将把系统安装到 <code>/mnt</code>。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pacstrap /mnt base linux linux-firmware base-devel vim networkmanager</span></span></code></pre>
+<p><strong>📦 软件包清单详解：</strong></p>
+<ul>
+<li>
+<p><strong><code>base</code></strong>：Arch 的基础文件系统结构。</p>
+</li>
+<li>
+<p><strong><code>linux</code></strong>：系统内核 (Kernel)。</p>
+</li>
+<li>
+<p><strong><code>linux-firmware</code></strong>：硬件驱动固件 (WiFi/显卡等)。</p>
+</li>
+<li>
+<p><strong><code>base-devel</code></strong>：编译工具包 (含 sudo, gcc)，后续使用 AUR 必备。</p>
+</li>
+<li>
+<p><strong><code>vim</code></strong>：文本编辑器 (如果不习惯 Vim 可改为 nano)。</p>
+</li>
+<li>
+<p><strong><code>networkmanager</code></strong>：<strong>关键组件</strong>！负责管理网络连接，不装重启后会没网。</p>
+</li>
+<li>
+<p>你<strong>不需要</strong>在 <code>pacstrap</code> 里单独安装 <code>iwd</code>（即 <code>iwctl</code> 所属的包）。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>为什么不需要？</strong><br>
+因为我们刚才安装了 <strong><code>networkmanager</code></strong>。<br>
+在 Linux 世界里，管理 WiFi 主要有两种主流方案：</p>
+<ul>
+<li><strong>方案 A (iwd)</strong>：非常轻量，命令行就是 <code>iwctl</code>。</li>
+<li><strong>方案 B (NetworkManager)</strong>：功能最全、最强大，也是目前 Arch、Ubuntu、Fedora 等主流系统的标配。它的命令行工具叫 <strong><code>nmcli</code></strong> 或带有彩色界面的 <strong><code>nmtui</code></strong>。</li>
+<li>如果你安装了 <code>networkmanager</code>，它本身就具备连接 WiFi 的能力，不再需要 <code>iwctl</code> 了。<br>
+<strong>小贴士</strong>：如果你执意想要 <code>iwctl</code> 的操作体验，也可以在 <code>pacstrap</code> 命令后面加上 <code>iwd</code>。但为了系统简洁，建议只留一个“管家”。我们重启后会用 <code>nmtui</code> 连网，它比 <code>iwctl</code> 更直观。</li>
+</ul>
+</blockquote>
+<h3 id="3-生成-fstab-文件">3. 生成 Fstab 文件</h3>
+<p>系统需要知道启动时如何挂载硬盘分区，我们需要生成这张“分区地图”。</p>
+<p><strong>1. 生成命令：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>genfstab -U /mnt >> /mnt/etc/fstab</span></span></code></pre>
+<p><strong>2. 检查结果：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>cat /mnt/etc/fstab</span></span></code></pre>
+<ul>
+<li><strong>检查点</strong>：你应该看到包含 <code>UUID=xxxx</code> 的行，分别对应你的 ext4 (根分区) 和 vfat (EFI 分区)。</li>
+</ul>
+<hr>
+<p>如果你已经运行完了 <code>genfstab</code> 并检查过文件内容了：</p>
+<p><strong>请执行这一步：进入新系统 (Chroot)</strong> 我们要从 U 盘的临时环境，“穿越”进你刚装好的硬盘系统里：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>arch-chroot /mnt</span></span></code></pre>
+<p><strong>执行完后，你会发现提示符变样了（可能去掉了 <code>archiso</code> 字样）。</strong></p>
+<h2 id="6-系统内部配置-chroot">6. <strong>系统内部配置 (Chroot)</strong>。</h2>
+<p>现在我们要从 U 盘的“临时系统”切换到你硬盘里刚装好的“真实系统”中进行配置。</p>
+<h3 id="1-进入新系统-chroot"><strong>1. 进入新系统 (Chroot)</strong></h3>
+<p>输入以下命令：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>arch-chroot /mnt</span></span></code></pre>
+<ul>
+<li>你会发现命令提示符变了，这代表你现在已经“身在”你的硬盘里了。</li>
+</ul>
+<h3 id="2-设置时区"><strong>2. 设置时区</strong></h3>
+<p>因为你在 <strong>洛杉矶 (Los Angeles)</strong>，我们直接设置为美西时间：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime</span></span></code></pre>
+<p>然后同步硬件时钟：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>hwclock --systohc</span></span></code></pre>
+<h3 id="3-设置语言-locale"><strong>3. 设置语言 (Locale)</strong></h3>
+<p>我们需要生成英文编码，防止显示乱码。</p>
+<ol>
+<li>编辑配置文件：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>vim /etc/locale.gen</span></span></code></pre>
+</li>
+<li><strong>取消注释</strong>：
+<ul>
+<li>按 <code>/</code> 输入 <code>en_US.UTF</code> 回车搜索。</li>
+<li>找到 <code>#en_US.UTF-8 UTF-8</code>，按 <code>x</code> 删除前面的 <code>#</code> 号。</li>
+<li><em>(可选)</em> 如果需要中文支持，也可以顺便搜 <code>zh_CN.UTF</code> 把 <code>#zh_CN.UTF-8 UTF-8</code> 去掉。</li>
+</ul>
+</li>
+<li><strong>保存退出</strong>：输入 <code>:wq</code> 回车。</li>
+<li><strong>生成 Locale</strong>：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>locale-gen</span></span></code></pre>
+</li>
+<li><strong>设置默认语言</strong>（建议用英文，防止 TTY 界面乱码）：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>echo "LANG=en_US.UTF-8" > /etc/locale.conf</span></span></code></pre>
+</li>
+</ol>
+<h3 id="4-设置主机名-hostname"><strong>4. 设置主机名 (Hostname)</strong></h3>
+<p>给你的电脑起个名字（比如叫 <code>archlinux</code>）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>echo "archlinux" > /etc/hostname</span></span></code></pre>
+<p>接着配置 hosts 文件：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>vim /etc/hosts</span></span></code></pre>
+<p>按 <code>i</code> 进入编辑模式，输入以下内容（把 <code>archlinux</code> 换成你刚才起的名字）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>127.0.0.1   localhost</span></span>
+<span class="line"><span>::1         localhost</span></span>
+<span class="line"><span>127.0.1.1   archlinux.localdomain archlinux</span></span></code></pre>
+<p>为了让你看清楚结构，假设你给电脑起的名字是 <strong><code>my-pc</code></strong>，那么你的 <code>/etc/hosts</code> 这一行应该写成：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>127.0.1.1   my-pc.localdomain  my-pc</span></span></code></pre>
+<p>简单解释一下：</p>
+<ul>
+<li>第一个（带 <code>.localdomain</code> 的）：是你的<strong>全限定域名 (FQDN)</strong>，类似文件的“全路径”。</li>
+<li>第二个：是你的<strong>主机别名</strong>，方便系统内部快速识别。</li>
+</ul>
+<p>按 <code>Esc</code>，输入 <code>:wq</code> 保存退出。</p>
+<h3 id="5-设置-root-密码-重要"><strong>5. 设置 Root 密码 (重要)</strong></h3>
+<p>这是你的超级管理员密码，千万别忘了。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>passwd</span></span></code></pre>
+<p>输入两次密码（输入时屏幕不会显示星号，是正常的）。</p>
+<hr>
+<h2 id="7-创建用户与安装引导-关键">7. <strong>创建用户与安装引导 (关键)</strong>。</h2>
+<p>我们不能一直用 Root 裸奔，同时我们需要安装“钥匙”让电脑能启动。</p>
+<h3 id="1-创建普通用户"><strong>1. 创建普通用户</strong></h3>
+<p>假设你的用户名叫 <code>myuser</code>（请自行替换）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>useradd -m -G wheel -s /bin/bash myuser</span></span></code></pre>
+<ul>
+<li><code>-m</code>: 创建家目录。</li>
+<li><code>-G wheel</code>: 把用户加入管理员组（wheel 组）。</li>
+</ul>
+<p><strong>设置用户密码：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>passwd myuser</span></span></code></pre>
+<p><strong>赋予 Sudo 权限：</strong> 我们需要编辑 sudo 配置文件：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>EDITOR=vim visudo</span></span></code></pre>
+<ul>
+<li>向下滚动，找到这一行： <code># %wheel ALL=(ALL:ALL) ALL</code></li>
+<li><strong>去掉前面的 <code>#</code> 号</strong>（取消注释）。</li>
+<li><code>:wq</code> 保存退出。</li>
+</ul>
+<hr>
+<h3 id="2-安装引导程序-grub"><strong>2. 安装引导程序 (GRUB)</strong></h3>
+<p>这是让 Arch 能启动的核心。</p>
+<p><strong>A. 安装软件包</strong> 你需要根据你的 CPU 厂商加装一个微码包（Microcode），这对系统稳定性很重要。</p>
+<ul>
+<li>如果你是 <strong>Intel</strong> CPU：装 <code>intel-ucode</code></li>
+<li>如果你是 <strong>AMD</strong> CPU：装 <code>amd-ucode</code></li>
+</ul>
+<p>执行安装命令（假设你是 AMD，如果是 Intel 请自行替换）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pacman -S grub efibootmgr amd-ucode</span></span></code></pre>
+<p><strong>B. 安装 GRUB 到 EFI 分区</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB</span></span></code></pre>
+<ul>
+<li><strong>检查输出</strong>：如果不报错，显示 <code>Installation finished. No error reported.</code>，就是成功了。</li>
+</ul>
+<p><strong>C. 生成配置文件</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>grub-mkconfig -o /boot/grub/grub.cfg</span></span></code></pre>
+<ul>
+<li><strong>检查输出</strong>：你应该能看到它找到了 <code>Linux image</code> 和 <code>initrd image</code>。</li>
+</ul>
+<hr>
+<h3 id="3-启用网络服务-最后一步配置"><strong>3. 启用网络服务 (最后一步配置)</strong></h3>
+<p>如果不做这一步，重启后你会没网，也没法用 <code>nmtui</code>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>systemctl enable NetworkManager</span></span></code></pre>
+<p><em>(注意大小写，N 和 M 是大写的)</em></p>
+<hr>
+<h2 id="8-收尾与重启">8. <strong>收尾与重启</strong>。</h2>
+<p>恭喜你，最艰难的部分已经结束了。现在我们要安全地退出安装环境，拔掉 U 盘，看看你的劳动成果。</p>
+<h3 id="1-退出-chroot-环境"><strong>1. 退出 Chroot 环境</strong></h3>
+<p>你现在还在硬盘系统里，需要先退回到 U 盘环境。 输入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>exit</span></span></code></pre>
+<ul>
+<li>你的命令提示符应该会变回 <code>root@archiso ...</code> 这种样式。</li>
+</ul>
+<h3 id="2-卸载分区"><strong>2. 卸载分区</strong></h3>
+<p>为了防止数据丢失，我们需要手动卸载挂载的硬盘。 输入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>umount -R /mnt</span></span></code></pre>
+<h3 id="3-重启电脑"><strong>3. 重启电脑</strong></h3>
+<p>输入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>reboot</span></span></code></pre>
+<p><strong>⚠️ 关键动作</strong>： 当你屏幕变黑或者出现主板 Logo 的时候，<strong>立刻拔掉 U 盘</strong>！否则电脑可能又从 U 盘启动进安装界面了。</p>
+<hr>
+<h3 id="重启后会发生什么"><strong>重启后会发生什么？</strong></h3>
+<ol>
+<li>你会看到 <strong>GRUB 启动菜单</strong>（黑底白字，第一项是 <code>Arch Linux</code>）。
+<ul>
+<li><em>直接回车进入。</em></li>
+</ul>
+</li>
+<li>屏幕会滚动一堆代码，然后停在 <code>archlinux login:</code>。</li>
+<li><strong>登录</strong>：
+<ul>
+<li>输入你刚才创建的用户名（例如 <code>myuser</code>）。</li>
+<li>输入密码。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="进入系统后的第一件事连网"><strong>进入系统后的第一件事：连网</strong></h3>
+<p>因为你现在面对的是一个纯黑的命令行界面（TTY），你需要先连上网，才能安装图形界面。</p>
+<p>还记得我们装了 <code>NetworkManager</code> 吗？它带有一个简易图形界面。</p>
+<ol>
+<li>输入命令：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>nmtui</span></span></code></pre>
+</li>
+<li>选择 <strong>Activate a connection</strong>（启用连接）。</li>
+<li>在列表里选中你的 WiFi，回车，输入密码。</li>
+<li>连接成功后按 <code>Esc</code> 退出。</li>
+<li>测试一下：<code>ping archlinux.org</code>。</li>
+</ol>
+<hr>
+<p><strong>一旦你成功登录并连上了网，你就拥有了一个完美运行的 Arch Linux 基系统！</strong></p>
+<p>接下来就是“装修”环节了（安装显卡驱动和桌面环境）。</p>
+<h2 id="9-安装显卡驱动与桌面环境-kde-plasma">9. 安装显卡驱动与桌面环境 (KDE Plasma)</h2>
+<p>我强烈推荐 <strong>KDE Plasma</strong>，因为它对游戏特性 (VRR/HDR) 支持更好，定制性极强，且拥有类似 Windows 的传统布局，上手极快。</p>
+<h3 id="第一步安装显卡驱动-️-核心步骤">第一步：安装显卡驱动 (⚠️ 核心步骤)</h3>
+<p>进桌面黑屏通常是因为这一步没做好。请根据你的硬件<strong>三选一</strong>：</p>
+<h4 id="-选项-anvidia-显卡-n-卡">🟢 选项 A：NVIDIA 显卡 (N 卡)</h4>
+<p>适用于大多数游戏本和台式机。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pacman -S nvidia nvidia-utils nvidia-settings</span></span></code></pre>
+<h4 id="-选项-bamd-显卡-a-卡">🔴 选项 B：AMD 显卡 (A 卡)</h4>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pacman -S mesa vulkan-radeon xf86-video-amdgpu</span></span></code></pre>
+<h4 id="-选项-cintel-核显-你的-intel-ultra-5">🔵 选项 C：Intel 核显 (你的 Intel Ultra 5)</h4>
+<p>适用于轻薄本或仅使用核显的情况。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pacman -S mesa vulkan-intel intel-media-driver</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>mesa</code></strong>: 基础 OpenGL 驱动。</p>
+</li>
+<li>
+<p><strong><code>vulkan-intel</code></strong>: Vulkan 驱动 (运行 Steam 游戏必装)。</p>
+</li>
+<li>
+<p><strong><code>intel-media-driver</code></strong>: <strong>关键！</strong> 视频硬件解码驱动。看 4K 视频时由显卡硬解，CPU 占用低，大幅提升笔记本续航。</p>
+</li>
+</ul>
+<h3 id="第二步安装-kde-plasma-全家桶">第二步：安装 KDE Plasma 全家桶</h3>
+<p>安装桌面核心、终端、文件管理器和登录管理器。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pacman -S plasma-meta konsole dolphin sddm</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>plasma-meta</code></strong>: KDE 核心组件。</p>
+</li>
+<li>
+<p><strong><code>konsole</code></strong>: 终端 (必装)。</p>
+</li>
+<li>
+<p><strong><code>dolphin</code></strong>: 文件管理器 (必装)。</p>
+</li>
+<li>
+<p><strong><code>sddm</code></strong>: 登录管理器 (开机输密码的界面)。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>提示</strong>：安装过程中若询问 <code>pipewire</code> 等依赖选择，<strong>全部直接回车</strong>使用默认值即可。</p>
+</blockquote>
+<h3 id="第三步启用并进入桌面">第三步：启用并进入桌面</h3>
+<ol>
+<li>
+<p><strong>设置 SDDM 开机自启</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>systemctl enable sddm</span></span></code></pre>
+</li>
+<li>
+<p><strong>立刻启动图形界面</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>systemctl start sddm</span></span></code></pre>
+</li>
+</ol>
+<p><strong>效果</strong>：屏幕闪烁后，你将看到图形化登录界面。输入密码登录，欢迎来到 Arch Linux！</p>
+<p>📖 知识扩展：为什么要用 SDDM？</p>
+<p>“启动器”在 Linux 中称为 <strong>Display Manager (显示管理器)</strong>。针对 KDE 用户，<strong>SDDM</strong> 是最佳选择。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><strong>显示管理器</strong></th><th><strong>最佳拍档</strong></th><th><strong>特点</strong></th><th><strong>评价</strong></th></tr></thead><tbody><tr><td><strong>SDDM</strong></td><td><strong>KDE</strong></td><td>颜值高、支持动态壁纸、Wayland 支持好</td><td><strong>KDE 用户首选</strong>，无缝融合，不引入多余依赖。</td></tr><tr><td><strong>GDM</strong></td><td>GNOME</td><td>动画丝滑</td><td>GNOME 专用。在 KDE 上用会引入大量 GNOME 依赖，导致系统臃肿。</td></tr><tr><td><strong>LightDM</strong></td><td>XFCE/MATE</td><td>极度轻量、速度快</td><td>老牌万金油。适合低配电脑，但高分屏缩放配置较繁琐。</td></tr><tr><td><strong>Ly</strong></td><td>i3/Hyprland</td><td>纯文本/黑客风</td><td>无图形界面 (TUI)，极客/平铺窗口管理器用户最爱。</td></tr></tbody></table>
+<p><strong>结论</strong>：对于 Intel Ultra 5 + KDE 的组合，<strong>坚持使用 SDDM</strong>。它对 Intel 核显的 Wayland 模式支持最稳，且开箱即用。</p>
+<h2 id="10-安装后配置-第一阶段基础软件与中文环境">10. 安装后配置 (第一阶段：基础软件与中文环境)</h2>
+<p>刚进入桌面时系统是“光秃秃”的，我们需要“三件套”来让它变得可用：<strong>浏览器</strong>、<strong>中文字体</strong>、<strong>输入法</strong>。</p>
+<p><em>操作方法：在桌面按 <code>Ctrl + Alt + T</code> 或菜单搜索打开 <code>Konsole</code>。</em></p>
+<h3 id="1-安装浏览器-firefox">1. 安装浏览器 (Firefox)</h3>
+<p>Arch 默认不含浏览器。先装 Firefox 应急，Chrome 需后续通过 AUR 安装。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S firefox</span></span></code></pre>
+<h3 id="2-修复中文乱码-拒绝豆腐块">2. 修复中文乱码 (拒绝“豆腐块”) 🧊</h3>
+<p>这是一个非常经典的 Arch 现象：打开中文网页全是方块。</p>
+<p>原因：你装了系统，但没装中文字体。Arch 默认只带基础英文字体。</p>
+<p>我们安装 Google 开发的 <strong>Noto CJK</strong> (中日韩) 字体库，兼容性最好。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S noto-fonts-cjk noto-fonts-emoji</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>noto-fonts-cjk</code></strong>: 解决中文/日文/韩文显示为方块的问题。</p>
+</li>
+<li>
+<p><strong><code>noto-fonts-emoji</code></strong>: (可选) 让系统支持显示 Emoji 表情。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>生效方法</strong>：安装后，关闭并重新打开 Firefox 即可见效。如果系统界面仍有乱码，注销并重新登录即可。</p>
+</blockquote>
+<h3 id="3-安装中文输入法-fcitx5">3. 安装中文输入法 (Fcitx5)</h3>
+<p>KDE 对 Fcitx5 框架支持最佳。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S fcitx5-im fcitx5-chinese-addons</span></span></code></pre>
+<blockquote>
+<p><strong>注意</strong>：询问包选择时，<strong>直接回车</strong> (默认全选)，确保包含 Qt 和 GTK 模块，防止在某些软件里无法打字。</p>
+</blockquote>
+<h3 id="4-启用输入法-️-必做">4. 启用输入法 (⚠️ 必做)</h3>
+<p>安装只是第一步，必须在系统设置里“激活”它，否则无法切换。</p>
+<ol>
+<li>
+<p><strong>打开设置</strong>：菜单搜索 “System Settings” (系统设置)。</p>
+</li>
+<li>
+<p><strong>定位路径</strong>：左侧栏 <code>Input &#x26; Output</code> (输入输出) -> <code>Keyboard</code> (键盘)。</p>
+</li>
+<li>
+<p><strong>修改配置</strong>：点击 <code>Virtual Keyboard</code> (虚拟键盘) 选项卡。</p>
+</li>
+<li>
+<p><strong>激活</strong>：选中 <strong>Fcitx 5</strong>，点击右下角 <code>Apply</code> (应用)。</p>
+</li>
+<li>
+<p><strong>重启生效</strong>：<strong>注销并重新登录</strong> (或重启电脑)。</p>
+</li>
+</ol>
+<p><strong>✅ 验证清单：</strong></p>
+<ol>
+<li>
+<p>打开 Firefox，访问中文网站 (如 B站)，确认不再显示方块乱码。</p>
+</li>
+<li>
+<p>按 <code>Ctrl + Space</code> (空格)，确认能切出拼音输入法并打字。</p>
+</li>
+</ol>
+<h2 id="11-配置第二阶段解锁-aur-arch-user-repository">11. 配置第二阶段：解锁 AUR (Arch User Repository)</h2>
+<p>AUR 是什么？</p>
+<p>Arch 官方仓库虽然丰富，但受限于版权或维护策略，不收录 Google Chrome, VSCode, Slack, Zoom 等专有软件。AUR 是由社区维护的“超级仓库”，几乎涵盖了 Linux 平台所有的软件。</p>
+<p>我们需要安装 <strong><code>yay</code></strong>。它是最流行的 AUR 助手，能像 <code>pacman</code> 一样管理官方和 AUR 软件，自动完成“下载源码 -> 编译 -> 安装”的全过程。</p>
+<h3 id="1-安装-yay-三步走">1. 安装 <code>yay</code> (三步走)</h3>
+<p>请在 <code>Konsole</code> 中按顺序执行以下命令：</p>
+<h4 id="第一步安装-git">第一步：安装 Git</h4>
+<p>确保你有拉取代码的工具。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S git</span></span></code></pre>
+<h4 id="第二步克隆源码">第二步：克隆源码</h4>
+<p>将 <code>yay</code> 的源代码下载到本地（通常放在当前目录即可，安装完可删除）。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git clone https://aur.archlinux.org/yay.git</span></span></code></pre>
+<h4 id="第三步编译并安装">第三步：编译并安装</h4>
+<p>进入目录，让系统自动构建安装包。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>cd yay</span></span>
+<span class="line"><span>makepkg -si</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>makepkg</code></strong>: 制作安装包的脚本。</p>
+</li>
+<li>
+<p><strong><code>-s</code></strong>: 自动安装缺少的依赖 (Sync dependencies)。</p>
+</li>
+<li>
+<p><strong><code>-i</code></strong>: 编译成功后自动安装 (Install)。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：如果不报错，最后会询问是否安装，输入 <code>y</code> 回车即可。</p>
+</blockquote>
+<h3 id="2-使用-yay-安装软件">2. 使用 <code>yay</code> 安装软件</h3>
+<p>从此以后，你可以用 <code>yay</code> 代替 <code>pacman</code>。它既能装官方软件，也能装 AUR 软件。</p>
+<h4 id="实战安装-google-chrome">实战：安装 Google Chrome</h4>
+<p>官方仓库只有开源的 Chromium，要用原版 Chrome 必须走 AUR。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S google-chrome</span></span></code></pre>
+<h4 id="-yay-的常见交互提示">💡 <code>yay</code> 的常见交互提示</h4>
+<p>第一次使用时，新手容易被问懵，请参考以下“标准答案”：</p>
+<ol>
+<li>
+<p><strong>Packages to CleanBuild?</strong> (是否清除构建缓存？)</p>
+<ul>
+<li>👉 <strong>直接回车</strong> (默认 None/All 均可，通常选 None)。</li>
+</ul>
+</li>
+<li>
+<p><strong>Diffs to show?</strong> (是否查看代码差异？)</p>
+<ul>
+<li>👉 <strong>直接回车</strong> (默认 None，除非你想审查代码)。</li>
+</ul>
+</li>
+<li>
+<p><strong>Password</strong>:</p>
+<ul>
+<li>👉 输入你的用户密码（安装软件需要 sudo 权限）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-推荐给-cs-学生的软件清单-可选">3. 推荐给 CS 学生的软件清单 (可选)</h3>
+<p>既然装好了 <code>yay</code>，不妨把开发工具也装上：</p>
+<ul>
+<li>
+<p><strong>VSCode (官方二进制版)</strong>:</p>
+<ul>
+<li><em>注意：要装 <code>-bin</code> 结尾的版本，否则会从源码编译，非常慢。</em></li>
+</ul>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S visual-studio-code-bin</span></span></code></pre>
+</li>
+<li>
+<p><strong>JetBrains Toolbox (全家桶管理工具)</strong>:</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S jetbrains-toolbox</span></span></code></pre>
+</li>
+</ul>
+<p><strong>✅ 阶段性任务：</strong></p>
+<ol>
+<li>
+<p>成功安装 <code>yay</code>。</p>
+</li>
+<li>
+<p>安装一个你熟悉的浏览器或编辑器，确认能在菜单中启动它。</p>
+</li>
+</ol>
+<h2 id="12-美化登录界面-sddm-与--紧急救援指南">12. 美化登录界面 (SDDM) 与 🚑 紧急救援指南</h2>
+<p>Arch 默认的 SDDM 界面非常简陋，但作为 KDE 用户，我们可以轻松将其替换为高颜值主题（如 Mac 风格或 Cyberpunk 风格）。</p>
+<h3 id="-part-1-更换高颜值主题">🎨 Part 1: 更换高颜值主题</h3>
+<h4 id="1-打开设置">1. 打开设置</h4>
+<ol>
+<li>
+<p>按 <code>Win</code> 键打开菜单，搜索并打开 <strong>“Login Screen (SDDM)”</strong> (登录屏幕)。</p>
+</li>
+<li>
+<p>点击右下角的 <strong>“Get New SDDM Themes…”</strong> (获取新 SDDM 主题)。</p>
+</li>
+<li>
+<p><strong>关键操作</strong>：在弹窗右上角，将排序方式改为 <strong>“Highest Rated”</strong> (评分最高) 或 <strong>“Most Downloaded”</strong>，以确保下载到质量稳定的主题。</p>
+</li>
+</ol>
+<h4 id="2-推荐主题">2. 推荐主题</h4>
+<ul>
+<li>
+<p><strong>Sugar Candy</strong>：最受欢迎的主题之一。类似 Win 10 风格，简洁大方，特色是<strong>可以直接同步显示你的桌面壁纸</strong>。</p>
+</li>
+<li>
+<p><strong>White Sur</strong>：完美复刻 macOS Big Sur 风格（如果你之前设置了自然滚动，配合这个简直完美）。</p>
+</li>
+<li>
+<p><strong>Catppuccin</strong>：极客圈很火的粉嫩/暗色调配色方案。</p>
+</li>
+</ul>
+<h4 id="3-安装与应用">3. 安装与应用</h4>
+<ol>
+<li>
+<p>点击 <strong>Install</strong> 下载你喜欢的主题。</p>
+</li>
+<li>
+<p>关闭下载窗口，在列表中<strong>选中</strong>该主题。</p>
+<ul>
+<li><em>技巧：对于 Sugar Candy 等主题，选中后点击下方的 <code>List</code> 图标或 <code>Configure</code> 按钮，可以自定义背景图片。</em></li>
+</ul>
+</li>
+<li>
+<p>点击 <strong>Apply</strong> (应用)，输入密码。</p>
+</li>
+</ol>
+<h4 id="4-预览效果">4. 预览效果</h4>
+<p>无需重启。点击菜单 -> <strong>Leave</strong> (离开) -> <strong>Log Out</strong> (注销)，即可立刻看到新界面。</p>
+<h3 id="-part-2-紧急救援-如果黑屏了怎么办">🚑 Part 2: 紧急救援 (如果黑屏了怎么办？)</h3>
+<p><strong>⚠️ 必读：</strong> 有时因为主题 Bug 或依赖缺失，更换主题后可能会导致 SDDM 卡死或黑屏。<strong>别慌，系统没坏，只是“大门”卡住了，我们需要走“侧门”进去。</strong></p>
+<h4 id="1-进入-tty-纯文本模式">1. 进入 TTY (纯文本模式)</h4>
+<p>当图形界面卡死时，按住键盘组合键：</p>
+<p>Ctrl + Alt + F3</p>
+<p>(如果 F3 没反应，尝试 F4、F5 或 F6)</p>
+<blockquote>
+<p><strong>成功标志</strong>：屏幕变黑，显示一行白字 <code>archlinux login:</code>。</p>
+</blockquote>
+<h4 id="2-登录系统">2. 登录系统</h4>
+<p>输入你的用户名和密码进行登录。只要能登录，说明系统内核完好。</p>
+<h4 id="3-恢复默认配置">3. 恢复默认配置</h4>
+<p>我们需要修改配置文件，强制把主题改回最稳的默认值 (<code>breeze</code>)。</p>
+<p>输入命令编辑配置：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/sddm.conf.d/kde_settings.conf</span></span></code></pre>
+<p><em>(注：如果提示文件不存在，尝试编辑 <code>/etc/sddm.conf</code>)</em></p>
+<p><strong>操作步骤：</strong></p>
+<ol>
+<li>
+<p>找到 <code>[Theme]</code> 区域。</p>
+</li>
+<li>
+<p>找到 <code>Current=xxxx</code> (xxxx 是导致黑屏的主题名)。</p>
+</li>
+<li>
+<p>将其修改为：</p>
+<p>Plaintext</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Current=breeze</span></span></code></pre>
+</li>
+<li>
+<p><strong>保存退出</strong>：按 <code>Esc</code> -> 输入 <code>:wq</code> -> 回车。</p>
+</li>
+</ol>
+<h4 id="4-重启图形界面">4. 重启图形界面</h4>
+<p>输入以下命令，让 SDDM 重新加载配置：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo systemctl restart sddm</span></span></code></pre>
+<p><strong>结果</strong>：屏幕应自动跳回图形登录界面。</p>
+<h2 id="13-进阶美化打造-mac-风格登录界面-防黑屏版">13. 进阶美化：打造 Mac 风格登录界面 (防黑屏版) 🍎</h2>
+<p>如果你想要 <strong>Mac 风格 (Big Sur / Monterey)</strong> 的登录体验，<strong>强烈建议</strong>不要使用系统设置里的“下载新主题”按钮。那个功能只下载皮肤但不下载依赖，极易导致黑屏。</p>
+<p>既然已经安装了 <code>yay</code>，我们将用最安全、依赖管理最完善的方式来操作。</p>
+<h3 id="️-第一步安装核心绘图依赖-防黑屏补丁">🛡️ 第一步：安装核心绘图依赖 (防黑屏补丁)</h3>
+<p><strong>这是最关键的一步！</strong> 90% 的花哨主题黑屏都是因为缺了这些 Qt 绘图库。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S qt5-graphicaleffects qt5-quickcontrols2 qt5-svg</span></span></code></pre>
+<h3 id="-第二步安装-white-sur-主题">🎨 第二步：安装 White Sur 主题</h3>
+<p><strong>White Sur</strong> 是目前 Linux 上复刻 macOS 最完美的主题之一，支持模糊特效、居中头像和 Mac 风格用户列表。</p>
+<p>使用 <code>yay</code> 安装（它会自动处理部分依赖）：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S sddm-theme-whitesur-git</span></span></code></pre>
+<p><em>(安装过程中若询问 provider，直接回车选默认即可)</em></p>
+<h3 id="️-第三步应用主题-修改配置文件">⚙️ 第三步：应用主题 (修改配置文件)</h3>
+<p>为了保险起见，我们直接修改配置文件来启用它，而不是去图形界面点点点。</p>
+<ol>
+<li>
+<p><strong>编辑配置</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/sddm.conf.d/kde_settings.conf</span></span></code></pre>
+<p><em>(注：如果文件为空，直接写入即可；如果有内容，修改对应行)</em></p>
+</li>
+<li>
+<p>修改内容：</p>
+<p>找到 [Theme] 区域，将 Current 修改为 whitesur：</p>
+<p>Ini, TOML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Theme]</span></span>
+<span class="line"><span>Current=whitesur</span></span></code></pre>
+</li>
+<li>
+<p><strong>保存退出</strong>：按 <code>Esc</code> -> 输入 <code>:wq</code> -> 回车。</p>
+</li>
+</ol>
+<h3 id="-第四步测试预览">🧪 第四步：测试预览</h3>
+<p>无需重启，直接运行测试命令查看效果：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sddm-greeter --test-mode --theme /usr/share/sddm/themes/whitesur</span></span></code></pre>
+<ul>
+<li>
+<p><strong>现象</strong>：桌面上会弹出一个窗口模拟登录界面。</p>
+</li>
+<li>
+<p><strong>判定</strong>：如果看到了漂亮的 Mac 风格界面且没有报错/黑屏，说明配置成功！</p>
+</li>
+</ul>
+<hr>
+<h2 id="14-开启神级特效-果冻--妙控灯"><strong>14. 开启神级特效 (果冻 + 妙控灯)</strong></h2>
+<p>Mac 的精髓在于动画。</p>
+<ol>
+<li>回到 <strong>System Settings</strong> -> <strong>Workspace Behavior</strong> (工作区行为) -> <strong>Desktop Effects</strong> (桌面特效)。</li>
+<li>搜索并勾选以下特效：
+<ul>
+<li><strong>Wobbly Windows</strong> (果冻窗口)：移动窗口时会像果冻一样抖动（Linux 必装装逼神器）。</li>
+<li><strong>Magic Lamp</strong> (神灯/阿拉丁)：最小化窗口时像 Mac 一样被“吸”进 Dock 里。</li>
+</ul>
+</li>
+<li>点击 <strong>Apply</strong>。</li>
+</ol>
+<hr>
+<p><strong>现在的任务：</strong> 试着拖动一下窗口，看看有没有果冻效果？最小化窗口，看看有没有神灯效果？</p>
+<h2 id="15-终端美化-zplug-版zplug--powerlevel10k">15. 终端美化 (Zplug 版)：Zplug + Powerlevel10k 🚀</h2>
+<p>既然追求性能且不喜欢臃肿的 Oh My Zsh，<strong>Zplug</strong> 是绝佳选择。它基于插件管理，启动速度极快。我们将配合 <strong>Powerlevel10k (P10k)</strong> 主题，打造即时响应的现代化终端。</p>
+<h3 id="第一步安装核心字体-meslo-nerd-font">第一步：安装核心字体 (Meslo Nerd Font)</h3>
+<p>P10k 主题依赖特定字体来显示图标（如 Git 分支、锁头）。直接通过 AUR 安装打好补丁的版本。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S ttf-meslo-nerd-font-powerlevel10k</span></span></code></pre>
+<p><em>(注：安装后无需手动配置，P10k 向导通常会自动识别。如果乱码，去 Konsole 设置里手动选 <code>MesloLGS NF</code>)</em></p>
+<h3 id="第二步安装-zplug">第二步：安装 Zplug</h3>
+<p>使用 <code>yay</code> 安装，系统路径通常位于 <code>/usr/share/zplug</code>。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S zplug</span></span></code></pre>
+<h3 id="第三步配置-zshrc-写入插件列表">第三步：配置 <code>.zshrc</code> (写入插件列表)</h3>
+<p>我们需要告诉 Zsh 启动时加载 Zplug 和需要的插件。</p>
+<ol>
+<li>
+<p><strong>编辑配置文件</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>vim ~/.zshrc</span></span></code></pre>
+</li>
+<li>
+<p><strong>写入以下配置</strong> (清空原内容或追加)：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 初始化 Zplug (Arch 包的默认路径)</span></span>
+<span class="line"><span>source /usr/share/zplug/init.zsh</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 定义插件</span></span>
+<span class="line"><span># 语法高亮 (输对变绿，输错变红)</span></span>
+<span class="line"><span>zplug "zsh-users/zsh-syntax-highlighting", defer:2</span></span>
+<span class="line"><span># 自动建议 (记录历史命令，按右键补全)</span></span>
+<span class="line"><span>zplug "zsh-users/zsh-autosuggestions", defer:2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 3. 加载主题 (Powerlevel10k)</span></span>
+<span class="line"><span># depth:1 表示只克隆最近一次提交，下载飞快</span></span>
+<span class="line"><span>zplug "romkatv/powerlevel10k", as:theme, depth:1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 4. 自动安装插件 (检测未安装则询问)</span></span>
+<span class="line"><span>if ! zplug check --verbose; then</span></span>
+<span class="line"><span>    printf "Install? [y/N]: "</span></span>
+<span class="line"><span>    read -q &#x26;&#x26; zplug install</span></span>
+<span class="line"><span>fi</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 5. 加载插件</span></span>
+<span class="line"><span>zplug load</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 6. 加载 P10k 的个性化配置 (由向导生成)</span></span>
+<span class="line"><span> ! -f ~/.p10k.zsh  || source ~/.p10k.zsh</span></span></code></pre>
+</li>
+<li>
+<p><strong>保存退出</strong> (<code>:wq</code>)。</p>
+</li>
+</ol>
+<h3 id="第四步激活与配置-见证奇迹">第四步：激活与配置 (见证奇迹) ✨</h3>
+<ol>
+<li>
+<p><strong>重启 Zsh</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>exec zsh</span></span></code></pre>
+</li>
+<li>
+<p><strong>自动安装</strong>：Zplug 会检测并询问是否安装插件，输入 <code>y</code> 确认。</p>
+</li>
+<li>
+<p>进入 P10k 配置向导：</p>
+<p>插件安装完毕后，P10k 会自动启动配置界面。</p>
+<ul>
+<li>
+<p><strong>检查图标</strong>：看到钻石/锁头图标选 <code>Yes</code>。</p>
+</li>
+<li>
+<p><strong>风格推荐</strong>：<code>Rainbow</code> (彩虹风格) 或 <code>Lean</code> (极简风格)。</p>
+</li>
+<li>
+<p><strong>Prompt Height</strong>：<code>Two lines</code> (两行模式，路径和命令分行，更清晰)。</p>
+</li>
+<li>
+<p><strong>Transient Prompt</strong>：推荐 <code>Yes</code> (让滚屏历史更干净)。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="-常见问题修正">💡 常见问题修正</h3>
+<p><strong>如果图标显示为方块/乱码：</strong></p>
+<ol>
+<li>
+<p>右键 Konsole -> <code>Edit Current Profile</code> -> <code>Appearance</code> -> <code>Font</code>。</p>
+</li>
+<li>
+<p>手动选择 <strong>MesloLGS NF</strong>。</p>
+</li>
+<li>
+<p>点击 <code>OK</code>。</p>
+</li>
+</ol>
+<p>测试效果：</p>
+<p>尝试输入 ls 或进入一个 git 仓库 (git status)，体验语法高亮和即时 Git 状态提示。</p>
+<p>Linux and Windows 上的 AirDrop</p>
+<hr>
+<h3 id="第一步确认-zplug-已安装"><strong>第一步：确认 Zplug 已安装</strong></h3>
+<p>先确保你真的装了它（防止刚才漏了）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S zplug</span></span></code></pre>
+<h3 id="第二步修改-zshrc-路径"><strong>第二步：修改 .zshrc 路径</strong></h3>
+<p>我们需要把配置文件里的引用路径改成 Arch 专属的路径。</p>
+<ol>
+<li>打开配置文件：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>vim ~/.zshrc</span></span></code></pre>
+</li>
+<li><strong>找到引用 Zplug 的那一行</strong>。它通常长这样：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>source ~/.zplug/init.zsh  &#x3C;-- 这是错的 (通用路径)</span></span></code></pre>
+</li>
+<li><strong>把它改成 Arch 的路径</strong>：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>source /usr/share/zplug/init.zsh</span></span></code></pre>
+</li>
+<li>保存退出 (<code>Esc</code> -> <code>:wq</code> -> 回车)。</li>
+</ol>
+<hr>
+<h3 id="第三步重新加载"><strong>第三步：重新加载</strong></h3>
+<p>在终端输入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>exec zsh</span></span></code></pre>
+<p>这次应该就能看到 Zplug 开始自动安装插件了（Install? [y/N]）。</p>
+<p>既然 <code>pacman</code>/<code>yay</code> 安装的路径找不到，或者安装过程出了问题，我们直接用最原始、也是最通用的<strong>Git 手动安装法</strong>。</p>
+<p>这样做还有一个好处：<strong>路径统一</strong>。你在 Mac 或其他 Linux 上通常也是装在用户目录下，这样你的配置文件拿过去就能直接用，不用改路径。</p>
+<p>请执行以下两步，马上解决：</p>
+<h3 id="第一步手动克隆到家目录"><strong>第一步：手动克隆到家目录</strong></h3>
+<p>在终端输入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git clone https://github.com/zplug/zplug ~/.zplug</span></span></code></pre>
+<h3 id="第二步修改配置文件"><strong>第二步：修改配置文件</strong></h3>
+<p>因为我们把它装到了 <code>~/.zplug</code>，现在的路径就和你复制过来的配置（通常情况）一致了。</p>
+<ol>
+<li>打开配置文件：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>vim ~/.zshrc</span></span></code></pre>
+</li>
+<li><strong>修改引用路径</strong>： 找到 <code>source ...</code> 那一行，改成：
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>source ~/.zplug/init.zsh</span></span></code></pre>
+<em>(如果你刚才贴的是 <code>/usr/share/...</code>，改回 <code>~/.zplug/...</code>)</em></li>
+<li>保存退出 (<code>:wq</code>)。</li>
+</ol>
+<hr>
+<h3 id="第三步再次激活"><strong>第三步：再次激活</strong></h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>exec zsh</span></span></code></pre>
+<p>这次应该稳了。它会去你家目录下的 <code>.zplug</code> 文件夹加载，并且开始安装插件。</p>
+<h2 id="16-安装常用软件与-arch-软件包原则-steam--微信避坑指南">16. 安装常用软件与 Arch 软件包原则 (Steam &#x26; 微信避坑指南) 🎮</h2>
+<p>在开始疯狂安装之前，我们需要先纠正一个从 Windows/Ubuntu 转过来的习惯，这能救你的命。</p>
+<h3 id="-核心原则为什么不能直接下载官网的-debrpm">🛑 核心原则：为什么不能直接下载官网的 .deb/.rpm？</h3>
+<p><strong>千万别去微信/WPS官网下载安装包，也不能直接装。</strong> 这是 Arch 新手最容易炸系统的坑。</p>
+<ol>
+<li>
+<p><strong>格式不通</strong>：</p>
+<ul>
+<li>
+<p><code>.deb</code> 是给 Debian/Ubuntu 用的。</p>
+</li>
+<li>
+<p><code>.rpm</code> 是给 RedHat/Fedora 用的。</p>
+</li>
+<li>
+<p>Arch 使用 <code>pacman</code> 包管理器，<strong>原生不支持</strong>这两种格式。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>依赖地狱</strong>：</p>
+<ul>
+<li>如果你强行用工具转换安装，99% 会因为缺少特定的系统库而打不开，或者导致系统其他软件冲突。</li>
+</ul>
+</li>
+</ol>
+<h4 id="aur-到底在干什么">AUR 到底在干什么？</h4>
+<p>你可能会问：“那 <code>yay</code> 是怎么装微信的？”。原理很简单：</p>
+<ol>
+<li>
+<p>yay 帮你去官方源把那个 .deb 下载下来。</p>
+<ol start="2">
+<li>
+<p>自动解压、修改文件结构以适应 Arch。</p>
+</li>
+<li>
+<p>自动补齐所有缺少的依赖库。</p>
+</li>
+<li>
+<p>打包成 Arch 能认的格式并安装。</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>结论：在 Arch 上，永远优先用 <code>yay</code> 找 AUR，不要去浏览器里下安装包。</strong></p>
+<h3 id="第一步开启-multilib-steam-必做">第一步：开启 Multilib (Steam 必做)</h3>
+<p>Steam 是 32 位软件，Arch 默认只开 64 位仓库。不打开这个，Steam 连装都装不上。</p>
+<ol>
+<li>
+<p><strong>编辑配置</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/pacman.conf</span></span></code></pre>
+</li>
+<li>
+<p><strong>修改</strong>：向下翻，找到 <code>[multilib]</code>，<strong>去掉两行前面的 <code>#</code> 号</strong>：</p>
+<p>Ini, TOML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[multilib]</span></span>
+<span class="line"><span>Include = /etc/pacman.d/mirrorlist</span></span></code></pre>
+</li>
+<li>
+<p><strong>同步数据库</strong> (修改完必须立刻执行)：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -Syu</span></span></code></pre>
+</li>
+</ol>
+<h3 id="第二步正确安装-steam-修复闪退版">第二步：正确安装 Steam (修复闪退版)</h3>
+<p>针对你的 <strong>Intel Ultra 5</strong> (集显)，如果只装 <code>steam</code> 本体，图标跳两下就会消失（因为缺 32 位显卡驱动）。</p>
+<p><strong>请执行这条“完全体”命令：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S steam lib32-mesa lib32-vulkan-intel</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>steam</code></strong>: 游戏平台本体。</p>
+</li>
+<li>
+<p><strong><code>lib32-vulkan-intel</code></strong>: <strong>防闪退的关键</strong>。这是 Intel 核显运行 Steam 游戏必须的 32 位 Vulkan 驱动。</p>
+</li>
+</ul>
+<h3 id="第三步安装-docker-devops-吃饭家伙">第三步：安装 Docker (DevOps 吃饭家伙)</h3>
+<ol>
+<li>
+<p><strong>安装</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S docker docker-compose</span></span></code></pre>
+</li>
+<li>
+<p><strong>配置权限</strong> (避免每次都输 sudo)：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo systemctl enable --now docker</span></span>
+<span class="line"><span>sudo usermod -aG docker $USER</span></span></code></pre>
+<p><em>(注：执行完后需<strong>注销并重新登录</strong>才会生效)</em></p>
+</li>
+</ol>
+<h3 id="第四步安装-aur-必备-微信spotify">第四步：安装 AUR 必备 (微信/Spotify)</h3>
+<p>根据前面的原则，我们使用 <code>yay</code> 来安装经过社区优化的版本。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S wechat-universal-bwe spotify typora-free</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>wechat-universal-bwe</code></strong> (强推)：</p>
+<ul>
+<li>
+<p>基于统信 UOS 适配版，功能最全（支持朋友圈、小程序），自带沙箱（防封号），稳定性最高。</p>
+</li>
+<li>
+<p><em>备选方案</em>：如果这个版本下载实在太慢或失败，可以尝试 <code>yay -S wechat-beta</code> (官方原生 Linux 4.0 测试版，较轻量但功能稍弱)。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>typora-free</code></strong>: Markdown 写作神器（免费旧版）。</p>
+</li>
+</ul>
+<p>🛠️ 微信高分屏太小怎么办？</p>
+<p>Intel Ultra 笔记本通常屏幕分辨率较高。</p>
+<ul>
+<li><strong>解决</strong>：打开微信 -> 左下角设置 -> 通用 -> <strong>缩放比例</strong> (拉到 150% 或 200%)。</li>
+</ul>
+<h3 id="-清单核对">✅ 清单核对</h3>
+<p>现在你的系统已经装备齐全：</p>
+<ol>
+<li>
+<p><strong>Steam</strong>: 能正常启动，不再闪退。</p>
+</li>
+<li>
+<p><strong>WeChat</strong>: 能打字，能看朋友圈，界面大小合适。</p>
+</li>
+<li>
+<p><strong>Docker</strong>: 随时可以部署容器。</p>
+</li>
+<li>
+<p><strong>Dev Environment</strong>: Zsh + Yay + Git 蓄势待发。</p>
+</li>
+</ol>
+<h2 id="17-核心知识软件去哪找pacman-vs-aur">17. 核心知识：软件去哪找？(Pacman vs AUR) 📦</h2>
+<p>在 Arch Linux 上装软件，不像 Windows 那样到处找 <code>.exe</code>，也不像 Ubuntu 那样经常要加 PPA。我们只有两个“大仓库”：<strong>官方仓库</strong> 和 <strong>AUR</strong>。</p>
+<h3 id="1-第一梯队官方仓库-official-repos">1. 第一梯队：官方仓库 (Official Repos)</h3>
+<p><strong>“正规军” / “超市货架”</strong></p>
+<p>这是 Arch 的核心基石，90% 的常用软件都在这里。</p>
+<ul>
+<li>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>
+<p><strong>全是二进制包 (Binaries)</strong>：官方已经编译好了，下载解压即用，速度极快，稳定性最高。</p>
+</li>
+<li>
+<p><strong>安全性高</strong>：由 Arch 官方开发者维护和签名。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>安装工具</strong>：<code>pacman</code></p>
+</li>
+<li>
+<p><strong>包含内容</strong>：</p>
+<ul>
+<li>
+<p><strong>系统底座</strong>：内核 (<code>linux</code>)、驱动 (<code>nvidia</code>, <code>mesa</code>)、桌面环境 (<code>plasma</code>, <code>gnome</code>)。</p>
+</li>
+<li>
+<p><strong>开发工具</strong>：<code>python</code>, <code>docker</code>, <code>git</code>, <code>vim</code>, <code>gcc</code>。</p>
+</li>
+<li>
+<p><strong>通用软件</strong>：<code>firefox</code>, <code>vlc</code>, <code>obs-studio</code>, <code>telegram</code>。</p>
+</li>
+<li>
+<p><strong>游戏</strong>：<code>steam</code> (位于 multilib 仓库)。</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>结论</strong>：哪怕你这辈子都不碰 AUR，光靠官方仓库也能完成绝大部分开发和娱乐工作。</p>
+</blockquote>
+<h3 id="2-第二梯队aur-arch-user-repository">2. 第二梯队：AUR (Arch User Repository)</h3>
+<p><strong>“社区黑市” / “定制工坊”</strong></p>
+<p>这就是你用 <code>yay</code> 访问的地方。它是<strong>社区用户维护</strong>的脚本库 (PKGBUILD)。</p>
+<ul>
+<li>
+<p><strong>为什么要用它？</strong></p>
+<ol>
+<li>
+<p><strong>版权/协议限制</strong>：Arch 官方不能直接分发商业软件的二进制文件（如 <strong>WeChat, Google Chrome, Spotify, Zoom</strong>）。AUR 提供的脚本会帮你去官网下载安装包，然后自动打包成 Arch 格式。</p>
+</li>
+<li>
+<p><strong>太新或太小众</strong>：GitHub 上刚出的开源小工具，或者特定的 Mac 主题、旧版软件。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>都要编译很久吗？</strong></p>
+<ul>
+<li>
+<p><strong>不一定</strong>。</p>
+</li>
+<li>
+<p><strong>Repackaging (快)</strong>：像 <code>google-chrome</code> 或 <code>wechat</code>，脚本只是把官方的 <code>.deb</code> 拆包再重组，几秒钟就好。</p>
+</li>
+<li>
+<p><strong>Compiling (慢)</strong>：带 <code>-git</code> 后缀的包（如 <code>wlroots-git</code>），会拉取源代码<strong>从头编译</strong>，这才是会让 CPU 满载且耗时的操作。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="-总结arch-用户的安装逻辑">🧠 总结：Arch 用户的安装逻辑</h3>
+<p>当你想要装一个软件时，脑子里应该自动运行这个流程：</p>
+<p><strong>第一步：先查官方仓库 (首选)</strong></p>
+<ul>
+<li>
+<p>想装 Python？ -> <code>sudo pacman -S python</code> (✅ 秒装)</p>
+</li>
+<li>
+<p>想装 Docker？ -> <code>sudo pacman -S docker</code> (✅ 秒装)</p>
+</li>
+<li>
+<p>想装 Firefox？ -> <code>sudo pacman -S firefox</code> (✅ 秒装)</p>
+</li>
+</ul>
+<p><strong>第二步：官方没有？再找 AUR (备选)</strong></p>
+<ul>
+<li>
+<p>想装 微信？(官方没收录) -> <code>yay -S wechat-universal-bwe</code></p>
+</li>
+<li>
+<p>想装 Chrome？(官方只有开源的 Chromium) -> <code>yay -S google-chrome</code></p>
+</li>
+<li>
+<p>想装 VSCode 闭源版？ -> <code>yay -S visual-studio-code-bin</code></p>
+</li>
+</ul>
+<p><strong>记住这个优先级，你的系统会既稳定又强大。</strong></p>
+<h2 id="18-终极输入法配置fcitx5--雾凇拼音--磨砂皮肤">18. 终极输入法配置：Fcitx5 + 雾凇拼音 + 磨砂皮肤 🧊</h2>
+<p>在 Arch Linux + KDE 下，Fcitx5 是公认的“真神”，原生支持 Wayland，响应极快。我们将配合开源界最强的“雾凇拼音”词库，打造超越搜狗的输入体验。</p>
+<h3 id="第一步安装核心组件-官方仓库">第一步：安装核心组件 (官方仓库)</h3>
+<p>直接使用 Pacman 安装基础框架和兼容模块。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>fcitx5-im</code></strong>: 基础包组。</p>
+</li>
+<li>
+<p><strong><code>fcitx5-chinese-addons</code></strong>: 自带的拼音引擎。</p>
+</li>
+<li>
+<p><strong><code>fcitx5-pinyin-zhwiki</code></strong>: 维基百科词库 (支持最新专有名词)。</p>
+</li>
+</ul>
+<h3 id="第二步配置环境变量-️-必做">第二步：配置环境变量 (⚠️ 必做)</h3>
+<p>如果不配置，VSCode、微信或终端里无法调出输入法。</p>
+<ol>
+<li>
+<p><strong>编辑文件</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/environment</span></span></code></pre>
+</li>
+<li>
+<p><strong>追加内容</strong> (确保包含以下几行)：</p>
+<p>Ini, TOML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>GTK_IM_MODULE=fcitx</span></span>
+<span class="line"><span>QT_IM_MODULE=fcitx</span></span>
+<span class="line"><span>XMODIFIERS=@im=fcitx</span></span>
+<span class="line"><span>SDL_IM_MODULE=fcitx</span></span>
+<span class="line"><span>GLFW_IM_MODULE=ibus</span></span></code></pre>
+</li>
+<li>
+<p><strong>保存</strong> (<code>:wq</code>) 并<strong>注销重新登录</strong>。</p>
+</li>
+</ol>
+<h3 id="第三步让-kde-托管输入法">第三步：让 KDE 托管输入法</h3>
+<ol>
+<li>
+<p><strong>系统设置</strong> -> <strong>Keyboard</strong> (键盘) -> <strong>Virtual Keyboard</strong> (虚拟键盘)。</p>
+</li>
+<li>
+<p>选中 <strong>Fcitx 5</strong> 并点击 Apply。</p>
+</li>
+</ol>
+<p><em>(注销回来后，右下角托盘应出现键盘图标)</em></p>
+<h3 id="第四步安装并激活雾凇拼音-rime-ice">第四步：安装并激活“雾凇拼音” (Rime-Ice)</h3>
+<p>Fcitx5 自带拼音够用，但雾凇拼音体验更好。</p>
+<p><strong>1. 安装 Rime 引擎和词库：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S fcitx5-rime rime-ice</span></span></code></pre>
+<ol start="2">
+<li>激活雾凇方案 (关键步骤)：</li>
+</ol>
+<p>Rime 默认使用旧版“明月拼音”，需手动修改配置强制启用雾凇。</p>
+<ul>
+<li>
+<p><strong>创建/编辑配置</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mkdir -p ~/.local/share/fcitx5/rime/</span></span>
+<span class="line"><span>vim ~/.local/share/fcitx5/rime/default.custom.yaml</span></span></code></pre>
+</li>
+<li>
+<p><strong>写入以下内容</strong>：</p>
+<p>YAML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>patch:</span></span>
+<span class="line"><span>  "schema_list/+":</span></span>
+<span class="line"><span>    - schema: rime_ice  # 强制启用雾凇拼音</span></span>
+<span class="line"><span>  "menu/page_size": 9   # 候选项显示9个</span></span></code></pre>
+</li>
+</ul>
+<p><strong>3. 部署生效：</strong></p>
+<ul>
+<li>
+<p>右键托盘图标 -> <strong>Restart</strong> (重启 Fcitx5)。</p>
+</li>
+<li>
+<p>在输入框按 <code>Ctrl+Space</code> 切换到 Rime (中州韵)。</p>
+</li>
+<li>
+<p>按 <code>F4</code> 或 <code>Ctrl+~</code>，菜单中应显示并选中“雾凇拼音”。</p>
+</li>
+</ul>
+<h3 id="第五步换上高颜值磨砂皮肤-fluentdark">第五步：换上高颜值磨砂皮肤 (FluentDark)</h3>
+<p>默认皮肤太土，我们换一个带<strong>模糊特效 (Blur)</strong> 和<strong>阴影</strong>的现代皮肤。</p>
+<p><strong>1. 安装皮肤：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S fcitx5-skin-fluentdark-git</span></span></code></pre>
+<p><em>(备选：如果想要纯粹的 Mac 风格，也可以装 <code>fcitx5-theme-whitesur-git</code>)</em></p>
+<p><strong>2. 应用皮肤：</strong></p>
+<ul>
+<li>
+<p>右键托盘图标 -> <strong>Configure</strong> (配置)。</p>
+</li>
+<li>
+<p><strong>Addons</strong> (附加组件) -> <strong>Classic User Interface</strong> (经典用户界面) -> 点击右侧 <strong>Configure</strong>。</p>
+</li>
+<li>
+<p><strong>Theme</strong> (主题) 选择：<code>FluentDark-git</code>。</p>
+</li>
+<li>
+<p><strong>建议勾选</strong>：<code>Use input method language to display text</code> (字体渲染更漂亮)。</p>
+</li>
+</ul>
+<p>✅ 最终效果检查：</p>
+<p>找个输入框按 Ctrl+Space，你应该能看到一个半透明、带模糊背景的精美悬浮窗，打字流畅，选词精准。</p>
+<h2 id="19-硬件驱动补全修复蓝牙与声音-intel-ultra-专用">19. 硬件驱动补全：修复蓝牙与声音 (Intel Ultra 专用) 🔊</h2>
+<p>在 Arch Linux 上，刚装完系统没声音、没蓝牙是常态。因为 Arch 默认不预装非必要的固件和服务。你的 Intel Ultra 5 属于新架构，必须手动补全 <strong>Firmware (固件)</strong> 才能让硬件工作。</p>
+<h3 id="part-1-修复蓝牙-bluetooth">Part 1: 修复蓝牙 (Bluetooth) 🦷</h3>
+<p>蓝牙只需要安装协议栈并启动后台服务即可。</p>
+<p><strong>1. 安装蓝牙工具：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S bluez bluez-utils</span></span></code></pre>
+<p><strong>2. 启动服务并设为开机自启：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo systemctl enable --now bluetooth</span></span></code></pre>
+<p><strong>3. 启用验证：</strong></p>
+<ul>
+<li>
+<p>现在去右下角托盘点击蓝牙图标，勾选 <strong>Enable</strong> (启用)，应该可以搜到设备了。</p>
+</li>
+<li>
+<p>如果搜不到，输入 <code>rfkill list</code> 检查是否被硬件开关关闭。</p>
+</li>
+</ul>
+<h3 id="part-2-修复声音-pipewire--sof-固件">Part 2: 修复声音 (PipeWire + SOF 固件) 🎵</h3>
+<p>我们使用现代化的 <strong>PipeWire</strong> 音频架构（KDE 6 标配）。对于 Intel Ultra (Meteor Lake) 处理器，<strong><code>sof-firmware</code> 是必须安装的</strong>，否则声卡无法被识别。</p>
+<ol>
+<li>安装全家桶 (含 Intel 固件)：</li>
+</ol>
+<p>请复制整行命令：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S pipewire pipewire-pulse pipewire-alsa wireplumber sof-firmware alsa-utils alsa-ucm-conf</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>pipewire-pulse</code></strong>: 替代旧的 PulseAudio，兼容性极佳。</p>
+</li>
+<li>
+<p><strong><code>sof-firmware</code></strong>: <strong>关键！</strong> Sound Open Firmware，没有它 Intel Ultra 的声卡就是摆设。</p>
+</li>
+<li>
+<p><strong><code>wireplumber</code></strong>: 音频会话管理器。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：安装过程中如果提示与 <code>pulseaudio</code> 冲突，<strong>请输入 <code>y</code> (确认移除)</strong>。</p>
+</blockquote>
+<ol start="2">
+<li>激活音频服务：</li>
+</ol>
+<p>无需 sudo，作为普通用户运行：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>systemctl --user enable --now pipewire pipewire-pulse wireplumber</span></span></code></pre>
+<ol start="3">
+<li>解除硬件静音 (Alsamixer)：</li>
+</ol>
+<p>有时底层驱动默认是静音状态。</p>
+<ul>
+<li>
+<p>输入 <code>alsamixer</code> 进入图形界面。</p>
+</li>
+<li>
+<p>如果看到柱状图底部显示 <strong><code>MM</code></strong> (Mute)，按 <strong><code>M</code></strong> 键将其切换为 <strong><code>00</code></strong> (开启)。</p>
+</li>
+<li>
+<p>按 <code>Esc</code> 退出。</p>
+</li>
+</ul>
+<h3 id="part-3-知识点纠正与重启">Part 3: 知识点纠正与重启</h3>
+<p>❓ 误区：我需要去官网下载声卡驱动吗？</p>
+<p>不需要。 Linux 的声卡驱动包含在内核 (Kernel) 里。你缺的不是驱动，是固件 (Firmware)。刚才装的 sof-firmware 就是把“说明书”补给内核，告诉它怎么控制你的声卡。</p>
+<p>✅ 最终操作：</p>
+<p>虽然服务已启动，但加载固件通常需要重启电脑才能生效。</p>
+<p><strong>重启后自测：</strong></p>
+<ol>
+<li>
+<p><strong>声音</strong>：右下角喇叭图标应无红叉，拖动滑块有声音。</p>
+</li>
+<li>
+<p><strong>设备</strong>：点击喇叭旁边的设置图标，确认 <strong>Output Device</strong> 选中的是 <code>Speaker</code> (扬声器)。</p>
+</li>
+</ol>
+<p>🚑 还是没声音？</p>
+<p>如果重启后依然无法识别声卡，请在终端输入以下命令查看底层硬件状态，根据输出结果排查：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aplay -l</span></span></code></pre>
+<p><em>(如果列表为空，说明内核完全没认出声卡，可能需要检查 BIOS 设置或内核版本)</em></p>
+<h2 id="20-补全-mac-体验拼图日常必备工具与效率神器">20. 补全 Mac 体验拼图：日常必备工具与效率神器 🧩</h2>
+<p>作为 CS 研究生的主力机 (Daily Driver)，仅仅只有好看的皮囊是不够的。我们需要安装以下组件，填补系统在<strong>数据安全</strong>、<strong>交互效率</strong>和<strong>办公</strong>方面的空缺。</p>
+<h3 id="1-你的时光机器timeshift-保命神器">1. 你的“时光机器”：Timeshift (保命神器) ⏳</h3>
+<p>Arch 作为一个滚动更新发行版，偶尔的“滚挂”在所难免。<strong>Timeshift 是必须要装的</strong>，它能在系统挂掉时一键回滚。</p>
+<ul>
+<li>
+<p><strong>安装</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S timeshift</span></span></code></pre>
+</li>
+<li>
+<p><strong>关键配置</strong>：</p>
+<ul>
+<li>
+<p><strong>Type</strong>：选择 <strong>RSYNC</strong> (除非你专门配置了 BTRFS 文件系统)。</p>
+</li>
+<li>
+<p><strong>Schedule</strong>：设置为 <strong>Daily</strong> (每天)，保留最近 5 份快照。</p>
+</li>
+<li>
+<p><strong>Action</strong>：<strong>现在立刻点击 Create 做一次快照</strong>，以此为基准点。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-你的spotlight-聚焦搜索krunner-vs-albert">2. 你的“Spotlight (聚焦搜索)”：KRunner vs Albert 🔍</h3>
+<p>Mac 用户离不开 <code>Cmd + Space</code>。KDE 自带的 KRunner 功能很强，但默认界面偏窄，如果你觉得它“太小气”，我们有更好的替代方案。</p>
+<h4 id="方案-a原生党-krunner">方案 A：原生党 (KRunner)</h4>
+<p>如果你不想装第三方软件，可以调整 KRunner 位置。</p>
+<ul>
+<li>
+<p><strong>位置</strong>：<code>System Settings</code> -> <code>Search</code> -> <code>KRunner</code> -> <strong>Center</strong> (屏幕中央)。</p>
+</li>
+<li>
+<p><strong>大小</strong>：受限于全局主题。去 <code>Plasma Style</code> 里应用 <strong>WhiteSur</strong> 主题会让它稍微宽一点。</p>
+</li>
+</ul>
+<h4 id="方案-bpro-也就是-cs-学生首选-albert">方案 B：Pro 也就是 CS 学生首选 (Albert) 🚀</h4>
+<p>如果你想要 Mac 上 <strong>Alfred / Raycast</strong> 那种“宽大、霸屏、可定制”的搜索框，<strong>Albert</strong> 是最佳选择 (C++/Qt 编写，速度极快)。</p>
+<ul>
+<li>
+<p><strong>安装</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S albert</span></span></code></pre>
+</li>
+<li>
+<p><strong>配置优势</strong>：</p>
+<ul>
+<li>
+<p><strong>快捷键</strong>：在设置里改为 <code>Meta+Space</code> (屏蔽 KRunner 的快捷键)。</p>
+</li>
+<li>
+<p><strong>巨型窗口</strong>：在 Theme 设置里，你可以手动拉大 <strong>Window Width</strong> (窗口宽度) 和字体大小，完美复刻 Spotlight 的视觉冲击力。</p>
+</li>
+<li>
+<p><strong>插件</strong>：记得开启 <code>Files</code> (文件)、<code>Terminal</code> (终端命令)、<code>Calculator</code> (计算器)。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-你的触控板手势touchpad-gestures-️">3. 你的“触控板手势”：Touchpad Gestures 🖐️</h3>
+<p>没有丝滑的三指/四指手势就不叫 Mac 体验。</p>
+<ul>
+<li>
+<p><strong>Wayland 用户 (KDE 6 默认)</strong>：</p>
+<ul>
+<li>
+<p><strong>状态</strong>：开箱即用。</p>
+</li>
+<li>
+<p><strong>操作</strong>：</p>
+<ul>
+<li>
+<p><strong>三指/四指左右滑</strong>：切换虚拟桌面。</p>
+</li>
+<li>
+<p><strong>四指上推</strong>：呼出“调度中心” (Overview)。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>优化</strong>：去 <code>System Settings</code> -> <code>Touchpad</code> 开启 <strong>Natural Scrolling</strong> (自然滚动) 并调快指针速度。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>X11 用户</strong>：需额外安装 <code>touchegg</code> (不推荐，建议坚持用 Wayland)。</p>
+</li>
+</ul>
+<h3 id="4-你的office-办公套件onlyoffice">4. 你的“Office 办公套件”：OnlyOffice 📝</h3>
+<p>LibreOffice 界面太复古。要在 Linux 上获得最接近 MS Office 的体验且兼容性最好（不乱码），OnlyOffice 是首选。</p>
+<ul>
+<li>
+<p><strong>安装</strong> (推荐二进制版，免编译)：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S onlyoffice-bin</span></span></code></pre>
+</li>
+<li>
+<p><strong>特点</strong>：极佳的 <code>.docx/.pptx</code> 兼容性，Tab 风格界面，与 macOS 风格违和感低。</p>
+</li>
+</ul>
+<h3 id="5-你的iina-播放器haruna">5. 你的“IINA 播放器”：Haruna 🎬</h3>
+<p>Linux 上最像 IINA 的播放器（基于 mpv 内核，极简界面，支持高分屏）。</p>
+<ul>
+<li>
+<p><strong>安装</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S haruna</span></span></code></pre>
+</li>
+<li>
+<p><strong>设置</strong>：在文件关联里把它设为默认视频播放器。</p>
+</li>
+</ul>
+<h3 id="-终极建议关于键位映射-cmd-vs-ctrl">💡 终极建议：关于键位映射 (Cmd vs Ctrl)</h3>
+<p>这是 Mac 转 Linux 最大的痛点：Mac 复制是 <code>Cmd+C</code> (大拇指)，Linux 是 <code>Ctrl+C</code> (小指)。</p>
+<p><strong>⚠️ CS 学生建议：不要全局改键！</strong></p>
+<ul>
+<li>
+<p><strong>理由</strong>：在 Linux 终端里，<strong><code>Ctrl+C</code> 是强制中断信号 (SIGINT)</strong>。如果你把 Win 键强行映射成 Ctrl，会导致你在终端想复制文本时，意外杀掉正在运行的程序，逻辑会非常混乱。</p>
+</li>
+<li>
+<p><strong>妥协方案</strong>：</p>
+<ol>
+<li>
+<p><strong>Konsole</strong>：在设置里把“复制/粘贴”单独改成 <code>Ctrl+C / Ctrl+V</code>。</p>
+</li>
+<li>
+<p><strong>适应</strong>：这是两个不同的操作系统，建议训练自己适应“小指 Ctrl”的习惯，或者只在 VSCode 等编辑器内部改键。</p>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="21-效率神器现代化终端工具链--截图配置">21. 效率神器：现代化终端工具链 &#x26; 截图配置 ⚡</h2>
+<p>作为 USC 的 CS 研究生，你的系统不能只是“长得像 Mac”，<strong>用起来</strong>也要有顶级开发者的效率。我们用 Rust 重写的现代工具替换 Linux 的老旧命令。</p>
+<h3 id="part-1-安装现代命令行工具-rust-全家桶">Part 1: 安装现代命令行工具 (Rust 全家桶) 🦀</h3>
+<p>一次性安装所有替代品：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S eza bat ripgrep fd zoxide fzf</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>eza</code></strong> (ls 替代品): 支持图标、Git 状态显示。</p>
+</li>
+<li>
+<p><strong><code>bat</code></strong> (cat 替代品): 带语法高亮、行号、Git 变动显示。</p>
+</li>
+<li>
+<p><strong><code>ripgrep</code></strong> (rg): 极速文本搜索工具，VSCode 都在用。</p>
+</li>
+<li>
+<p><strong><code>zoxide</code></strong> (cd 替代品): 智能路径跳转 (<code>z src</code> 直达目录)。</p>
+</li>
+<li>
+<p><strong><code>fzf</code></strong>: 命令行模糊搜索神器。</p>
+</li>
+</ul>
+<h3 id="part-2-配置-zshrc-让工具生效-️">Part 2: 配置 <code>.zshrc</code> (让工具生效) 🛠️</h3>
+<p>安装完如果不配置别名，这些工具是不会自动生效的。</p>
+<ol>
+<li>
+<p><strong>编辑配置文件</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>vim ~/.zshrc</span></span></code></pre>
+</li>
+<li>
+<p><strong>跳到底部</strong>：按 <code>G</code> (大写)，然后按 <code>o</code> (小写) 插入新行。</p>
+</li>
+<li>
+<p><strong>粘贴配置代码</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># ==============================================</span></span>
+<span class="line"><span># Modern Tools Config (Arch Efficiency Pack)</span></span>
+<span class="line"><span># ==============================================</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 1. eza (ls 替代品) ---</span></span>
+<span class="line"><span>alias ls='eza --icons --group-directories-first'</span></span>
+<span class="line"><span>alias ll='eza --icons -l --git --group-directories-first'</span></span>
+<span class="line"><span>alias la='eza --icons -la --git --group-directories-first'</span></span>
+<span class="line"><span>alias tree='eza --icons --tree --level=2'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 2. bat (cat 替代品) ---</span></span>
+<span class="line"><span>alias cat='bat'</span></span>
+<span class="line"><span>alias catt='/usr/bin/cat' # 偶尔需要纯文本时用</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 3. zoxide (cd 智能跳转) ---</span></span>
+<span class="line"><span>eval "$(zoxide init zsh)"</span></span>
+<span class="line"><span>alias cd='z'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 4. fzf (模糊搜索) ---</span></span>
+<span class="line"><span>[ -f /usr/share/fzf/key-bindings.zsh ] &#x26;&#x26; source /usr/share/fzf/key-bindings.zsh</span></span>
+<span class="line"><span>[ -f /usr/share/fzf/completion.zsh ] &#x26;&#x26; source /usr/share/fzf/completion.zsh</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 5. Ripgrep (搜索优化) ---</span></span>
+<span class="line"><span>export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'</span></span></code></pre>
+</li>
+<li>
+<p><strong>生效</strong>：保存退出 (<code>:wq</code>) 并运行 <code>source ~/.zshrc</code>。</p>
+</li>
+</ol>
+<p><strong>🚀 能力解锁：</strong></p>
+<ul>
+<li>
+<p>打 <code>ll</code>：显示带图标和 Git 状态的文件列表。</p>
+</li>
+<li>
+<p>打 <code>cat 文件名</code>：代码高亮显示。</p>
+</li>
+<li>
+<p>按 <code>Ctrl + R</code>：呼出超丝滑的历史命令搜索框。</p>
+</li>
+</ul>
+<h3 id="part-3-截图神器-flameshot-替换-spectacle">Part 3: 截图神器 Flameshot (替换 Spectacle) 📸</h3>
+<p>KDE 自带截图一般，Flameshot 才是王者（支持标注、马赛克、钉图）。</p>
+<p><strong>1. 安装</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S flameshot</span></span></code></pre>
+<p><strong>2. 绑定快捷键 (必做，否则按 PrintScreen 没反应)</strong>：</p>
+<ul>
+<li>
+<p><strong>解绑旧的</strong>：去 <code>System Settings</code> -> <code>Shortcuts</code>，搜索 <code>Spectacle</code>，把绑定 <code>Print</code> 键的项目设为 None。</p>
+</li>
+<li>
+<p><strong>绑定新的</strong>：</p>
+<ul>
+<li>
+<p>点击 <code>Add New</code> -> <code>Command</code>。</p>
+</li>
+<li>
+<p><strong>Command</strong>: 输入 <code>flameshot gui</code> (⚠️ 必须加 gui)。</p>
+</li>
+<li>
+<p><strong>Shortcut</strong>: 按下 <code>PrintScreen</code> (或者习惯 Mac 的话按 <code>Meta+Shift+4</code>)。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-4-清理战场-系统大扫除">Part 4: 清理战场 (系统大扫除) 🧹</h3>
+<p>安装这么多软件后，清理一下无用的依赖和缓存。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 删除孤儿包 (作为依赖安装但现在没人用的包)</span></span>
+<span class="line"><span>sudo pacman -Rns $(pacman -Qdtq)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 清理 pacman 缓存 (需安装 pacman-contrib)</span></span>
+<span class="line"><span>sudo pacman -S pacman-contrib</span></span>
+<span class="line"><span>sudo paccache -r # 只保留最近 2 个版本</span></span></code></pre>
+<h2 id="22-效率与颜值从终端到笔记的geek-化武装">22. 效率与颜值：从终端到笔记的“Geek 化”武装 ⚡</h2>
+<h3 id="part-1-命令行特种部队-rust-全家桶">Part 1: 命令行“特种部队” (Rust 全家桶) 🦀</h3>
+<p>抛弃 <code>ls</code>, <code>cat</code>, <code>top</code> 吧，现代 Geek 都用这些：</p>
+<ul>
+<li>
+<p><strong><code>eza</code></strong> (ls 替代品): 支持图标、Git 状态显示。</p>
+</li>
+<li>
+<p><strong><code>bat</code></strong> (cat 替代品): 带语法高亮、行号。</p>
+</li>
+<li>
+<p><strong><code>ripgrep</code></strong> (rg): 极速文本搜索，VSCode 都在用。</p>
+</li>
+<li>
+<p><strong><code>zoxide</code></strong> (cd 替代品): 智能跳转 (<code>z src</code> 直达目录)。</p>
+</li>
+<li>
+<p><strong><code>tealdeer</code></strong> (tldr): 简化版 man 手册，只看常用例子（再也不怕记不住 <code>tar</code> 参数）。</p>
+</li>
+<li>
+<p><strong><code>btop</code></strong> (top 替代品): 赛博朋克风的资源监控，支持鼠标操作，看着 CPU 核心跳动是理工男的浪漫。</p>
+</li>
+<li>
+<p><strong><code>fastfetch</code></strong> (neofetch 替代品): 每次打开终端打印帅气的 Arch Logo 和硬件参数（Arch 用户的“社交礼仪”）。</p>
+</li>
+<li>
+<p><strong><code>zellij</code></strong> (tmux 替代品): 开箱即用的终端复用神器，一边跑 Server 一边看 Log。</p>
+</li>
+</ul>
+<p><strong>一键安装命令：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S eza bat ripgrep fd zoxide fzf tealdeer btop fastfetch zellij</span></span></code></pre>
+<p><strong>初始化 tldr 数据库：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>tldr --update</span></span></code></pre>
+<h3 id="part-2-注入灵魂-zshrc-配置-️">Part 2: 注入灵魂 (.zshrc 配置) 🛠️</h3>
+<p>工具装了不会自动生效，必须配置别名和自启动。</p>
+<ol>
+<li>
+<p><strong>编辑配置</strong>：<code>vim ~/.zshrc</code></p>
+</li>
+<li>
+<p><strong>跳到底部</strong> (<code>G</code> -> <code>o</code>)，<strong>粘贴以下终极配置</strong>：</p>
+</li>
+</ol>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># ==============================================</span></span>
+<span class="line"><span># Geek Efficiency Pack (CS Student Edition)</span></span>
+<span class="line"><span># ==============================================</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 1. eza (ls Pro Max) ---</span></span>
+<span class="line"><span>alias ls='eza --icons --group-directories-first'</span></span>
+<span class="line"><span>alias ll='eza --icons -l --git --group-directories-first'</span></span>
+<span class="line"><span>alias la='eza --icons -la --git --group-directories-first'</span></span>
+<span class="line"><span>alias tree='eza --icons --tree --level=2'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 2. bat (cat Pro) ---</span></span>
+<span class="line"><span>alias cat='bat'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 3. zoxide (智能跳转) ---</span></span>
+<span class="line"><span>eval "$(zoxide init zsh)"</span></span>
+<span class="line"><span>alias cd='z'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 4. fzf &#x26; ripgrep (搜索神器) ---</span></span>
+<span class="line"><span>[ -f /usr/share/fzf/key-bindings.zsh ] &#x26;&#x26; source /usr/share/fzf/key-bindings.zsh</span></span>
+<span class="line"><span>[ -f /usr/share/fzf/completion.zsh ] &#x26;&#x26; source /usr/share/fzf/completion.zsh</span></span>
+<span class="line"><span>export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># --- 5. 启动问候 (Arch 身份证) ---</span></span>
+<span class="line"><span># 每次打开终端显示系统信息，不仅帅，还能确认环境</span></span>
+<span class="line"><span>fastfetch</span></span></code></pre>
+<ol start="3">
+<li><strong>生效</strong>：<code>:wq</code> 保存退出，然后 <code>source ~/.zshrc</code>。</li>
+</ol>
+<h3 id="part-3-桌面端的降维打击工具-️">Part 3: 桌面端的“降维打击”工具 🖥️</h3>
+<h4 id="1-像黑客一样上网vimium-c-浏览器插件">1. 像黑客一样上网：Vimium C (浏览器插件)</h4>
+<p>你终端和 IDE 都是 Vim 模式，浏览器为什么要用鼠标？</p>
+<ul>
+<li>
+<p><strong>安装</strong>：去 Chrome/Edge 商店搜索 <strong>Vimium C</strong>。</p>
+</li>
+<li>
+<p><strong>神技</strong>：</p>
+<ul>
+<li>
+<p>按 <code>f</code>：所有链接出现快捷字母，按键直达。</p>
+</li>
+<li>
+<p>按 <code>j/k</code>：上下丝滑滚动。</p>
+</li>
+<li>
+<p>按 <code>x</code>：关闭标签。</p>
+</li>
+<li>
+<p><strong>效果</strong>：写代码查资料时，双手无需离开键盘主键区。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-最强截图flameshot-火焰截图">2. 最强截图：Flameshot (火焰截图)</h4>
+<ul>
+<li>
+<p><strong>安装</strong>：<code>sudo pacman -S flameshot</code></p>
+</li>
+<li>
+<p><strong>绑定</strong>：去系统设置快捷键，把 <code>PrintScreen</code> 绑给 <code>flameshot gui</code>。</p>
+</li>
+<li>
+<p><strong>优势</strong>：支持画箭头、打马赛克、序号标记、钉在屏幕上（对比代码神器）。</p>
+</li>
+</ul>
+<h4 id="3-第二大脑obsidian--git">3. 第二大脑：Obsidian + Git</h4>
+<p>数据在他处是流浪，在本地才是家。</p>
+<ul>
+<li>
+<p><strong>安装</strong>：<code>sudo pacman -S obsidian</code></p>
+</li>
+<li>
+<p><strong>Geek 用法</strong>：配合 <code>Obsidian Git</code> 插件，将笔记 push 到 GitHub 私有库。这是真正的<strong>纯文本、本地化、版本控制</strong>知识管理。</p>
+</li>
+</ul>
+<h3 id="part-4-最后的强迫症大扫除">Part 4: 最后的“强迫症”大扫除 🧹</h3>
+<p>安装完这一大堆东西，清理一下战场，保持系统纯净。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 删除孤儿包</span></span>
+<span class="line"><span>sudo pacman -Rns $(pacman -Qdtq)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 清理缓存 (保留最近2个版本)</span></span>
+<span class="line"><span>sudo pacman -S pacman-contrib</span></span>
+<span class="line"><span>sudo paccache -r</span></span></code></pre>
+<h2 id="23-进阶生存指南正确的找软件姿势-aur-官网-️">23. 进阶生存指南：正确的“找软件”姿势 (AUR 官网) 🕵️</h2>
+<p>你可能会好奇：yay 到底去哪里下载的软件？</p>
+<p>yay 本质上是一个“接口”，它连接了 Arch 的两大数据库：官方仓库 和 AUR。</p>
+<p>熟练使用以下两个网站，能帮你避开 90% 的坑。</p>
+<h3 id="1-aur-官网-社区最活跃的集市">1. AUR 官网 (社区最活跃的“集市”)</h3>
+<p>👉 <strong>网址：<a href="https://aur.archlinux.org/">aur.archlinux.org</a></strong></p>
+<p>这是你刚才装的 <code>wechat-universal-bwrap</code>、<code>fcitx5-skin-fluentdark-git</code> 的老家。它不仅仅是一个下载站，更是<strong>排错中心</strong>。</p>
+<p><strong>Web 端的三大关键用途 (比命令行更强)：</strong></p>
+<ul>
+<li>
+<p><strong>看置顶评论 (Pinned Comments) 🌟</strong>：<strong>最重要！</strong> 如果软件装不上或报错，先去该页面看置顶评论。维护者通常会把最新的编译错误解决方案写在那里。</p>
+</li>
+<li>
+<p><strong>按热度排序 (Votes)</strong>：搜关键词（如 “music”）并按 Votes 排序。高票通常意味着稳定、好用，帮你避开冷门的垃圾包。</p>
+</li>
+<li>
+<p><strong>检查存活 (Last Updated)</strong>：如果一个包最后更新时间是 2018 年，直接放弃，不要浪费时间尝试。</p>
+</li>
+</ul>
+<h3 id="2-arch-官方包查询">2. Arch 官方包查询</h3>
+<p>👉 <strong>网址：<a href="https://archlinux.org/packages/">archlinux.org/packages</a></strong></p>
+<p>这是 <code>pacman</code> 的地盘（内核、Docker、Python 等核心组件）。这里主要用来查询官方包的具体文件列表或最新版本号。</p>
+<h3 id="-cs-研究生的逛街流程">💡 CS 研究生的“逛街”流程</h3>
+<p>不要盲目在终端乱试，建议养成标准化的<strong>选型流程</strong>：</p>
+<p>Step 1: 橱窗购物 (Web)</p>
+<p>打开 AUR 官网，输入关键词（例如 visual studio code）。</p>
+<p>Step 2: 维度分析 (Check)</p>
+<p>你会发现搜出来几十个结果。这时候要看：</p>
+<ul>
+<li>
+<p><strong>Votes</strong>: 票数最高的通常是最佳选择。</p>
+</li>
+<li>
+<p><strong>Suffix</strong>: 比如 VSCode，你会发现有 <code>visual-studio-code-bin</code> (官方二进制，快) 和 <code>visual-studio-code-git</code> (源码编译，慢)。通常选 <code>-bin</code>。</p>
+</li>
+<li>
+<p><strong>Maintainer</strong>: 确认有人维护，不是 Orphaned (孤儿包)。</p>
+</li>
+</ul>
+<p>Step 3: 终端下单 (Terminal)</p>
+<p>确认好包名（比如 visual-studio-code-bin）后，再回到 Konsole 执行：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S visual-studio-code-bin</span></span></code></pre>
+<p>至此，你的 Arch Linux 知识体系已经闭环。</p>
+<p>你不仅拥有了一个配置完美的系统，还掌握了从底层维护到上层软件选型的全部逻辑。</p>
+<p><strong>Good luck, EthanLee! 愿你的代码编译永不报错。</strong> 🚀</p>
+<h2 id="24-asus-笔记本专用优化-lunar-lake-版">24. ASUS 笔记本专用优化 (Lunar Lake 版) 💻</h2>
+<p>针对你的 <strong>ASUS Vivobook S 14 (S5406SA)</strong>，由于搭载了 Bleeding Edge 的 <strong>Intel Lunar Lake</strong> 平台，我们需要一套特定的“续命全家桶”来接管硬件控制。</p>
+<h3 id="part-1-安装-asus-续命全家桶-️">Part 1: 安装 ASUS 续命全家桶 🛠️</h3>
+<p>Arch 社区的神级项目 <strong>Asus-Linux</strong> 是必须安装的，否则无法控制风扇策略和电池阈值。</p>
+<p><strong>1. 安装核心组件：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S asusctl rog-control-center</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>asusctl</code></strong>: 核心守护进程，负责底层硬件交互。</p>
+</li>
+<li>
+<p><strong><code>rog-control-center</code></strong>: 图形化控制面板（类似 Windows 奥创中心）。</p>
+</li>
+<li>
+<p><em>(注：你是 Intel 核显，不需要安装 <code>supergfxctl</code>，省去了折腾显卡切换的麻烦)</em></p>
+</li>
+</ul>
+<ol start="2">
+<li>启动服务 (关键修正)：</li>
+</ol>
+<p>新版 asusd 通常是 static 类型的服务，不需要 enable，直接启动即可（它会由 Udev 规则或 Socket 自动激活）。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo systemctl start asusd</span></span></code></pre>
+<p><strong>验证状态：</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>systemctl status asusd</span></span></code></pre>
+<ul>
+<li>如果显示 <strong><code>active (running)</code></strong> 且正确识别出 <code>Vivobook S 14</code>，说明服务已就绪。</li>
+</ul>
+<h3 id="part-2-硬件控制指南-新版-asusctl-用法">Part 2: 硬件控制指南 (新版 asusctl 用法) 🎮</h3>
+<p>新版 <code>asusctl</code> 采用了类似 git 的子命令结构。</p>
+<h4 id="1-性能模式-profile">1. 性能模式 (Profile)</h4>
+<ul>
+<li>
+<p><strong>查看当前模式</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>asusctl profile -p</span></span></code></pre>
+</li>
+<li>
+<p><strong>切换模式</strong>：</p>
+<ul>
+<li>
+<p>推荐使用快捷键 <strong><code>Fn + F</code></strong>，屏幕上应出现 OSD 提示。</p>
+</li>
+<li>
+<p>命令行切换：<code>asusctl profile -P Performance</code> (或 Balanced/Quiet)。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-电池保养-battery-health">2. 电池保养 (Battery Health) 🔋</h4>
+<p>防止长期插电导致电池鼓包。</p>
+<ul>
+<li>
+<p><strong>查看阈值</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>asusctl charge-control -q</span></span></code></pre>
+</li>
+<li>
+<p><strong>限制充电至 80%</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>asusctl charge-control -l 80</span></span></code></pre>
+<p><em>(也可在 ROG Control Center 图形界面中拖动滑块设置)</em></p>
+</li>
+</ul>
+<h4 id="3-键盘背光">3. 键盘背光</h4>
+<p>你的 Vivobook 配备的是标准背光（非 RGB 矩阵）。</p>
+<ul>
+<li><strong>控制方式</strong>：直接使用键盘上的 <strong><code>F7</code></strong> (或对应亮度图标) 调节，无需使用命令行。</li>
+</ul>
+<h3 id="part-3-硬件状态确认-lunar-lake-特性">Part 3: 硬件状态确认 (Lunar Lake 特性) 🚀</h3>
+<p>根据 <code>lspci</code> 确认，你的机器配置极高，属于 <strong>Linux 6.12+ 内核</strong> 的重点优化对象。</p>
+<ol>
+<li>
+<p><strong>NPU (AI 加速器)</strong>：</p>
+<ul>
+<li>
+<p>搭载 <strong>Intel NPU 4.0</strong> (48 TOPS 算力)。</p>
+</li>
+<li>
+<p>未来可安装 <code>intel-npu-driver</code> 跑本地大模型。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>显卡 (Xe2 Battlemage)</strong>：</p>
+<ul>
+<li><strong>Intel Arc 140V</strong> 是目前最强核显之一，无需折腾闭源驱动，Wayland 兼容性满分。</li>
+</ul>
+</li>
+<li>
+<p><strong>电量监控</strong>：</p>
+<ul>
+<li>
+<p><strong>图形界面</strong>：KDE 右下角托盘图标。</p>
+</li>
+<li>
+<p><strong>极客方式</strong>：在终端输入 <code>btop</code>，右下角 Battery 区域会显示<strong>实时充放电功率 (Watts)</strong>。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="25-终极解锁在-lunar-lake-上实现红外人脸识别-howdy-️">25. 终极解锁：在 Lunar Lake 上实现红外人脸识别 (Howdy) 👁️</h2>
+<p>你已经拥有了 Mac 的外观和 Linux 的内核，现在我们补全最后一块拼图：红外人脸解锁。</p>
+<p>由于 AUR 稳定版脚本过时且 Lunar Lake 平台太新，我们需要特殊的“Beta Git 版 + 预编译依赖”方案。</p>
+<h3 id="part-1-正确的安装姿势-避坑指南">Part 1: 正确的安装姿势 (避坑指南) 🛑</h3>
+<p>不要直接装 <code>howdy</code>，也不要装 <code>howdy-beta-git</code>（分支已死）。请严格按此顺序操作：</p>
+<ol>
+<li>先装最难搞的依赖 (python-dlib-git)</li>
+</ol>
+<p>Dlib 编译极其耗时且易报错，我们优先处理它。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S python-dlib-git</span></span></code></pre>
+<ul>
+<li><strong>注意</strong>：CleanBuild 选 <code>A</code>。编译可能需要 5-10 分钟，风扇狂转是正常的，<strong>不要中断</strong>。</li>
+</ul>
+<p><strong>2. 再装主程序 (howdy-git)</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S howdy-git</span></span></code></pre>
+<ul>
+<li><strong>注意</strong>：如果提示依赖，选择刚才装好的 <code>python-dlib-git</code>。</li>
+</ul>
+<h3 id="part-2-硬件识别与配置">Part 2: 硬件识别与配置 📷</h3>
+<p>Lunar Lake 有多个摄像头节点，我们需要找到红外 (IR) 的那一个。</p>
+<p><strong>1. 寻找红外摄像头</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>v4l2-ctl --list-devices</span></span></code></pre>
+<ul>
+<li><strong>经验法则</strong>：通常是 <code>/dev/video2</code> (排在彩色摄像头之后)。</li>
+</ul>
+<p><strong>2. 修改配置文件</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo EDITOR=vim howdy config</span></span></code></pre>
+<ul>
+<li>
+<p><strong><code>device_path</code></strong>: 改为 <code>/dev/video2</code> (若不确定可先填这个)。</p>
+</li>
+<li>
+<p><strong><code>dark_threshold</code></strong>: 改为 <strong>60</strong> 或 <strong>10</strong> (根据实际测试调整)。如果提示 “Too dark”，就调低；如果识别不准，就调高。</p>
+</li>
+<li>
+<p><strong><code>ignore_closed_lid</code></strong>: 改为 <code>true</code> (防止合盖误触)。</p>
+</li>
+</ul>
+<p><strong>3. 关键验证 (howdy test)</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo howdy test</span></span></code></pre>
+<ul>
+<li>
+<p><strong>一定要做！</strong> 观察弹出的窗口：</p>
+<ul>
+<li>
+<p><strong>黑白/紫色画面</strong>：✅ 成功！这就是红外摄像头。</p>
+</li>
+<li>
+<p><strong>彩色画面</strong>：❌ 选错了，换 <code>video0</code> 或 <code>video1</code> 重试。</p>
+</li>
+<li>
+<p><strong>全黑</strong>：❌ 红外灯没亮，需安装 <code>linux-enable-ir-emitter</code> 修复。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-3-录入与应用">Part 3: 录入与应用 🔓</h3>
+<p><strong>1. 录入人脸</strong>：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo howdy add</span></span></code></pre>
+<ul>
+<li>提示 “Scan Complete” 即为成功。建议在不同光线/戴眼镜状态下多录几次。</li>
+</ul>
+<ol start="2">
+<li>启用全系统解锁 (Sudo + 登录 + 锁屏)：</li>
+</ol>
+<p>编辑全局认证文件：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/pam.d/system-auth</span></span></code></pre>
+<p><strong>关键操作</strong>：在文件<strong>最顶部</strong>（所有 <code>auth</code> 行之前）插入：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>auth sufficient pam_howdy.so</span></span></code></pre>
+<h3 id="-最终效果">🎉 最终效果</h3>
+<p>现在，当你执行 <code>sudo</code> 命令、开机登录 SDDM 或解锁屏幕时，摄像头红灯会自动亮起，瞬间解锁，无需手动输入密码。</p>
+<p>当你打开 Timeshift 这种需要管理员权限的图形软件时，它会调用一个叫 <strong>Polkit</strong> 的组件来弹窗问密码。</p>
+<ol>
+<li>
+<p>KDE 的弹窗（Polkit Agent）非常“死板”，它只期待你输入文本。</p>
+</li>
+<li>
+<p>因为你在 <code>/etc/pam.d/system-auth</code> 全局开启了 Howdy，所以弹窗一出来，Howdy 就抢先激活了摄像头。</p>
+</li>
+<li>
+<p>Howdy 试图告诉系统“正在扫描人脸…”，但 KDE 的弹窗<strong>听不懂</strong>这个信号，或者把它误判为“用户输入了一个空密码并按了回车”。</p>
+</li>
+<li>
+<p>于是，还没等你反应过来，它就判定“密码/验证错误”，直接关掉了。</p>
+</li>
+</ol>
+<h3 id="-解决方案-1最快进-timeshift-的方法-绕过-bug">✅ 解决方案 1：最快进 Timeshift 的方法 (绕过 Bug)</h3>
+<p>既然图形界面的弹窗有 Bug，那我们就用终端启动它。终端环境完美支持 Howdy。</p>
+<p>打开终端，输入：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo timeshift-launcher</span></span></code></pre>
+<ul>
+<li>
+<p><strong>现象</strong>：这时候你的红外灯会亮，面部识别成功后，Timeshift 的窗口就会直接弹出来。</p>
+</li>
+<li>
+<p><em>注意：如果报错找不到命令，试着输入 <code>sudo timeshift-gtk</code>。</em></p>
+</li>
+</ul>
+<h3 id="-解决方案-2彻底修复-治本">✅ 解决方案 2：彻底修复 (治本)</h3>
+<p>如果你想保留“刷脸 sudo”和“刷脸登录”，但不想让它干扰 Timeshift 这种图形软件，最好的办法是：<strong>不要在全局 (<code>system-auth</code>) 启用 Howdy，而是“按需启用”。</strong></p>
+<p>图形界面的密码框 (Polkit) 对 Howdy 支持很差，我们把它关掉，只保留 Sudo 和 登录。</p>
+<h4 id="第一步撤销全局配置">第一步：撤销全局配置</h4>
+<p>我们先把你刚才在 <code>/etc/pam.d/system-auth</code> 里加的那行删掉。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/pam.d/system-auth</span></span></code></pre>
+<ul>
+<li>
+<p><strong>删除</strong> (或注释掉) 你刚才加在最上面的 <code>auth sufficient pam_howdy.so</code>。</p>
+</li>
+<li>
+<p>保存退出。</p>
+</li>
+</ul>
+<h4 id="第二步只给-sudo-加-终端命令刷脸">第二步：只给 Sudo 加 (终端命令刷脸)</h4>
+<p>这个你之前可能改过，确认一下：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/pam.d/sudo</span></span></code></pre>
+<ul>
+<li>确保 <code>auth sufficient pam_howdy.so</code> 在最上面。</li>
+</ul>
+<h4 id="第三步只给-sddm-加-开机锁屏刷脸">第三步：只给 SDDM 加 (开机/锁屏刷脸)</h4>
+<p>这是 KDE 的登录管理器。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/pam.d/sddm</span></span></code></pre>
+<ul>
+<li>在最上面加上 <code>auth sufficient pam_howdy.so</code>。</li>
+</ul>
+<h4 id="第四步可选-给锁屏加">第四步：(可选) 给锁屏加</h4>
+<p>如果你用的是 KDE 的锁屏（唤醒时）：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo vim /etc/pam.d/kde</span></span></code></pre>
+<p><em>(如果没有这个文件，可能是 <code>kscreenlocker</code>)</em></p>
+<ul>
+<li>同样加上那行配置。</li>
+</ul>
+<h2 id="26-开会全家桶视频通话与屏幕共享-zoom腾讯会议">26. 开会全家桶：视频通话与屏幕共享 (Zoom/腾讯会议) 📹</h2>
+<p>作为留学生，Zoom 是上课刚需，腾讯会议是国内联系刚需。鉴于你使用的是 <strong>KDE Plasma 6 (Wayland)</strong>，我们需要一套特定的工具链来保证开会不翻车。</p>
+<h3 id="part-1-照镜子调试神器-kamoso">Part 1: 照镜子调试神器 (Kamoso) 🪞</h3>
+<p>开会前需要检查发型、确认摄像头没被遮挡。</p>
+<ul>
+<li>
+<p><strong>Kamoso</strong>: KDE 官方相机应用，轻量原生，启动极快。</p>
+</li>
+<li>
+<p><strong>⚠️ 避坑指南</strong>：</p>
+<ul>
+<li>
+<p>你的 Lunar Lake 有多个摄像头节点。</p>
+</li>
+<li>
+<p>打开 Kamoso 后，在设置里记得选 <strong><code>/dev/video0</code></strong> (彩色主摄)。</p>
+</li>
+<li>
+<p><strong>不要选</strong> <code>/dev/video2</code> (那是刚才配给 Howdy 的黑白红外摄像头)。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-2-必备会议软件-aur">Part 2: 必备会议软件 (AUR) 💻</h3>
+<ul>
+<li>
+<p><strong>Zoom</strong>: USC 上课/组会必备。AUR 里的 <code>zoom</code> 是官方二进制包。</p>
+</li>
+<li>
+<p><strong>腾讯会议 (Wemeet)</strong>: 推荐 <code>wemeet-bin</code>，界面与 Windows 无异，支持虚拟背景。</p>
+</li>
+<li>
+<p><strong>Teams (可选)</strong>: 推荐 <code>teams-for-linux-bin</code>，比微软官方网页版封装得更好。</p>
+</li>
+</ul>
+<h3 id="part-3-解决屏幕共享黑屏-关键补丁-️">Part 3: 解决屏幕共享黑屏 (关键补丁) 🛠️</h3>
+<p>KDE 6 默认使用 Wayland 协议，Zoom 和腾讯会议在共享屏幕时往往是一片漆黑。</p>
+<ul>
+<li>
+<p><strong>解决方案</strong>: 安装 <strong><code>xwaylandvideobridge</code></strong>。</p>
+</li>
+<li>
+<p><strong>原理</strong>: 它在后台静默运行。当你点击“共享屏幕”时，它会欺骗会议软件，把 Wayland 的画面“桥接”过去。</p>
+</li>
+</ul>
+<h3 id="part-4-声音控制总台-pavucontrol-️">Part 4: 声音控制总台 (Pavucontrol) 🎚️</h3>
+<p>Linux 开会最怕麦克风选错设备（比如选到了笔记本自带麦，而不是 AirPods）。</p>
+<ul>
+<li>
+<p><strong>Pavucontrol</strong>: Linux 老鸟必装的音频总控台。</p>
+</li>
+<li>
+<p><strong>用法</strong>: 开会时打开它，可以在 <strong>“Playback”</strong> 标签页单独拉大 Zoom 的音量，在 <strong>“Recording”</strong> 标签页强制把 Zoom 的输入源锁定为你的耳机。</p>
+</li>
+</ul>
+<h3 id="-一键安装清单">✅ 一键安装清单</h3>
+<p>请直接复制执行，一次性搞定所有需求：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 官方仓库：相机 + 屏幕共享补丁 + 音频控制</span></span>
+<span class="line"><span>sudo pacman -S kamoso xwaylandvideobridge pavucontrol</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. AUR 仓库：Zoom + 腾讯会议 (按需选择 Teams)</span></span>
+<span class="line"><span>yay -S zoom wemeet-bin teams-for-linux-bin</span></span></code></pre>
+<p><strong>测试流程：</strong></p>
+<ol>
+<li>
+<p>打开 <strong>Kamoso</strong>，确认能看到彩色的自己 (切换到 <code>/dev/video0</code>)。</p>
+</li>
+<li>
+<p>打开 <strong>Zoom</strong>，尝试发起一个会议，点击“共享屏幕”，确认能弹出窗口选择器且画面正常。</p>
+</li>
+<li>
+<p>打开 <strong>Pavucontrol</strong>，熟悉一下如何切换输入/输出设备。</p>
+</li>
+</ol>
+<h2 id="27-安装-paru">27. 安装 Paru</h2>
+<p><strong>绝对行，而且是“无缝衔接”的。</strong></p>
+<p>你完全不需要担心“兼容性”问题，因为 <strong><code>yay</code> 和 <code>paru</code> 根本不持有你的软件包数据。</strong></p>
+<h3 id="为什么可以随意切换">为什么可以随意切换？</h3>
+<p>你可以把 <code>pacman</code> 想象成<strong>数据库 (Database)</strong>，而 <code>yay</code> 和 <code>paru</code> 只是两个不同品牌的<strong>客户端 (Client)</strong>。</p>
+<ol>
+<li>
+<p><strong>单一数据源 (Single Source of Truth)</strong>：</p>
+<ul>
+<li>
+<p>你用 <code>yay</code> 安装的所有软件（无论是 Chrome 还是 VSCode），最终都记录在 <code>/var/lib/pacman/local/</code> 这个系统级数据库里。</p>
+</li>
+<li>
+<p><code>paru</code> 启动时，它读的也是这个数据库。</p>
+</li>
+<li>
+<p><strong>结论</strong>：<code>paru</code> 一上来就知道你之前用 <code>yay</code> 装了什么，也能毫无障碍地更新、卸载它们。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>不需要“迁移”</strong>：</p>
+<ul>
+<li>
+<p>你不需要运行什么 <code>import</code> 命令。</p>
+</li>
+<li>
+<p>你在 <code>yay</code> 里装的软件，在 <code>paru</code> 里直接就能管理。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="现场验证">现场验证</h3>
+<p>你可以马上做一个实验来让自己放心：</p>
+<ol>
+<li>
+<p>安装 <code>paru</code> (如果你还没装)：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>yay -S paru</span></span></code></pre>
+</li>
+<li>
+<p>用 <code>paru</code> 查看你之前用 <code>yay</code> 装的软件（比如 <code>howdy</code>）：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>paru -Qs howdy</span></span></code></pre>
+<p><em>你会发现它不仅能搜到，而且会显示 <code>[installed]</code>，这证明它完全“认识”你的旧资产。</em></p>
+</li>
+<li>
+<p>用 <code>paru</code> 更新系统（这将同时更新官方包和 <code>yay</code> 装的 AUR 包）：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>paru</span></span></code></pre>
+<p><em>(相当于 <code>yay</code> 或 <code>pacman -Syu</code>)</em></p>
+</li>
+</ol>
+<h3 id="唯一的区别配置文件">唯一的区别：配置文件</h3>
+<p>只有一样东西是它们<strong>不共享</strong>的：<strong>配置文件</strong>。</p>
+<ul>
+<li>
+<p>如果你之前在 <code>yay</code> 的配置里设置了“不显示 diff”或者“自定义构建目录”，这些设置<strong>不会</strong>自动同步到 <code>paru</code>。</p>
+</li>
+<li>
+<p>你需要去 <code>~/.config/paru/paru.conf</code> 里重新设一遍（如果你有特殊需求的话）。</p>
+</li>
+</ul>
+<h2 id="28-安装-nvim-与配置">28. 安装 nvim 与配置</h2>
+<p>这一壶必须给你倒满！🍺</p>
+<p>你作为 CS 研究生，如果还在用 VS Code 写简单的 Python 脚本，或者用 nano 改服务器配置，那确实差点意思。<strong>Neovim (nvim)</strong> 是 Vim 的现代重构版，它不仅是个编辑器，更是**“基于键盘的个性化 IDE”**。</p>
+<h3 id="为什么-neovim-是神why-nvim">为什么 Neovim 是“神”？(Why Nvim?)</h3>
+<ol>
+<li>
+<p><strong>快，极致的快</strong>：VS Code 是基于 Electron (浏览器内核) 的，内存占用几百 MB 起步。Neovim 是 C 和 Lua 写的，启动只需几十毫秒，内存占用忽略不计。</p>
+</li>
+<li>
+<p><strong>LSP (语言服务协议) 原生支持</strong>：这是它能变成 IDE 的核心。代码补全、跳转定义、重构、错误提示，效果和 VS Code 一模一样（因为大家用的都是同一套 Language Servers），但 Neovim 更加轻量。</p>
+</li>
+<li>
+<p><strong>Lua 插件生态</strong>：现在的 Neovim 插件（如 Telescope, Treesitter）极其强大，界面甚至比 GUI 软件还漂亮。</p>
+</li>
+<li>
+<p><strong>唯快不破 (Vim Motion)</strong>：一旦你的肌肉记忆记住了 <code>ciw</code> (修改单词)、<code>dt"</code> (删除直到引号)，你的编码速度会跟上你的思维速度。</p>
+</li>
+</ol>
+<h3 id="第一步备料-安装基础环境">第一步：备料 (安装基础环境)</h3>
+<p>在 Arch 上，我们要装的不仅是 <code>neovim</code> 本体，还有让它变强所需的“佐料”（字体、搜索工具、剪贴板工具）。</p>
+<p>打开终端，直接用 <code>paru</code> 梭哈：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. neovim: 本体</span></span>
+<span class="line"><span># 2. ttf-jetbrains-mono-nerd: 必装！否则你的界面会全是乱码方块（图标显示不出来）</span></span>
+<span class="line"><span># 3. ripgrep (rg): 世界上最快的 grep，Neovim 用它来秒搜代码</span></span>
+<span class="line"><span># 4. fd: 比 find 快 10 倍的文件查找工具</span></span>
+<span class="line"><span># 5. wl-clipboard: 让 Neovim 能复制粘贴到系统剪贴板 (因为你是 KDE Wayland 环境)</span></span>
+<span class="line"><span># 6. lazygit: 可以在 nvim 里直接调用的 git 图形界面（可选，但强烈推荐）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>paru -S neovim ttf-jetbrains-mono-nerd ripgrep fd wl-clipboard lazygit</span></span></code></pre>
+<p><em>注意：安装完字体后，记得去你的 <strong>Konsole</strong> 或 <strong>iTerm2</strong> (如果用了 Mac) 设置里，把字体改成 <strong>JetBrainsMono Nerd Font</strong>。这一步不做，后面全是乱码。</em></p>
+<h3 id="第二步上主菜-配置方案">第二步：上主菜 (配置方案)</h3>
+<p>Neovim 的默认界面是一片黑，啥也没有。配置它是一门玄学，从零写 init.lua 需要几个月。</p>
+<p>对于你，我直接推荐“预制菜”界的天花板 —— LazyVim。</p>
+<p>它是一套现成的配置框架，开箱即用，集成了文件树、代码补全、模糊搜索、语法高亮，而且颜值极高。</p>
+<p><strong>1. 备份旧配置 (如果有)</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mv ~/.config/nvim{,.bak}</span></span>
+<span class="line"><span>mv ~/.local/share/nvim{,.bak}</span></span>
+<span class="line"><span>mv ~/.local/state/nvim{,.bak}</span></span>
+<span class="line"><span>mv ~/.cache/nvim{,.bak}</span></span></code></pre>
+<p><strong>2. 克隆 LazyVim 模板</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git clone https://github.com/LazyVim/starter ~/.config/nvim</span></span></code></pre>
+<p><strong>3. 移除 git 关联 (这样你可以把配置变成你自己的)</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>rm -rf ~/.config/nvim/.git</span></span></code></pre>
+<h3 id="第三步开吃首次启动与使用">第三步：开吃！(首次启动与使用)</h3>
+<p>在终端输入：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>nvim</span></span></code></pre>
+<p><strong>见证奇迹的时刻</strong>：</p>
+<ol>
+<li>
+<p>你会看到一个蓝色的界面，下方会疯狂滚动代码 —— 这是它在自动通过 <code>lazy.nvim</code> 下载几百个插件。</p>
+</li>
+<li>
+<p><strong>不要动</strong>，等它全部跑完，变成 “Everything up to date”。</p>
+</li>
+<li>
+<p><strong>退出</strong>：按 <code>:qa</code> 回车，然后重新进入 <code>nvim</code>。</p>
+</li>
+</ol>
+<p>现在，你拥有了一个满血版的编辑器。</p>
+<h3 id="第四步cs-研究生必备操作指南">第四步：CS 研究生必备操作指南</h3>
+<p>LazyVim 的键位设计非常符合直觉（大部分基于 <code>&#x3C;Space></code> 空格键，我们称为 Leader Key）。</p>
+<h4 id="1-怎么写代码配置环境">1. 怎么写代码？(配置环境)</h4>
+<p>LazyVim 默认只有基础配置。你需要装 <strong>Python</strong> 或 <strong>C++</strong> 的支持。</p>
+<ul>
+<li>
+<p>输入 <code>:Mason</code> (回车)。</p>
+</li>
+<li>
+<p>这是插件管理器界面。用箭头移动，按 <code>i</code> 安装你需要的：</p>
+<ul>
+<li>
+<p><strong>LSP (语言服务器)</strong>: <code>pyright</code> (Python), <code>clangd</code> (C++), <code>lua_language_server</code>.</p>
+</li>
+<li>
+<p><strong>Formatter (格式化)</strong>: <code>black</code> (Python), <code>shfmt</code> (Shell).</p>
+</li>
+</ul>
+</li>
+<li>
+<p>装完后，打开一个 <code>.py</code> 文件，你应该能看到语法高亮和智能提示了。</p>
+</li>
+</ul>
+<h4 id="2-核心快捷键-肌肉记忆">2. 核心快捷键 (肌肉记忆)</h4>
+<ul>
+<li>
+<p><strong>找文件</strong>：<code>&#x3C;Space> f f</code> (Find Files) - 呼出 Telescope，模糊搜索文件名。</p>
+</li>
+<li>
+<p><strong>搜代码</strong>：<code>&#x3C;Space> s g</code> (Search Grep) - 全局搜索代码内容。</p>
+</li>
+<li>
+<p><strong>文件树</strong>：<code>&#x3C;Space> e</code> (Explorer) - 打开左侧的文件浏览树 (Neo-tree)。</p>
+</li>
+<li>
+<p><strong>浮动终端</strong>：<code>&#x3C;Space> f t</code> (Float Terminal) - 在编辑器里弹出一个悬浮终端，用完按 <code>Esc</code> <code>q</code> 关闭。</p>
+</li>
+<li>
+<p><strong>Keymaps 查询</strong>：<code>&#x3C;Space> s k</code> - 忘了快捷键？按这个查所有键位。</p>
+</li>
+</ul>
+<h4 id="3-怎么在-yazi-里用-nvim">3. 怎么在 yazi 里用 nvim？</h4>
+<p>既然你刚才设置了 <code>export EDITOR='nvim'</code>，现在去 <code>yazi</code> 里选中一个文件按 <code>e</code>，它就会以这套酷炫的界面打开文件。</p>
+<h3 id="第五步进阶调优-为了你的论文和项目">第五步：进阶调优 (为了你的论文和项目)</h3>
+<p>你的 <code>RevieU</code> 项目和学术论文可能需要 Markdown 预览或 LaTeX 支持。</p>
+<p>打开 <code>~/.config/nvim/lua/plugins/example.lua</code> (或者新建文件)，你可以添加插件。</p>
+<p>启用 LazyVim 自带的强大模块：</p>
+<p>LazyVim 有个 lazyvim.json 配置文件，或者你可以在 lua/config/lazy.lua 里开启 Extras。</p>
+<p>建议开启：</p>
+<ul>
+<li>
+<p><code>lazyvim.plugins.extras.lang.python</code> (更强的 Python 支持)</p>
+</li>
+<li>
+<p><code>lazyvim.plugins.extras.lang.markdown</code> (实时预览 Markdown)</p>
+</li>
+<li>
+<p><code>lazyvim.plugins.extras.coding.copilot</code> (如果你买了 GitHub Copilot，这个必须开！)</p>
+</li>
+</ul>
+<h3 id="总结">总结</h3>
+<p>你现在的终端环境是：</p>
+<ul>
+<li>
+<p><strong>Shell</strong>: Zsh + Oh My Zsh (Arch 标配)</p>
+</li>
+<li>
+<p><strong>包管理</strong>: Paru (Rust 极客风)</p>
+</li>
+<li>
+<p><strong>文件管理</strong>: Yazi (Rust 极速流)</p>
+</li>
+<li>
+<p><strong>编辑器</strong>: Neovim + LazyVim (IDE 级体验)</p>
+</li>
+</ul>
+<p><strong>现在，随便打开一个 Python 脚本，按下 <code>&#x3C;Space> e</code> 呼出侧边栏，再 <code>&#x3C;Space> f f</code> 搜个文件，感受一下这种指尖跳舞的快感吧！</strong> 🧊</p>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=Arch%20Linux%20%E4%BB%8E%E9%9B%B6%E5%AE%89%E8%A3%85%EF%BC%88UEFI%20%2B%20iwctl%EF%BC%89&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Finfra%2F%25E5%259C%25A8-iwctl-%25E4%25BA%25A4%25E4%25BA%2592%25E6%25A8%25A1%25E5%25BC%258F%25E4%25B8%258B%25E6%2589%25A7%25E8%25A1%258C%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/infra/%E5%9C%A8-iwctl-%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%89%A7%E8%A1%8C/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+Related Posts
+</h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/infra/创建目录-如果不存在/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>GPG 密钥生成与 Git 签名配置</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>从安装 GPG 到生成密钥、配置 Git 签名与上传公钥的完整步骤。</p></a><a href="/blog/infra/bandwidth/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>云服务器带宽与流量区别</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>解释带宽上限与流量上限的差异，帮助按业务峰值和成本选择合适配置。</p></a><a href="/blog/infra/bitwarden/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Self-host Vaultwarden (Bitwarden Compatible)</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>使用 Docker 部署 Vaultwarden，并通过反向代理与 HTTPS 提供可用的密码管理服务。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
+Comments
+</h3> <div class="giscus-wrapper" data-astro-cid-jvxsf75u> <script src="https://giscus.app/client.js" data-repo="LosFurina/LosFurina.github.io" data-repo-id="R_kgDOQ_gmWQ" data-category="General" data-category-id="DIC_kwDOQ_gmWc4C2A9-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </section>  <script type="module">function s(){const e=document.documentElement.getAttribute("data-theme"),t=document.querySelector("iframe.giscus-frame");if(t){const i=e==="dark"?"dark":"light";t.contentWindow?.postMessage({giscus:{setConfig:{theme:i}}},"https://giscus.app")}}const n=new MutationObserver(e=>{e.forEach(t=>{t.attributeName==="data-theme"&&s()})});n.observe(document.documentElement,{attributes:!0});window.addEventListener("message",e=>{e.origin==="https://giscus.app"&&s()});</script> </footer> </article> </main> <aside class="right-sidebar" data-astro-cid-bvzihdzo> <!-- Future content --> </aside> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="copyright" data-astro-cid-sz7xmlte>
+&copy; 2026 Wayne Li. All rights reserved.
+</p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" title="X (Twitter)" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:me@liweijun.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path> <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline> </svg> </a> <a href="/rss.xml" title="RSS Feed" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>RSS Feed</span> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> <p class="footer-note" data-astro-cid-sz7xmlte>
+Built with <a href="https://astro.build" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Astro</a> </p> </div> </footer>  </body></html>

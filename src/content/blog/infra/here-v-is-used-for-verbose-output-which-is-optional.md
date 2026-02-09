@@ -3,7 +3,6 @@ title: "Here, `v` Is Used For Verbose Output Which Is Optional."
 description: "tar 常用参数与归档压缩命令速查，覆盖打包、解包与查看内容。"
 pubDate: "2025-05-25"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/LinuxCommand/tar.md"

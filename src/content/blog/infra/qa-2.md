@@ -3,7 +3,6 @@ title: "Clash 规则配置 FAQ"
 description: "整理 Clash 分流规则的配置思路，重点解决开发场景中的端口与路由问题。"
 pubDate: "2025-11-22"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/从0开始搭建你的服务/4. 配置 Clash 代理规则.md"

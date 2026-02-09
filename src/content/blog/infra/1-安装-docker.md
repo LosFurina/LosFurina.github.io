@@ -3,7 +3,6 @@ title: "安装 Docker 与 Nginx Proxy Manager"
 description: "在自托管场景中先安装 Docker，再部署 Nginx Proxy Manager 管理证书与反向代理。"
 pubDate: "2025-11-23"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/从0开始搭建你的服务/6. 安装 Nginx Proxy Manager.md"

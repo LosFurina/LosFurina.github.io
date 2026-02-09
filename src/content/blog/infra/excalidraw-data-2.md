@@ -3,7 +3,6 @@ title: "Excalidraw Source: TUN Diagram"
 description: "Excalidraw 原始绘图数据文件，用于保存 TUN 网络示意图。"
 pubDate: "2025-11-22"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/从0开始搭建你的服务/TUN.md"

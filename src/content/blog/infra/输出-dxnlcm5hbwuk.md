@@ -3,7 +3,6 @@ title: "K8s Secret 认证失败：echo 换行符陷阱"
 description: "复盘 Kubernetes Secret 中 Base64 编码误用导致认证失败的典型问题。"
 pubDate: "2025-09-08"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/K8s 避坑指南：那个由 `echo` 带来的隐形刺客——Secret 认证失败惨案.md"

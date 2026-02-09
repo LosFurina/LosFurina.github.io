@@ -3,7 +3,6 @@ title: "JupyterLab 登录认证配置"
 description: "记录 JupyterLab 设置密码登录、修改配置文件与启动服务的最小步骤。"
 pubDate: "2025-05-21"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Jupyter.md"

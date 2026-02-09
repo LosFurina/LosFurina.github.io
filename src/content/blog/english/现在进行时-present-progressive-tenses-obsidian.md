@@ -3,7 +3,6 @@ title: "现在进行时：结构与动词 -ing 规则"
 description: "总结现在进行时的构成方法、be 动词变化和动词 -ing 变形规则，并配常见例句。"
 pubDate: "2025-01-13"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/现在进行时（Present Progressive Tenses）.md"

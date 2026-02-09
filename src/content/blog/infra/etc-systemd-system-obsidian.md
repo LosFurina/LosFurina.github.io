@@ -3,7 +3,6 @@ title: "/etc/systemd/system"
 description: "systemd unit 文件放置在 /etc/systemd/system 的原因与管理方式说明。"
 pubDate: "2025-02-18"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Run the command in the background.md"

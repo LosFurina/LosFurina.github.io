@@ -3,7 +3,6 @@ title: "K3s 安装与 Traefik 禁用（面向 APISIX）"
 description: "安装 K3s 时禁用 Traefik，避免端口冲突并为 APISIX 网关预留环境。"
 pubDate: "2025-12-31"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/k8s/Install ks3.md"

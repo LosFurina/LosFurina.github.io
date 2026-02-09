@@ -3,7 +3,6 @@ title: "SSH 安装与基础配置（Ubuntu/Debian）"
 description: "覆盖 OpenSSH 安装、服务检查、密钥登录与远程连接验证流程。"
 pubDate: "2025-11-21"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Install and Config SSH Connection.md"

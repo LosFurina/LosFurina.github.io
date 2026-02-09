@@ -3,7 +3,6 @@ title: "Why We Need Hysteria2"
 description: "解释在受限网络环境中选择 Hysteria2 的动机，并对比 TCP 代理在速度与稳定性上的取舍。"
 pubDate: "2025-02-23"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Hysteria2 Installation.md"

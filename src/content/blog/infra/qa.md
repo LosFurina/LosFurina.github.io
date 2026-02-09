@@ -3,7 +3,6 @@ title: "自建代理服务 FAQ"
 description: "总结为什么要自建代理、优势与局限，以及在开发与日常使用中的典型场景。"
 pubDate: "2025-11-21"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/从0开始搭建你的服务/3. 自建代理服务.md"

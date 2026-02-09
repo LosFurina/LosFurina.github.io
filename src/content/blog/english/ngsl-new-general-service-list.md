@@ -3,7 +3,6 @@ title: "NGSL 词表速记：资源入口"
 description: "记录 New General Service List 的官方与百科入口，作为高频词汇学习与复习的起点。"
 pubDate: "2025-01-16"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/NGSL(New General Service List).md"

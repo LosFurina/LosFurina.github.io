@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><!-- Theme Initialization Script --><script>
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
+
+	if (theme === "dark") {
+		document.documentElement.setAttribute("data-theme", "dark");
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.classList.remove("dark");
+	}
+
+	window.localStorage.setItem("theme", theme);
+</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Wayne" href="https://blog.liweijun.com/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://blog.liweijun.com/blog/infra/%E6%9F%A5%E7%9C%8B%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81-%E9%9C%80%E8%A6%81-sudo-%E9%99%A4%E9%9D%9E%E4%BD%A0%E9%85%8D%E7%BD%AE%E4%BA%86%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/"><!-- Primary Meta Tags --><title>K3s 安装与 Traefik 禁用（面向 APISIX）</title><meta name="title" content="K3s 安装与 Traefik 禁用（面向 APISIX）"><meta name="description" content="安装 K3s 时禁用 Traefik，避免端口冲突并为 APISIX 网关预留环境。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.liweijun.com/blog/infra/%E6%9F%A5%E7%9C%8B%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81-%E9%9C%80%E8%A6%81-sudo-%E9%99%A4%E9%9D%9E%E4%BD%A0%E9%85%8D%E7%BD%AE%E4%BA%86%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/"><meta property="og:title" content="K3s 安装与 Traefik 禁用（面向 APISIX）"><meta property="og:description" content="安装 K3s 时禁用 Traefik，避免端口冲突并为 APISIX 网关预留环境。"><meta property="og:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.liweijun.com/blog/infra/%E6%9F%A5%E7%9C%8B%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81-%E9%9C%80%E8%A6%81-sudo-%E9%99%A4%E9%9D%9E%E4%BD%A0%E9%85%8D%E7%BD%AE%E4%BA%86%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/"><meta property="twitter:title" content="K3s 安装与 Traefik 禁用（面向 APISIX）"><meta property="twitter:description" content="安装 K3s 时禁用 Traefik，避免端口冲突并为 APISIX 网关预留环境。"><meta property="twitter:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Wayne","description":"DevOps and infrastructure engineering notes, projects, and practical automation experiments by Wayne Li.","url":"https://blog.liweijun.com/","inLanguage":"en"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Wayne Li","url":"https://blog.liweijun.com/","email":"mailto:me@liweijun.com","sameAs":["https://github.com/LosFurina","https://x.com/MicroNahida"],"jobTitle":"DevOps / Infrastructure Engineer"}</script><link rel="stylesheet" href="/_astro/index.DCFK0IPC.css">
+<link rel="stylesheet" href="/_astro/about.DVvCJqHw.css">
+<style>a[data-astro-cid-eimmu3lg]{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .75rem;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--header-text, rgb(var(--gray-dark)));border-radius:999px;transition:color .2s ease,background .2s ease;position:relative}a[data-astro-cid-eimmu3lg]:hover{background:var(--header-hover, rgba(179, 106, 74, .08));color:var(--header-text-strong, rgb(var(--gray-dark)))}a[data-astro-cid-eimmu3lg]:focus-visible{outline:2px solid var(--header-accent, #b36a4a);outline-offset:2px}a[data-astro-cid-eimmu3lg].active{color:var(--header-accent, #b36a4a)}a[data-astro-cid-eimmu3lg].active:after{content:"";position:absolute;left:50%;bottom:4px;width:4px;height:4px;margin-left:-2px;border-radius:999px;background:var(--header-accent, #b36a4a)}.nav-icon[data-astro-cid-eimmu3lg]{display:inline-flex;width:16px;height:16px}.nav-icon[data-astro-cid-eimmu3lg] svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}@media(max-width:720px){a[data-astro-cid-eimmu3lg]{width:100%;justify-content:flex-start;padding:.6rem .9rem}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <div class="nav-left" data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Wayne</a></h2> </div> <div class="internal-links" id="mobileMenu" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M3 11.5L12 4l9 7.5" data-astro-cid-3ef6ksr2></path> <path d="M6.5 10.5V20h11V10.5" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Home
+</span> </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="6" y="4.5" width="12" height="15" rx="2" data-astro-cid-3ef6ksr2></rect> <path d="M9 9h6" data-astro-cid-3ef6ksr2></path> <path d="M9 13h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Blog
+</span> </a>  <a href="/projects" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="4" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="4" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Projects
+</span> </a>  <a href="/resume" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M14 3.5V8h4" data-astro-cid-3ef6ksr2></path> <path d="M9 12h6" data-astro-cid-3ef6ksr2></path> <path d="M9 16h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Resume
+</span> </a>  <a href="/contact" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M4 8l8 6 8-6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Contact
+</span> </a>  <!-- Tools Dropdown --> <div class="dropdown" id="toolsDropdown" data-astro-cid-3ef6ksr2> <button class="dropdown-trigger" id="toolsBtn" data-astro-cid-3ef6ksr2>
+More
+<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="dropdown-menu" id="toolsMenu" data-astro-cid-3ef6ksr2> <!-- 本站页面 --> <a href="/about" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>👤</span>
+About
+</a> <a href="/uses" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🛠️</span>
+Uses
+</a> <a href="/now" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>⏰</span>
+Now
+</a> <a href="/bookmarks" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔖</span>
+Bookmarks
+</a> <a href="/guestbook" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📝</span>
+Guestbook
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <a href="/keys" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔐</span>
+GPG Keys
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
+GitHub
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二阶段安装-k3s-针对-apisix-优化的安装" class="toc-link" data-astro-cid-xvrfupwn>第二阶段：安装 K3s (针对 APISIX 优化的安装)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三阶段理解现在的状态" class="toc-link" data-astro-cid-xvrfupwn>第三阶段：理解现在的状态</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第四步准备-docker-镜像" class="toc-link" data-astro-cid-xvrfupwn>第四步：准备 Docker 镜像</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#你的下一步" class="toc-link" data-astro-cid-xvrfupwn>你的下一步</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步安装-helm-工具" class="toc-link" data-astro-cid-xvrfupwn>第一步：安装 Helm 工具</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步添加-apisix-仓库" class="toc-link" data-astro-cid-xvrfupwn>第二步：添加 APISIX 仓库</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步准备配置文件-valuesyaml--关键" class="toc-link" data-astro-cid-xvrfupwn>第三步：准备配置文件 (values.yaml) —— 关键</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第四步执行安装" class="toc-link" data-astro-cid-xvrfupwn>第四步：执行安装</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第五步验证安装结果" class="toc-link" data-astro-cid-xvrfupwn>第五步：验证安装结果</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第六步访问测试" class="toc-link" data-astro-cid-xvrfupwn>第六步：访问测试</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#你的下一步-1" class="toc-link" data-astro-cid-xvrfupwn>你的下一步</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法一临时生效当前终端窗口" class="toc-link" data-astro-cid-xvrfupwn>方法一：临时生效（当前终端窗口）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法二永久生效推荐" class="toc-link" data-astro-cid-xvrfupwn>方法二：永久生效（推荐）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#验证并重试" class="toc-link" data-astro-cid-xvrfupwn>验证并重试</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步修正-configyaml-针对官方-chart" class="toc-link" data-astro-cid-xvrfupwn>第一步：修正 config.yaml (针对官方 Chart)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步更新-apisix-网关" class="toc-link" data-astro-cid-xvrfupwn>第二步：更新 APISIX 网关</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步单独安装-dashboard" class="toc-link" data-astro-cid-xvrfupwn>第三步：单独安装 Dashboard</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第四步最终联调" class="toc-link" data-astro-cid-xvrfupwn>第四步：最终联调</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-怎么卸载清理环境" class="toc-link" data-astro-cid-xvrfupwn>1. 怎么卸载（清理环境）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-改用-helm-安装推荐做法" class="toc-link" data-astro-cid-xvrfupwn>2. 改用 Helm 安装（推荐做法）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-验证安装" class="toc-link" data-astro-cid-xvrfupwn>3. 验证安装</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第一步安装-cert-manager" class="toc-link" data-astro-cid-xvrfupwn>第一步：安装 Cert-Manager</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第二步创建-clusterissuer-关键步骤" class="toc-link" data-astro-cid-xvrfupwn>第二步：创建 ClusterIssuer (关键步骤)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步配置-ingress-使用证书" class="toc-link" data-astro-cid-xvrfupwn>第三步：配置 Ingress 使用证书</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#它是如何工作的流程解析" class="toc-link" data-astro-cid-xvrfupwn>它是如何工作的？（流程解析）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#可能遇到的坑" class="toc-link" data-astro-cid-xvrfupwn>可能遇到的坑</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-查看列表概览" class="toc-link" data-astro-cid-xvrfupwn>1. 查看列表概览</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-查看详细状态-排错必用" class="toc-link" data-astro-cid-xvrfupwn>2. 查看详细状态 (排错必用)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#补充如果你创建的是-issuer-非全局" class="toc-link" data-astro-cid-xvrfupwn>补充：如果你创建的是 Issuer (非全局)</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>K3s 安装与 Traefik 禁用（面向 APISIX）</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-12-31T00:00:00.000Z"> Dec 30, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 18 min read
+</span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
+Updated  <time datetime="2026-02-09T00:00:00.000Z"> Feb 8, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h3 id="第二阶段安装-k3s-针对-apisix-优化的安装">第二阶段：安装 K3s (针对 APISIX 优化的安装)</h3>
+<p>普通的 K3s 安装很简单，但<strong>既然你要用 APISIX</strong>，我们就不能用默认安装命令。</p>
+<p>为什么？</p>
+<p>K3s 默认自带一个叫 Traefik 的网关。如果你不禁用它，它会抢占 80 端口。你想用 APISIX 接管皇位，就需要把 Traefik 踢掉。</p>
+<h4 id="1-执行安装命令-禁用-traefik">1. 执行安装命令 (禁用 Traefik)</h4>
+<p>在你的服务器上执行这条命令：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable traefik" sh -</span></span></code></pre>
+<ul>
+<li>
+<p><code>curl ...</code>: 下载安装脚本。</p>
+</li>
+<li>
+<p><code>--disable traefik</code>: <strong>关键参数</strong>。告诉 K3s：“我不想要你自带的 Traefik 网关，我自己有安排（我要装 APISIX）”。</p>
+</li>
+</ul>
+<h4 id="2-验证安装">2. 验证安装</h4>
+<p>安装通常只需要几十秒。完成后，检查节点状态：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 查看节点状态 (需要 sudo，除非你配置了用户权限)</span></span>
+<span class="line"><span>sudo k3s kubectl get nodes</span></span></code></pre>
+<p>如果看到 <code>STATUS</code> 是 <strong>Ready</strong>，恭喜你！你已经拥有了一个标准的 Kubernetes 集群。</p>
+<h4 id="3-配置-kubectl-便利性-可选">3. 配置 kubectl 便利性 (可选)</h4>
+<p>为了不用每次都输 <code>sudo k3s kubectl ...</code>，你可以把配置文件复制出来并设置别名：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 创建 .kube 目录</span></span>
+<span class="line"><span>mkdir -p ~/.kube</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 复制配置文件</span></span>
+<span class="line"><span>sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 3. 修改文件权限归属当前用户</span></span>
+<span class="line"><span>sudo chown $(id -u):$(id -g) ~/.kube/config</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 4. 设置 alias (写入 .bashrc 或 .zshrc)</span></span>
+<span class="line"><span>echo "alias k='kubectl'" >> ~/.bashrc</span></span>
+<span class="line"><span>source ~/.bashrc</span></span></code></pre>
+<p>现在你可以直接输入 <code>kubectl get nodes</code> 或者简写 <code>k get nodes</code> 了。</p>
+<h3 id="第三阶段理解现在的状态">第三阶段：理解现在的状态</h3>
+<p>现在的服务器状态是：</p>
+<ol>
+<li>
+<p><strong>地基打好了</strong>：K3s 正在运行。</p>
+</li>
+<li>
+<p><strong>大门没装</strong>：因为我们要用的 APISIX 还没装，而自带的 Traefik 被我们禁用了。</p>
+</li>
+<li>
+<p><strong>房子是空的</strong>：你的前端和后端应用还没部署进去。</p>
+</li>
+</ol>
+<p>此时如果你访问服务器的 IP，应该是什么都打不开的（Connection Refused），因为 80 端口现在没人监听。</p>
+<h3 id="第四步准备-docker-镜像">第四步：准备 Docker 镜像</h3>
+<p>既然要上 K8s，你的前端和后端必须是 <strong>Docker 镜像</strong>。</p>
+<ol>
+<li>
+<p><strong>后端</strong>：你之前已经有 Docker 部署了，说明你有镜像（或者 Dockerfile）。你需要把这个镜像推送到一个仓库（Docker Hub 或阿里云镜像仓库），或者直接在 K3s 节点上构建（K3s 可以直接使用本地导入的镜像，但推荐用仓库）。</p>
+</li>
+<li>
+<p><strong>前端</strong>：正如之前讨论的，你需要写一个 <code>Dockerfile</code> 把前端打包。</p>
+</li>
+</ol>
+<p><strong>前端 Dockerfile 示例 (放在你的 React/Vue 项目根目录):</strong></p>
+<p>Dockerfile</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># Step 1: Build</span></span>
+<span class="line"><span>FROM node:18-alpine as builder</span></span>
+<span class="line"><span>WORKDIR /app</span></span>
+<span class="line"><span>COPY package.json pnpm-lock.yaml ./</span></span>
+<span class="line"><span>RUN npm install -g pnpm &#x26;&#x26; pnpm install</span></span>
+<span class="line"><span>COPY . .</span></span>
+<span class="line"><span>RUN pnpm build</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Step 2: Serve</span></span>
+<span class="line"><span>FROM nginx:alpine</span></span>
+<span class="line"><span># 将构建好的文件放入 Nginx 镜像</span></span>
+<span class="line"><span>COPY --from=builder /app/dist /usr/share/nginx/html</span></span>
+<span class="line"><span># 暴露容器内部端口</span></span>
+<span class="line"><span>EXPOSE 80</span></span>
+<span class="line"><span>CMD ["nginx", "-g", "daemon off;"]</span></span></code></pre>
+<h3 id="你的下一步">你的下一步</h3>
+<p>现在的当务之急是把 <strong>APISIX</strong> 装进这个 K3s 集群，让 80 端口重新工作起来。</p>
+<p><strong>Would you like me to:</strong> 指导你使用 <strong>Helm</strong> (K8s 的包管理器) 在 K3s 中安装 <strong>Apache APISIX</strong> 和 <strong>APISIX Dashboard</strong>？这是最标准的安装方式。</p>
+<p>是的，下一步就是安装 <strong>APISIX</strong>。</p>
+<p>既然我们已经用 K3s 打好了地基（并且清空了端口），现在要往上面盖“大门”了。</p>
+<p>在 Kubernetes (K3s) 中安装软件，最标准的方式是使用 <strong>Helm</strong>（相当于 K8s 的应用商店/包管理器）。</p>
+<p>请按照以下步骤操作，这将会在你的 K3s 集群中部署 APISIX、Etcd（它的数据库）以及 Dashboard。</p>
+<h3 id="第一步安装-helm-工具">第一步：安装 Helm 工具</h3>
+<p>如果你的服务器上还没有 <code>helm</code> 命令，先运行这行脚本安装它：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash</span></span></code></pre>
+<h3 id="第二步添加-apisix-仓库">第二步：添加 APISIX 仓库</h3>
+<p>告诉 Helm 去哪里下载 APISIX：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>helm repo add apisix https://charts.apiseven.com</span></span>
+<span class="line"><span>helm repo update</span></span></code></pre>
+<h3 id="第三步准备配置文件-valuesyaml--关键">第三步：准备配置文件 (<code>values.yaml</code>) —— <strong>关键</strong></h3>
+<p>为了适配你的 <strong>单机 K3s</strong> 环境，我们需要调整一些默认配置。特别是要开启 <code>LoadBalancer</code> 模式，这样 K3s 就会自动把 APISIX 绑定到宿主机的 80 和 443 端口（这正是我们卸载 Nginx 的目的）。</p>
+<p>请在服务器上新建一个文件 <code>apisix-values.yaml</code>，并将以下内容复制进去：</p>
+<p>YAML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># apisix-values.yaml</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 1. 开启网关的 LoadBalancer 模式</span></span>
+<span class="line"><span># 在 K3s 中，这会让 APISIX 直接监听宿主机的 80/443 端口</span></span>
+<span class="line"><span>gateway:</span></span>
+<span class="line"><span>  type: LoadBalancer</span></span>
+<span class="line"><span>  http:</span></span>
+<span class="line"><span>    enabled: true</span></span>
+<span class="line"><span>    servicePort: 80</span></span>
+<span class="line"><span>  tls:</span></span>
+<span class="line"><span>    enabled: true</span></span>
+<span class="line"><span>    servicePort: 443</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 优化资源占用</span></span>
+<span class="line"><span># 你是单机部署，etcd（数据库）不需要跑 3 个副本，1 个就够了，省内存</span></span>
+<span class="line"><span>etcd:</span></span>
+<span class="line"><span>  replicaCount: 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 3. 开启控制台 (Dashboard)</span></span>
+<span class="line"><span># 这样你就能通过网页界面配置路由了</span></span>
+<span class="line"><span>dashboard:</span></span>
+<span class="line"><span>  enabled: true</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 4. 开启 Ingress Controller</span></span>
+<span class="line"><span># 这让 APISIX 能看懂 K8s 的 yaml 配置，实现“自动化配置”</span></span>
+<span class="line"><span>ingress-controller:</span></span>
+<span class="line"><span>  enabled: true</span></span>
+<span class="line"><span>  config:</span></span>
+<span class="line"><span>    apisix:</span></span>
+<span class="line"><span>      serviceNamespace: ingress-apisix</span></span></code></pre>
+<h3 id="第四步执行安装">第四步：执行安装</h3>
+<p>我们把所有组件都安装到一个专门的命名空间 <code>ingress-apisix</code> 中。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 创建命名空间</span></span>
+<span class="line"><span>kubectl create ns ingress-apisix</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 开始安装 (这一步可能需要 1-2 分钟拉取镜像)</span></span>
+<span class="line"><span>helm install apisix apisix/apisix \</span></span>
+<span class="line"><span>  -f apisix-values.yaml \</span></span>
+<span class="line"><span>  -n ingress-apisix</span></span></code></pre>
+<h3 id="第五步验证安装结果">第五步：验证安装结果</h3>
+<p>等待几分钟后，查看 Pod 和 Service 的状态：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl get pods,svc -n ingress-apisix</span></span></code></pre>
+<p><strong>你应该看到类似这样的结果：</strong></p>
+<ol>
+<li>
+<p><strong>Pods</strong>: 应该有 <code>apisix-etcd-0</code> (数据库), <code>apisix-gateway-...</code> (网关), <code>apisix-dashboard-...</code> (控制台) 都在 <code>Running</code> 状态。</p>
+</li>
+<li>
+<p><strong>Service</strong>: 找到 <code>service/apisix-gateway</code> 这一行。</p>
+<ul>
+<li><strong>关键点</strong>：看它的 <code>EXTERNAL-IP</code>。在 K3s 里，它应该显示为你服务器的 <strong>内网 IP</strong> 或者具体的 IP 地址。这意味着它已经成功占领了 80 和 443 端口。</li>
+</ul>
+</li>
+</ol>
+<h3 id="第六步访问测试">第六步：访问测试</h3>
+<p>此时，APISIX 已经接管了你服务器的 80 端口。</p>
+<ol>
+<li>
+<p>测试网关：</p>
+<p>在浏览器直接访问你的 域名 或 服务器IP。</p>
+<p>你应该会看到一个 404 Not Found。</p>
+<ul>
+<li><strong>注意</strong>：这个 404 是 APISIX 返回的（通常是 <code>{"error_msg":"404 Route Not Found"}</code>），这说明 <strong>APISIX 已经活着并且在工作了</strong>！它只是还没配置路由，不知道把请求转发给谁。</li>
+</ul>
+</li>
+<li>
+<p>访问 Dashboard (控制台)：</p>
+<p>默认情况下，Dashboard 为了安全，不会直接暴露到公网。你需要用 K8s 的端口转发功能来临时访问它。</p>
+<p>在你的本地电脑（如果你配置了本地 kubectl）或者服务器上执行：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 把服务器 Dashboard 的 9000 端口映射到当前机器的 9000</span></span>
+<span class="line"><span>kubectl port-forward -n ingress-apisix svc/apisix-dashboard 9000:9000 --address 0.0.0.0</span></span></code></pre>
+<p>然后访问 <code>http://服务器IP:9000</code>。</p>
+<ul>
+<li>
+<p><strong>默认账号</strong>: <code>admin</code></p>
+</li>
+<li>
+<p><strong>默认密码</strong>: <code>admin</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="你的下一步-1">你的下一步</h3>
+<p>现在“大门” (APISIX) 已经立起来了，它是空的，不通向任何房间。</p>
+<p>接下来的任务是：<strong>把你的前端 (Nginx Docker) 和后端 (FastAPI) 部署进 K8s，并告诉 APISIX 怎么走。</strong></p>
+<p><strong>Would you like me to:</strong> 教你写第一个 Kubernetes <strong>Deployment</strong> 和 <strong>Service</strong> 文件，先把你的 <strong>前端镜像</strong> 跑起来并配置域名访问？</p>
+<p>这是一个非常经典的 <strong>“找不到门”</strong> 的错误。</p>
+<p>原因分析：</p>
+<p>K3s 的配置文件默认放在 /etc/rancher/k3s/k3s.yaml，而 helm 和 kubectl 默认去 ~/.kube/config 找配置文件。如果找不到，它们就会默认尝试连接 localhost:8080（这是标准 K8s 的默认行为），结果当然是连不上，因为 K3s 监听的是 6443 端口。</p>
+<p>你需要把钥匙交给 Helm。请执行以下步骤修复：</p>
+<h3 id="方法一临时生效当前终端窗口">方法一：临时生效（当前终端窗口）</h3>
+<p>直接告诉环境变量配置文件的位置：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>export KUBECONFIG=/etc/rancher/k3s/k3s.yaml</span></span></code></pre>
+<p>执行完这句后，先运行一句命令测试一下：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl get nodes</span></span></code></pre>
+<p>如果能看到节点状态，说明连通了，然后再执行你的 Helm 安装命令。</p>
+<h3 id="方法二永久生效推荐">方法二：永久生效（推荐）</h3>
+<p>把配置文件复制到标准位置，这样以后新开窗口或者用 Helm 都不用每次敲 export 了。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 1. 创建默认目录</span></span>
+<span class="line"><span>mkdir -p ~/.kube</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. 复制 K3s 的配置文件过去</span></span>
+<span class="line"><span>cp /etc/rancher/k3s/k3s.yaml ~/.kube/config</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 3. (如果你是 root 用户，这一步可以跳过；如果是普通用户，需要改权限)</span></span>
+<span class="line"><span># chown $(id -u):$(id -g) ~/.kube/config</span></span></code></pre>
+<h3 id="验证并重试">验证并重试</h3>
+<p><strong>第一步：验证连接</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl get nodes</span></span></code></pre>
+<p><em>必须看到 <code>Ready</code> 状态的节点，才能继续。</em></p>
+<p><strong>第二步：重新执行 Helm 安装</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>helm install apisix apisix/apisix \</span></span>
+<span class="line"><span>  -f apisix-values.yaml \</span></span>
+<span class="line"><span>  -n ingress-apisix</span></span></code></pre>
+<p>这次应该就能成功了！</p>
+<p>这就对了！现在你的环境很干净，而且 Helm 仓库也配置正确了。</p>
+<p>但是，出现了一个新的问题：你的配置没有生效。</p>
+<p>看日志，apisix-gateway 依然是 NodePort（且没有 External IP），而且 apisix-dashboard 依然没有出现。</p>
+<p>原因分析：</p>
+<p>Apache 官方的 Helm Chart (apisix/apisix) 和我们之前用的配置结构不一样。</p>
+<ol>
+<li>
+<p>它不叫 <code>gateway</code>，而叫 <code>service</code>。</p>
+</li>
+<li>
+<p>它<strong>不包含</strong> Dashboard。官方现在推荐把 Dashboard 作为一个独立服务安装，而不是捆绑在一起。</p>
+</li>
+</ol>
+<p>我们需要分两步走：</p>
+<ol>
+<li>
+<p><strong>修正 APISIX 网关的配置</strong>（让它变成 LoadBalancer）。</p>
+</li>
+<li>
+<p><strong>单独安装 Dashboard</strong>。</p>
+</li>
+</ol>
+<p>请严格执行以下步骤，这次一定能行。</p>
+<h3 id="第一步修正-configyaml-针对官方-chart">第一步：修正 config.yaml (针对官方 Chart)</h3>
+<p>我们需要修改 <code>config.yaml</code>，把 <code>gateway</code> 改成 <code>service</code>，并去掉无效的 Dashboard 配置。</p>
+<p>请复制下面的代码覆盖原文件：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>cat &#x3C;&#x3C;EOF > config.yaml</span></span>
+<span class="line"><span># 1. 网关服务配置 (注意这里变成了 service)</span></span>
+<span class="line"><span>service:</span></span>
+<span class="line"><span>  type: LoadBalancer</span></span>
+<span class="line"><span>  externalTrafficPolicy: Cluster</span></span>
+<span class="line"><span>  http:</span></span>
+<span class="line"><span>    enabled: true</span></span>
+<span class="line"><span>    port: 80           # 对外暴露的 HTTP 端口</span></span>
+<span class="line"><span>    containerPort: 9080</span></span>
+<span class="line"><span>  tls:</span></span>
+<span class="line"><span>    enabled: true</span></span>
+<span class="line"><span>    servicePort: 443   # 对外暴露的 HTTPS 端口</span></span>
+<span class="line"><span>    containerPort: 9443</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 2. Etcd 配置 (单机省资源)</span></span>
+<span class="line"><span>etcd:</span></span>
+<span class="line"><span>  replicaCount: 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 3. Ingress Controller (对接 K8s)</span></span>
+<span class="line"><span>ingress-controller:</span></span>
+<span class="line"><span>  enabled: true</span></span>
+<span class="line"><span>  config:</span></span>
+<span class="line"><span>    apisix:</span></span>
+<span class="line"><span>      serviceNamespace: ingress-apisix</span></span>
+<span class="line"><span>EOF</span></span></code></pre>
+<h3 id="第二步更新-apisix-网关">第二步：更新 APISIX 网关</h3>
+<p>用修正后的配置更新现有的安装：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>helm upgrade apisix apisix/apisix \</span></span>
+<span class="line"><span>  -f config.yaml \</span></span>
+<span class="line"><span>  -n ingress-apisix \</span></span>
+<span class="line"><span>  --wait</span></span></code></pre>
+<p>验证：</p>
+<p>执行 kubectl get svc -n ingress-apisix。</p>
+<p>现在 apisix-gateway 的 TYPE 应该变成 LoadBalancer 了，EXTERNAL-IP 应该显示你的内网 IP。</p>
+<h3 id="第三步单独安装-dashboard">第三步：单独安装 Dashboard</h3>
+<p>官方把 Dashboard 拆分成了独立的 Chart，我们需要单独装它。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>helm install apisix-dashboard apisix/apisix-dashboard \</span></span>
+<span class="line"><span>  -n ingress-apisix \</span></span>
+<span class="line"><span>  --set service.type=ClusterIP</span></span></code></pre>
+<p>验证：</p>
+<p>再次执行 kubectl get svc -n ingress-apisix。</p>
+<p>现在你应该能看到 apisix-dashboard 出现在列表里了！</p>
+<h3 id="第四步最终联调">第四步：最终联调</h3>
+<p>如果上面两步都成功了，你的 K3s 集群里应该是一片繁荣景象。</p>
+<ol>
+<li>
+<p><strong>访问网关</strong>：浏览器打开 <code>http://你的服务器IP</code>。看到 <code>404 Not Found</code> (APISIX 返回的) 即为成功。</p>
+</li>
+<li>
+<p>访问 Dashboard：</p>
+<p>依然需要端口转发（因为我们设的是 ClusterIP 保护它）：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl port-forward -n ingress-apisix svc/apisix-dashboard 9000:9000 --address 0.0.0.0</span></span></code></pre>
+<p>浏览器访问 <code>http://服务器IP:9000</code> (账号密码 admin/admin)。</p>
+</li>
+</ol>
+<p>一旦确认这两点，我们的 <strong>“K3s + APISIX 基础设施”</strong> 就算彻底竣工了！下一步就可以部署你的前端代码了。</p>
+<p><strong>是的，我强烈建议你先卸载它</strong>，然后改用 Helm 安装。</p>
+<p>原因有两个：</p>
+<ol>
+<li>
+<p><strong>管理一致性</strong>：根据你之前提供的 APISIX <code>values.yaml</code>，你通过 Helm 管理基础设施。将 <code>cert-manager</code> 也纳入 Helm 管理，后续升级（比如从 v1.13 到 v1.15）会比手动 Apply YAML 文件方便得多。</p>
+</li>
+<li>
+<p><strong>避免冲突</strong>：如果你现在的集群里已经有了通过 YAML 安装的 cert-manager，再运行 <code>helm install</code> 可能会报错，或者造成资源归属混乱（Helm 认为资源不属于它，无法管理）。</p>
+</li>
+</ol>
+<h3 id="1-怎么卸载清理环境">1. 怎么卸载（清理环境）</h3>
+<p>直接使用 <code>delete</code> 命令，指向你刚才安装的那个 URL：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl delete -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.yaml</span></span></code></pre>
+<p><em>注意：这会删除 cert-manager 的所有组件，包括 CRD（自定义资源定义）。如果你之前已经创建了 Issuer 或 Certificate，它们也会被清理掉。鉴于你是刚安装，这里应该是干净的。</em></p>
+<h3 id="2-改用-helm-安装推荐做法">2. 改用 Helm 安装（推荐做法）</h3>
+<p>卸载完成后，请按照标准流程用 Helm 安装。</p>
+<p><strong>步骤 A：添加仓库</strong></p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>helm repo add jetstack https://charts.jetstack.io</span></span>
+<span class="line"><span>helm repo update</span></span></code></pre>
+<p>步骤 B：安装 Cert-Manager</p>
+<p>注意：这里有一个非常重要的参数 —set installCRDs=true，千万别漏了。</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>helm install cert-manager jetstack/cert-manager \</span></span>
+<span class="line"><span>  --namespace cert-manager \</span></span>
+<span class="line"><span>  --create-namespace \</span></span>
+<span class="line"><span>  --version v1.13.0 \</span></span>
+<span class="line"><span>  --set installCRDs=true</span></span></code></pre>
+<h3 id="3-验证安装">3. 验证安装</h3>
+<p>安装完成后，检查一下 Pod 是否都运行起来了：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl get pods -n cert-manager</span></span></code></pre>
+<p>你应该能看到三个组件：</p>
+<ul>
+<li>
+<p><code>cert-manager</code></p>
+</li>
+<li>
+<p><code>cert-manager-cainjector</code></p>
+</li>
+<li>
+<p><code>cert-manager-webhook</code></p>
+</li>
+</ul>
+<p>如果状态都是 <code>Running</code>，你就可以继续按照之前的步骤去创建 <code>ClusterIssuer</code> 和配置 <code>Ingress</code> 了。</p>
+<p><strong>Would you like to proceed with creating the <code>ClusterIssuer</code> YAML now?</strong></p>
+<p>你的配置非常适合配合 <strong>Cert-Manager</strong> 使用。</p>
+<p><strong>分析你的配置：</strong></p>
+<ol>
+<li>
+<p><strong><code>service: LoadBalancer</code></strong>: 你已经分配了一个外部 IP。</p>
+</li>
+<li>
+<p><strong><code>http.port: 80</code></strong>: HTTP 端口已开放，这对于 ACME 的 <code>HTTP-01</code> 校验至关重要（Let’s Encrypt 必须能访问你的 80 端口）。</p>
+</li>
+<li>
+<p><strong><code>ingress-controller: enabled</code></strong>: 你使用的是 K8s Ingress 模式，这是 Cert-Manager 最擅长的场景。</p>
+</li>
+</ol>
+<p>基于你的这份 <code>values.yaml</code> 配置，以下是<strong>一步步落地 ACME 自动证书</strong>的最佳实践流程：</p>
+<h3 id="第一步安装-cert-manager">第一步：安装 Cert-Manager</h3>
+<p>如果还没有安装，直接用 Helm 安装最稳妥：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>helm repo add jetstack https://charts.jetstack.io</span></span>
+<span class="line"><span>helm repo update</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 安装 cert-manager，并安装 CRD</span></span>
+<span class="line"><span>helm install cert-manager jetstack/cert-manager \</span></span>
+<span class="line"><span>  --namespace cert-manager \</span></span>
+<span class="line"><span>  --create-namespace \</span></span>
+<span class="line"><span>  --set installCRDs=true</span></span></code></pre>
+<h3 id="第二步创建-clusterissuer-关键步骤">第二步：创建 ClusterIssuer (关键步骤)</h3>
+<p>我们需要告诉 cert-manager 如何去申请证书。请创建一个 YAML 文件（如 <code>issuer.yaml</code>）并应用它。</p>
+<p><strong>注意</strong>：这里最关键的是 <code>class: apisix</code>，它告诉 cert-manager：“请去修改 APISIX 的路由来完成验证，而不是 Nginx”。</p>
+<p>YAML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>apiVersion: cert-manager.io/v1</span></span>
+<span class="line"><span>kind: ClusterIssuer</span></span>
+<span class="line"><span>metadata:</span></span>
+<span class="line"><span>  name: letsencrypt-prod</span></span>
+<span class="line"><span>spec:</span></span>
+<span class="line"><span>  acme:</span></span>
+<span class="line"><span>    # 你的邮箱，用于接收证书过期提醒</span></span>
+<span class="line"><span>    email: your-email@example.com</span></span>
+<span class="line"><span>    server: https://acme-v02.api.letsencrypt.org/directory</span></span>
+<span class="line"><span>    privateKeySecretRef:</span></span>
+<span class="line"><span>      name: letsencrypt-prod</span></span>
+<span class="line"><span>    solvers:</span></span>
+<span class="line"><span>    - http01:</span></span>
+<span class="line"><span>        ingress:</span></span>
+<span class="line"><span>          # 重点：必须匹配 APISIX Ingress Controller 默认的 class 名</span></span>
+<span class="line"><span>          class: apisix</span></span></code></pre>
+<p>应用配置：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl apply -f issuer.yaml</span></span></code></pre>
+<h3 id="第三步配置-ingress-使用证书">第三步：配置 Ingress 使用证书</h3>
+<p>现在，你只需要在业务的 Ingress 资源中加 <strong>3行注解</strong> 和 <strong>tls 配置</strong>。</p>
+<p>假设你要部署一个服务 <code>my-service</code>，域名是 <code>api.example.com</code>：</p>
+<p>YAML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>apiVersion: networking.k8s.io/v1</span></span>
+<span class="line"><span>kind: Ingress</span></span>
+<span class="line"><span>metadata:</span></span>
+<span class="line"><span>  name: my-app-ingress</span></span>
+<span class="line"><span>  annotations:</span></span>
+<span class="line"><span>    # 1. 指定使用 APISIX 处理流量</span></span>
+<span class="line"><span>    kubernetes.io/ingress.class: apisix</span></span>
+<span class="line"><span>    # 2. 指定使用上面创建的 Issuer 签发证书</span></span>
+<span class="line"><span>    cert-manager.io/cluster-issuer: "letsencrypt-prod"</span></span>
+<span class="line"><span>    # 3. (可选) 如果你想强制 HTTP 跳转 HTTPS，加这行</span></span>
+<span class="line"><span>    k8s.apisix.apache.org/http-to-https: "true"</span></span>
+<span class="line"><span>spec:</span></span>
+<span class="line"><span>  tls:</span></span>
+<span class="line"><span>  - hosts:</span></span>
+<span class="line"><span>    - api.example.com</span></span>
+<span class="line"><span>    # 证书签发成功后，会自动存到这个 Secret 里，名字随便取</span></span>
+<span class="line"><span>    secretName: api-example-com-tls</span></span>
+<span class="line"><span>  rules:</span></span>
+<span class="line"><span>  - host: api.example.com</span></span>
+<span class="line"><span>    http:</span></span>
+<span class="line"><span>      paths:</span></span>
+<span class="line"><span>      - path: /</span></span>
+<span class="line"><span>        pathType: Prefix</span></span>
+<span class="line"><span>        backend:</span></span>
+<span class="line"><span>          service:</span></span>
+<span class="line"><span>            name: my-service</span></span>
+<span class="line"><span>            port:</span></span>
+<span class="line"><span>              number: 80</span></span></code></pre>
+<h3 id="它是如何工作的流程解析">它是如何工作的？（流程解析）</h3>
+<p>当你 Apply 上面的 Ingress 后，会自动发生以下过程：</p>
+<ol>
+<li>
+<p><strong>触发</strong>：Cert-manager 发现 Ingress 带了 <code>cert-manager.io/cluster-issuer</code> 注解。</p>
+</li>
+<li>
+<p><strong>验证</strong>：Cert-manager 临时创建一个特殊的 Ingress（路由），路径是 <code>/.well-known/acme-challenge/...</code>。</p>
+</li>
+<li>
+<p><strong>生效</strong>：APISIX Ingress Controller 监听到这个临时 Ingress，自动在 APISIX 网关中生效该路由。</p>
+</li>
+<li>
+<p><strong>访问</strong>：Let’s Encrypt 服务器访问 <code>http://api.example.com/.well-known/...</code>。</p>
+</li>
+<li>
+<p><strong>通过</strong>：你的 LoadBalancer (80端口) -> APISIX -> Cert-manager Pod。验证通过。</p>
+</li>
+<li>
+<p><strong>下发</strong>：证书被保存到 Secret <code>api-example-com-tls</code>。</p>
+</li>
+<li>
+<p><strong>加载</strong>：APISIX 监听到 Secret 变化，热加载 SSL 证书。Https 访问生效。</p>
+</li>
+</ol>
+<h3 id="可能遇到的坑">可能遇到的坑</h3>
+<ol>
+<li>
+<p><strong>DNS 解析</strong>：确保 <code>api.example.com</code> 已经正确解析到了你的 <code>LoadBalancer</code> 的 <strong>External IP</strong>。</p>
+</li>
+<li>
+<p><strong>网络策略</strong>：如果你的 K8s 开启了 NetworkPolicy，确保 Cert-manager 的 Pod 能够被 APISIX 访问。</p>
+</li>
+<li>
+<p><strong>Ingress Class</strong>：默认情况下 APISIX 的 class 名是 <code>apisix</code>。如果你在 <code>values.yaml</code> 中修改了 <code>ingress-controller.config.ingressClass</code>，请确保 <code>ClusterIssuer</code> 中的 <code>class</code> 字段与之对应。</p>
+</li>
+</ol>
+<p><strong>Would you like me to explain how to debug if the certificate remains in a “Pending” state?</strong></p>
+<p>配置好 Issuer（或 ClusterIssuer）后，查看其状态非常重要，因为这决定了它是否能成功向 Let’s Encrypt 注册账户并申请证书。</p>
+<p>由于我们通常推荐使用 <code>ClusterIssuer</code>（全局生效），请按照以下步骤检查：</p>
+<h3 id="1-查看列表概览">1. 查看列表概览</h3>
+<p>首先查看集群里有哪些 ClusterIssuer 以及它们的简要状态：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>kubectl get clusterissuers</span></span></code></pre>
+<p>预期的成功输出：</p>
+<p>你看到的 READY 一栏应该是 True。</p>
+<p>Plaintext</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>NAME               READY   AGE</span></span>
+<span class="line"><span>letsencrypt-prod   True    10m</span></span></code></pre>
+<h3 id="2-查看详细状态-排错必用">2. 查看详细状态 (排错必用)</h3>
+<p>如果 <code>READY</code> 是 <code>False</code>，或者你想确认它是否成功连接到了 Let’s Encrypt，必须使用 <code>describe</code> 命令：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 假设你的名字是 letsencrypt-prod</span></span>
+<span class="line"><span>kubectl describe clusterissuer letsencrypt-prod</span></span></code></pre>
+<p><strong>你需要关注输出底部的 <code>Status</code> 部分：</strong></p>
+<h4 id="-成功状态示例">🟢 成功状态示例</h4>
+<p>你应该在 <code>Status</code> -> <code>Conditions</code> 里看到 <code>Type: Ready</code> 和 <code>Status: True</code>，并且 <code>Message</code> 会显示账户注册成功。</p>
+<p>YAML</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Status:</span></span>
+<span class="line"><span>  Acme:</span></span>
+<span class="line"><span>    Uri:  https://acme-v02.api.letsencrypt.org/acme/acct/12345678</span></span>
+<span class="line"><span>  Conditions:</span></span>
+<span class="line"><span>    - Last Transition Time:  2023-10-27T08:00:00Z</span></span>
+<span class="line"><span>      Message:               The ACME account was registered with the ACME server</span></span>
+<span class="line"><span>      Reason:                ACMEAccountRegistered</span></span>
+<span class="line"><span>      Status:                True</span></span>
+<span class="line"><span>      Type:                  Ready</span></span></code></pre>
+<h4 id="-常见失败原因及排查">🔴 常见失败原因及排查</h4>
+<p>如果你看到的 <code>Status</code> 是 <code>False</code>，请检查 <code>Message</code> 里的报错信息：</p>
+<ol>
+<li>
+<p><strong>404 / Network Error</strong>:</p>
+<ul>
+<li>
+<p>你的 K8s 集群可能无法访问外网，导致连不上 <code>acme-v02.api.letsencrypt.org</code>。</p>
+</li>
+<li>
+<p>检查集群的 DNS 或防火墙设置。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Private Key Error</strong>:</p>
+<ul>
+<li>
+<p>报错类似于 <code>error getting private key</code>。</p>
+</li>
+<li>
+<p>这通常是因为你引用的 <code>privateKeySecretRef</code> 有问题，或者 cert-manager 没有权限创建 Secret。通常等待几秒钟，cert-manager 会自动创建这个 Secret。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="补充如果你创建的是-issuer-非全局">补充：如果你创建的是 Issuer (非全局)</h3>
+<p>如果你没有使用 <code>ClusterIssuer</code> 而是使用了 <code>Issuer</code>（即只在特定 namespace 生效），查看命令需要加上 <code>-n</code> 参数：</p>
+<p>Bash</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 查看列表</span></span>
+<span class="line"><span>kubectl get issuers -n &#x3C;你的namespace></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 查看详情</span></span>
+<span class="line"><span>kubectl describe issuer &#x3C;issuer名字> -n &#x3C;你的namespace></span></span></code></pre>
+<p><strong>只要 ClusterIssuer 的状态是 <code>Ready: True</code>，你就可以放心地去部署 Ingress 来自动申请证书了。</strong></p>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=K3s%20%E5%AE%89%E8%A3%85%E4%B8%8E%20Traefik%20%E7%A6%81%E7%94%A8%EF%BC%88%E9%9D%A2%E5%90%91%20APISIX%EF%BC%89&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Finfra%2F%25E6%259F%25A5%25E7%259C%258B%25E8%258A%2582%25E7%2582%25B9%25E7%258A%25B6%25E6%2580%2581-%25E9%259C%2580%25E8%25A6%2581-sudo-%25E9%2599%25A4%25E9%259D%259E%25E4%25BD%25A0%25E9%2585%258D%25E7%25BD%25AE%25E4%25BA%2586%25E7%2594%25A8%25E6%2588%25B7%25E6%259D%2583%25E9%2599%2590%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/infra/%E6%9F%A5%E7%9C%8B%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81-%E9%9C%80%E8%A6%81-sudo-%E9%99%A4%E9%9D%9E%E4%BD%A0%E9%85%8D%E7%BD%AE%E4%BA%86%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+Related Posts
+</h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/infra/在-iwctl-交互模式下执行/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch Linux 从零安装（UEFI + iwctl）</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>一份面向新手的 Arch Linux 安装实操笔记，覆盖 UEFI 启动、分区思路、iwctl 连接 Wi-Fi 与常见故障排查。</p></a><a href="/blog/infra/创建目录-如果不存在/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>GPG 密钥生成与 Git 签名配置</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>从安装 GPG 到生成密钥、配置 Git 签名与上传公钥的完整步骤。</p></a><a href="/blog/infra/bandwidth/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>云服务器带宽与流量区别</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>解释带宽上限与流量上限的差异，帮助按业务峰值和成本选择合适配置。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
+Comments
+</h3> <div class="giscus-wrapper" data-astro-cid-jvxsf75u> <script src="https://giscus.app/client.js" data-repo="LosFurina/LosFurina.github.io" data-repo-id="R_kgDOQ_gmWQ" data-category="General" data-category-id="DIC_kwDOQ_gmWc4C2A9-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </section>  <script type="module">function s(){const e=document.documentElement.getAttribute("data-theme"),t=document.querySelector("iframe.giscus-frame");if(t){const i=e==="dark"?"dark":"light";t.contentWindow?.postMessage({giscus:{setConfig:{theme:i}}},"https://giscus.app")}}const n=new MutationObserver(e=>{e.forEach(t=>{t.attributeName==="data-theme"&&s()})});n.observe(document.documentElement,{attributes:!0});window.addEventListener("message",e=>{e.origin==="https://giscus.app"&&s()});</script> </footer> </article> </main> <aside class="right-sidebar" data-astro-cid-bvzihdzo> <!-- Future content --> </aside> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="copyright" data-astro-cid-sz7xmlte>
+&copy; 2026 Wayne Li. All rights reserved.
+</p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" title="X (Twitter)" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:me@liweijun.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path> <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline> </svg> </a> <a href="/rss.xml" title="RSS Feed" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>RSS Feed</span> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> <p class="footer-note" data-astro-cid-sz7xmlte>
+Built with <a href="https://astro.build" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Astro</a> </p> </div> </footer>  </body></html>

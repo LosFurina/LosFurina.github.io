@@ -3,7 +3,6 @@ title: "SSH-Keygen 参数详解"
 description: "SSH-Keygen 参数详解 是一个用于生成、管理和转换 SSH 密钥的工具。下面对其主要参数和常见用法进行全面介绍。"
 pubDate: "2025-11-21"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/从0开始搭建你的服务/SSH 公私钥.md"

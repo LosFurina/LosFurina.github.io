@@ -3,7 +3,6 @@ title: "句子成分速览：主语、谓语、宾语"
 description: "整理英语句子中的核心成分与常见结构，帮助快速建立语法分析框架。"
 pubDate: "2025-01-16"
 updatedDate: "2026-02-09"
-draft: true
 category: "english"
 tags: ["english"]
 sourcePath: "English Study/句子成分.md"

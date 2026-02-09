@@ -3,7 +3,6 @@ title: "Git Workflow 视频脚本：RevieU Git 协作工作流详解"
 description: "RevieU 团队 Git 协作流程视频脚本，面向新人培训与统一分支规范。"
 pubDate: "2025-12-28"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Git/Git Workflow 视频脚本：RevieU Git 协作工作流详解.md"

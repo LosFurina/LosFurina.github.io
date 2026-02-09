@@ -3,7 +3,6 @@ title: "Linux 与 Windows 的 AirDrop 替代方案"
 description: "对比 Snapdrop 等局域网传输方案，快速实现跨平台文件互传。"
 pubDate: "2026-01-17"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Linux and Windows 上的 AirDrop.md"

@@ -3,7 +3,6 @@ title: "Linux 终端终极配置指南：Zsh + Zplug + Powerlevel10k"
 description: "这份文档总结了我们刚才讨论的所有内容，从 Shell 的选择到 Zsh 的终极配置（Zplug + Powerlevel10k），整理成了一份详细的操作指南。"
 pubDate: "2026-01-15"
 updatedDate: "2026-02-09"
-draft: true
 category: "infra"
 tags: ["infra"]
 sourcePath: "ComputerScience/Linux 终端终极配置指南：Zsh + Zplug + Powerlevel10k.md"
