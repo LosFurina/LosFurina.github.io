@@ -52,60 +52,398 @@ GPG Keys
 GitHub
 <span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
 On this page
-</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与适用场景" class="toc-link" data-astro-cid-xvrfupwn>背景与适用场景</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心结论" class="toc-link" data-astro-cid-xvrfupwn>核心结论</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#详细说明" class="toc-link" data-astro-cid-xvrfupwn>详细说明</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#分析思路-1" class="toc-link" data-astro-cid-xvrfupwn>分析思路 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#分析思路-2" class="toc-link" data-astro-cid-xvrfupwn>分析思路 2</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#分析思路-3" class="toc-link" data-astro-cid-xvrfupwn>分析思路 3</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#操作步骤与命令示例" class="toc-link" data-astro-cid-xvrfupwn>操作步骤与命令示例</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-1" class="toc-link" data-astro-cid-xvrfupwn>示例 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#执行顺序建议" class="toc-link" data-astro-cid-xvrfupwn>执行顺序建议</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#常见问题与排查" class="toc-link" data-astro-cid-xvrfupwn>常见问题与排查</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#关键问答摘录" class="toc-link" data-astro-cid-xvrfupwn>关键问答摘录</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#总结" class="toc-link" data-astro-cid-xvrfupwn>总结</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>蓝牙名称由来</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-07-21T00:00:00.000Z"> Jul 20, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 3 min read
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与目标" class="toc-link" data-astro-cid-xvrfupwn>背景与目标</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心内容" class="toc-link" data-astro-cid-xvrfupwn>核心内容</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-1-为什么蓝牙被命名为bluetooth有什么原因" class="toc-link" data-astro-cid-xvrfupwn>主题 1. 为什么蓝牙被命名为bluetooth，有什么原因</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-bluetooth-本意是一个人名" class="toc-link" data-astro-cid-xvrfupwn>1. “Bluetooth” 本意是一个人名</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-蓝牙技术--统一不同设备" class="toc-link" data-astro-cid-xvrfupwn>2. 蓝牙技术 = 统一不同设备</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-原计划换名字结果忘了改" class="toc-link" data-astro-cid-xvrfupwn>3. 原计划换名字，结果忘了改</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-logo-都有维京彩蛋" class="toc-link" data-astro-cid-xvrfupwn>4. Logo 都有维京彩蛋。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#总结一下" class="toc-link" data-astro-cid-xvrfupwn>总结一下</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-2-蓝牙的通讯原理是什么" class="toc-link" data-astro-cid-xvrfupwn>主题 2. 蓝牙的通讯原理是什么</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-工作频段在免费频道上聊天" class="toc-link" data-astro-cid-xvrfupwn>1. 工作频段：在“免费”频道上聊天</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-跳频扩频边聊边换座位避免被打扰" class="toc-link" data-astro-cid-xvrfupwn>2. 跳频扩频：边聊边“换座位”，避免被打扰</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-主从结构一个指挥官带一群小弟" class="toc-link" data-astro-cid-xvrfupwn>3. 主从结构：一个指挥官带一群小弟</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#️-4-通信流程配对握手发数据" class="toc-link" data-astro-cid-xvrfupwn>️ 4. 通信流程：配对、握手、发数据</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-低功耗设计ble" class="toc-link" data-astro-cid-xvrfupwn>5. 低功耗设计（BLE）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#简单总结一口气说完" class="toc-link" data-astro-cid-xvrfupwn>简单总结一口气说完：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-3-蓝牙通信协议" class="toc-link" data-astro-cid-xvrfupwn>主题 3. 蓝牙通信协议</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-l2cap逻辑链路控制与适配协议" class="toc-link" data-astro-cid-xvrfupwn>1. L2CAP（逻辑链路控制与适配协议）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-attattribute-protocol" class="toc-link" data-astro-cid-xvrfupwn>2. ATT（Attribute Protocol）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-gatt通用属性配置文件" class="toc-link" data-astro-cid-xvrfupwn>3. GATT（通用属性配置文件）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-sdp服务发现协议" class="toc-link" data-astro-cid-xvrfupwn>4. SDP（服务发现协议）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-security-manager安全管理器" class="toc-link" data-astro-cid-xvrfupwn>5. Security Manager（安全管理器）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-link-layer链路层" class="toc-link" data-astro-cid-xvrfupwn>1. Link Layer（链路层）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-hci主机控制接口" class="toc-link" data-astro-cid-xvrfupwn>2. HCI（主机控制接口）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-4-蓝牙最初只是设计传输文件的吗现在感觉耳机等外设用的多" class="toc-link" data-astro-cid-xvrfupwn>主题 4. 蓝牙最初只是设计传输文件的吗，现在感觉耳机等外设用的多</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#初衷是啥" class="toc-link" data-astro-cid-xvrfupwn>初衷是啥。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#举个例子" class="toc-link" data-astro-cid-xvrfupwn>举个例子：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#ble蓝牙低功耗带来了什么" class="toc-link" data-astro-cid-xvrfupwn>BLE（蓝牙低功耗）带来了什么。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-5-24g属于高频还是低频" class="toc-link" data-astro-cid-xvrfupwn>主题 5. 2.4G属于高频还是低频</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#复盘与应用" class="toc-link" data-astro-cid-xvrfupwn>复盘与应用</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>蓝牙名称由来</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-07-21T00:00:00.000Z"> Jul 20, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 15 min read
 </span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
-Updated  <time datetime="2025-07-21T00:00:00.000Z"> Jul 20, 2025 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与适用场景">背景与适用场景</h2>
-<p>本文基于实际问题整理：为什么蓝牙被命名为bluetooth，有什么原因。</p>
-<h2 id="核心结论">核心结论</h2>
+Updated  <time datetime="2026-02-13T00:00:00.000Z"> Feb 12, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与目标">背景与目标</h2>
+<p>本文围绕“为什么蓝牙被命名为bluetooth，有什么原因”展开，整理可直接复用的步骤、原理说明与排查经验。</p>
+<h2 id="核心内容">核心内容</h2>
+<h3 id="主题-1-为什么蓝牙被命名为bluetooth有什么原因">主题 1. 为什么蓝牙被命名为bluetooth，有什么原因</h3>
+<p>这个名字背后，其实是一个“维京传奇 + IT职场乌龙”的故事，挺有趣的。</p>
+<h3 id="1-bluetooth-本意是一个人名">1. <strong>“Bluetooth” 本意是一个人名</strong></h3>
+<p>“Bluetooth”（蓝牙）最早指的是——<strong>10世纪的丹麦国王 Harald “Bluetooth” Gormsson</strong>。</p>
+<p>这个哈拉尔德国王以两点著称：</p>
 <ul>
-<li>他有一颗 坏掉发黑的牙齿，看上去发蓝，所以被叫做“蓝牙”（Bluetooth）。</li>
-<li>PAN (Personal Area Network)</li>
-<li>把哈拉尔德国王名字“ H arald B låtand”的首字母 “ᚼ (H)” 和 “ᛒ (B)” 合在一起，变成了我们今天看到的那个蓝…</li>
-<li>这个名字背后，其实是一个“维京传奇 + IT职场乌龙”的故事，挺有趣的</li>
-<li>�1. “Bluetooth” 本意是一个人名</li>
+<li>他非常善于 <strong>沟通与统一</strong> ——统一了当时的挪威和丹麦。</li>
+<li>他有一颗<strong>坏掉发黑的牙齿</strong>，看上去发蓝，所以被叫做“蓝牙”（Bluetooth）。</li>
 </ul>
-<h2 id="详细说明">详细说明</h2>
-<h3 id="分析思路-1">分析思路 1</h3>
-<p>这个名字背后，其实是一个“维京传奇 + IT职场乌龙”的故事，挺有趣的</p>
-<p>�1. “Bluetooth” 本意是一个人名</p>
-<h3 id="分析思路-2">分析思路 2</h3>
-<p>� 2. 跳频扩频：边聊边“换座位”，避免被打扰</p>
-<p>� 1. 工作频段：在“免费”频道上聊天</p>
-<h3 id="分析思路-3">分析思路 3</h3>
-<p>可以是 USB、UART、SPI 接口实现，也支持通过软件栈模拟</p>
-<p>整套协议栈主要分为 控制层（Controller）+ 主机层（Host），再加上一个 配置管理层（Profile）</p>
-<h2 id="操作步骤与命令示例">操作步骤与命令示例</h2>
-<h3 id="示例-1">示例 1</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">+----------------------------+</span></span>
-<span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">   应用层（Application）</span><span style="color:#F97583">    |</span><span style="color:#B392F0"> 👨：使用蓝牙功能的APP，比如微信传文件、耳机App</span></span>
-<span class="line"><span style="color:#B392F0">+----------------------------+</span></span>
-<span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">      配置文件层（Profiles）</span><span style="color:#F97583">|</span><span style="color:#B392F0"> 🧩：定义耳机、键盘等设备的行为规范（比如</span><span style="color:#9ECBFF"> A2DP、HID）</span></span>
-<span class="line"><span style="color:#B392F0">+----------------------------+</span></span>
-<span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">   主机层（Host</span><span style="color:#9ECBFF"> Stack）</span><span style="color:#F97583">     |</span><span style="color:#B392F0"> 🧠：数据处理逻辑，例如安全认证、数据封装等</span></span>
-<span class="line"><span style="color:#B392F0">+----------------------------+</span></span>
-<span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">   控制器层（Controller）</span><span style="color:#F97583">   |</span><span style="color:#B392F0"> 💪：真实发射无线信号的硬件层</span></span>
-<span class="line"><span style="color:#B392F0">+----------------------------+</span></span>
-<span class="line"><span style="color:#F97583">|</span><span style="color:#B392F0">         物理层（Radio）</span><span style="color:#F97583">     |</span><span style="color:#B392F0"> 📡：2.4GHz射频信号本体</span></span></code></pre>
-<h3 id="执行顺序建议">执行顺序建议</h3>
-<ol>
-<li>明确当前问题与目标结果。</li>
-<li>按维度梳理关键信息并形成判断。</li>
-<li>结合场景选择可执行的下一步动作。</li>
-</ol>
-<h2 id="常见问题与排查">常见问题与排查</h2>
+<h3 id="2-蓝牙技术--统一不同设备">2. <strong>蓝牙技术 = 统一不同设备</strong></h3>
+<p>在1996年，Intel、Ericsson、Nokia 等公司组建了一个小组，要研发一种能统一无线通讯协议的技术，主要解决：</p>
 <ul>
-<li><strong>问题：</strong> 2.4G属于高频还是低频  <strong>排查：</strong> 2.4GHz（即 2400 MHz）在无线通信领域中， 属于“高频”，但它不是“超高”那种，而是处于无线电频谱中的一个“黄金中频段”；低频（LF） 30–300 kHz…</li>
+<li>不同品牌手机、耳机、电脑的短距离通信；</li>
+<li>替代红外线，解决设备“对不齐”就传不了的问题。</li>
 </ul>
-<h2 id="关键问答摘录">关键问答摘录</h2>
+<p>他们说：这个技术的目标不就是——像“蓝牙国王”一样，把各家设备“团结起来”吗。于是就临时用了**“Bluetooth”**作为代号，打算以后换掉。</p>
+<h3 id="3-原计划换名字结果忘了改">3. <strong>原计划换名字，结果忘了改</strong></h3>
+<p>等技术快成熟了，开发团队在做市场推广时，本来想换个酷点的名字，比如：</p>
+<ul>
+<li><strong>RadioWire</strong></li>
+<li><strong>PAN (Personal Area Network)</strong></li>
+</ul>
+<p>但这些名字不是被注册了，就是过于死板，最后居然——<strong>没来得及换名</strong>，蓝牙就这样正式发布了。</p>
+<h3 id="4-logo-都有维京彩蛋">4. <strong>Logo 都有维京彩蛋。</strong></h3>
+<p>蓝牙的 Logo 是一个“北欧文符号”：</p>
+<ul>
+<li>把哈拉尔德国王名字“<strong>H</strong>arald <strong>B</strong>låtand”的首字母 “ᚼ (H)” 和 “ᛒ (B)” 合在一起，变成了我们今天看到的那个蓝色的 Bluetooth 图标。</li>
+</ul>
+<p>是不是顿时觉得科技感里透着一点神秘的北欧味。</p>
+<h3 id="总结一下">总结一下</h3>
 <blockquote>
-<p><strong>Q:</strong> 2.4G属于高频还是低频</p>
-<p><strong>A:</strong> 2.4GHz（即 2400 MHz）在无线通信领域中， 属于“高频”，但它不是“超高”那种，而是处于无线电频谱中的一个“黄金中频段”；低频（LF） 30–300 kHz…</p>
+<p>蓝牙（Bluetooth）原是丹麦国王的外号，因为他统一了多个民族，就像蓝牙技术统一了不同设备。最初只是代号，结果没改名就直接发布了，于是这个维京式的名字就留了下来。</p>
 </blockquote>
-<h2 id="总结">总结</h2>
-<p>他有一颗 坏掉发黑的牙齿，看上去发蓝，所以被叫做“蓝牙”（Bluetooth）。</p>
+<p>有点像《指环王》里的角色跑去搞技术创业，意外改变了世界</p>
+<h3 id="主题-2-蓝牙的通讯原理是什么">主题 2. 蓝牙的通讯原理是什么</h3>
+<p>蓝牙通信的原理其实可以简单理解成——<strong>“在空气中说悄悄话”</strong>，用的是一种<strong>短距离、低功耗的无线电信号传输技术</strong>。我们来分段拆解一下它的核心原理：</p>
+<h3 id="1-工作频段在免费频道上聊天">1. <strong>工作频段：在“免费”频道上聊天</strong></h3>
+<p>蓝牙使用的是 <strong>2.4GHz 的 ISM（Industrial, Scientific, Medical）频段</strong>，这个频段在全球大部分国家都是<strong>免费使用的无线频段</strong>，Wi-Fi、微波炉甚至无线鼠标也用它。</p>
 <ul>
-<li>原始对话来源：<a href="https://chatgpt.com/c/687f1d9c-7360-8001-bf0f-e7204cb0d9e4">https://chatgpt.com/c/687f1d9c-7360-8001-bf0f-e7204cb0d9e4</a></li>
-</ul>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=%E8%93%9D%E7%89%99%E5%90%8D%E7%A7%B0%E7%94%B1%E6%9D%A5&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Fcareer%2F%25E8%2593%259D%25E7%2589%2599%25E5%2590%258D%25E7%25A7%25B0%25E7%2594%25B1%25E6%259D%25A5%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/career/%E8%93%9D%E7%89%99%E5%90%8D%E7%A7%B0%E7%94%B1%E6%9D%A5/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+<li>具体是 <strong>2.402 GHz 到 2.480 GHz</strong>，总共 79 个子频道（每个宽 1 MHz）。</li>
+</ul>
+<h3 id="2-跳频扩频边聊边换座位避免被打扰">2. <strong>跳频扩频：边聊边“换座位”，避免被打扰</strong></h3>
+<p>为了避免跟别人冲突（比如Wi-Fi也在2.4GHz打电话），蓝牙采用了一种<strong>跳频</strong>技术（Frequency Hopping Spread Spectrum，FHSS）：</p>
+<ul>
+<li>每秒跳 1600 次频率（对，就是超快换频道）</li>
+<li>类似“你说一句话就换个频道，再说一句又换一个”，干扰就很难持续打中你</li>
+<li>如果某个频道被干扰（比如Wi-Fi正好占了），就自动跳过</li>
+</ul>
+<p>就像两个人在食堂里说悄悄话，每说一句话就换个桌子坐，非常“谨慎”。</p>
+<h3 id="3-主从结构一个指挥官带一群小弟">3. <strong>主从结构：一个指挥官带一群小弟</strong></h3>
+<p>蓝牙不是你发我收那么简单，而是<strong>一个主设备（Master）控制最多 7 个从设备（Slave）</strong>，形成一个叫 <strong>piconet（微网）</strong> 的结构。</p>
+<p>举个例子：</p>
+<ul>
+<li>你手机是主设备；</li>
+<li>蓝牙耳机、手环、音响是从设备；</li>
+<li>你说：“大家听我号令”，其他设备听你的指挥。</li>
+</ul>
+<h3 id="️-4-通信流程配对握手发数据">️ 4. <strong>通信流程：配对、握手、发数据</strong></h3>
+<p>蓝牙的通信过程基本像谈恋爱（真的是）：</p>
+<ol>
+<li><strong>发现阶段</strong>：打开蓝牙，广播“我在这~有没有人想连我。”</li>
+<li><strong>配对阶段</strong>：找到设备后，进行认证（输入PIN码或者确认），交换身份信息</li>
+<li><strong>连接阶段</strong>：一旦信任，就建立通信链路（L2CAP协议），开始传数据</li>
+<li><strong>通信阶段</strong>：根据蓝牙协议，传输音频、文件或控制指令等</li>
+</ol>
+<p>一旦配对成功，下次重连就快很多。</p>
+<h3 id="5-低功耗设计ble">5. <strong>低功耗设计（BLE）</strong></h3>
+<p>传统蓝牙是持续广播信号，耗电较高，而 BLE（Bluetooth Low Energy）是：</p>
+<ul>
+<li>只在需要时快速唤醒</li>
+<li>传完就休眠，像打个盹再继续工作</li>
+<li>特别适合手环、温度计、IoT设备这种“说一句就能睡一天”的场景</li>
+</ul>
+<h3 id="简单总结一口气说完">简单总结一口气说完：</h3>
+<blockquote>
+<p>蓝牙是一种短距离无线通信技术，它在免费频段上工作，通过跳频快速换频道避免干扰，采用主从结构控制多个设备，通信过程包括配对、握手、传输，同时还有低功耗版本 BLE 用于节能场景。</p>
+</blockquote>
+<p>就像一个会跳舞、说悄悄话的指挥官，在复杂的空气中组织大家高效低调地传情达意</p>
+<p>你要是想更硬核一点，比如蓝牙的协议栈、层级结构（L2CAP、HCI、GATT 等），我也能讲，只不过那就进入“技术极客深坑区”了，要不要我们继续。</p>
+<h3 id="主题-3-蓝牙通信协议">主题 3. 蓝牙通信协议</h3>
+<p>蓝牙通信协议堪称“无线界的操作系统”，它是一个<strong>分层架构的协议栈</strong>，像一座“无线信号摩天大楼”，每一层都负责特定的功能。下面我会用直白、形象的方式，帮你理清楚这座“楼”到底长什么样，谁在里面干什么活。</p>
+<p>蓝牙协议栈结构一览</p>
+<p>整套协议栈主要分为 <strong>控制层（Controller）+ 主机层（Host）</strong>，再加上一个<strong>配置管理层（Profile）</strong>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>+----------------------------+</span></span>
+<span class="line"><span>|   应用层（Application）    | ：使用蓝牙功能的APP，比如微信传文件、耳机App</span></span>
+<span class="line"><span>+----------------------------+</span></span>
+<span class="line"><span>|      配置文件层（Profiles）| ：定义耳机、键盘等设备的行为规范（比如 A2DP、HID）</span></span>
+<span class="line"><span>+----------------------------+</span></span>
+<span class="line"><span>|   主机层（Host Stack）     | ：数据处理逻辑，例如安全认证、数据封装等</span></span>
+<span class="line"><span>+----------------------------+</span></span>
+<span class="line"><span>|   控制器层（Controller）   | ：真实发射无线信号的硬件层</span></span>
+<span class="line"><span>+----------------------------+</span></span>
+<span class="line"><span>|         物理层（Radio）     | ：2.4GHz射频信号本体</span></span></code></pre>
+<p>主机层（Host）——蓝牙协议的“大脑”</p>
+<p>这一层包含了各种协议模块，负责控制逻辑、数据通信、服务发现等，主要组件如下：</p>
+<h3 id="1-l2cap逻辑链路控制与适配协议">1. <strong>L2CAP（逻辑链路控制与适配协议）</strong></h3>
+<ul>
+<li>类似“邮局打包系统”：对上层数据进行封装、分段、重组；</li>
+<li>支持多个频道（通道号），支持 QoS（服务质量）。</li>
+</ul>
+<h3 id="2-attattribute-protocol">2. <strong>ATT（Attribute Protocol）</strong></h3>
+<ul>
+<li>BLE 专属，用于传递属性（attribute）——数据的最小单位；</li>
+<li>类似“身份证系统”：每个数据项都有 ID、权限、值等元信息。</li>
+</ul>
+<h3 id="3-gatt通用属性配置文件">3. <strong>GATT（通用属性配置文件）</strong></h3>
+<ul>
+<li>BLE 的核心：构建服务（Service）和特征（Characteristic）；</li>
+<li>类似“菜单系统”：客户端（比如手机）读取服务器（比如手环）提供的服务。</li>
+</ul>
+<h3 id="4-sdp服务发现协议">4. <strong>SDP（服务发现协议）</strong></h3>
+<ul>
+<li>用于经典蓝牙，发现对方提供的服务种类；</li>
+<li>相当于“你会干啥。我看看能不能雇你。”</li>
+</ul>
+<h3 id="5-security-manager安全管理器">5. <strong>Security Manager（安全管理器）</strong></h3>
+<ul>
+<li>控制配对流程、密钥交换、加密通信；</li>
+<li>包括 PIN 码、Just Works、OOB 等配对方式。</li>
+</ul>
+<p>控制器层（Controller）——蓝牙的“肌肉层”</p>
+<p>靠固件运行，靠芯片执行，是物理传输的核心部分。</p>
+<h3 id="1-link-layer链路层">1. <strong>Link Layer（链路层）</strong></h3>
+<ul>
+<li>控制连接的建立、维护、断开；</li>
+<li>BLE 中还管理广播（Advertise）和扫描（Scan）过程。</li>
+</ul>
+<h3 id="2-hci主机控制接口">2. <strong>HCI（主机控制接口）</strong></h3>
+<ul>
+<li>Host 和 Controller 之间的接口，数据打包传输；</li>
+<li>可以是 USB、UART、SPI 接口实现，也支持通过软件栈模拟。</li>
+</ul>
+<p>配置文件（Profiles）——“设备说明书”层</p>
+<p>每种类型的设备，比如耳机、键盘、遥控器，都有对应的 Profile，来规定它们的行为方式。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Profile</th><th>用途</th></tr></thead><tbody><tr><td>A2DP</td><td>高质量音频传输（音响、耳机）</td></tr><tr><td>AVRCP</td><td>音频远程控制（播放、暂停）</td></tr><tr><td>HFP</td><td>免提电话协议</td></tr><tr><td>HID</td><td>人机接口设备（键盘、鼠标）</td></tr><tr><td>GATT</td><td>BLE的通用访问（比如手环）</td></tr><tr><td>SPP</td><td>串口仿真协议（模拟串口通信）</td></tr></tbody></table>
+<p>这些 Profile 就是“行业标准手册”，你生产一个蓝牙耳机就要遵守 A2DP + AVRCP，生产鼠标就要遵守 HID。</p>
+<p>小结：蓝牙协议的“栈式宇宙”</p>
+<p>想象蓝牙通信就像发送一封信件：</p>
+<ol>
+<li>应用层写好内容（我要播放音乐）</li>
+<li>L2CAP 打包信件</li>
+<li>GATT/ATT 决定你是要读温度、还是控制灯泡</li>
+<li>HCI 把打包好的信交给邮差（控制器）</li>
+<li>Radio 发射信号</li>
+<li>另一端解包 → 解码 → 应用</li>
+</ol>
+<p>如果你是搞嵌入式、BLE 开发或者物联网的，建议深入了解 GATT 和 L2CAP 的细节。如果你更偏向做应用，理解 Profile 的匹配就足够让你玩转蓝牙产品。</p>
+<h3 id="主题-4-蓝牙最初只是设计传输文件的吗现在感觉耳机等外设用的多">主题 4. 蓝牙最初只是设计传输文件的吗，现在感觉耳机等外设用的多</h3>
+<p>你这个问题问得太好了——<strong>蓝牙一开始的确主要是为了传文件和替代电缆而设计的</strong>，但后来它的人生轨迹“严重跑偏”，成了耳机、手环、鼠标键盘的主力技术，甚至成为“物联网”的重要支柱。它的人生就像一位“原本想考公务员的文科生，最后去跑黑科技创业了”。我们来捋一捋这段蓝牙的演化史：</p>
+<p>蓝牙的“童年”：只想替代电缆传文件（1990s）</p>
+<h3 id="初衷是啥">初衷是啥。</h3>
+<ul>
+<li><strong>爱立信（Ericsson）</strong> 在 1994 年发起蓝牙技术，目标非常朴素：</li>
+</ul>
+<blockquote>
+<p><strong>“让手机和电脑之间无线传文件，替代串口/USB电缆。”</strong></p>
+</blockquote>
+<h3 id="举个例子">举个例子：</h3>
+<ul>
+<li>手机与电脑互传联系人、短信、铃声；</li>
+<li>早期“红外线”要两个设备对得很准，蓝牙一来就解决这个问题；</li>
+<li>所以蓝牙最初走的是“文件共享 + 通讯增强”的路子。</li>
+</ul>
+<p>那时候它就像个“无线小助手”。</p>
+<p>‍ 蓝牙的“少年期”：加入外设、耳机的战局（2000s）</p>
+<p>这一阶段，蓝牙开始<strong>开发各种 Profile（协议）</strong>，比如：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Profile</th><th>用途</th></tr></thead><tbody><tr><td><strong>HSP / HFP</strong></td><td>耳机打电话</td></tr><tr><td><strong>A2DP</strong></td><td>无线高音质音乐</td></tr><tr><td><strong>AVRCP</strong></td><td>控制播放暂停</td></tr><tr><td><strong>HID</strong></td><td>蓝牙鼠标、键盘</td></tr><tr><td><strong>OBEX</strong></td><td>文件传输</td></tr></tbody></table>
+<p>这时蓝牙变得“多才多艺”了，不仅能传文件，还能：</p>
+<ul>
+<li>播歌</li>
+<li>通话</li>
+<li>连键盘打字⌨️</li>
+<li>控遥控器️</li>
+</ul>
+<p>变成了一种全能型通信协议，就像“无线万能胶”。</p>
+<p>蓝牙的“成年期”：BLE爆发 + IoT之光（2010s~）</p>
+<p>2009 年，**Bluetooth Low Energy（BLE）**发布，这是一个大分水岭。</p>
+<h3 id="ble蓝牙低功耗带来了什么">BLE（蓝牙低功耗）带来了什么。</h3>
+<ul>
+<li>超低功耗、秒级唤醒</li>
+<li>理想续航达<strong>几个月甚至几年</strong></li>
+<li>专为<strong>传感器、手环、健康设备、智能灯泡、门锁</strong>设计</li>
+</ul>
+<p>这一波 BLE 让蓝牙成了物联网的“红人”：</p>
+<ul>
+<li>Apple Watch、手环、温湿度计、血氧仪、蓝牙门禁……</li>
+<li>全靠 GATT 协议传递数据，省电又稳定</li>
+</ul>
+<p>于是蓝牙逐渐从“近场传文件”技术，摇身一变成了<strong>智能设备的默认无线接口</strong>，几乎哪里有智能，哪里就有蓝牙。</p>
+<p>现在的蓝牙：“社交达人 + IoT骨干 + 音频大哥”</p>
+<p>蓝牙如今分出两大“人格”：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>蓝牙角色</th><th>主力应用</th><th>技术特点</th></tr></thead><tbody><tr><td><strong>经典蓝牙（BR/EDR）</strong></td><td>耳机、音响、电话通话</td><td>支持高带宽，耗电多</td></tr><tr><td><strong>BLE（低功耗蓝牙）</strong></td><td>手环、体温计、智能灯</td><td>超省电，低速数据传输</td></tr></tbody></table>
+<p>而且它还在进化中，比如：</p>
+<ul>
+<li><strong>LE Audio（蓝牙新音频协议）</strong>：支持多设备共享音频，一个手机连接多个耳机；</li>
+<li><strong>Auracast 广播音频</strong>：地铁站、电影院统一广播蓝牙音频；</li>
+<li><strong>蓝牙定位</strong>：基于 RSSI 和 AoA（到达角）实现 1 米内精度定位；</li>
+<li><strong>Mesh 网络</strong>：蓝牙设备彼此中继通信，构建覆盖全屋的 IoT 网络。</li>
+</ul>
+<p>总结一句话：</p>
+<blockquote>
+<p>蓝牙最初是为传文件而生，但它“误入外设江湖”，靠着灵活的协议栈、出色的兼容性和不断进化的低功耗设计，成了无线耳机和智能设备的“骨干成员”。</p>
+</blockquote>
+<p>它已经不是那个只想摆脱数据线的小工具了，而是一位活跃在智能世界里的通信巨星</p>
+<p>如果你有兴趣，我可以进一步带你了解 BLE 的开发过程、如何用手机与蓝牙设备交互，比如用 Python 的 <code>bleak</code> 或者 Android 的 Bluetooth API。是否想试试。</p>
+<h3 id="主题-5-24g属于高频还是低频">主题 5. 2.4G属于高频还是低频</h3>
+<p>2.4GHz（即 2400 MHz）在无线通信领域中，<strong>属于“高频”</strong>，但它不是“超高”那种，而是处于无线电频谱中的一个“黄金中频段”。</p>
+<p>让我们来做个层级划分，帮你更清楚地理解它在整个频谱中的位置。</p>
+<p>无线频谱划分（经典版）</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>名称（英文缩写）</th><th>频率范围</th><th>中文叫法</th><th>举例应用</th></tr></thead><tbody><tr><td><strong>低频（LF）</strong></td><td>30–300 kHz</td><td>低频</td><td>潜艇通信、RFID门禁</td></tr><tr><td><strong>中频（MF）</strong></td><td>300–3000 kHz</td><td>中频</td><td>AM广播</td></tr><tr><td><strong>高频（HF）</strong></td><td>3–30 MHz</td><td>高频</td><td>短波广播、海事通信</td></tr><tr><td><strong>甚高频（VHF）</strong></td><td>30–300 MHz</td><td>很高频</td><td>FM广播、电视信号</td></tr><tr><td><strong>超高频（UHF）</strong></td><td>300–3000 MHz</td><td>超高频</td><td>手机信号、WiFi、蓝牙</td></tr><tr><td><strong>特高频（SHF）</strong></td><td>3–30 GHz</td><td>特高频</td><td>雷达、5G、卫星通信</td></tr><tr><td><strong>极高频（EHF）</strong></td><td>30–300 GHz</td><td>极高频</td><td>未来毫米波通信</td></tr></tbody></table>
+<p>所以：2.4GHz 属于 <strong>UHF（Ultra High Frequency，超高频）</strong> 范畴</p>
+<ul>
+<li>它处在 UHF 的中高端，<strong>比FM广播高很多，但比5G毫米波低得多</strong></li>
+<li>被广泛用于：
+<ul>
+<li>Wi-Fi（2.4GHz 路由器）</li>
+<li>蓝牙（经典蓝牙 + BLE）</li>
+<li>无线鼠标键盘</li>
+<li>微波炉（是的，微波炉也在 2.45GHz）</li>
+<li>无线摄像头、对讲机等</li>
+</ul>
+</li>
+</ul>
+<p>为什么选 2.4GHz。</p>
+<p>2.4GHz 是 <strong>ISM（Industrial, Scientific, Medical）</strong> 免费开放频段：</p>
+<ul>
+<li>全球通用，不需要牌照</li>
+<li>频率高 → 天线小，设备可做得更轻便</li>
+<li>不像更高频（如5GHz）那样容易被墙壁阻挡，但比低频数据更快</li>
+</ul>
+<p>它是个典型的“家用无线黄金频段”，虽然容易拥挤（因为大家都用），但性价比极高。</p>
+<p>类比解释：</p>
+<p>你可以把频率想象成说话的语速：</p>
+<ul>
+<li><strong>低频（几kHz）</strong>：就像爷爷在说话，很稳重但太慢，能穿透墙，但只能说简单话；</li>
+<li><strong>中高频（MHz级）</strong>：像正常语速，兼顾清晰度与穿透力；</li>
+<li><strong>2.4GHz</strong>：像年轻人，语速快，表达力强，但稍微吵点就听不清了；</li>
+<li><strong>几十GHz</strong>：像在高速弹幕中聊天，信息密度超高，但风一吹你就听不到了。</li>
+</ul>
+<p>总结一句话：</p>
+<blockquote>
+<p><strong>2.4GHz 属于“超高频段（UHF）”，是无线通信的热门频率，处于高频范围，但还不是最极端的高频。</strong></p>
+</blockquote>
+<p>简单说，它不是低频，它是“高频中的中流砥柱”，是无线技术的核心战场</p>
+<hr>
+<p>Powered by <a href="https://www.chatgptexporter.com">ChatGPT Exporter</a></p>
+<h2 id="复盘与应用">复盘与应用</h2>
+<ol>
+<li>先提炼可复用结论，再结合个人场景做取舍。</li>
+<li>将关键判断标准整理为检查表，便于后续复用。</li>
+<li>定期回看并更新结论，避免策略随环境变化而失效。</li>
+</ol>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=%E8%93%9D%E7%89%99%E5%90%8D%E7%A7%B0%E7%94%B1%E6%9D%A5&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Fcareer%2F%25E8%2593%259D%25E7%2589%2599%25E5%2590%258D%25E7%25A7%25B0%25E7%2594%25B1%25E6%259D%25A5%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/career/%E8%93%9D%E7%89%99%E5%90%8D%E7%A7%B0%E7%94%B1%E6%9D%A5/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
 Related Posts
 </h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/career/日语动漫称谓含义解析/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>日语动漫称谓含义解析</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>发音来自于小孩子口齿不清，把“Chan”发成了“Tan”。</p></a><a href="/blog/career/日麻场风与游戏进程区别/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>日麻场风与游戏进程区别</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>东家（庄家） 是最恐怖的。如果东家碰了“东”，那就是 2 番（连风东）。加上庄家得点 1.5 倍，东场东家的速攻非常致命。</p></a><a href="/blog/career/符号读法解析/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>符号读法解析</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>特指路径时： forward slash。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
 Comments

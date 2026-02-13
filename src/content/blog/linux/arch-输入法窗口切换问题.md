@@ -2,82 +2,67 @@
 title: "Arch 输入法窗口切换问题"
 description: "解决 Arch 切换窗口后输入法自动回中文的问题，重点配置 Fcitx5 的共享状态与默认布局。"
 pubDate: "2026-02-12"
-updatedDate: "2026-02-12"
+updatedDate: "2026-02-13"
 category: "linux"
 tags: ["linux"]
 sourcePath: "src/content/blog/Gemini-Arch 输入法窗口切换问题.md"
 sourceVault: "chat-export"
 ---
-## 背景与适用场景
 
-在 Arch Linux 中使用 Fcitx5 时，常见现象是切换应用窗口后输入法状态自动回到中文。本文适用于希望默认保持英文、仅在需要时手动切中文的场景。
+## 背景与目标
 
-## 核心结论
+本文围绕“我在arch上，为什么每次一切窗口，输入自动就换中文了，我要保持英文，在...”展开，整理可直接复用的步骤、原理说明与排查经验。
 
-- 在 Fcitx5 设置中将 `Share input state between applications` 设置为 `All`。
-- 将输入法列表中的 `Keyboard - English` 放到最前，确保默认状态是英文。
-- 取消 `Use system keyboard layout`，避免桌面环境覆盖输入法行为。
-- 修改环境变量后重启 Fcitx5，再验证不同应用间的切窗行为。
+## 核心内容
 
-## 详细说明
+### 主题 1. 我在arch上，为什么每次一切窗口，输入自动就换中文了，我要保持英文，在...
 
-### 实现思路 1
+这通常是因为你的输入法框架（大概率是 **fcitx5** 或 **ibus**）开启了“全局状态”或者“每个窗口独立状态”的设置，导致它在切换窗口时自动回退到了默认的中文输入状态。
 
-在 `Fcitx5 Configuration` 的全局选项里，定位到“应用间共享输入状态”。
+作为一个 Arch 用户，这种“自作聪明”的行为确实很让人恼火。你可以按照以下步骤来锁定英文优先：
 
-将策略调整为 `All`，可让输入法状态在窗口之间保持一致。
+### 1\. 如果你使用的是 Fcitx5 (推荐)
 
-### 实现思路 2
+Fcitx5 默认可能会记住每个窗口的状态。
 
-在“输入法”列表中确认 `Keyboard - English` 在第一位，避免会话启动后直接进入中文输入。
+*   **打开设置**：在终端输入 `fcitx5-configtool`。
+*   **全局选项 (Global Options)**：
+    *   找到 **"为每个程序使用单独的输入法" (Share input state between applications)**。
+    *   将其设置为 **"所有程序共享" (All)**。这样你在一个窗口切了英文，全系统都会保持英文。
+*   **输入法顺序**：确保你的“当前输入法”列表中，**键盘 - 英语 (Keyboard - English)** 排在最上面。Fcitx5 默认启动时会加载第一个。
 
-如果系统级布局与 Fcitx5 冲突，优先以 Fcitx5 内部布局为准。
+### 2\. 如果你使用的是 IBus
 
-### 实现思路 3
+IBus 的行为更怪异一些，通常需要强制重置：
 
-确认会话内环境变量已指向 Fcitx5（GTK、Qt、XMODIFIERS）。
+*   **打开设置**：执行 `ibus-setup`。
+*   **高级 (Advanced)**：
+    *   取消勾选 **"使用系统键盘布局" (Use system keyboard layout)**。
+    *   勾选 **"所有窗口共享同一输入法" (Share the same input method among all windows)**。
 
-修改后重启 Fcitx5 或重新登录，再进行跨应用验证。
+### 3\. 检查系统环境变量
 
-## 操作步骤与命令示例
+有时候环境变量会导致输入法引擎强制初始化。检查你的 `~/.xprofile`、`~/.bashrc` 或 `/etc/environment`：
 
-### 示例 1
-
-```bash
+```
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
 XMODIFIERS=@im=fcitx
 ```
 
-### 示例 2
+确保这些指向的是你正在使用的框架。
 
-```bash
-fcitx5 -rd
-```
+### 4\. 进阶：使用插件或脚本 (Vim 玩家必看)
 
-### 执行顺序建议
+如果你是因为在 Neovim 或写代码时频繁切换窗口感到痛苦：
 
-1. 确认当前系统版本、服务状态与关键配置文件。
-2. 按最小变更原则执行命令或修改配置。
-3. 通过日志、状态命令和实际行为完成验证。
+*   **fcitx5-remote**：你可以安装这个小工具。
+*   **Vim 插件**：比如 `fcitx.vim`，它能在你进入 Normal 模式时自动切回英文，进入 Insert 模式时恢复之前的状态。
 
-## 常见问题与排查
+**你是用的哪种桌面环境（KDE, GNOME 还是 i3/Sway 这种 TWM）。** 不同的 WM 对窗口焦点的处理逻辑不一样，如果你告诉我你的环境，我可以给你更具体的配置文件改法。
 
-- **问题：** 切窗后又回到中文  **排查：** 先检查 `Share input state between applications` 是否为 `All`，再确认输入法列表首位是英文。
-- **问题：** 某些应用不遵循切换状态  **排查：** 检查环境变量是否生效，并在应用重启后复测。
+## 实施与验证清单
 
-## 关键问答摘录
-
-> **Q:** 最关键的设置项是什么？
->
-> **A:** `Share input state between applications = All`，它决定了切窗后是否保持同一输入状态。
-
-> **Q:** 如何保证默认英文输入？
->
-> **A:** 把 `Keyboard - English` 放在输入法列表第一位，并关闭系统布局覆盖项。
-
-## 总结
-
-先统一 Fcitx5 的共享状态，再固定默认英文布局，通常即可解决 Arch 切窗后自动回中文的问题。
-
-- 原始对话来源：https://gemini.google.com/app/64d4f7f398588a16
+1. 执行前先确认环境、版本和依赖与文中前置条件一致。
+2. 涉及系统级变更时，先备份关键配置或创建快照。
+3. 完成操作后按验证步骤确认结果，再执行清理或覆盖动作。

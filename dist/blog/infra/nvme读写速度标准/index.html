@@ -52,60 +52,301 @@ GPG Keys
 GitHub
 <span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
 On this page
-</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与适用场景" class="toc-link" data-astro-cid-xvrfupwn>背景与适用场景</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心结论" class="toc-link" data-astro-cid-xvrfupwn>核心结论</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#详细说明" class="toc-link" data-astro-cid-xvrfupwn>详细说明</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-1" class="toc-link" data-astro-cid-xvrfupwn>实现思路 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-2" class="toc-link" data-astro-cid-xvrfupwn>实现思路 2</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#crystaldiskmark" class="toc-link" data-astro-cid-xvrfupwn>CrystalDiskMark</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#操作步骤与命令示例" class="toc-link" data-astro-cid-xvrfupwn>操作步骤与命令示例</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-1" class="toc-link" data-astro-cid-xvrfupwn>示例 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-2" class="toc-link" data-astro-cid-xvrfupwn>示例 2</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-3" class="toc-link" data-astro-cid-xvrfupwn>示例 3</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-4" class="toc-link" data-astro-cid-xvrfupwn>示例 4</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#执行顺序建议" class="toc-link" data-astro-cid-xvrfupwn>执行顺序建议</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#常见问题与排查" class="toc-link" data-astro-cid-xvrfupwn>常见问题与排查</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#关键问答摘录" class="toc-link" data-astro-cid-xvrfupwn>关键问答摘录</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#总结" class="toc-link" data-astro-cid-xvrfupwn>总结</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>NVMe读写速度标准</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-10-07T00:00:00.000Z"> Oct 6, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 2 min read
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与目标" class="toc-link" data-astro-cid-xvrfupwn>背景与目标</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心内容" class="toc-link" data-astro-cid-xvrfupwn>核心内容</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-1-nvme正常读写速度是多少" class="toc-link" data-astro-cid-xvrfupwn>主题 1. nvme正常读写速度是多少</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#一接口版本决定天花板" class="toc-link" data-astro-cid-xvrfupwn>一、接口版本决定“天花板”</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#️-二影响性能的实际因素" class="toc-link" data-astro-cid-xvrfupwn>️ 二、影响性能的实际因素</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#三参考判断标准" class="toc-link" data-astro-cid-xvrfupwn>三、参考判断标准</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#四实用建议" class="toc-link" data-astro-cid-xvrfupwn>四、实用建议</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-2-有什么软件可以测试读写速度" class="toc-link" data-astro-cid-xvrfupwn>主题 2. 有什么软件可以测试读写速度</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1️⃣-crystaldiskmark最常用" class="toc-link" data-astro-cid-xvrfupwn>1️⃣ CrystalDiskMark（⭐最常用）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2️⃣-as-ssd-benchmark" class="toc-link" data-astro-cid-xvrfupwn>2️⃣ AS SSD Benchmark</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3️⃣-atto-disk-benchmark" class="toc-link" data-astro-cid-xvrfupwn>3️⃣ ATTO Disk Benchmark</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4️⃣-blackmagic-disk-speed-testmacwindows" class="toc-link" data-astro-cid-xvrfupwn>4️⃣ Blackmagic Disk Speed Test（Mac/Windows）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1️⃣-iometer" class="toc-link" data-astro-cid-xvrfupwn>1️⃣ Iometer</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2️⃣-anvils-storage-utilities" class="toc-link" data-astro-cid-xvrfupwn>2️⃣ Anvil’s Storage Utilities</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#linux-用户" class="toc-link" data-astro-cid-xvrfupwn>Linux 用户：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-3-crystaldiskmark" class="toc-link" data-astro-cid-xvrfupwn>主题 3. CrystalDiskMark</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#实施与验证清单" class="toc-link" data-astro-cid-xvrfupwn>实施与验证清单</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>NVMe读写速度标准</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-10-07T00:00:00.000Z"> Oct 6, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 9 min read
 </span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
-Updated  <time datetime="2025-10-07T00:00:00.000Z"> Oct 6, 2025 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与适用场景">背景与适用场景</h2>
-<p>本文整理 NVMe读写速度标准 的关键实践路径，适用于基础设施建设、部署与运维场景。</p>
-<h2 id="核心结论">核心结论</h2>
+Updated  <time datetime="2026-02-13T00:00:00.000Z"> Feb 12, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与目标">背景与目标</h2>
+<p>本文围绕“nvme正常读写速度是多少”展开，整理可直接复用的步骤、原理说明与排查经验。</p>
+<h2 id="核心内容">核心内容</h2>
+<h3 id="主题-1-nvme正常读写速度是多少">主题 1. nvme正常读写速度是多少</h3>
+<h3 id="一接口版本决定天花板">一、接口版本决定“天花板”</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>接口</th><th>理论带宽（单向）</th><th>实际常见读速</th><th>实际常见写速</th><th>代表型号</th></tr></thead><tbody><tr><td><strong>PCIe 3.0 x4 NVMe</strong></td><td>~3.94 GB/s</td><td>2500–3500 MB/s</td><td>1500–3200 MB/s</td><td>Samsung 970 EVO Plus, WD SN750</td></tr><tr><td><strong>PCIe 4.0 x4 NVMe</strong></td><td>~7.88 GB/s</td><td>5000–7400 MB/s</td><td>4000–6500 MB/s</td><td>Samsung 980 PRO, WD SN850</td></tr><tr><td><strong>PCIe 5.0 x4 NVMe</strong></td><td>~15.75 GB/s</td><td>9000–14000 MB/s</td><td>8500–12000 MB/s</td><td>Crucial T700, Corsair MP700</td></tr></tbody></table>
+<blockquote>
+<p>比喻一下：PCIe 3.0 像四车道高速，PCIe 4.0 是八车道，PCIe 5.0 直接上了双层立交。车（数据）跑得多快，取决于你这条路修到什么档次。</p>
+</blockquote>
+<h3 id="️-二影响性能的实际因素">️ 二、影响性能的实际因素</h3>
+<ol>
+<li><strong>闪存类型</strong>：
 <ul>
 <li>TLC（三层单元）速度较快；</li>
 <li>QLC（四层单元）容量大但速度掉得厉害；</li>
 <li>SLC 缓存区满了后，QLC 盘速度可能暴跌到 300MB/s。</li>
-<li>温度限制（Thermal Throttling）</li>
-<li>太热（ 70°C）时，控制器会自动降速；</li>
 </ul>
-<h2 id="详细说明">详细说明</h2>
-<h3 id="实现思路-1">实现思路 1</h3>
-<p>这个问题问得很到点上，因为“NVMe 正常读写速度”其实取决于不少因素——接口版本、闪存类型、控制器、通道数、主板支持情况、甚至散热都有影响</p>
-<p>比喻一下：PCIe 3.0 像四车道高速，PCIe 4.0 是八车道，PCIe 5.0 直接上了双层立交</p>
-<h3 id="实现思路-2">实现思路 2</h3>
-<p>结果对比网络上几乎所有 SSD 评测</p>
-<p>评分体系（Score）方便横向对比</p>
-<h3 id="crystaldiskmark">CrystalDiskMark</h3>
-<p>检查插槽是否是 PCIe 4.0 x4</p>
-<p>越大越真实 建议改为 4GiB 或更大</p>
-<h2 id="操作步骤与命令示例">操作步骤与命令示例</h2>
-<h3 id="示例-1">示例 1</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">fio</span><span style="color:#79B8FF"> --name=nvme_test</span><span style="color:#79B8FF"> --filename=/mnt/nvme/testfile</span><span style="color:#79B8FF"> --size=4G</span><span style="color:#79B8FF"> --rw=randread</span><span style="color:#79B8FF"> --bs=4k</span><span style="color:#79B8FF"> --numjobs=4</span><span style="color:#79B8FF"> --time_based</span><span style="color:#79B8FF"> --runtime=60s</span><span style="color:#79B8FF"> --group_reporting</span></span></code></pre>
-<h3 id="示例-2">示例 2</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> hdparm</span><span style="color:#79B8FF"> -tT</span><span style="color:#9ECBFF"> /dev/nvme0n1</span></span></code></pre>
-<h3 id="示例-3">示例 3</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">dd</span><span style="color:#9ECBFF"> if=/dev/zero</span><span style="color:#9ECBFF"> of=testfile</span><span style="color:#9ECBFF"> bs=1G</span><span style="color:#9ECBFF"> count=</span><span style="color:#79B8FF">1</span><span style="color:#9ECBFF"> oflag=direct</span></span></code></pre>
-<h3 id="示例-4">示例 4</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">Seq</span><span style="color:#9ECBFF"> Q8T1</span><span style="color:#9ECBFF"> Read:</span><span style="color:#79B8FF"> 7100</span><span style="color:#9ECBFF"> MB/s</span></span>
-<span class="line"><span style="color:#B392F0">Seq</span><span style="color:#9ECBFF"> Q8T1</span><span style="color:#9ECBFF"> Write:</span><span style="color:#79B8FF"> 5300</span><span style="color:#9ECBFF"> MB/s</span></span>
-<span class="line"><span style="color:#B392F0">RND4K</span><span style="color:#9ECBFF"> Q1T1</span><span style="color:#9ECBFF"> Read:</span><span style="color:#79B8FF"> 80</span><span style="color:#9ECBFF"> MB/s</span></span>
-<span class="line"><span style="color:#B392F0">RND4K</span><span style="color:#9ECBFF"> Q1T1</span><span style="color:#9ECBFF"> Write:</span><span style="color:#79B8FF"> 220</span><span style="color:#9ECBFF"> MB/s</span></span></code></pre>
-<h3 id="执行顺序建议">执行顺序建议</h3>
-<ol>
-<li>明确目标环境、依赖条件与网络连通性。</li>
-<li>分阶段实施配置或部署，逐步验证。</li>
-<li>记录最终状态与回滚策略，便于复用。</li>
+</li>
+<li><strong>温度限制（Thermal Throttling）</strong>：
+<ul>
+<li>太热（>70°C）时，控制器会自动降速；</li>
+<li>没装散热片的 NVMe 特别容易中招。</li>
+</ul>
+</li>
+<li><strong>主板插槽带宽</strong>：
+<ul>
+<li>某些主板的第二个 M.2 插槽只有 PCIe 3.0 x2（减半速）；</li>
+<li>有的笔电甚至共享通道，会被显卡或无线网卡占用。</li>
+</ul>
+</li>
+<li><strong>系统环境</strong>：
+<ul>
+<li>Windows 复制大文件 ≠ 实际持续写入；</li>
+<li>用专业工具（如 CrystalDiskMark、AS SSD Benchmark）测试才更准确。</li>
+</ul>
+</li>
 </ol>
-<h2 id="常见问题与排查">常见问题与排查</h2>
+<h3 id="三参考判断标准">三、参考判断标准</h3>
 <ul>
-<li><strong>问题：</strong> CrystalDiskMark  <strong>排查：</strong> 检查插槽是否是 PCIe 4.0 x4；越大越真实 建议改为 4GiB 或更大</li>
+<li>你的 NVMe 如果是 <strong>PCIe 3.0</strong>，读写在 <strong>3000/2500 MB/s 左右</strong>算正常；</li>
+<li>如果是 <strong>PCIe 4.0</strong>，那就要在 <strong>7000/5000 MB/s 左右</strong>才算健康；</li>
+<li>若你买的是 <strong>PCIe 5.0</strong> 新盘，低于 <strong>9000 MB/s</strong> 反而说明主板或 BIOS 没开通带宽。</li>
 </ul>
-<h2 id="关键问答摘录">关键问答摘录</h2>
-<blockquote>
-<p><strong>Q:</strong> CrystalDiskMark</p>
-<p><strong>A:</strong> 检查插槽是否是 PCIe 4.0 x4；越大越真实 建议改为 4GiB 或更大</p>
-</blockquote>
-<h2 id="总结">总结</h2>
-<p>TLC（三层单元）速度较快；。</p>
+<h3 id="四实用建议">四、实用建议</h3>
 <ul>
-<li>原始对话来源：<a href="https://chatgpt.com/c/68e59698-3744-832a-9353-5a0cc3d431db">https://chatgpt.com/c/68e59698-3744-832a-9353-5a0cc3d431db</a></li>
-</ul>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=NVMe%E8%AF%BB%E5%86%99%E9%80%9F%E5%BA%A6%E6%A0%87%E5%87%86&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Finfra%2Fnvme%25E8%25AF%25BB%25E5%2586%2599%25E9%2580%259F%25E5%25BA%25A6%25E6%25A0%2587%25E5%2587%2586%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/infra/nvme%E8%AF%BB%E5%86%99%E9%80%9F%E5%BA%A6%E6%A0%87%E5%87%86/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+<li>用 <strong>CrystalDiskInfo</strong> 查看接口协商速率（是否真的是 x4、Gen4、Gen5）。</li>
+<li>用 <strong>CrystalDiskMark</strong> 跑一遍，看顺序读写和随机读写；</li>
+<li>如果写入速度掉得太厉害，可以试试：
+<ul>
+<li>开启 NVMe 驱动（厂商驱动或微软 NVMe 驱动）；</li>
+<li>保持至少 20% 空间空闲；</li>
+<li>检查散热。</li>
+</ul>
+</li>
+</ul>
+<h3 id="主题-2-有什么软件可以测试读写速度">主题 2. 有什么软件可以测试读写速度</h3>
+<p>好问题 ，测试 NVMe 读写速度的软件其实很多，但不同软件关注的维度、测试逻辑和展示方式都不一样。下面我给你分层推荐几类工具——从“普通用户可视化”到“专业级分析”，都有：</p>
+<p>一、主流用户常用的速度测试工具（最推荐）</p>
+<p>这些是图形化、简单、结果一目了然的工具</p>
+<h3 id="1️⃣-crystaldiskmark最常用"><strong>1️⃣ CrystalDiskMark（⭐最常用）</strong></h3>
+<ul>
+<li><strong>适用系统</strong>：Windows</li>
+<li><strong>功能</strong>：顺序读写 + 随机读写速度测试（Q1T1、Q32T1等模式）</li>
+<li><strong>特点</strong>：<br>
+*   显示 <strong>读/写 MB/s</strong>、IOPS、响应时间；<br>
+*   可选择测试文件大小（1GiB–64GiB）；<br>
+*   结果对比网络上几乎所有 SSD 评测。</li>
+<li><strong>推荐理由</strong>：几乎所有评测都用它，你的数据一对比就知道盘是不是拖后腿。</li>
+<li><strong>下载</strong>：<a href="https://crystalmark.info/en/software/crystaldiskmark/">CrystalDiskMark 官网</a></li>
+</ul>
+<h3 id="2️⃣-as-ssd-benchmark"><strong>2️⃣ AS SSD Benchmark</strong></h3>
+<ul>
+<li><strong>适用系统</strong>：Windows</li>
+<li><strong>功能</strong>：综合测试 NVMe/SATA 读写性能 + 访问延迟</li>
+<li><strong>额外功能</strong>：<br>
+*   评分体系（Score）方便横向对比；<br>
+*   提供“Copy Benchmark”测试真实文件操作。</li>
+<li><strong>区别</strong>：CrystalDiskMark 偏理论最大速度，AS SSD 更贴近真实使用。</li>
+</ul>
+<h3 id="3️⃣-atto-disk-benchmark"><strong>3️⃣ ATTO Disk Benchmark</strong></h3>
+<ul>
+<li><strong>适用系统</strong>：Windows</li>
+<li>️ <strong>功能</strong>：以不同数据块大小（从 512B 到 64MB）测试性能曲线。</li>
+<li><strong>适合用途</strong>：查看 SSD 在不同块大小下的速度变化，比如 4K 块和 1MB 块差异。</li>
+<li><strong>实用场景</strong>：分析控制器和缓存策略表现。</li>
+</ul>
+<h3 id="4️⃣-blackmagic-disk-speed-testmacwindows"><strong>4️⃣ Blackmagic Disk Speed Test（Mac/Windows）</strong></h3>
+<ul>
+<li><strong>适合人群</strong>：Mac 用户、视频剪辑党</li>
+<li><strong>功能</strong>：测试磁盘对视频编辑（ProRes、RAW）的读写是否达标。</li>
+<li><strong>下载</strong>：App Store 免费。</li>
+</ul>
+<p>️ 二、进阶测试工具（给想深挖的玩家）</p>
+<h3 id="1️⃣-iometer"><strong>1️⃣ Iometer</strong></h3>
+<ul>
+<li>开源、老牌、专业；</li>
+<li>可设置不同工作负载（随机读写比例、队列深度）；</li>
+<li>常用于企业 SSD 测试；</li>
+<li>缺点：界面丑、配置复杂。</li>
+</ul>
+<h3 id="2️⃣-anvils-storage-utilities"><strong>2️⃣ Anvil’s Storage Utilities</strong></h3>
+<ul>
+<li>功能丰富，可测试延迟、IOPS、压缩性能；</li>
+<li>对比多种负载下的表现；</li>
+<li>对 NVMe 高性能盘的压力测试更准确。</li>
+</ul>
+<p>三、命令行和系统内置方案</p>
+<h3 id="linux-用户"><strong>Linux 用户</strong>：</h3>
+<ul>
+<li><code>fio</code>：最强命令行测试工具，可定制 workload。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">    fio</span><span style="color:#79B8FF"> --name=nvme_test</span><span style="color:#79B8FF"> --filename=/mnt/nvme/testfile</span><span style="color:#79B8FF"> --size=4G</span><span style="color:#79B8FF"> --rw=randread</span><span style="color:#79B8FF"> --bs=4k</span><span style="color:#79B8FF"> --numjobs=4</span><span style="color:#79B8FF"> --time_based</span><span style="color:#79B8FF"> --runtime=60s</span><span style="color:#79B8FF"> --group_reporting</span></span></code></pre>
+<ul>
+<li><code>hdparm</code>（SATA 盘）：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">    sudo</span><span style="color:#9ECBFF"> hdparm</span><span style="color:#79B8FF"> -tT</span><span style="color:#9ECBFF"> /dev/nvme0n1</span></span></code></pre>
+<ul>
+<li><code>dd</code>（简单但不准）：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">    dd</span><span style="color:#9ECBFF"> if=/dev/zero</span><span style="color:#9ECBFF"> of=testfile</span><span style="color:#9ECBFF"> bs=1G</span><span style="color:#9ECBFF"> count=</span><span style="color:#79B8FF">1</span><span style="color:#9ECBFF"> oflag=direct</span></span></code></pre>
+<p>四、建议的测试流程</p>
+<ol>
+<li><strong>先关掉后台程序</strong>，避免干扰；</li>
+<li><strong>选 1GiB 或 4GiB 测试文件</strong>（太小会高估速度）；</li>
+<li><strong>重复 2–3 次取平均值</strong>；</li>
+<li><strong>结果判断</strong>：
+<ul>
+<li>顺序读写：主打接口极限；</li>
+<li>随机读写（4K Q1T1）：决定系统日常响应；</li>
+<li>若速度大幅低于标称值，检查：
+<ul>
+<li>是否插在 PCIe x4 插槽；</li>
+<li>是否开启 NVMe 驱动；</li>
+<li>是否温度过高限速。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>如果你告诉我你的系统（Windows / Linux / macOS）和测试目的（比如想测最高速度还是想看真实应用性能），我可以帮你选一个<strong>最合适的工具 + 推荐参数组合</strong>。</p>
+<h3 id="主题-3-crystaldiskmark">主题 3. CrystalDiskMark</h3>
+<p>非常好 ，<strong>CrystalDiskMark</strong> 是测试 NVMe、SSD、甚至机械硬盘速度最主流的软件之一，操作非常简单。下面我手把手带你完整过一遍：</p>
+<p>一、下载安装</p>
+<ol>
+<li>打开官网：<br>
+<a href="https://crystalmark.info/en/software/crystaldiskmark/">https://crystalmark.info/en/software/crystaldiskmark/</a></li>
+<li>下载最新版（选择 <strong>Standard Edition ZIP 绿色版</strong> 就行，不用安装）。</li>
+<li>解压后，双击运行 <code>DiskMark64.exe</code>（如果是 32 位系统就运行 <code>DiskMark32.exe</code>）。</li>
+</ol>
+<p>️ 二、界面认识（五个关键选项）</p>
+<p>打开界面后，你会看到一堆数字框和几个下拉菜单，，这里逐个解释</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>区域</th><th>说明</th><th>建议设置</th></tr></thead><tbody><tr><td><strong>① 测试次数（All、5）</strong></td><td>默认是 5，表示每项测试跑 5 次取平均值</td><td>保持默认即可</td></tr><tr><td><strong>② 测试文件大小（1GiB）</strong></td><td>用多大文件测试；越大越真实</td><td>建议改为 <strong>4GiB</strong> 或更大</td></tr><tr><td><strong>③ 测试磁盘（C: D: E: …）</strong></td><td>选择要测试的硬盘或分区</td><td>选你的 <strong>NVMe SSD 所在盘符</strong></td></tr><tr><td><strong>④ 测试项目按钮（All / Seq / RND）</strong></td><td>“All” 会跑所有测试</td><td>建议点 <strong>All</strong> 一次完成</td></tr><tr><td><strong>⑤ 测试结果区域</strong></td><td>会显示读写速度、IOPS、延迟等数据</td><td>等待测试完成后看结果</td></tr></tbody></table>
+<p>三、测试步骤</p>
+<ol>
+<li>关闭其他程序（包括浏览器、下载、Steam等），保持系统空闲；</li>
+<li>启动 CrystalDiskMark；</li>
+<li>选择：
+<ul>
+<li>测试文件大小：4GiB</li>
+<li>测试磁盘：你要测的 NVMe（比如 D: 或 E:）</li>
+</ul>
+</li>
+<li>点击 <strong>“All”</strong> 按钮开始测试；</li>
+<li>等待 1–3 分钟，完成后会显示结果。</li>
+</ol>
+<p>四、结果怎么看</p>
+<p>测试完后你会看到四组指标（默认排列如下）</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>项目</th><th>含义</th><th>说明</th></tr></thead><tbody><tr><td><strong>Seq Q8T1</strong></td><td>顺序读写（大文件）</td><td>测最大吞吐速度，最接近厂商宣传值</td></tr><tr><td><strong>Seq Q1T1</strong></td><td>单队列顺序读写</td><td>更贴近日常文件传输性能</td></tr><tr><td><strong>RND4K Q32T16</strong></td><td>随机 4K 多线程</td><td>测多任务场景（高并发读写）</td></tr><tr><td><strong>RND4K Q1T1</strong></td><td>随机 4K 单线程</td><td>测系统响应速度，启动/打开软件相关</td></tr></tbody></table>
+<p><strong>举例解释：</strong><br>
+如果你看到：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Seq Q8T1 Read: 7100 MB/s</span></span>
+<span class="line"><span>Seq Q8T1 Write: 5300 MB/s</span></span>
+<span class="line"><span>RND4K Q1T1 Read: 80 MB/s</span></span>
+<span class="line"><span>RND4K Q1T1 Write: 220 MB/s</span></span></code></pre>
+<p>那就说明你这块盘是标准的 <strong>PCIe 4.0 NVMe SSD</strong>，表现完全正常。</p>
+<p>️ 五、附加建议</p>
+<ul>
+<li>测试过程中如果温度超过 <strong>70°C</strong>，速度可能会自动降；</li>
+<li>如果结果明显比标称值低（比如 7000MB/s 的盘只跑出 3000MB/s）：
+<ol>
+<li>检查插槽是否是 <strong>PCIe 4.0 x4</strong>；</li>
+<li>确保开启 <strong>NVMe 驱动</strong>；</li>
+<li>试试换个 M.2 插槽；</li>
+<li>或者 BIOS 里开启 <strong>PCIe Gen4/Gen5 模式</strong>。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<p>Powered by <a href="https://www.chatgptexporter.com">ChatGPT Exporter</a></p>
+<h2 id="实施与验证清单">实施与验证清单</h2>
+<ol>
+<li>执行前先确认环境、版本和依赖与文中前置条件一致。</li>
+<li>涉及系统级变更时，先备份关键配置或创建快照。</li>
+<li>完成操作后按验证步骤确认结果，再执行清理或覆盖动作。</li>
+</ol>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=NVMe%E8%AF%BB%E5%86%99%E9%80%9F%E5%BA%A6%E6%A0%87%E5%87%86&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Finfra%2Fnvme%25E8%25AF%25BB%25E5%2586%2599%25E9%2580%259F%25E5%25BA%25A6%25E6%25A0%2587%25E5%2587%2586%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/infra/nvme%E8%AF%BB%E5%86%99%E9%80%9F%E5%BA%A6%E6%A0%87%E5%87%86/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
 Related Posts
 </h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/infra/k3s-双节点集群部署指南/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>K3s 双节点集群部署指南</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>网络连通性：两台机器之间需要互通。如果是跨云厂商，建议使用 Tailscale 或 WireGuard 建立虚拟内网，或者确保防火墙开放了...</p></a><a href="/blog/infra/kubectl-rollout-命令详解/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>kubectl rollout 命令详解</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>场景： 在 CI/CD 流水线中，确保新版本完全启动后再进行下一步。</p></a><a href="/blog/infra/k8s-vs-k3s-ingress-体验对比/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>k8s vs k3s: Ingress 体验对比</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>原生 k8s： 如果你不在云平台上，这个 Service 会永远卡在 状态，因为 k8s 不知道如何去向你的路由器或公网申请一个 IP。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
 Comments

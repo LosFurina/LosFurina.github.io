@@ -50,26 +50,280 @@ Guestbook
 GPG Keys
 </a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
 GitHub
-<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container no-toc" data-astro-cid-bvzihdzo>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>查看Linux用户组（索引）</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-10-23T00:00:00.000Z"> Oct 22, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 1 min read
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与目标" class="toc-link" data-astro-cid-xvrfupwn>背景与目标</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心内容" class="toc-link" data-astro-cid-xvrfupwn>核心内容</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-1-怎么查看一个linux用户的组" class="toc-link" data-astro-cid-xvrfupwn>主题 1. 怎么查看一个linux用户的组</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法-1groups-命令" class="toc-link" data-astro-cid-xvrfupwn>方法 1：groups 命令</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法-2id-命令" class="toc-link" data-astro-cid-xvrfupwn>方法 2：id 命令</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法-3查看-etcgroup-文件" class="toc-link" data-astro-cid-xvrfupwn>方法 3：查看 /etc/group 文件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#小总结" class="toc-link" data-astro-cid-xvrfupwn>小总结：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-2-把一个组添加给一个用户" class="toc-link" data-astro-cid-xvrfupwn>主题 2. 把一个组添加给一个用户</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#举个例子" class="toc-link" data-astro-cid-xvrfupwn>举个例子：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#创建一个新组" class="toc-link" data-astro-cid-xvrfupwn>创建一个新组：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#从组中移除用户" class="toc-link" data-astro-cid-xvrfupwn>从组中移除用户：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#查看组内所有用户" class="toc-link" data-astro-cid-xvrfupwn>查看组内所有用户：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-3-怎么给一个文件夹添加一个所属组" class="toc-link" data-astro-cid-xvrfupwn>主题 3. 怎么给一个文件夹添加一个所属组</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-4-能把装口钉在最前的软件" class="toc-link" data-astro-cid-xvrfupwn>主题 4. 能把装口钉在最前的软件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法1右键窗口标题栏" class="toc-link" data-astro-cid-xvrfupwn>方法1：右键窗口标题栏</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#安装" class="toc-link" data-astro-cid-xvrfupwn>安装：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法2使用-wmctrl" class="toc-link" data-astro-cid-xvrfupwn>方法2：使用 wmctrl</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方法3使用-xdotool" class="toc-link" data-astro-cid-xvrfupwn>方法3：使用 xdotool</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#实施与验证清单" class="toc-link" data-astro-cid-xvrfupwn>实施与验证清单</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>查看Linux用户组（索引）</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2025-10-23T00:00:00.000Z"> Oct 22, 2025 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 9 min read
 </span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
-Updated  <time datetime="2025-10-24T00:00:00.000Z"> Oct 23, 2025 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <blockquote>
-<p>这篇内容与主文高度重合，已整理为索引版。完整内容请查看：<a href="/blog/linux/%E6%9F%A5%E7%9C%8Blinux%E7%94%A8%E6%88%B7%E7%BB%84/">查看Linux用户组</a>。</p>
-</blockquote>
-<h2 id="索引摘要">索引摘要</h2>
+Updated  <time datetime="2026-02-13T00:00:00.000Z"> Feb 12, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与目标">背景与目标</h2>
+<p>本文围绕“怎么查看一个linux用户的组”展开，整理可直接复用的步骤、原理说明与排查经验。</p>
+<h2 id="核心内容">核心内容</h2>
+<h3 id="主题-1-怎么查看一个linux用户的组">主题 1. 怎么查看一个linux用户的组</h3>
+<p>在 Linux 中，有几种常见方式可以查看一个用户所属的组，下面我帮你总结几个最常用、最直观的命令</p>
+<h3 id="方法-1groups-命令"><strong>方法 1：<code>groups</code> 命令</strong></h3>
+<p>最简单直接的方式：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">groups</span><span style="color:#9ECBFF"> 用户名</span></span></code></pre>
+<p>例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">groups</span><span style="color:#9ECBFF"> weijun</span></span></code></pre>
+<p>输出类似：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>weijun : weijun sudo docker</span></span></code></pre>
+<p>意思是用户 <code>weijun</code> 属于三个组：<code>weijun</code>（主组）、<code>sudo</code>、<code>docker</code>（附加组）。</p>
+<p>如果不加用户名，只输入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">groups</span></span></code></pre>
+<p>就会显示<strong>当前登录用户</strong>的组。</p>
+<h3 id="方法-2id-命令"><strong>方法 2：<code>id</code> 命令</strong></h3>
+<p>这个命令更详细，显示用户 ID（UID）、主组（GID）以及所有附属组：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">id</span><span style="color:#9ECBFF"> 用户名</span></span></code></pre>
+<p>示例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">id</span><span style="color:#9ECBFF"> weijun</span></span></code></pre>
+<p>输出：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>uid=1000(weijun) gid=1000(weijun) groups=1000(weijun),27(sudo),999(docker)</span></span></code></pre>
+<p>解释：</p>
 <ul>
-<li>在 Linux 中，有几种常见方式可以查看一个用户所属的组，下面我帮你总结几个最常用、最直观的命令</li>
-<li>这个命令更详细，显示用户 ID（UID）、主组（GID）以及所有附属组</li>
-<li>append（追加），别落下！不然会覆盖原有组！</li>
+<li><code>uid</code>：用户 ID</li>
+<li><code>gid</code>：主组 ID</li>
+<li><code>groups</code>：列出了所属的所有组（含主组）</li>
 </ul>
-<h2 id="主文入口">主文入口</h2>
+<h3 id="方法-3查看-etcgroup-文件"><strong>方法 3：查看 <code>/etc/group</code> 文件</strong></h3>
+<p>如果你想更底层一点看组与成员的对应关系，可以查看系统组配置文件：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /etc/group</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> grep</span><span style="color:#9ECBFF"> 用户名</span></span></code></pre>
+<p>示例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /etc/group</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> grep</span><span style="color:#9ECBFF"> weijun</span></span></code></pre>
+<p>输出可能是：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo:x:27:weijun</span></span>
+<span class="line"><span>docker:x:999:weijun</span></span></code></pre>
+<p>表示 <code>weijun</code> 在 <code>sudo</code> 和 <code>docker</code> 组中。</p>
+<h3 id="小总结">小总结：</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>命令</th><th>用途</th><th>示例</th></tr></thead><tbody><tr><td><code>groups</code></td><td>快速查看所属组</td><td><code>groups weijun</code></td></tr><tr><td><code>id</code></td><td>查看 UID/GID 及所有组</td><td><code>id weijun</code></td></tr><tr><td><code>grep /etc/group</code></td><td>查看系统组配置</td><td><code>grep weijun /etc/group</code></td></tr></tbody></table>
+<p>想顺带了解“如何修改用户所属组”（比如添加到 <code>docker</code> 或 <code>sudo</code>），我也可以帮你写一下命令说明，要吗。</p>
+<h3 id="主题-2-把一个组添加给一个用户">主题 2. 把一个组添加给一个用户</h3>
+<p>好嘞，这个操作在 Linux 里也非常常见，尤其是你要让某个用户获得新权限（比如能用 <code>docker</code> 或 <code>sudo</code>）的时候。<br>
+下面我帮你分清楚「命令 + 机制 + 注意点」，保证你一步到位</p>
+<p>一、命令格式</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> usermod</span><span style="color:#79B8FF"> -aG</span><span style="color:#9ECBFF"> 组名</span><span style="color:#9ECBFF"> 用户名</span></span></code></pre>
+<p><strong>解释：</strong></p>
 <ul>
-<li>
-<p>完整教程：/blog/linux/查看linux用户组/</p>
+<li><code>usermod</code>：修改用户属性</li>
+<li><code>-a</code>：append（追加），别落下。不然会覆盖原有组。</li>
+<li><code>-G</code>：指定附加组</li>
+<li><code>组名</code>：要添加的组</li>
+<li><code>用户名</code>：目标用户</li>
+</ul>
+<h3 id="举个例子">举个例子：</h3>
+<p>比如我要把用户 <code>weijun</code> 添加到 <code>docker</code> 组：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> usermod</span><span style="color:#79B8FF"> -aG</span><span style="color:#9ECBFF"> docker</span><span style="color:#9ECBFF"> weijun</span></span></code></pre>
+<p>这样 <code>weijun</code> 就能在不用 <code>sudo</code> 的情况下运行 <code>docker</code> 了。</p>
+<p>二、验证是否添加成功</p>
+<p>执行下面任意一个命令查看：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">id</span><span style="color:#9ECBFF"> weijun</span></span>
+<span class="line"><span style="color:#6A737D"># 或者</span></span>
+<span class="line"><span style="color:#B392F0">groups</span><span style="color:#9ECBFF"> weijun</span></span></code></pre>
+<p>输出应包含：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>docker</span></span></code></pre>
+<p>️ 三、别忘了「重新登录」。</p>
+<p>修改组后，<strong>需要重新登录或重启终端会话</strong>才会生效。<br>
+否则当前 session 中的组信息不会被刷新。</p>
+<p>快速刷新可以这样：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">newgrp</span><span style="color:#9ECBFF"> docker</span></span></code></pre>
+<p>这会立即让当前 shell 使用新组。</p>
+<p>四、其他相关操作（备查）</p>
+<h3 id="创建一个新组">创建一个新组：</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> groupadd</span><span style="color:#9ECBFF"> mygroup</span></span></code></pre>
+<h3 id="从组中移除用户">从组中移除用户：</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> gpasswd</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF"> 用户名</span><span style="color:#9ECBFF"> 组名</span></span></code></pre>
+<h3 id="查看组内所有用户">查看组内所有用户：</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">getent</span><span style="color:#9ECBFF"> group</span><span style="color:#9ECBFF"> 组名</span></span></code></pre>
+<p>要我顺带帮你写一个「添加用户到组 + 自动验证」的小脚本（适合服务器常用）吗。可以直接执行、一行看完结果的那种。</p>
+<h3 id="主题-3-怎么给一个文件夹添加一个所属组">主题 3. 怎么给一个文件夹添加一个所属组</h3>
+<p>非常好，这个问题问得很“Unix味儿”——你现在是想<strong>改变文件夹（或文件）的所属组</strong>，也就是让它归某个组管理，对吧。<br>
+比如说：<code>/var/www</code> 这个目录要归 <code>www-data</code> 组。<br>
+那我们来一步步讲清楚</p>
+<p>一、命令格式：<code>chgrp</code></p>
+<p>最直接的命令就是：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> chgrp</span><span style="color:#9ECBFF"> 组名</span><span style="color:#9ECBFF"> 路径</span></span></code></pre>
+<p>例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> chgrp</span><span style="color:#9ECBFF"> docker</span><span style="color:#9ECBFF"> /home/weijun/project</span></span></code></pre>
+<p>这表示把 <code>/home/weijun/project</code> 文件夹的“组”改成 <code>docker</code>。</p>
+<p>二、如果要对整个目录递归修改（包括里面所有文件和子目录）</p>
+<p>加上 <code>-R</code> 参数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> chgrp</span><span style="color:#79B8FF"> -R</span><span style="color:#9ECBFF"> docker</span><span style="color:#9ECBFF"> /home/weijun/project</span></span></code></pre>
+<blockquote>
+<p>️ 注意：这会修改整个文件夹树下所有文件的组，一般要谨慎操作。</p>
+</blockquote>
+<p>三、验证修改结果</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ls</span><span style="color:#79B8FF"> -l</span><span style="color:#9ECBFF"> /home/weijun</span></span></code></pre>
+<p>结果中间两列是「所属用户」和「所属组」：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>drwxr-xr-x  weijun docker 4096 Oct 23 22:40 project</span></span></code></pre>
+<p>说明：</p>
+<ul>
+<li>第三列 <code>weijun</code> 是 owner（文件拥有者）</li>
+<li>第四列 <code>docker</code> 是 group（文件组）</li>
+</ul>
+<p>四、可选操作：让文件夹自动继承该组（SGID 位）</p>
+<p>如果你想让<strong>新建的文件或子文件夹</strong>自动继承这个组（比如团队协作时常用），可以这样设置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> chmod</span><span style="color:#9ECBFF"> g+s</span><span style="color:#9ECBFF"> /home/weijun/project</span></span></code></pre>
+<p>这会在权限位中加一个 “s”：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>drwxr-sr-x weijun docker ...</span></span></code></pre>
+<p>现在，只要有人在这个目录里新建文件，它的 group 会自动是 <code>docker</code>，而不是创建者自己的主组。<br>
+这在团队开发或服务器共享目录时非常有用。</p>
+<p>五、如果你同时想改用户和组</p>
+<p>那就用 <code>chown</code>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> chown</span><span style="color:#9ECBFF"> 用户名:组名</span><span style="color:#9ECBFF"> 路径</span></span></code></pre>
+<p>比如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> chown</span><span style="color:#9ECBFF"> weijun:docker</span><span style="color:#9ECBFF"> /home/weijun/project</span></span></code></pre>
+<p>同样可以递归：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> chown</span><span style="color:#79B8FF"> -R</span><span style="color:#9ECBFF"> weijun:docker</span><span style="color:#9ECBFF"> /home/weijun/project</span></span></code></pre>
+<p>小总结</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>操作</th><th>命令</th><th>示例</th></tr></thead><tbody><tr><td>修改组</td><td><code>chgrp</code></td><td><code>sudo chgrp docker folder/</code></td></tr><tr><td>修改组（递归）</td><td><code>chgrp -R</code></td><td><code>sudo chgrp -R docker folder/</code></td></tr><tr><td>修改用户+组</td><td><code>chown</code></td><td><code>sudo chown weijun:docker folder/</code></td></tr><tr><td>新文件继承组</td><td><code>chmod g+s</code></td><td><code>sudo chmod g+s folder/</code></td></tr></tbody></table>
+<h3 id="主题-4-能把装口钉在最前的软件">主题 4. 能把装口钉在最前的软件</h3>
+<p>你是说「<strong>让某个软件固定在最前端显示</strong>（即窗口始终置顶）」，对吧。——比如终端、播放器、浏览器、代码编辑器之类的。<br>
+那就对了<br>
+这个功能在不同桌面环境和窗口管理器下做法不太一样，我来分几种场景给你讲清楚</p>
+<p>一、图形桌面环境通用做法（GNOME / KDE / XFCE）</p>
+<h3 id="方法1右键窗口标题栏">方法1：右键窗口标题栏</h3>
+<p>几乎所有 Linux 桌面都支持这种最直接的方法：</p>
+<ol>
+<li>右键点击窗口标题栏（比如你打开一个终端或 Firefox）。</li>
+<li>选择菜单里的 <strong>“保持在最前端”</strong>（或叫 “Always on Top”、“Always keep above others”）。</li>
+<li>窗口就会一直浮在所有窗口上面。</li>
+</ol>
+<p>不同桌面语言环境下的名称可能略有不同，比如：</p>
+<ul>
+<li>中文：<strong>“始终在最前端”</strong> / “置顶显示”</li>
+<li>英文：<strong>“Always on Top”</strong></li>
+<li>KDE 里还可能是 “More Actions → Keep Above Others”</li>
+</ul>
+<p>二、命令行做法（窗口管理器控制）</p>
+<p>如果你在写脚本或想自动控制窗口置顶，可以用 <code>wmctrl</code> 或 <code>xdotool</code>。<br>
+这些工具轻便、兼容大多数 X11 桌面环境。</p>
+<h3 id="安装">安装：</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> apt</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> wmctrl</span><span style="color:#9ECBFF"> xdotool</span></span></code></pre>
+<h3 id="方法2使用-wmctrl">方法2：使用 <code>wmctrl</code></h3>
+<p>查看当前窗口：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wmctrl</span><span style="color:#79B8FF"> -l</span></span></code></pre>
+<p>找到你的目标软件窗口（比如标题里有 “Terminal”），然后置顶它：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wmctrl</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> "Terminal"</span><span style="color:#79B8FF"> -b</span><span style="color:#9ECBFF"> add,above</span></span></code></pre>
+<p>取消置顶：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wmctrl</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> "Terminal"</span><span style="color:#79B8FF"> -b</span><span style="color:#9ECBFF"> remove,above</span></span></code></pre>
+<h3 id="方法3使用-xdotool">方法3：使用 <code>xdotool</code></h3>
+<p>获取当前激活窗口：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">xdotool</span><span style="color:#9ECBFF"> getactivewindow</span></span></code></pre>
+<p>然后置顶：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">xdotool</span><span style="color:#9ECBFF"> windowactivate</span><span style="color:#E1E4E8"> $(</span><span style="color:#B392F0">xdotool</span><span style="color:#9ECBFF"> getactivewindow</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">xdotool</span><span style="color:#9ECBFF"> windowraise</span><span style="color:#E1E4E8"> $(</span><span style="color:#B392F0">xdotool</span><span style="color:#9ECBFF"> getactivewindow</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>如果想更直接一点，用：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">xdotool</span><span style="color:#9ECBFF"> getactivewindow</span><span style="color:#9ECBFF"> windowfocus</span><span style="color:#9ECBFF"> windowraise</span></span></code></pre>
+<p>三、Wayland 环境（比如 Ubuntu 22+、Fedora GNOME）</p>
+<p>Wayland 限制较多，像 <code>wmctrl</code> 这种传统工具通常无效。<br>
+但有两种思路：</p>
+<ol>
+<li><strong>切换到 X11 会话</strong>（登录时选 <code>GNOME on Xorg</code>）。</li>
+<li><strong>使用桌面自带插件</strong>：
+<ul>
+<li>GNOME 可以安装 <code>Just Perfection</code> 或 <code>Shell Configurator</code> 扩展。</li>
+<li>KDE 原生支持 “Keep above others”。</li>
+</ul>
 </li>
-<li>
-<p>原始对话来源：<a href="https://chatgpt.com/c/68fb1061-a628-832b-9580-56f39a71fa5f">https://chatgpt.com/c/68fb1061-a628-832b-9580-56f39a71fa5f</a></p>
-</li>
-</ul>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=%E6%9F%A5%E7%9C%8BLinux%E7%94%A8%E6%88%B7%E7%BB%84%EF%BC%88%E7%B4%A2%E5%BC%95%EF%BC%89&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Flinux%2F%25E6%259F%25A5%25E7%259C%258Blinux%25E7%2594%25A8%25E6%2588%25B7%25E7%25BB%2584-index%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/linux/%E6%9F%A5%E7%9C%8Blinux%E7%94%A8%E6%88%B7%E7%BB%84-index/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+</ol>
+<p>四、如果你要某个程序「自动置顶启动」</p>
+<p>可以在启动脚本里添加命令，比如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">#!/bin/bash</span></span>
+<span class="line"><span style="color:#B392F0">gnome-terminal</span><span style="color:#E1E4E8"> &#x26;</span></span>
+<span class="line"><span style="color:#B392F0">sleep</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#B392F0">wmctrl</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> "Terminal"</span><span style="color:#79B8FF"> -b</span><span style="color:#9ECBFF"> add,above</span></span></code></pre>
+<p>这样每次启动终端都会自动固定在最前。</p>
+<p>小总结：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>环境</th><th>方法</th><th>命令/操作</th></tr></thead><tbody><tr><td>图形界面</td><td>右键标题栏 → “始终在最前”</td><td>最简单</td></tr><tr><td>X11 桌面</td><td><code>wmctrl -r "窗口名" -b add,above</code></td><td>可脚本化</td></tr><tr><td>Wayland</td><td>GNOME 插件 或 切回 X11</td><td>需要扩展支持</td></tr><tr><td>永久置顶启动</td><td>启动脚本中加 <code>wmctrl</code> 命令</td><td>自动化</td></tr></tbody></table>
+<h2 id="实施与验证清单">实施与验证清单</h2>
+<ol>
+<li>执行前先确认环境、版本和依赖与文中前置条件一致。</li>
+<li>涉及系统级变更时，先备份关键配置或创建快照。</li>
+<li>完成操作后按验证步骤确认结果，再执行清理或覆盖动作。</li>
+</ol>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=%E6%9F%A5%E7%9C%8BLinux%E7%94%A8%E6%88%B7%E7%BB%84%EF%BC%88%E7%B4%A2%E5%BC%95%EF%BC%89&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Flinux%2F%25E6%259F%25A5%25E7%259C%258Blinux%25E7%2594%25A8%25E6%2588%25B7%25E7%25BB%2584-index%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/linux/%E6%9F%A5%E7%9C%8Blinux%E7%94%A8%E6%88%B7%E7%BB%84-index/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
 Related Posts
 </h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/linux/arch-linux-安装最新版-neovim/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch Linux 安装最新版 Neovim</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>安装剪贴板支持： (X11) 或 (Wayland)。</p></a><a href="/blog/linux/arch-linux-f12-键功能切换指南/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch Linux F12 键功能切换指南</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>快捷键组合： 尝试按下 +。如果 Esc 键上有一个小锁图标，这通常能反转 F 键的行为。</p></a><a href="/blog/linux/arch-输入法窗口切换问题/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch 输入法窗口切换问题</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>解决 Arch 切换窗口后输入法自动回中文的问题，重点配置 Fcitx5 的共享状态与默认布局。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
 Comments

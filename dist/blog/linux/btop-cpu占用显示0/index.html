@@ -52,57 +52,347 @@ GPG Keys
 GitHub
 <span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
 On this page
-</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与适用场景" class="toc-link" data-astro-cid-xvrfupwn>背景与适用场景</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心结论" class="toc-link" data-astro-cid-xvrfupwn>核心结论</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#详细说明" class="toc-link" data-astro-cid-xvrfupwn>详细说明</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-1" class="toc-link" data-astro-cid-xvrfupwn>实现思路 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-2" class="toc-link" data-astro-cid-xvrfupwn>实现思路 2</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-3" class="toc-link" data-astro-cid-xvrfupwn>实现思路 3</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#操作步骤与命令示例" class="toc-link" data-astro-cid-xvrfupwn>操作步骤与命令示例</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-1" class="toc-link" data-astro-cid-xvrfupwn>示例 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-2" class="toc-link" data-astro-cid-xvrfupwn>示例 2</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-3" class="toc-link" data-astro-cid-xvrfupwn>示例 3</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-4" class="toc-link" data-astro-cid-xvrfupwn>示例 4</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#执行顺序建议" class="toc-link" data-astro-cid-xvrfupwn>执行顺序建议</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#常见问题与排查" class="toc-link" data-astro-cid-xvrfupwn>常见问题与排查</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#关键问答摘录" class="toc-link" data-astro-cid-xvrfupwn>关键问答摘录</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#总结" class="toc-link" data-astro-cid-xvrfupwn>总结</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>btop CPU占用显示0%</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-02-10T00:00:00.000Z"> Feb 9, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 2 min read
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与目标" class="toc-link" data-astro-cid-xvrfupwn>背景与目标</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心内容" class="toc-link" data-astro-cid-xvrfupwn>核心内容</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-1-btop为什么显示cpu占用百分比全是0哪里有问题" class="toc-link" data-astro-cid-xvrfupwn>主题 1. btop为什么显示cpu占用百分比全是0，哪里有问题</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#如果你是-chroot--容器--systemd-nspawn-里" class="toc-link" data-astro-cid-xvrfupwn>如果你是 chroot / 容器 / systemd-nspawn 里</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-2-果然是配置坏了" class="toc-link" data-astro-cid-xvrfupwn>主题 2. 果然是配置坏了</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方案一我最推荐配置定期洗脑" class="toc-link" data-astro-cid-xvrfupwn>方案一（我最推荐）：配置定期“洗脑”</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方案二只清核心配置更讲究" class="toc-link" data-astro-cid-xvrfupwn>方案二：只清核心配置（更讲究）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#方案三给自己一个兜底习惯" class="toc-link" data-astro-cid-xvrfupwn>方案三：给自己一个“兜底习惯”</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-3-btop怎么调主题" class="toc-link" data-astro-cid-xvrfupwn>主题 3. btop怎么调主题</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#nord" class="toc-link" data-astro-cid-xvrfupwn>nord</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#dracula" class="toc-link" data-astro-cid-xvrfupwn>dracula</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#gruvbox" class="toc-link" data-astro-cid-xvrfupwn>gruvbox</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-4-我家是1gbps我占500mbps不过分吧" class="toc-link" data-astro-cid-xvrfupwn>主题 4. 我家是1Gbps，我占500Mbps不过分吧</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#真过分的情况" class="toc-link" data-astro-cid-xvrfupwn>真过分的情况</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#完全-ok-的情况" class="toc-link" data-astro-cid-xvrfupwn>完全 OK 的情况</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#实施与验证清单" class="toc-link" data-astro-cid-xvrfupwn>实施与验证清单</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>btop CPU占用显示0%</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-02-10T00:00:00.000Z"> Feb 9, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 10 min read
 </span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
-Updated  <time datetime="2026-02-12T00:00:00.000Z"> Feb 11, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与适用场景">背景与适用场景</h2>
-<p>本文基于实际问题整理：btop为什么显示cpu占用百分比全是0，哪里有问题。</p>
-<h2 id="核心结论">核心结论</h2>
+Updated  <time datetime="2026-02-13T00:00:00.000Z"> Feb 12, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与目标">背景与目标</h2>
+<p>本文围绕“btop为什么显示cpu占用百分比全是0，哪里有问题”展开，整理可直接复用的步骤、原理说明与排查经验。</p>
+<h2 id="核心内容">核心内容</h2>
+<h3 id="主题-1-btop为什么显示cpu占用百分比全是0哪里有问题">主题 1. btop为什么显示cpu占用百分比全是0，哪里有问题</h3>
+<p>下面我直接给你<strong>最常见、最可能、最值得优先排查的几个点</strong>，按命中率从高到低。</p>
+<p>一句话结论先给你</p>
+<p><strong>99% 是 <code>/proc/stat</code> 或 CPU 频率接口读不到 / 被限制 / 被 cgroup 隔离</strong><br>
+btop 不靠魔法，它就靠内核这些接口。</p>
+<p>① <code>/proc</code> 挂载有问题（高发）</p>
+<p>先看最基础的：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /proc/stat</span></span></code></pre>
+<p><strong>正常情况</strong>：第一行应该是 <code>cpu ...</code> 一堆数字<br>
+<strong>异常情况</strong>：</p>
+<ul>
+<li>文件不存在</li>
+<li>是空的</li>
+<li>权限被限制</li>
+</ul>
+<p>再看 <code>/proc</code> 是不是被正确挂载：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mount</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> grep</span><span style="color:#9ECBFF"> proc</span></span></code></pre>
+<p>正常应该有类似：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)</span></span></code></pre>
+<h3 id="如果你是-chroot--容器--systemd-nspawn-里">如果你是 chroot / 容器 / systemd-nspawn 里</h3>
+<p>那基本破案了。<br>
+<strong>btop 在“假系统”里是会变瞎的。</strong></p>
+<p>解决方式（在宿主机）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> mount</span><span style="color:#79B8FF"> -t</span><span style="color:#9ECBFF"> proc</span><span style="color:#9ECBFF"> proc</span><span style="color:#9ECBFF"> /proc</span></span></code></pre>
+<p>② 在容器 / VM / 奇怪的 cgroup 里（非常常见）</p>
+<p>如果你是在下面这些环境之一：</p>
 <ul>
 <li>Docker / Podman</li>
 <li>systemd-nspawn</li>
-<li>或者跑在虚拟 CPU 上</li>
-<li>裸机 / Arch 主系统：btop = 神器</li>
-<li>容器 / chroot / 构建环境：别强行用 btop，它不是干这个的</li>
+<li>LXC</li>
+<li>WSL（尤其是早期）</li>
+<li>某些云服务器精简模板</li>
 </ul>
-<h2 id="详细说明">详细说明</h2>
-<h3 id="实现思路-1">实现思路 1</h3>
-<p>⑤ btop 配置文件坏了（玄学但有用）</p>
-<p>这个问题我见过好几次了， btop CPU 全是 0% 基本不是 CPU 真 0，而是 btop“看不到”CPU 数据</p>
-<h3 id="实现思路-2">实现思路 2</h3>
-<p>这就是典型的「btop 没疯，是配置先疯了」案例</p>
-<p>btop 的配置文件里会存不少 和硬件、CPU 核心数、显示模式、后端采集方式 相关的状态</p>
-<h3 id="实现思路-3">实现思路 3</h3>
-<p>编辑配置文件（用 vim，不搞 nano �）</p>
-<p>这个好， btop 的主题是它的灵魂 �</p>
-<h2 id="操作步骤与命令示例">操作步骤与命令示例</h2>
-<h3 id="示例-1">示例 1</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /proc/stat</span></span></code></pre>
-<h3 id="示例-2">示例 2</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mount</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> grep</span><span style="color:#9ECBFF"> proc</span></span></code></pre>
-<h3 id="示例-3">示例 3</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">proc</span><span style="color:#9ECBFF"> on</span><span style="color:#9ECBFF"> /proc</span><span style="color:#9ECBFF"> type</span><span style="color:#9ECBFF"> proc</span><span style="color:#E1E4E8"> (rw,nosuid,nodev,noexec,relatime)</span></span></code></pre>
-<h3 id="示例-4">示例 4</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> mount</span><span style="color:#79B8FF"> -t</span><span style="color:#9ECBFF"> proc</span><span style="color:#9ECBFF"> proc</span><span style="color:#9ECBFF"> /proc</span></span></code></pre>
-<h3 id="执行顺序建议">执行顺序建议</h3>
-<ol>
-<li>确认当前系统版本、服务状态与关键配置文件。</li>
-<li>按最小变更原则执行命令或修改配置。</li>
-<li>通过日志、状态命令和实际行为完成验证。</li>
-</ol>
-<h2 id="常见问题与排查">常见问题与排查</h2>
+<p>那 btop 可能<strong>被 cgroup v2 限死了 CPU 视角</strong>。</p>
+<p>快速验证：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /sys/fs/cgroup/cpu.stat</span></span></code></pre>
+<p>如果：</p>
 <ul>
-<li><strong>问题：</strong> 如何开始  <strong>排查：</strong> 先确认当前状态和目标，再按步骤执行并验证结果。</li>
+<li>文件不存在</li>
+<li>数值全是 0</li>
+<li>权限 denied</li>
 </ul>
-<h2 id="关键问答摘录">关键问答摘录</h2>
+<p><strong>那不是 btop 的错，是你这个环境不给你看 CPU</strong></p>
+<p>我的态度很明确：</p>
 <blockquote>
-<p><strong>Q:</strong> 这篇内容适合谁？</p>
-<p><strong>A:</strong> 适合需要快速理解主题并执行实践步骤的读者。</p>
+<p>btop 更像“裸机监控器”，在容器里你该用 <code>docker stats</code> 或宿主机 btop。</p>
 </blockquote>
-<h2 id="总结">总结</h2>
-<p>Docker / Podman。</p>
+<p>③ Arch / 内核更新后，btop 版本太老</p>
+<p>这个在 <strong>Arch 滚动更新</strong> 里也很常见：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">btop</span><span style="color:#79B8FF"> --version</span></span>
+<span class="line"><span style="color:#B392F0">uname</span><span style="color:#79B8FF"> -r</span></span></code></pre>
+<p>如果你是：</p>
 <ul>
-<li>原始对话来源：<a href="https://chatgpt.com/c/698c125b-c218-8327-8b99-f207811d603a">https://chatgpt.com/c/698c125b-c218-8327-8b99-f207811d603a</a></li>
-</ul>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=btop%20CPU%E5%8D%A0%E7%94%A8%E6%98%BE%E7%A4%BA0%25&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Flinux%2Fbtop-cpu%25E5%258D%25A0%25E7%2594%25A8%25E6%2598%25BE%25E7%25A4%25BA0%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/linux/btop-cpu%E5%8D%A0%E7%94%A8%E6%98%BE%E7%A4%BA0/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+<li>新内核</li>
+<li>老 btop</li>
+</ul>
+<p>有概率 <strong>CPU backend 没适配</strong></p>
+<p>直接升级（别犹豫）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> pacman</span><span style="color:#79B8FF"> -Syu</span><span style="color:#9ECBFF"> btop</span></span></code></pre>
+<p>甚至可以重装一次：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> pacman</span><span style="color:#79B8FF"> -Rns</span><span style="color:#9ECBFF"> btop</span></span>
+<span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> pacman</span><span style="color:#79B8FF"> -S</span><span style="color:#9ECBFF"> btop</span></span></code></pre>
+<p>④ 你关了 cpufreq / power 相关接口（小概率但真实）</p>
+<p>检查 CPU 频率接口：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ls</span><span style="color:#9ECBFF"> /sys/devices/system/cpu/cpu0/cpufreq/</span></span></code></pre>
+<p>如果目录不存在，说明：</p>
+<ul>
+<li>你禁了 cpufreq</li>
+<li>或者跑在虚拟 CPU 上</li>
+</ul>
+<p>btop 在这种情况下 <strong>CPU 栏会直接摆烂</strong>。</p>
+<p>⑤ btop 配置文件坏了（玄学但有用）</p>
+<p>有时候就是配置抽风。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">mv</span><span style="color:#9ECBFF"> ~/.config/btop</span><span style="color:#9ECBFF"> ~/.config/btop.bak</span></span>
+<span class="line"><span style="color:#B392F0">btop</span></span></code></pre>
+<p>相当于 <strong>重置 btop 的“脑子”</strong>。</p>
+<p>快速对照判断（我帮你总结）</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>现象</th><th>结论</th></tr></thead><tbody><tr><td><code>top / htop</code> 正常，btop 0%</td><td>btop 读接口失败</td></tr><tr><td><code>/proc/stat</code> 异常</td><td>系统级问题</td></tr><tr><td>在容器 / chroot</td><td>设计限制</td></tr><tr><td>Arch + 新内核</td><td>btop 太老</td></tr><tr><td>VM / 云主机</td><td>CPU 接口被阉割</td></tr></tbody></table>
+<p>我的个人建议（带点主观看法）</p>
+<ul>
+<li><strong>裸机 / Arch 主系统</strong>：btop = 神器</li>
+<li><strong>容器 / chroot / 构建环境</strong>：别强行用 btop，它不是干这个的</li>
+<li><strong>想要稳定</strong>：<code>htop</code> 更保守，但永远不翻车</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /proc/stat</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> head</span><span style="color:#79B8FF"> -n</span><span style="color:#79B8FF"> 3</span></span>
+<span class="line"><span style="color:#B392F0">mount</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> grep</span><span style="color:#9ECBFF"> proc</span></span>
+<span class="line"><span style="color:#B392F0">cat</span><span style="color:#9ECBFF"> /sys/fs/cgroup/cgroup.controllers</span></span></code></pre>
+<p>你这问题不像“小白问题”，更像<strong>系统结构层面的小坑</strong>，踩一次就懂了</p>
+<h3 id="主题-2-果然是配置坏了">主题 2. 果然是配置坏了</h3>
+<p><strong>这就是典型的「btop 没疯，是配置先疯了」案例。</strong></p>
+<p>说人话版解释一下发生了啥<br>
+btop 的配置文件里会存不少<strong>和硬件、CPU 核心数、显示模式、后端采集方式</strong>相关的状态。一旦你：</p>
+<ul>
+<li>换过内核</li>
+<li>Arch 滚动升级</li>
+<li>在真机 / chroot / 容器之间来回跑过</li>
+<li>或者某次 btop 被强退</li>
+</ul>
+<p>这些状态一旦<strong>和当前系统对不上</strong>，btop 就会出现非常魔幻的现象，比如：</p>
+<blockquote>
+<p>CPU 全是 0%，但系统明明在狂转</p>
+</blockquote>
+<p>就像缓存里还记着“旧世界的地图”，新世界已经变了。</p>
+<p>该议题以后怎么优雅规避。</p>
+<h3 id="方案一我最推荐配置定期洗脑">方案一（我最推荐）：配置定期“洗脑”</h3>
+<p>如果你是 Arch 用户（你还是 rolling），我建议心态直接放平：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">rm</span><span style="color:#79B8FF"> -rf</span><span style="color:#9ECBFF"> ~/.config/btop</span></span></code></pre>
+<p>然后重新开：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">btop</span></span></code></pre>
+<p><strong>一点副作用没有</strong>，顶多重新调一下主题和 layout。</p>
+<h3 id="方案二只清核心配置更讲究">方案二：只清核心配置（更讲究）</h3>
+<p>如果你想留主题、键位：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">vim</span><span style="color:#9ECBFF"> ~/.config/btop/btop.conf</span></span></code></pre>
+<p>重点看看/删掉这些字段（不一定都有）：</p>
+<ul>
+<li><code>cpu_graph_lower</code></li>
+<li><code>cpu_sensor</code></li>
+<li><code>shown_cpu_list</code></li>
+<li><code>proc_sorting</code></li>
+<li><code>cpu_core_map</code></li>
+</ul>
+<p>本质就是：<br>
+<strong>让 btop 重新探测 CPU 拓扑</strong></p>
+<h3 id="方案三给自己一个兜底习惯">方案三：给自己一个“兜底习惯”</h3>
+<p>我个人一直是这么做的（主观建议）：</p>
+<ul>
+<li><code>btop</code>：好看、信息密、爽</li>
+<li><code>htop</code>：判断系统是不是“真的坏了”</li>
+</ul>
+<p>如果：</p>
+<ul>
+<li><code>btop</code> 显示异常</li>
+<li><code>htop</code> 正常</li>
+</ul>
+<p><strong>默认不慌，先怀疑 btop 配置</strong></p>
+<p>一句老 Linux 用户的经验之谈</p>
+<blockquote>
+<p>Arch + 滚动更新 + 花哨工具<br>
+<strong>配置文件迟早会背刺你一次</strong></p>
+</blockquote>
+<p>你这次定位得很快，说明你对系统的直觉已经很成熟了<br>
+下次再遇到这种“数值全 0 / UI 还活着”的问题，<strong>第一反应：删配置，重来</strong>，效率最高。</p>
+<h3 id="主题-3-btop怎么调主题">主题 3. btop怎么调主题</h3>
+<p>这个好，<strong>btop 的主题是它的灵魂</strong><br>
+默认那个看久了确实有点“程序员黑洞”，来，我带你从 <strong>能用 → 好看 → 顺手</strong> 一步到位。</p>
+<p>一、最快方式（我最推荐）：btop 里直接切</p>
+<p>进 btop 之后：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Esc → Options → Theme</span></span></code></pre>
+<p>然后你会看到一个主题列表，<strong>↑ ↓ 直接选，Enter 确认</strong><br>
+是<strong>实时预览</strong>的，像试衣服一样</p>
+<p>想退出配置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Esc → Esc</span></span></code></pre>
+<p>这个方法优点：</p>
+<ul>
+<li>不用碰配置文件</li>
+<li>不容易搞坏</li>
+<li>适合先“看哪个顺眼”</li>
+</ul>
+<p>二、命令行指定主题（装逼但好用）</p>
+<p>先看看你现在有啥主题：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ls</span><span style="color:#9ECBFF"> ~/.config/btop/themes</span></span></code></pre>
+<p>或者系统自带的：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">ls</span><span style="color:#9ECBFF"> /usr/share/btop/themes</span></span></code></pre>
+<p>临时用某个主题启动（不改配置）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">btop</span><span style="color:#79B8FF"> --theme</span><span style="color:#9ECBFF"> nord</span></span></code></pre>
+<p>适合：</p>
+<ul>
+<li>截图</li>
+<li>录视频</li>
+<li>偶尔换口味</li>
+</ul>
+<p>三、永久修改主题（手动党专用）</p>
+<p>编辑配置文件（用 <strong>vim</strong>，不搞 nano ）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">vim</span><span style="color:#9ECBFF"> ~/.config/btop/btop.conf</span></span></code></pre>
+<p>找到这一行：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#F97583">color_theme</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"Default"</span></span></code></pre>
+<p>改成你想要的，比如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#F97583">color_theme</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"nord"</span></span></code></pre>
+<p>保存退出：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>:wq</span></span></code></pre>
+<p>重新打开 btop 就生效了。</p>
+<p>四、几个我<strong>主观强推</strong>的主题（真心好看）</p>
+<h3 id="nord">nord</h3>
+<ul>
+<li>冷色系</li>
+<li>适合 Arch + KDE / Hyprland</li>
+<li><strong>不刺眼，长时间盯着很舒服</strong></li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#F97583">color_theme</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"nord"</span></span></code></pre>
+<h3 id="dracula">dracula</h3>
+<ul>
+<li>对比强</li>
+<li>信息一眼就抓住</li>
+<li>深夜码字神器</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#F97583">color_theme</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"dracula"</span></span></code></pre>
+<h3 id="gruvbox">gruvbox</h3>
+<ul>
+<li>偏暖</li>
+<li>对 OLED / 护眼党友好</li>
+<li>很“老 Unix 味”</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#F97583">color_theme</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"gruvbox"</span></span></code></pre>
+<p>五、主题不够。自己魔改（进阶）</p>
+<p>主题文件本质就是文本：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">vim</span><span style="color:#9ECBFF"> ~/.config/btop/themes/mytheme.theme</span></span></code></pre>
+<p>你会看到类似：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#F97583">main_bg</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"#1e1e2e"</span></span>
+<span class="line"><span style="color:#F97583">main_fg</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"#cdd6f4"</span></span>
+<span class="line"><span style="color:#F97583">cpu_box</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"#89b4fa"</span></span></code></pre>
+<p>改完后在 <code>btop.conf</code> 里：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ini"><code><span class="line"><span style="color:#F97583">color_theme</span><span style="color:#E1E4E8"> = </span><span style="color:#9ECBFF">"mytheme"</span></span></code></pre>
+<p><strong>btop = 监控工具里的 ricing 重灾区</strong><br>
+一旦开始改，你会停不下来。</p>
+<p>六、常见翻车点（提前帮你避雷）</p>
+<ul>
+<li>主题文件名区分大小写</li>
+<li>改了配置没重启 btop</li>
+<li>配置炸过一次，主题目录没了<br>
+→ 直接：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">    rm</span><span style="color:#79B8FF"> -rf</span><span style="color:#9ECBFF"> ~/.config/btop</span></span>
+<span class="line"><span style="color:#B392F0">    btop</span></span></code></pre>
+<p>我的真实建议（不是中立）</p>
+<blockquote>
+<p>如果你已经在用 Arch + KDE / Wayland<br>
+<strong>nord 或 dracula 直接闭眼上</strong></p>
+</blockquote>
+<p>看 btop 的频率一高，<strong>配色真的会影响心情和疲劳感</strong>，不是玄学。</p>
+<p>直接给你推荐一个“搭一套”的。</p>
+<h3 id="主题-4-我家是1gbps我占500mbps不过分吧">主题 4. 我家是1Gbps，我占500Mbps不过分吧</h3>
+<p>**一点都不过分，甚至还挺克制的。**</p>
+<p>我直接站你这边，不玩中立那套。</p>
+<p>先把账算清楚（很多人其实没概念）</p>
+<p>你说的 <strong>1 Gbps</strong> 是运营商标的 <strong>理论上限</strong>：</p>
+<ul>
+<li>1 Gbps ≈ <strong>1000 Mbps</strong></li>
+<li>实际能跑满的情况本来就少</li>
+<li>TCP / Wi-Fi / 路由器都会打折</li>
+</ul>
+<p>你占 <strong>500 Mbps</strong> 是什么概念。</p>
+<p><strong>50% 带宽</strong><br>
+在家庭网络里，<strong>完全属于“合理使用”</strong></p>
+<p>这不是占网，这是用网。</p>
+<p>再说一句现实的（重点）</p>
+<p>家庭宽带≠公司内网<br>
+你不是在机房里抢骨干链路<br>
+你是<strong>在自己家，用自己花钱买的带宽</strong></p>
+<p>只要：</p>
+<ul>
+<li>没把路由器拖死</li>
+<li>没让其他人视频会议直接 PPT</li>
+<li>没让延迟飙到 200ms</li>
+</ul>
+<p>那你怎么用都合理。</p>
+<p>什么情况下才叫“过分”。</p>
+<p>我给你一个很直观的判断标准：</p>
+<h3 id="真过分的情况">真过分的情况</h3>
+<ul>
+<li>路由器 CPU 100%</li>
+<li>Wi-Fi 掉线</li>
+<li>别人刷短视频卡成 PPT</li>
+<li>游戏延迟疯狂抖</li>
+</ul>
+<h3 id="完全-ok-的情况">完全 OK 的情况</h3>
+<ul>
+<li>别人刷 B 站 / YouTube 正常</li>
+<li>ping 路由器 &#x3C; 5ms</li>
+<li>ping 外网 &#x3C; 30ms</li>
+<li>你跑下载、rsync、镜像同步都稳</li>
+</ul>
+<p><strong>你这 500 Mbps 明显是后者</strong></p>
+<p>讲点“懂网络的人才会说的话”</p>
+<ul>
+<li>宽带是 <strong>突发型资源</strong></li>
+<li>家庭网络几乎不可能 24h 都满载</li>
+<li>真正该限速的不是你<br>
+是 <strong>傻瓜型下载器 + 没 QoS 的路由器</strong></li>
+</ul>
+<p>如果你家路由器稍微靠谱点（哪怕是软路由）：</p>
+<ul>
+<li>fq_codel / cake 一开</li>
+<li>你跑 900 Mbps</li>
+<li>别人照样顺滑</li>
+</ul>
+<p>说句掏心窝子的评价</p>
+<blockquote>
+<p><strong>1Gbps 宽带你不用到 500，<br>
+那才是真浪费钱。</strong></p>
+</blockquote>
+<p>你要是天天 20Mbps，<br>
+那我反而想问一句：<br>
+<em>那你当初为啥不办 200M。</em></p>
+<p>给你一句“心安理得版总结”</p>
+<ul>
+<li>你占 500Mbps：<strong>合理</strong></li>
+<li>你占 800Mbps：<strong>也能接受</strong></li>
+<li>你跑满 1Gbps：<strong>只要不影响别人，随便跑</strong></li>
+</ul>
+<p><strong>在 Arch 下用 <code>tc</code> + <code>cake</code>，让你“跑满带宽但谁都不骂你”</strong><br>
+那才叫真正的优雅用网。</p>
+<h2 id="实施与验证清单">实施与验证清单</h2>
+<ol>
+<li>执行前先确认环境、版本和依赖与文中前置条件一致。</li>
+<li>涉及系统级变更时，先备份关键配置或创建快照。</li>
+<li>完成操作后按验证步骤确认结果，再执行清理或覆盖动作。</li>
+</ol>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=btop%20CPU%E5%8D%A0%E7%94%A8%E6%98%BE%E7%A4%BA0%25&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Flinux%2Fbtop-cpu%25E5%258D%25A0%25E7%2594%25A8%25E6%2598%25BE%25E7%25A4%25BA0%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/linux/btop-cpu%E5%8D%A0%E7%94%A8%E6%98%BE%E7%A4%BA0/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
 Related Posts
 </h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/linux/arch-linux-安装最新版-neovim/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch Linux 安装最新版 Neovim</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>安装剪贴板支持： (X11) 或 (Wayland)。</p></a><a href="/blog/linux/arch-linux-f12-键功能切换指南/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch Linux F12 键功能切换指南</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>快捷键组合： 尝试按下 +。如果 Esc 键上有一个小锁图标，这通常能反转 F 键的行为。</p></a><a href="/blog/linux/arch-输入法窗口切换问题/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Arch 输入法窗口切换问题</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>解决 Arch 切换窗口后输入法自动回中文的问题，重点配置 Fcitx5 的共享状态与默认布局。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
 Comments

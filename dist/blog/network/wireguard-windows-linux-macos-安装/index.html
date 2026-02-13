@@ -52,86 +52,422 @@ GPG Keys
 GitHub
 <span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
 On this page
-</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与适用场景" class="toc-link" data-astro-cid-xvrfupwn>背景与适用场景</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心结论" class="toc-link" data-astro-cid-xvrfupwn>核心结论</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#详细说明" class="toc-link" data-astro-cid-xvrfupwn>详细说明</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-1" class="toc-link" data-astro-cid-xvrfupwn>实现思路 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-2" class="toc-link" data-astro-cid-xvrfupwn>实现思路 2</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#实现思路-3" class="toc-link" data-astro-cid-xvrfupwn>实现思路 3</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#操作步骤与命令示例" class="toc-link" data-astro-cid-xvrfupwn>操作步骤与命令示例</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-1" class="toc-link" data-astro-cid-xvrfupwn>示例 1</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-2" class="toc-link" data-astro-cid-xvrfupwn>示例 2</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-3" class="toc-link" data-astro-cid-xvrfupwn>示例 3</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#示例-4" class="toc-link" data-astro-cid-xvrfupwn>示例 4</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#执行顺序建议" class="toc-link" data-astro-cid-xvrfupwn>执行顺序建议</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#常见问题与排查" class="toc-link" data-astro-cid-xvrfupwn>常见问题与排查</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#关键问答摘录" class="toc-link" data-astro-cid-xvrfupwn>关键问答摘录</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#总结" class="toc-link" data-astro-cid-xvrfupwn>总结</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>WireGuard Windows Linux macOS 安装</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-02-12T00:00:00.000Z"> Feb 11, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 4 min read
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景与目标" class="toc-link" data-astro-cid-xvrfupwn>背景与目标</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#核心内容" class="toc-link" data-astro-cid-xvrfupwn>核心内容</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-1-wiregard怎么安装我要连通windowslinuxmacos" class="toc-link" data-astro-cid-xvrfupwn>主题 1. wiregard怎么安装，我要连通windows，linux，macos</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-2-linux互联呢" class="toc-link" data-astro-cid-xvrfupwn>主题 2. linux互联呢</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-安装-wireguard" class="toc-link" data-astro-cid-xvrfupwn>1. 安装 WireGuard</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-生成客户端密钥" class="toc-link" data-astro-cid-xvrfupwn>2. 生成客户端密钥</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-创建客户端配置文件" class="toc-link" data-astro-cid-xvrfupwn>3. 创建客户端配置文件</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-在服务端添加该客户端" class="toc-link" data-astro-cid-xvrfupwn>4. 在“服务端”添加该客户端</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-启动连接" class="toc-link" data-astro-cid-xvrfupwn>5. 启动连接</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#常见问题与调试" class="toc-link" data-astro-cid-xvrfupwn>常见问题与调试</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-3-wg" class="toc-link" data-astro-cid-xvrfupwn>主题 3. wg</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-4-wg怎么重启一下" class="toc-link" data-astro-cid-xvrfupwn>主题 4. wg怎么重启一下</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-使用-wg-quick-最推荐" class="toc-link" data-astro-cid-xvrfupwn>1. 使用 wg-quick (最推荐)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-使用-systemctl-推荐用于服务器" class="toc-link" data-astro-cid-xvrfupwn>2. 使用 systemctl (推荐用于服务器)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-热更新配置-不中断连接" class="toc-link" data-astro-cid-xvrfupwn>3. 热更新配置 (不中断连接)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-检查是否重启成功" class="toc-link" data-astro-cid-xvrfupwn>4. 检查是否重启成功</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-5-rootcc-wg-show" class="toc-link" data-astro-cid-xvrfupwn>主题 5. root@cc:~ wg show</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-检查公网端口是否开放-udp" class="toc-link" data-astro-cid-xvrfupwn>1. 检查公网端口是否开放 (UDP!)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-检查公钥是否配对" class="toc-link" data-astro-cid-xvrfupwn>2. 检查公钥是否配对</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-allowedips-范围" class="toc-link" data-astro-cid-xvrfupwn>3. AllowedIPs 范围</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#4-路由冲突-mtu-问题" class="toc-link" data-astro-cid-xvrfupwn>4. 路由冲突 (MTU 问题)</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#5-检查服务端状态" class="toc-link" data-astro-cid-xvrfupwn>5. 检查服务端状态</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#排查场景-1-wg-show-rootracknerd-7829f7f-1116" class="toc-link" data-astro-cid-xvrfupwn>排查场景 1. wg show root@racknerd-7829f7f 11:16:…</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#为什么不通" class="toc-link" data-astro-cid-xvrfupwn>为什么不通。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#解决方案统一网段" class="toc-link" data-astro-cid-xvrfupwn>解决方案：统一网段</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#第三步再次测试" class="toc-link" data-astro-cid-xvrfupwn>第三步：再次测试</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-6-这样还不对吗" class="toc-link" data-astro-cid-xvrfupwn>主题 6. 这样还不对吗</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#为什么现在不通" class="toc-link" data-astro-cid-xvrfupwn>为什么现在不通。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#修正方案保持两端网段绝对一致" class="toc-link" data-astro-cid-xvrfupwn>修正方案：保持两端网段绝对一致</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-重启生效" class="toc-link" data-astro-cid-xvrfupwn>3. 重启生效</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-7-为什么这里一个是32位掩码一个是24位掩码" class="toc-link" data-astro-cid-xvrfupwn>主题 7. 为什么这里一个是32位掩码，一个是24位掩码</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-interface-里的-24定义本地网段" class="toc-link" data-astro-cid-xvrfupwn>1. Interface 里的 /24：定义本地网段</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-peer-里的-32定义唯一的身份验证" class="toc-link" data-astro-cid-xvrfupwn>2. Peer 里的 /32：定义唯一的身份验证</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-如果反过来会怎样" class="toc-link" data-astro-cid-xvrfupwn>3. 如果反过来会怎样。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#总结" class="toc-link" data-astro-cid-xvrfupwn>总结</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-8-allow-ip只要大于24就行" class="toc-link" data-astro-cid-xvrfupwn>主题 8. allow ip只要大于24就行</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-为什么通常用-32" class="toc-link" data-astro-cid-xvrfupwn>1. 为什么通常用 /32。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-什么时候可以用-24-甚至更小" class="toc-link" data-astro-cid-xvrfupwn>2. 什么时候可以用 /24 甚至更小。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#3-一个极端的例子0" class="toc-link" data-astro-cid-xvrfupwn>3. 一个极端的例子：/0</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#️-注意不要在服务端的多个-peer-里重叠范围" class="toc-link" data-astro-cid-xvrfupwn>️ 注意：不要在服务端的多个 Peer 里重叠范围</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#总结建议" class="toc-link" data-astro-cid-xvrfupwn>总结建议</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#主题-9-pacman可以安装wg吗" class="toc-link" data-astro-cid-xvrfupwn>主题 9. pacman可以安装wg吗</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#几个关键点" class="toc-link" data-astro-cid-xvrfupwn>几个关键点：</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#️-特别提醒针对-vps-用户" class="toc-link" data-astro-cid-xvrfupwn>️ 特别提醒（针对 VPS 用户）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#排查场景-2-wg-quick-up-wg0-033242" class="toc-link" data-astro-cid-xvrfupwn>排查场景 2. wg-quick up wg0 03:32:42</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#解决方案" class="toc-link" data-astro-cid-xvrfupwn>解决方案</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#️-关键提醒你的-ip-段又变了" class="toc-link" data-astro-cid-xvrfupwn>️ 关键提醒：你的 IP 段又变了。</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#总结操作步骤" class="toc-link" data-astro-cid-xvrfupwn>总结操作步骤</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#实施与验证清单" class="toc-link" data-astro-cid-xvrfupwn>实施与验证清单</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>WireGuard Windows Linux macOS 安装</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-02-12T00:00:00.000Z"> Feb 11, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 21 min read
 </span>   <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="last-updated" data-astro-cid-bvzihdzo>
-Updated  <time datetime="2026-02-12T00:00:00.000Z"> Feb 11, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与适用场景">背景与适用场景</h2>
-<p>本文基于实际问题整理：wiregard怎么安装，我要连通windows，linux，macos。</p>
-<h2 id="核心结论">核心结论</h2>
-<ul>
-<li>获取公钥： 窗口上方会自动生成该设备的 Public Key，请将其记录下来并填回 Linux 服务器配置中的 部分。</li>
-<li>客户端启动： 在 Windows/macOS 客户端点击“连接”或“激活”。</li>
-<li>防火墙开放端口： 确保你的 Linux 服务器防火墙（如 ufw 或云服务商的安全组）已开放 UDP 51820 端口。</li>
-<li>Windows 连通性： 连接后，试着在命令行。如果通了，说明隧道建立成功。</li>
-<li>互联互通： 因为我们在 Linux 开启了 的转发规则，Windows (10.0.0.2) 现在也可以直接访问 macOS (10.0…</li>
-</ul>
-<h2 id="详细说明">详细说明</h2>
-<h3 id="实现思路-1">实现思路 1</h3>
-<p>你只需要把 A 的公钥填到 B 里，把 B 的公钥填到 A 里，隧道就打通了</p>
+Updated  <time datetime="2026-02-13T00:00:00.000Z"> Feb 12, 2026 </time> </span>  </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h2 id="背景与目标">背景与目标</h2>
+<p>本文围绕“wiregard怎么安装，我要连通windows，linux，macos”展开，整理可直接复用的步骤、原理说明与排查经验。</p>
+<h2 id="核心内容">核心内容</h2>
+<h3 id="主题-1-wiregard怎么安装我要连通windowslinuxmacos">主题 1. wiregard怎么安装，我要连通windows，linux，macos</h3>
+<p>搭建 WireGuard 就像是建立一个专属的虚拟“隧道”。它的核心逻辑是：<strong>每一台设备（节点）都有自己的私钥（Secret Key）和公钥（Public Key）</strong>。你只需要把 A 的公钥填到 B 里，把 B 的公钥填到 A 里，隧道就打通了。</p>
+<p>这里以一套典型的方案为例：将 <strong>Linux</strong> 作为服务端（中转站），<strong>Windows</strong> 和 <strong>macOS</strong> 作为客户端。</p>
 <p>1. 在 Linux 上安装与配置 (服务端)</p>
-<h3 id="实现思路-2">实现思路 2</h3>
-<p>WireGuard 在 Linux 上既可以是服务端，也可以是客户端——这正是它的强大之处</p>
-<p>以下是 Linux 客户端 的快速接入步骤</p>
-<h3 id="实现思路-3">实现思路 3</h3>
-<p>在 WireGuard 的世界里，没有绝对的“服务端”和“客户端”，只有 Peer（对等节点）</p>
-<p>既然你已经准备好了，我们直接进入 Linux 互联 的实战阶段</p>
-<h2 id="操作步骤与命令示例">操作步骤与命令示例</h2>
-<h3 id="示例-1">示例 1</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">wg</span><span style="color:#9ECBFF"> genkey</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> tee</span><span style="color:#9ECBFF"> privatekey</span><span style="color:#F97583"> |</span><span style="color:#B392F0"> wg</span><span style="color:#9ECBFF"> pubkey</span><span style="color:#F97583"> ></span><span style="color:#9ECBFF"> publickey</span></span></code></pre>
-<h3 id="示例-2">示例 2</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">[Interface]</span></span>
-<span class="line"><span style="color:#B392F0">PrivateKey</span><span style="color:#9ECBFF"> =</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">这里填你刚才生成的</span><span style="color:#9ECBFF"> Linux</span><span style="color:#9ECBFF"> 私</span><span style="color:#E1E4E8">钥</span><span style="color:#F97583">></span></span>
-<span class="line"><span style="color:#B392F0">Address</span><span style="color:#9ECBFF"> =</span><span style="color:#9ECBFF"> 10.0.0.1/24</span></span>
-<span class="line"><span style="color:#B392F0">ListenPort</span><span style="color:#9ECBFF"> =</span><span style="color:#79B8FF"> 51820</span></span>
-<span class="line"><span style="color:#B392F0">PostUp</span><span style="color:#9ECBFF"> =</span><span style="color:#9ECBFF"> iptables</span><span style="color:#79B8FF"> -A</span><span style="color:#9ECBFF"> FORWARD</span><span style="color:#79B8FF"> -i</span><span style="color:#9ECBFF"> wg0</span><span style="color:#79B8FF"> -j</span><span style="color:#9ECBFF"> ACCEPT</span><span style="color:#E1E4E8">; </span><span style="color:#B392F0">iptables</span><span style="color:#79B8FF"> -t</span><span style="color:#9ECBFF"> nat</span><span style="color:#79B8FF"> -A</span><span style="color:#9ECBFF"> POSTROUTING</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> eth0</span><span style="color:#79B8FF"> -j</span><span style="color:#9ECBFF"> MASQUERADE</span></span>
-<span class="line"><span style="color:#B392F0">PostDown</span><span style="color:#9ECBFF"> =</span><span style="color:#9ECBFF"> iptables</span><span style="color:#79B8FF"> -D</span><span style="color:#9ECBFF"> FORWARD</span><span style="color:#79B8FF"> -i</span><span style="color:#9ECBFF"> wg0</span><span style="color:#79B8FF"> -j</span><span style="color:#9ECBFF"> ACCEPT</span><span style="color:#E1E4E8">; </span><span style="color:#B392F0">iptables</span><span style="color:#79B8FF"> -t</span><span style="color:#9ECBFF"> nat</span><span style="color:#79B8FF"> -D</span><span style="color:#9ECBFF"> POSTROUTING</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> eth0</span><span style="color:#79B8FF"> -j</span><span style="color:#9ECBFF"> MASQUERADE</span></span>
-<span class="line"><span style="color:#6A737D"># 预留给 Windows 的配置</span></span>
-<span class="line"><span style="color:#E1E4E8">[Peer]</span></span>
-<span class="line"><span style="color:#B392F0">PublicKey</span><span style="color:#9ECBFF"> =</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">稍后填入</span><span style="color:#9ECBFF"> Windows</span><span style="color:#9ECBFF"> 的公</span><span style="color:#E1E4E8">钥</span><span style="color:#F97583">></span></span>
-<span class="line"><span style="color:#B392F0">AllowedIPs</span><span style="color:#9ECBFF"> =</span><span style="color:#9ECBFF"> 10.0.0.2/32</span></span>
-<span class="line"><span style="color:#6A737D"># 预留给 macOS 的配置</span></span>
-<span class="line"><span style="color:#E1E4E8">[Peer]</span></span>
-<span class="line"><span style="color:#B392F0">PublicKey</span><span style="color:#9ECBFF"> =</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">稍后填入</span><span style="color:#9ECBFF"> macOS</span><span style="color:#9ECBFF"> 的公</span><span style="color:#E1E4E8">钥</span><span style="color:#F97583">></span></span>
-<span class="line"><span style="color:#B392F0">AllowedIPs</span><span style="color:#9ECBFF"> =</span><span style="color:#9ECBFF"> 10.0.0.3/32</span></span></code></pre>
-<h3 id="示例-3">示例 3</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#E1E4E8">[Interface]</span></span>
-<span class="line"><span style="color:#B392F0">PrivateKey</span><span style="color:#9ECBFF"> =</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">自动生成的私</span><span style="color:#E1E4E8">钥</span><span style="color:#F97583">></span></span>
-<span class="line"><span style="color:#B392F0">Address</span><span style="color:#9ECBFF"> =</span><span style="color:#9ECBFF"> 10.0.0.2/24</span></span>
-<span class="line"><span style="color:#B392F0">DNS</span><span style="color:#9ECBFF"> =</span><span style="color:#79B8FF"> 1.1.1.1</span></span>
-<span class="line"><span style="color:#E1E4E8">[Peer]</span></span>
-<span class="line"><span style="color:#B392F0">PublicKey</span><span style="color:#9ECBFF"> =</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">填入</span><span style="color:#9ECBFF"> Linux</span><span style="color:#9ECBFF"> 服务器的公</span><span style="color:#E1E4E8">钥</span><span style="color:#F97583">></span></span>
-<span class="line"><span style="color:#B392F0">Endpoint</span><span style="color:#9ECBFF"> =</span><span style="color:#F97583"> &#x3C;</span><span style="color:#9ECBFF">服务器公网I</span><span style="color:#E1E4E8">P</span><span style="color:#F97583">></span><span style="color:#9ECBFF">:51820</span></span>
-<span class="line"><span style="color:#B392F0">AllowedIPs</span><span style="color:#9ECBFF"> =</span><span style="color:#9ECBFF"> 10.0.0.0/24</span><span style="color:#6A737D">  # 只代理隧道内流量</span></span>
-<span class="line"><span style="color:#6A737D"># 如果想全量代理，改为 0.0.0.0/0</span></span>
-<span class="line"><span style="color:#B392F0">PersistentKeepalive</span><span style="color:#9ECBFF"> =</span><span style="color:#79B8FF"> 25</span></span></code></pre>
-<h3 id="示例-4">示例 4</h3>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">sudo</span><span style="color:#9ECBFF"> wg-quick</span><span style="color:#9ECBFF"> up</span><span style="color:#9ECBFF"> wg0</span></span>
-<span class="line"><span style="color:#6A737D">    # 设置开机自启</span></span>
-<span class="line"><span style="color:#B392F0">    sudo</span><span style="color:#9ECBFF"> systemctl</span><span style="color:#9ECBFF"> enable</span><span style="color:#9ECBFF"> wg-quick@wg0</span></span></code></pre>
-<h3 id="执行顺序建议">执行顺序建议</h3>
-<ol>
-<li>检查网络拓扑、地址分配和路由路径。</li>
-<li>逐层验证 DNS、端口与协议握手状态。</li>
-<li>根据日志和抓包结果修正配置。</li>
-</ol>
-<h2 id="常见问题与排查">常见问题与排查</h2>
+<p>大多数现代 Linux 内核已集成 WireGuard。以 Ubuntu/Debian 为例：</p>
 <ul>
-<li><strong>问题：</strong> allow ip只要大于24就行  <strong>排查：</strong> 在 WireGuard 中， 的核心规则是： 你允许这个 Peer（对等节点）使用哪些 IP 地址；2. 什么时候可以用 甚至更小</li>
-<li><strong>问题：</strong> pacman可以安装wg吗  <strong>排查：</strong> 可以， Arch Linux 安装 WireGuard 非常简单；由于你之前提到了 和，如果你其中一台机器跑的是 Arch Linux，直接使用 即可</li>
+<li><strong>安装：</strong> <code>sudo apt update &#x26;&#x26; sudo apt install wireguard</code></li>
+<li><strong>生成密钥对：</strong></li>
 </ul>
-<h2 id="关键问答摘录">关键问答摘录</h2>
-<blockquote>
-<p><strong>Q:</strong> allow ip只要大于24就行</p>
-<p><strong>A:</strong> 在 WireGuard 中， 的核心规则是： 你允许这个 Peer（对等节点）使用哪些 IP 地址；2. 什么时候可以用 甚至更小</p>
-</blockquote>
-<blockquote>
-<p><strong>Q:</strong> pacman可以安装wg吗</p>
-<p><strong>A:</strong> 可以， Arch Linux 安装 WireGuard 非常简单；由于你之前提到了 和，如果你其中一台机器跑的是 Arch Linux，直接使用 即可</p>
-</blockquote>
-<h2 id="总结">总结</h2>
-<p>获取公钥： 窗口上方会自动生成该设备的 Public Key，请将其记录下来并填回 Linux 服务器配置中的 部分。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>    wg genkey | tee privatekey | wg pubkey > publickey</span></span></code></pre>
 <ul>
-<li>原始对话来源：<a href="https://gemini.google.com/app/fbb862d8e809170b">https://gemini.google.com/app/fbb862d8e809170b</a></li>
-</ul>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=WireGuard%20Windows%20Linux%20macOS%20%E5%AE%89%E8%A3%85&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Fnetwork%2Fwireguard-windows-linux-macos-%25E5%25AE%2589%25E8%25A3%2585%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/network/wireguard-windows-linux-macos-%E5%AE%89%E8%A3%85/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+<li><strong>创建配置文件：</strong> <code>sudo nano /etc/wireguard/wg0.conf</code></li>
+</ul>
+<p><strong>写入以下配置：</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span>PrivateKey = &#x3C;这里填你刚才生成的 Linux 私钥></span></span>
+<span class="line"><span>Address = 10.0.0.1/24</span></span>
+<span class="line"><span>ListenPort = 51820</span></span>
+<span class="line"><span>PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</span></span>
+<span class="line"><span>PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 预留给 Windows 的配置</span></span>
+<span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = &#x3C;稍后填入 Windows 的公钥></span></span>
+<span class="line"><span>AllowedIPs = 10.0.0.2/32</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 预留给 macOS 的配置</span></span>
+<span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = &#x3C;稍后填入 macOS 的公钥></span></span>
+<span class="line"><span>AllowedIPs = 10.0.0.3/32</span></span></code></pre>
+<p>2. 在 Windows 和 macOS 上安装 (客户端)</p>
+<p>这两者的操作逻辑几乎完全一致：</p>
+<ol>
+<li><strong>下载：</strong> 访问<br>
+<a href="https://www.wireguard.com/install/">WireGuard 官网</a><br>
+下载对应安装包。</li>
+<li><strong>生成配置：</strong> 打开软件，点击“新建隧道” -> “新建空白隧道”。</li>
+<li><strong>获取公钥：</strong> 窗口上方会自动生成该设备的 <strong>Public Key</strong>，请将其记录下来并填回 Linux 服务器配置中的 <code>[Peer]</code> 部分。</li>
+<li><strong>编辑客户端配置：</strong></li>
+</ol>
+<p><strong>Windows (10.0.0.2):</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span>PrivateKey = &#x3C;自动生成的私钥></span></span>
+<span class="line"><span>Address = 10.0.0.2/24</span></span>
+<span class="line"><span>DNS = 1.1.1.1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = &#x3C;填入 Linux 服务器的公钥></span></span>
+<span class="line"><span>Endpoint = &#x3C;服务器公网IP>:51820</span></span>
+<span class="line"><span>AllowedIPs = 10.0.0.0/24  # 只代理隧道内流量</span></span>
+<span class="line"><span># 如果想全量代理，改为 0.0.0.0/0</span></span>
+<span class="line"><span>PersistentKeepalive = 25</span></span></code></pre>
+<p><strong>macOS (10.0.0.3):</strong> 配置同上，只需将 <code>Address</code> 改为 <code>10.0.0.3/24</code>。</p>
+<p>3. 启动与连通</p>
+<ol>
+<li><strong>服务器端启动：</strong></li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>    sudo wg-quick up wg0</span></span>
+<span class="line"><span>    # 设置开机自启</span></span>
+<span class="line"><span>    sudo systemctl enable wg-quick@wg0</span></span></code></pre>
+<ol start="2">
+<li><strong>客户端启动：</strong> 在 Windows/macOS 客户端点击“连接”或“激活”。</li>
+<li><strong>防火墙开放端口：</strong> 确保你的 Linux 服务器防火墙（如 ufw 或云服务商的安全组）已开放 <strong>UDP 51820</strong> 端口。</li>
+</ol>
+<p>进阶小贴士</p>
+<ul>
+<li><strong>Windows 连通性：</strong> 连接后，试着在命令行 <code>ping 10.0.0.1</code>。如果通了，说明隧道建立成功。</li>
+<li><strong>互联互通：</strong> 因为我们在 Linux 开启了 <code>PostUp</code> 的转发规则，Windows (10.0.0.2) 现在也可以直接访问 macOS (10.0.0.3)。</li>
+</ul>
+<p>如果你觉得手动改配置文件太麻烦，<strong>需要我为你推荐一些带图形化管理界面的 WireGuard 辅助工具（如 Subspace 或 wg-easy）吗。</strong></p>
+<h3 id="主题-2-linux互联呢">主题 2. linux互联呢</h3>
+<p>既然你已经有了 Linux 服务器作为中转，让另一台 Linux 客户端接入其实和 Windows/macOS 的逻辑是一样的。WireGuard 在 Linux 上既可以是服务端，也可以是客户端——这正是它的强大之处。</p>
+<p>以下是 <strong>Linux 客户端</strong> 的快速接入步骤：</p>
+<h3 id="1-安装-wireguard">1. 安装 WireGuard</h3>
+<p>在你的 Linux 客户端机器上安装工具包：</p>
+<ul>
+<li><strong>Ubuntu/Debian:</strong> <code>sudo apt install wireguard</code></li>
+<li><strong>CentOS/RHEL:</strong> <code>sudo dnf install wireguard-tools</code></li>
+<li><strong>Arch:</strong> <code>sudo pacman -S wireguard-tools</code></li>
+</ul>
+<h3 id="2-生成客户端密钥">2. 生成客户端密钥</h3>
+<p>在客户端机器上运行：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>wg genkey | tee client_privatekey | wg pubkey > client_publickey</span></span></code></pre>
+<p>记下生成的这两个密钥。</p>
+<h3 id="3-创建客户端配置文件">3. 创建客户端配置文件</h3>
+<p>创建文件 <code>/etc/wireguard/wg0.conf</code>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span>PrivateKey = &#x3C;客户端刚才生成的私钥></span></span>
+<span class="line"><span>Address = 10.0.0.4/24  # 给这台 Linux 分配一个新的 IP</span></span>
+<span class="line"><span>DNS = 1.1.1.1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = &#x3C;Linux 服务端的公钥></span></span>
+<span class="line"><span>Endpoint = &#x3C;服务端公网IP>:51820</span></span>
+<span class="line"><span>AllowedIPs = 10.0.0.0/24</span></span>
+<span class="line"><span>PersistentKeepalive = 25</span></span></code></pre>
+<h3 id="4-在服务端添加该客户端">4. 在“服务端”添加该客户端</h3>
+<p>回到你的 <strong>中转服务器</strong>，将这个新 Linux 客户端的公钥添加进去：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 直接通过命令行添加，无需重启</span></span>
+<span class="line"><span>sudo wg set wg0 peer &#x3C;客户端的公钥> allowed-ips 10.0.0.4/32</span></span></code></pre>
+<p><em>注：为了持久化，建议也手动把这段 <code>[Peer]</code> 信息写进服务端的 <code>/etc/wireguard/wg0.conf</code> 里。</em></p>
+<h3 id="5-启动连接">5. 启动连接</h3>
+<p>在客户端机器上运行：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 启动</span></span>
+<span class="line"><span>sudo wg-quick up wg0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 检查状态</span></span>
+<span class="line"><span>sudo wg show</span></span></code></pre>
+<h3 id="常见问题与调试">常见问题与调试</h3>
+<ul>
+<li><strong>路由冲突：</strong> 确保你设置的 <code>Address</code> (如 10.0.0.x) 不会和你本地局域网的网段冲突。</li>
+<li><strong>内网穿透：</strong> 如果你的 Linux 客户端在公司或家里内网，<code>PersistentKeepalive = 25</code> 非常重要，它能防止防火墙因为长时间没流量而关闭 UDP 隧道。</li>
+<li><strong>多台 Linux 互联：</strong> 如果你想让两台 Linux 不经过中转服务器直接对连（点对点），前提是其中一台必须有公网 IP 或者你做了端口映射。</li>
+</ul>
+<p><strong>你是想让这些 Linux 机器仅仅互相通信，还是希望其中一台作为出口，让其他机器通过它实现“科学”上网。</strong></p>
+<h3 id="主题-3-wg">主题 3. wg</h3>
+<p>既然你已经准备好了，我们直接进入 <strong>Linux 互联</strong> 的实战阶段。在 WireGuard 的世界里，没有绝对的“服务端”和“客户端”，只有 <strong>Peer（对等节点）</strong>。</p>
+<p>如果你想让两台 Linux 机器互联，最关键的是要理解它们如何交换公钥。</p>
+<h3 id="主题-4-wg怎么重启一下">主题 4. wg怎么重启一下</h3>
+<p>在 WireGuard (wg) 中，最标准的重启方式是使用 <code>wg-quick</code> 工具。它会自动处理接口的关闭、配置加载和重新启动。</p>
+<p>根据你的操作习惯，有以下几种常用方法：</p>
+<h3 id="1-使用-wg-quick-最推荐">1. 使用 <code>wg-quick</code> (最推荐)</h3>
+<p>这是最直接的方法，适用于你手动管理的配置文件（如 <code>/etc/wireguard/wg0.conf</code>）。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 关闭接口</span></span>
+<span class="line"><span>sudo wg-quick down wg0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 启动接口</span></span>
+<span class="line"><span>sudo wg-quick up wg0</span></span></code></pre>
+<p><em>注：<code>wg0</code> 是你的配置文件名。如果你的文件名是 <code>my_vpn.conf</code>，则命令改为 <code>wg-quick down my_vpn</code>。</em></p>
+<h3 id="2-使用-systemctl-推荐用于服务器">2. 使用 <code>systemctl</code> (推荐用于服务器)</h3>
+<p>如果你已经将 WireGuard 设置为开机自启的服务，建议使用 systemd 来管理，这样更规范：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># 一键重启</span></span>
+<span class="line"><span>sudo systemctl restart wg-quick@wg0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 查看状态（确认是否重启成功）</span></span>
+<span class="line"><span>sudo systemctl status wg-quick@wg0</span></span></code></pre>
+<h3 id="3-热更新配置-不中断连接">3. 热更新配置 (不中断连接)</h3>
+<p>如果你修改了配置文件，但<strong>不想让已经连接的用户掉线</strong>，可以使用 <code>strip</code> 命令同步配置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo wg syncconf wg0 &#x3C;(wg-quick strip wg0)</span></span></code></pre>
+<blockquote>
+<p><strong>提示：</strong> 这个操作只会更新修改的部分（比如新增了一个 Peer），而不会像 <code>down/up</code> 那样重置整个网络接口。</p>
+</blockquote>
+<h3 id="4-检查是否重启成功">4. 检查是否重启成功</h3>
+<p>重启后，你可以通过以下命令确认隧道是否正常工作：</p>
+<ul>
+<li><strong>查看运行状态：</strong> <code>sudo wg show</code> （如果看到流量 <code>transfer</code> 在变，说明通了）</li>
+<li><strong>查看网卡信息：</strong> <code>ip a show wg0</code></li>
+<li><strong>测试连通性：</strong> <code>ping 10.0.0.1</code> (根据你设置的内部 IP 测试)</li>
+</ul>
+<p><strong>你是遇到了连接不上的问题，还是刚才修改了配置文件需要生效。</strong> 如果是连接不上，我可以帮你看看报错日志。</p>
+<h3 id="主题-5-rootcc-wg-show">主题 5. root@cc:~ wg show</h3>
+<p>从你的 <code>wg show</code> 输出和 <code>ping</code> 结果来看，隧道虽然配置了，但<strong>数据包是有去无回（100% loss）</strong>。</p>
+<p>最明显的疑点在于：<code>transfer</code> 显示 <strong>1.30 KiB sent, 0 B received</strong>。这意味着你的这台 Linux 发出了握手请求，但对方（142.171.114.231）完全没有回应。</p>
+<p>请按以下顺序排查，通常能解决 90% 的连通性问题：</p>
+<h3 id="1-检查公网端口是否开放-udp">1. 检查公网端口是否开放 (UDP!)</h3>
+<p>这是最常见的坑。WireGuard 使用的是 <strong>UDP</strong> 协议，而不是 TCP。</p>
+<ul>
+<li><strong>服务端防火墙：</strong> 如果 <code>142.171.114.231</code> 是你的服务端，确保它的防火墙（或云控制台安全组）开放了 <strong>UDP 51820</strong>。</li>
+<li><strong>测试端口：</strong> 在客户端（当前的 Linux）执行：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>    nc -zvu 142.171.114.231 51820</span></span></code></pre>
+<p>如果显示 <code>succeeded</code>，说明端口通了；如果是 <code>timed out</code>，说明被挡在了门外。</p>
+<h3 id="2-检查公钥是否配对">2. 检查公钥是否配对</h3>
+<p>WireGuard 是严格的“公钥交换”。</p>
+<ul>
+<li><strong>当前客户端：</strong> 你的 Public Key 是 <code>5AKyGR...</code>。</li>
+<li><strong>服务端 (142.171.114.231)：</strong> 请去服务端运行 <code>wg show</code>，确认其 <code>[Peer]</code> 配置里的公钥<strong>完全等同于</strong>上面的 <code>5AKyGR...</code>。</li>
+<li><strong>反向确认：</strong> 确认你本地配置里的 <code>peer: pEpkd4...</code> 确实是服务端真实的 Public Key。</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong> 哪怕少一个字符，WireGuard 都会静默丢包，没有任何错误提示。</p>
+</blockquote>
+<h3 id="3-allowedips-范围">3. AllowedIPs 范围</h3>
+<p>你现在的配置是： <code>allowed ips: 10.10.0.0/24</code></p>
+<ul>
+<li>如果你要 ping 的目标地址是 <code>10.10.0.1</code>，那么这个范围是对的。</li>
+<li>但请确认<strong>服务端</strong>那边给这个客户端分配的 <code>AllowedIPs</code> 是不是 <code>10.10.0.x/32</code>（即你本机的内网 IP）。</li>
+</ul>
+<h3 id="4-路由冲突-mtu-问题">4. 路由冲突 (MTU 问题)</h3>
+<p>如果你使用的是 VPS（比如 CloudCone 或其他云服务商），有时默认的 MTU 过大会导致包发不出去。尝试在 <code>wg0.conf</code> 的 <code>[Interface]</code> 部分加入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>MTU = 1380</span></span></code></pre>
+<p>然后重启 <code>wg-quick down wg0 &#x26;&#x26; wg-quick up wg0</code> 试试。</p>
+<h3 id="5-检查服务端状态">5. 检查服务端状态</h3>
+<p>去 <strong>142.171.114.231</strong> 这台机器上运行 <code>wg show</code>，看看：</p>
+<ol>
+<li>它有没有收到来自你这台机器公网 IP 的请求。</li>
+<li>它的 <code>endpoint</code> 是否显示了你目前的公网 IP。</li>
+</ol>
+<p><strong>你可以登录到服务端 (142.171.114.231) 执行一下 <code>wg show</code> 吗。把结果发给我，我一眼就能看出哪边没对上。</strong></p>
+<h3 id="排查场景-1-wg-show-rootracknerd-7829f7f-1116">排查场景 1. wg show root@racknerd-7829f7f 11:16:…</h3>
+<ul>
+<li>场景：wg show root@racknerd-7829f7f 11:16:…</li>
+<li>处理要点：<br>
+发现问题了。原因非常典型，是 <strong>IP 地址段不匹配</strong> 导致的“握手成功但无法通信”。</li>
+</ul>
+<p>观察这两台机器的状态：</p>
+<ol>
+<li><strong>服务端 (RackNerd):</strong> 它的 <code>allowed ips</code> 是 <strong><code>10.0.0.3/32</code></strong>。</li>
+<li><strong>客户端 (CC):</strong> 你刚才 ping 的目标是 <strong><code>10.10.0.1</code></strong>。</li>
+</ol>
+<h3 id="为什么不通">为什么不通。</h3>
+<p>在 WireGuard 中，<code>AllowedIPs</code> 既是路由表也是白名单。</p>
+<ul>
+<li><strong>服务端认为：</strong> 客户端的内网 IP 应该是 <code>10.0.0.3</code>。</li>
+<li><strong>客户端认为：</strong> 自己属于 <code>10.10.0.x</code> 网段。 由于服务端只允许 <code>10.0.0.3</code> 的流量进入，当你从客户端发送 <code>10.10.0.x</code> 的包时，服务端会直接丢弃（因为它不在白名单里）。</li>
+</ul>
+<h3 id="解决方案统一网段">解决方案：统一网段</h3>
+<p>你需要决定用哪个网段，建议统一使用 <code>10.10.0.x</code>。</p>
+<h4 id="第一步修改服务端-racknerd-的配置">第一步：修改服务端 (RackNerd) 的配置</h4>
+<p>修改 <code>/etc/wireguard/wg0.conf</code>，将该 Peer 的配置改为：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = 5AKyGRiJ+3/cYCh0FDs0Aj4w6ipRloHNZgagZmFH3Gc=</span></span>
+<span class="line"><span>AllowedIPs = 10.10.0.2/32  # 假设给客户端分配 .2</span></span></code></pre>
+<p>然后热更新服务端配置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo wg syncconf wg0 &#x3C;(wg-quick strip wg0)</span></span></code></pre>
+<h4 id="第二步修改客户端-cc-的配置">第二步：修改客户端 (CC) 的配置</h4>
+<p>修改其 <code>/etc/wireguard/wg0.conf</code>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span>PrivateKey = &#x3C;客户端私钥></span></span>
+<span class="line"><span>Address = 10.10.0.2/24  # 确保这里的网段和服务端分配的一致</span></span>
+<span class="line"><span># ... 其他保持不变</span></span></code></pre>
+<p>然后重启客户端：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo wg-quick down wg0 &#x26;&#x26; sudo wg-quick up wg0</span></span></code></pre>
+<h3 id="第三步再次测试">第三步：再次测试</h3>
+<p>现在在客户端（CC）上执行：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ping 10.10.0.1</span></span></code></pre>
+<p><strong>一点提示：</strong> 你刚才服务端的 <code>wg show</code> 显示 <code>latest handshake: 41 seconds ago</code>，这说明<strong>物理链路（UDP 端口和密钥）已经是通的了</strong>。只要把内部的 <code>Address</code> 和 <code>AllowedIPs</code> 调成一致，立刻就能连上网。</p>
+<h3 id="主题-6-这样还不对吗">主题 6. 这样还不对吗</h3>
+<p>握手（Handshake）成功了，说明你的<strong>密钥、IP、端口全是对的</strong>。现在的问题卡在 <strong>“路由逻辑”</strong> 上，也就是我刚才提到的 <strong>AllowedIPs 不匹配</strong>。</p>
+<p>在 WireGuard 中，<code>AllowedIPs</code> 是一个“双向检查”：</p>
+<ol>
+<li><strong>发送时：</strong> 它决定哪些目标 IP 走这个隧道。</li>
+<li><strong>接收时：</strong> 它决定哪些源 IP 允许进入。</li>
+</ol>
+<h3 id="为什么现在不通">为什么现在不通。</h3>
+<p>你看你的两条 <code>wg show</code> 数据：</p>
+<ul>
+<li><strong>服务端 (RackNerd):</strong> <code>allowed ips: 10.0.0.3/32</code>
+<ul>
+<li><strong>它在想：</strong> “我只接收来自 <code>10.0.0.3</code> 的包，也只把发往 <code>10.0.0.3</code> 的包丢进隧道。”</li>
+</ul>
+</li>
+<li><strong>客户端 (CC):</strong> 发出的 Ping 包源 IP 是 <strong><code>10.10.0.x</code></strong>（由它的 <code>Interface</code> 决定）。
+<ul>
+<li><strong>结果：</strong> 服务端收到包后发现源 IP 是 <code>10.10.0.x</code>，不是它期待的 <code>10.0.0.3</code>，于是<strong>直接丢弃</strong>。</li>
+</ul>
+</li>
+</ul>
+<p>这就是为什么你看到 <code>transfer</code> 有几百字节的变动（握手包过了），但业务数据（Ping）死活不通。</p>
+<h3 id="修正方案保持两端网段绝对一致">修正方案：保持两端网段绝对一致</h3>
+<p>请确保你的配置文件长这样（假设我们统一用 <code>10.10.0.x</code>）：</p>
+<h4 id="1-服务端-racknerd">1. 服务端 (RackNerd)</h4>
+<p>编辑 <code>/etc/wireguard/wg0.conf</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span>Address = 10.10.0.1/24</span></span>
+<span class="line"><span>ListenPort = 51820</span></span>
+<span class="line"><span>PrivateKey = &#x3C;服务端私钥></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = 5AKyGRiJ+3/cYCh0FDs0Aj4w6ipRloHNZgagZmFH3Gc=</span></span>
+<span class="line"><span># 必须改成 10.10 段！</span></span>
+<span class="line"><span>AllowedIPs = 10.10.0.2/32  </span></span></code></pre>
+<h4 id="2-客户端-cc">2. 客户端 (CC)</h4>
+<p>编辑 <code>/etc/wireguard/wg0.conf</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span># 必须和上面服务端分配给你的对上！</span></span>
+<span class="line"><span>Address = 10.10.0.2/24  </span></span>
+<span class="line"><span>PrivateKey = &#x3C;客户端私钥></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = pEpkd4HxVDp7b59UMrHoKiHqwdtIDeoNUXELdj1tAjY=</span></span>
+<span class="line"><span>Endpoint = 142.171.114.231:51820</span></span>
+<span class="line"><span>AllowedIPs = 10.10.0.0/24</span></span></code></pre>
+<h3 id="3-重启生效">3. 重启生效</h3>
+<p>两边都修改完后，分别执行重启：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo wg-quick down wg0 &#x26;&#x26; sudo wg-quick up wg0</span></span></code></pre>
+<p>再试试 <code>ping 10.10.0.1</code>，这次大概率就通了。</p>
+<p><strong>顺便问下：</strong> 你的这两台机器，一台是 CloudCone (CC) 另一台是 RackNerd 吗。你是打算用这两台 VPS 互做备份，还是单纯为了组内网。</p>
+<h3 id="主题-7-为什么这里一个是32位掩码一个是24位掩码">主题 7. 为什么这里一个是32位掩码，一个是24位掩码</h3>
+<p>这是一个非常棒的问题，触及了 WireGuard 逻辑的核心：<strong><code>Interface</code>（接口）和 <code>Peer</code>（对等节点）定义的维度完全不同。</strong></p>
+<p>简单来说：<strong>24位掩码定义的是“地盘”，32位掩码定义的是“门牌号”。</strong></p>
+<h3 id="1-interface-里的-24定义本地网段">1. <code>Interface</code> 里的 <code>/24</code>：定义本地网段</h3>
+<p>在 <code>[Interface]</code> 部分，<code>Address = 10.10.0.1/24</code> 的作用是<strong>给你的虚拟网卡（wg0）设置 IP 和掩码</strong>。</p>
+<ul>
+<li>这告诉操作系统：“我这块网卡属于 <code>10.10.0.0</code> 到 <code>10.10.0.255</code> 这个大家庭。”</li>
+<li>它会自动在你的系统路由表中添加一条规则：凡是发往 <code>10.10.0.x</code> 的包，都往 <code>wg0</code> 接口扔。</li>
+</ul>
+<h3 id="2-peer-里的-32定义唯一的身份验证">2. <code>Peer</code> 里的 <code>/32</code>：定义唯一的身份验证</h3>
+<p>在 <code>[Peer]</code> 部分，<code>AllowedIPs = 10.10.0.2/32</code> 的作用完全不同，它是 WireGuard 特有的 <strong>“加密路由表 (Cryptokey Routing)”</strong>。</p>
+<ul>
+<li><strong>作为过滤器：</strong> 当服务端收到一个包，公钥校验通过后，它会看包里的源 IP。如果包的源 IP 是 <code>10.10.0.2</code>，而你的配置里写的是 <code>/32</code>（精确匹配），它才允许这个包通过。</li>
+<li><strong>作为分发器：</strong> 当服务端想往隧道里发包时，它会查：哪个 Peer 拥有 <code>10.10.0.2</code> 这个 IP。查到对应的公钥后，就把包加密发给那个 Peer。</li>
+</ul>
+<blockquote>
+<p><strong>比喻：</strong></p>
+<ul>
+<li><strong><code>/24</code></strong> 像是一条街道的名字（10.10.0 大街），只要你住在这条街，你发信件（数据包）就知道该走哪条路。</li>
+<li><strong><code>/32</code></strong> 像是具体的门牌号（10.10.0.2 号）。WireGuard 必须精确知道哪个公钥对应哪个门牌号，否则它不知道该把包加密给谁。</li>
+</ul>
+</blockquote>
+<h3 id="3-如果反过来会怎样">3. 如果反过来会怎样。</h3>
+<ul>
+<li><strong>如果 Peer 处也写 <code>/24</code>：</strong> 如果你在服务端的 Peer 配置里写 <code>AllowedIPs = 10.10.0.0/24</code>，那就出大问题了。如果此时你有两个客户端接入，服务端就分不清哪个 IP 对应哪个客户端了，会导致数据包冲突。</li>
+<li><strong>如果 Interface 处写 <code>/32</code>：</strong> 你的系统路由表会认为这条街只有你一个人，当你尝试 ping 隧道里的其他队友（比如 <code>10.10.0.2</code>）时，系统可能根本找不到路径，因为它不觉得 <code>10.10.0.2</code> 在你的网段里。</li>
+</ul>
+<h3 id="总结">总结</h3>
+<ul>
+<li><strong><code>Address</code> 用 <code>/24</code></strong>：是为了让你的 Linux 系统知道这一片 IP 都归 WireGuard 管。</li>
+<li><strong><code>AllowedIPs</code> 用 <code>/32</code></strong>：是为了让 WireGuard 知道这个特定的公钥（Peer）<strong>仅代表</strong>这一个特定的 IP。</li>
+</ul>
+<p><strong>现在你把两端的网段改统一了吗。改完重启后再 ping 一下试试，握手已经有了，成功的曙光就在眼前。</strong></p>
+<h3 id="主题-8-allow-ip只要大于24就行">主题 8. allow ip只要大于24就行</h3>
+<p>简单直观的结论是：<strong>不完全是。它不是“大小”的问题，而是“范围”的问题。</strong></p>
+<p>在 WireGuard 中，<code>AllowedIPs</code> 的核心规则是：<strong>你允许这个 Peer（对等节点）使用哪些 IP 地址。</strong></p>
+<h3 id="1-为什么通常用-32">1. 为什么通常用 <code>/32</code>。</h3>
+<p>如果你只是想连接 <strong>一台</strong> 电脑，必须用 <code>/32</code>。</p>
+<ul>
+<li><code>10.10.0.2/32</code> 表示：这个公钥 <strong>只能且仅能</strong> 代表 <code>10.10.0.2</code> 这一个 IP。</li>
+<li>这是最安全的做法，防止某个客户端冒充别人的 IP 发包。</li>
+</ul>
+<h3 id="2-什么时候可以用-24-甚至更小">2. 什么时候可以用 <code>/24</code> 甚至更小。</h3>
+<p>只有当你希望通过这个隧道 <strong>访问一个网段</strong> 时，才会调小掩码（比如 <code>/24</code>）。</p>
+<p><strong>场景举例：</strong> 假设你的 Linux 客户端（CC）不仅是一台机器，它还是一个局域网的网关，它身后还有一堆设备（192.168.1.x）。</p>
+<ul>
+<li>如果你想在 RackNerd 服务端直接访问 CC 身后的所有设备。</li>
+<li>那么在 RackNerd 的 <code>[Peer]</code> 配置里，你需要写： <code>AllowedIPs = 10.10.0.2/32, 192.168.1.0/24</code></li>
+<li>这样，发往 192.168.1.x 的包也会被丢进这个隧道。</li>
+</ul>
+<h3 id="3-一个极端的例子0">3. 一个极端的例子：<code>/0</code></h3>
+<p>在 Windows/macOS 客户端上，你经常会看到： <code>AllowedIPs = 0.0.0.0/0</code></p>
+<ul>
+<li><strong>含义：</strong> 掩码是 0，表示匹配所有 IP。</li>
+<li><strong>作用：</strong> 这就是“全局代理”。所有的上网流量（发往任何地方的包）都会被塞进 WireGuard 隧道，发给服务器。</li>
+</ul>
+<h3 id="️-注意不要在服务端的多个-peer-里重叠范围">️ 注意：不要在服务端的多个 Peer 里重叠范围</h3>
+<p>这是新手最容易犯的错。如果你有两个客户端：</p>
+<ul>
+<li>Peer A: <code>AllowedIPs = 10.10.0.0/24</code></li>
+<li>Peer B: <code>AllowedIPs = 10.10.0.0/24</code></li>
+</ul>
+<p><strong>WireGuard 会直接报错或失效。</strong> 因为当它收到一个发往 <code>10.10.0.5</code> 的包时，它不知道该用 A 的公钥加密还是 B 的公钥加密。</p>
+<h3 id="总结建议">总结建议</h3>
+<p>对于你目前连接 CC 和 RackNerd 的需求：</p>
+<ul>
+<li><strong>服务端的 <code>[Peer]</code>：</strong> 必须用 <strong><code>/32</code></strong>（指定那台机器的唯一内网 IP）。</li>
+<li><strong>客户端的 <code>[Peer]</code>：</strong> 建议用 <strong><code>/24</code></strong>（让客户端知道所有 <code>10.10.0.x</code> 的包都往服务器发，这样它才能找到其他队友）。</li>
+</ul>
+<p><strong>你现在的配置里，两端的 <code>AllowedIPs</code> 修改成同一个网段（比如都是 10.10.0.x）了吗。如果改好了，Ping 一下 <code>10.10.0.1</code> 试试看。</strong></p>
+<h3 id="主题-9-pacman可以安装wg吗">主题 9. pacman可以安装wg吗</h3>
+<p>可以，<strong>Arch Linux</strong> 安装 WireGuard 非常简单。</p>
+<p>由于你之前提到了 <code>root@cc</code> 和 <code>racknerd</code>，如果你其中一台机器跑的是 Arch Linux，直接使用 <code>pacman</code> 即可：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S wireguard-tools</span></span></code></pre>
+<h3 id="几个关键点">几个关键点：</h3>
+<ol>
+<li><strong>内核支持</strong>： Arch Linux 的官方内核（<code>linux</code> 包）已经内置了 WireGuard 模块。如果你使用的是默认内核，安装完 <code>wireguard-tools</code> 就能直接用。
+<ul>
+<li>如果你使用的是长期支持版内核，确保安装了 <code>linux-lts</code>。</li>
+<li>如果你是自己编译的极简内核，可能需要确认开启了 <code>CONFIG_WIREGUARD</code>。</li>
+</ul>
+</li>
+<li><strong>验证安装</strong>： 安装完成后，你可以运行以下命令确认工具是否可用：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>    wg --version</span></span></code></pre>
+<ol start="3">
+<li><strong>配置路径</strong>： 和 Debian/Ubuntu 一样，配置文件同样放在 <code>/etc/wireguard/</code> 目录下。</li>
+<li><strong>管理服务</strong>： Arch 同样使用 systemd。如果你想让隧道开机自启：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>    sudo systemctl enable wg-quick@wg0</span></span></code></pre>
+<h3 id="️-特别提醒针对-vps-用户">️ 特别提醒（针对 VPS 用户）</h3>
+<p>如果你的 Arch Linux 是运行在 <strong>OpenVZ</strong> 虚拟化架构的 VPS 上（虽然 RackNerd 和 CC 绝大部分是 KVM，但还是提醒一下），由于无法直接加载内核模块，你可能还需要安装 <code>wireguard-go</code>（这是一个用户态实现版本）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S wireguard-go</span></span></code></pre>
+<p><em>如果是 KVM 架构，则完全不需要这个，直接用内核版性能更好。</em></p>
+<p><strong>你现在是准备把其中一台机器重装成 Arch，还是在给现有的 Arch 节点加隧道。之前的 10.10.x.x 网段连通了吗。</strong></p>
+<h3 id="排查场景-2-wg-quick-up-wg0-033242">排查场景 2. wg-quick up wg0 03:32:42</h3>
+<ul>
+<li>场景：wg-quick up wg0 03:32:42</li>
+<li>处理要点：<br>
+报错原因非常直接：你的配置文件里写了 <code>DNS = x.x.x.x</code>，所以 <code>wg-quick</code> 尝试调用 <code>resolvconf</code> 来修改系统的 DNS 设置，但你的 <strong>Arch Linux 上没装这个工具</strong>。</li>
+</ul>
+<p>由于 <code>wg-quick</code> 发现 DNS 设置失败，为了保证配置的一致性，它执行了“回滚”操作（<code>ip link delete dev wg0</code>），导致网卡根本没启动，所以你 Ping 不通。</p>
+<h3 id="解决方案">解决方案</h3>
+<h4 id="方法-a安装依赖推荐">方法 A：安装依赖（推荐）</h4>
+<p>在 Arch 上，通常安装 <code>openresolv</code> 就能解决这个问题：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo pacman -S openresolv</span></span></code></pre>
+<p>安装后再运行 <code>sudo wg-quick up wg0</code> 即可。</p>
+<h4 id="方法-b注释掉-dns">方法 B：注释掉 DNS</h4>
+<p>如果你不需要通过隧道解析 DNS（仅仅是两台机器互联，用 IP 通讯），直接把配置文件里的 DNS 行删掉或注释掉：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span>Address = 10.0.0.2/24</span></span>
+<span class="line"><span># DNS = 1.1.1.1  &#x3C;-- 把这一行删了</span></span>
+<span class="line"><span>PrivateKey = ...</span></span></code></pre>
+<h3 id="️-关键提醒你的-ip-段又变了">️ 关键提醒：你的 IP 段又变了。</h3>
+<p>我注意到你这次的日志里显示： <code>[#] ip -4 address add 10.0.0.2/24 dev wg0</code></p>
+<p><strong>请务必检查：</strong></p>
+<ol>
+<li><strong>服务端 (RackNerd)</strong> 的 <code>[Peer]</code> 里的 <code>AllowedIPs</code> 是否已经改成了 <code>10.0.0.2/32</code>。</li>
+<li>如果你还在 Ping <code>10.0.0.1</code>，请确保服务端自己的 <code>[Interface]</code> 里的 <code>Address</code> 确实是 <code>10.0.0.1/24</code>。</li>
+</ol>
+<h3 id="总结操作步骤">总结操作步骤</h3>
+<ol>
+<li>执行 <code>sudo pacman -S openresolv</code>。</li>
+<li>再次执行 <code>sudo wg-quick up wg0</code>。</li>
+<li>如果看到接口没被 delete，再执行 <code>wg show</code> 确认状态。</li>
+</ol>
+<p><strong>搞定 <code>resolvconf</code> 报错后，这次 <code>wg show</code> 的 transfer 是不是终于有 received 数据了。</strong></p>
+<h2 id="实施与验证清单">实施与验证清单</h2>
+<ol>
+<li>执行前先确认环境、版本和依赖与文中前置条件一致。</li>
+<li>涉及系统级变更时，先备份关键配置或创建快照。</li>
+<li>完成操作后按验证步骤确认结果，再执行清理或覆盖动作。</li>
+</ol>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=WireGuard%20Windows%20Linux%20macOS%20%E5%AE%89%E8%A3%85&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Fnetwork%2Fwireguard-windows-linux-macos-%25E5%25AE%2589%25E8%25A3%2585%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/network/wireguard-windows-linux-macos-%E5%AE%89%E8%A3%85/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
 Related Posts
 </h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/network/http-错误码比喻与速记/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>HTTP 错误码比喻与速记</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>代理服务器（Nginx/Traefik）：传菜员/领班。</p></a><a href="/blog/network/uri-与-url-的区别/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>URI 与 URL 的区别</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>URI (Uniform Resource Identifier)：就像是一个人的 身份证号。它唯一地标识了一个人，但通过身份证号你可能找...</p></a><a href="/blog/network/网卡限速方法/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>网卡限速方法</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>运行 → 计算机配置 → Windows 设置 → 基于策略的 QoS。</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
 Comments
