@@ -296,3 +296,63 @@ ssh-keygen
 After running this command, you can find your public key at `~/.ssh/id_ed25519.pub`.
 
 Please use ed25519, not RSA.
+
+## 5. Strongly Recommended (Not Required): Sign Your Commits with GPG
+
+Signing your commits is **strongly recommended**, but **not required**. If you don't have this set up yet, you can still contribute.
+
+Why we recommend it:
+- **Identity verification:** teammates (and CI) can cryptographically verify the commit was made by you.
+- **Tamper-evidence:** if a commit is modified after signing, the signature becomes invalid.
+- **GitHub "Verified" badge:** signed commits can show as **Verified** on GitHub once your public key is added.
+
+### 5.1. Generate a GPG Key
+
+First, make sure you have `gpg` installed:
+```bash
+gpg --version
+```
+
+Generate a key (interactive):
+```bash
+gpg --full-generate-key
+```
+
+List your secret keys and copy the key id (the long hex string after `sec`):
+```bash
+gpg --list-secret-keys --keyid-format=long
+```
+
+### 5.2. Add the Public Key to GitHub
+
+Export your public key:
+```bash
+gpg --armor --export <YOUR_KEY_ID>
+```
+
+Then go to GitHub: `Settings` -> `SSH and GPG keys` -> `New GPG key`, and paste the exported output.
+
+**Note:** to get the GitHub **Verified** badge, your GPG key email should match `git config user.email`, and that email should be verified on GitHub.
+
+### 5.3. Configure Git to Sign Commits
+
+Set the signing key:
+```bash
+git config --global user.signingkey <YOUR_KEY_ID>
+```
+
+Enable signing by default:
+```bash
+git config --global commit.gpgsign true
+```
+
+(Optional) Also sign tags:
+```bash
+git config --global tag.gpgsign true
+```
+
+Test it:
+```bash
+git commit --allow-empty -m "chore: test signed commit"
+git log --show-signature -1
+```
