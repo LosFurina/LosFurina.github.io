@@ -75,11 +75,14 @@ const hasReadingTime = rawContent.trim().length > 0;
 
 			.toc-sidebar {
 				position: relative;
+				align-self: start;
 			}
 
 			.toc-wrapper {
 				position: sticky;
 				top: 6rem;
+				max-height: calc(100vh - 8rem);
+				overflow-y: auto;
 			}
 
 			main {
@@ -234,6 +237,8 @@ const hasReadingTime = rawContent.trim().length > 0;
 				.toc-wrapper {
 					position: relative;
 					top: 0;
+					max-height: none;
+					overflow-y: visible;
 				}
 
 				.article-title {
