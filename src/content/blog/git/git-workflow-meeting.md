@@ -11,17 +11,17 @@ Everyone should change their GitHub nickname to their real name.
 
 ## 2. Role Distribution
 
-#### 2.1. PM
+### 2.1. PM
 - Yanxia
-#### 2.2. Infra
+### 2.2. Infra
 - Weijun
 - Zizhao
-#### 2.3. BE
+### 2.3. BE
 - Yanxia
 - Weijun
 - Yuexing
 - Chang
-#### 2.4. FE
+### 2.4. FE
 - John
 - Avi
 - Diviya
@@ -30,6 +30,7 @@ Everyone should change their GitHub nickname to their real name.
 - Zhonghui
 
 If anyone is not satisfied with the role assignment, we can discuss it right now. Otherwise, we will follow the assignment above.
+
 ## 3. Git Collaboration Workflow
 
 ### 3.1. Branch Setup
@@ -75,20 +76,20 @@ Once an item is moved to P1, it becomes a real task waiting to be picked up and 
 
 First of all, every item represents a complete task, so we need to follow the entire workflow for each item.
 
-#### Pick up a task from GitHub Project and assign it to yourself
+#### Step 1: Pick up a task from GitHub Project and assign it to yourself
 
 ![Pick up a job from GitHub Project, and set Assignee to yourself](https://pub-814c06b6910145dca895b800c5b48770.r2.dev/img/Pasted%20image%2020260213011718.png)
 
-#### Set status, change status from ready to In progress
+#### Step 2: Set status, change status from ready to In progress
 
 ![Set status, change status from ready to In progress](https://pub-814c06b6910145dca895b800c5b48770.r2.dev/img/Pasted%20image%2020260213011741.png)
 
-#### Get the Issue ID and remember it
+#### Step 3: Get the Issue ID and remember it
 
 ![Get Issue Id and remember it](https://pub-814c06b6910145dca895b800c5b48770.r2.dev/img/Pasted%20image%2020260213011840.png)
 Now this task is yours — you can start developing.
 
-#### Sync your local environment with the remote — make sure your local `main` and `dev` branches are up to date
+#### Step 4: Sync your local environment with the remote — make sure your local `main` and `dev` branches are up to date
 ```bash
 git checkout dev
 git pull origin dev
@@ -96,7 +97,7 @@ git checkout main
 git pull origin main
 ```
 
-#### Make sure you are on the `dev` branch
+#### Step 5: Make sure you are on the `dev` branch
 
 ```bash
 git status
@@ -108,7 +109,7 @@ You can check which branch you are on. If you are not on `dev`, run:
 git checkout dev
 ```
 
-#### Create a new `feat` / `perf` / `fix` branch
+#### Step 6: Create a new `feat` / `perf` / `fix` branch
 
 The branch type is determined by the task type in GitHub Project.
 
@@ -127,12 +128,14 @@ git checkout -b fix/83-standardized-frontend-configfile
 Now you can write your code.
 Once you have finished development, follow the steps below.
 
-#### Add your changes
+#### Step 7: Add your changes
 
 ```bash
-git add -A 
-# (Not recommended — if you use this, you are responsible for any unintended changes, unless you know exactly what you are doing)
+git add -A
 ```
+
+> **Warning:** Not recommended — if you use this, you are responsible for any unintended changes, unless you know exactly what you are doing.
+
 This command adds all changes at once.
 
 You should know exactly which files you changed, and only add those files. For example:
@@ -144,10 +147,10 @@ git status
 to check your changes, and then:
 
 ```bash
-git add src/apps/core/internal/doamin/auth/router.go
+git add src/apps/core/internal/domain/auth/router.go
 ```
 
-#### Commit your changes
+#### Step 8: Commit your changes
 
 You can use:
 ```bash
@@ -155,6 +158,8 @@ git commit -m "type(<scope>: optional): Integrate .env and .vite.env into one fi
 ```
 
 For example:
+
+Below is a commit message example **with inline comments** explaining the format:
 
 ```
 feat(media): implement Cloudflare R2 presigned URL upload (#98)
@@ -176,6 +181,8 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 # Note: must leave a <br> here
 Closes #98
 ```
+
+And here is what the actual commit message looks like **without comments**:
 
 ```
 feat(media): implement Cloudflare R2 presigned URL upload (#98)
@@ -201,15 +208,15 @@ Closes #98
 
 ==Please note: Any branch name or commit message that does not follow these rules will be rejected by the reviewer. All reviewers should strictly enforce this rule.==
 
-#### Push your changes to the remote repository
+#### Step 9: Push your changes to the remote repository
 
-```
+```bash
 git push origin fix/83-standardized-frontend-configfile
 ```
 
 **Note:** The branch name must match your current branch name.
 
-#### Create a Pull Request (PR)
+#### Step 10: Create a Pull Request (PR)
 
 ![Create a Pull Requests (PR)](https://pub-814c06b6910145dca895b800c5b48770.r2.dev/img/Pasted%20image%2020260213014832.png)
 
@@ -289,7 +296,7 @@ Note: Only Pub Key, no private Key
 
 ### 4.1. If You Don't Have a Key Yet
 
-```
+```bash
 ssh-keygen
 ```
 
