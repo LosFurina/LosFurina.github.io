@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><!-- Theme Initialization Script --><script>
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			return "dark";
+		}
+		return "light";
+	})();
+
+	if (theme === "dark") {
+		document.documentElement.setAttribute("data-theme", "dark");
+		document.documentElement.classList.add("dark");
+	} else {
+		document.documentElement.setAttribute("data-theme", "light");
+		document.documentElement.classList.remove("dark");
+	}
+
+	window.localStorage.setItem("theme", theme);
+</script><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Wayne" href="https://blog.liweijun.com/rss.xml"><meta name="generator" content="Astro v5.17.1"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://blog.liweijun.com/blog/ai/claude-code-gemini-codex-mcp/"><!-- Primary Meta Tags --><title>让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南</title><meta name="title" content="让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南"><meta name="description" content="让 Claude 作为主控，通过 MCP 将 Gemini 与 Codex 接入 Claude Code，实现更可靠的多模型协作开发流程。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://blog.liweijun.com/blog/ai/claude-code-gemini-codex-mcp/"><meta property="og:title" content="让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南"><meta property="og:description" content="让 Claude 作为主控，通过 MCP 将 Gemini 与 Codex 接入 Claude Code，实现更可靠的多模型协作开发流程。"><meta property="og:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://blog.liweijun.com/blog/ai/claude-code-gemini-codex-mcp/"><meta property="twitter:title" content="让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南"><meta property="twitter:description" content="让 Claude 作为主控，通过 MCP 将 Gemini 与 Codex 接入 Claude Code，实现更可靠的多模型协作开发流程。"><meta property="twitter:image" content="https://blog.liweijun.com/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Wayne","description":"DevOps and infrastructure engineering notes, projects, and practical automation experiments by Wayne Li.","url":"https://blog.liweijun.com/","inLanguage":"en"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Wayne Li","url":"https://blog.liweijun.com/","email":"mailto:me@liweijun.com","sameAs":["https://github.com/LosFurina","https://x.com/MicroNahida"],"jobTitle":"DevOps / Infrastructure Engineer"}</script><link rel="stylesheet" href="/_astro/index.DCFK0IPC.css">
+<link rel="stylesheet" href="/_astro/about.C7Me09Gr.css">
+<style>a[data-astro-cid-eimmu3lg]{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .75rem;text-decoration:none;font-size:.9rem;font-weight:500;color:var(--header-text, rgb(var(--gray-dark)));border-radius:999px;transition:color .2s ease,background .2s ease;position:relative}a[data-astro-cid-eimmu3lg]:hover{background:var(--header-hover, rgba(179, 106, 74, .08));color:var(--header-text-strong, rgb(var(--gray-dark)))}a[data-astro-cid-eimmu3lg]:focus-visible{outline:2px solid var(--header-accent, #b36a4a);outline-offset:2px}a[data-astro-cid-eimmu3lg].active{color:var(--header-accent, #b36a4a)}a[data-astro-cid-eimmu3lg].active:after{content:"";position:absolute;left:50%;bottom:4px;width:4px;height:4px;margin-left:-2px;border-radius:999px;background:var(--header-accent, #b36a4a)}.nav-icon[data-astro-cid-eimmu3lg]{display:inline-flex;width:16px;height:16px}.nav-icon[data-astro-cid-eimmu3lg] svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}@media(max-width:720px){a[data-astro-cid-eimmu3lg]{width:100%;justify-content:flex-start;padding:.6rem .9rem}}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <div class="nav-left" data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Wayne</a></h2> </div> <div class="internal-links" id="mobileMenu" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M3 11.5L12 4l9 7.5" data-astro-cid-3ef6ksr2></path> <path d="M6.5 10.5V20h11V10.5" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Home
+</span> </a>  <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="6" y="4.5" width="12" height="15" rx="2" data-astro-cid-3ef6ksr2></rect> <path d="M9 9h6" data-astro-cid-3ef6ksr2></path> <path d="M9 13h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Blog
+</span> </a>  <a href="/projects" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <rect x="4" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="4" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="4" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> <rect x="13" y="13" width="7" height="7" rx="1.5" data-astro-cid-3ef6ksr2></rect> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Projects
+</span> </a>  <a href="/resume" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M7 3.5h7l4 4v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M14 3.5V8h4" data-astro-cid-3ef6ksr2></path> <path d="M9 12h6" data-astro-cid-3ef6ksr2></path> <path d="M9 16h6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Resume
+</span> </a>  <a href="/contact" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> <span class="nav-icon" aria-hidden="true" data-astro-cid-eimmu3lg> <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" data-astro-cid-3ef6ksr2> <path d="M4 6.5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z" data-astro-cid-3ef6ksr2></path> <path d="M4 8l8 6 8-6" data-astro-cid-3ef6ksr2></path> </svg> </span> <span class="nav-text" data-astro-cid-eimmu3lg> 
+Contact
+</span> </a>  <!-- Tools Dropdown --> <div class="dropdown" id="toolsDropdown" data-astro-cid-3ef6ksr2> <button class="dropdown-trigger" id="toolsBtn" data-astro-cid-3ef6ksr2>
+More
+<svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="12" height="12" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" data-astro-cid-3ef6ksr2></path> </svg> </button> <div class="dropdown-menu" id="toolsMenu" data-astro-cid-3ef6ksr2> <!-- 本站页面 --> <a href="/about" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>👤</span>
+About
+</a> <a href="/uses" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🛠️</span>
+Uses
+</a> <a href="/now" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>⏰</span>
+Now
+</a> <a href="/bookmarks" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔖</span>
+Bookmarks
+</a> <a href="/guestbook" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📝</span>
+Guestbook
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <a href="/keys" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>🔐</span>
+GPG Keys
+</a> <div class="dropdown-divider" data-astro-cid-3ef6ksr2></div> <!-- 外部链接 --> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" class="dropdown-item" data-astro-cid-3ef6ksr2> <span class="item-icon" data-astro-cid-3ef6ksr2>📦</span>
+GitHub
+<span class="external-icon" data-astro-cid-3ef6ksr2>↗</span> </a> </div> </div> </div> <div class="nav-right" data-astro-cid-3ef6ksr2> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://github.com/LosFurina" target="_blank" title="GitHub" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-3ef6ksr2> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-3ef6ksr2></path> </svg> </a> </div> <button id="theme-toggle" aria-label="Toggle theme" data-astro-cid-x3pjskd3> <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <circle cx="12" cy="12" r="5" data-astro-cid-x3pjskd3></circle> <line x1="12" y1="1" x2="12" y2="3" data-astro-cid-x3pjskd3></line> <line x1="12" y1="21" x2="12" y2="23" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" data-astro-cid-x3pjskd3></line> <line x1="1" y1="12" x2="3" y2="12" data-astro-cid-x3pjskd3></line> <line x1="21" y1="12" x2="23" y2="12" data-astro-cid-x3pjskd3></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" data-astro-cid-x3pjskd3></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" data-astro-cid-x3pjskd3></line> </svg> <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-x3pjskd3> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-cid-x3pjskd3></path> </svg> </button>  <script type="module">const t=()=>{const e=document.documentElement;e.getAttribute("data-theme")==="dark"?(e.setAttribute("data-theme","light"),e.classList.remove("dark"),localStorage.setItem("theme","light")):(e.setAttribute("data-theme","dark"),e.classList.add("dark"),localStorage.setItem("theme","dark"))};document.getElementById("theme-toggle")?.addEventListener("click",t);</script> <!-- Hamburger Menu Button (Mobile Only) --> <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> <span class="hamburger-line" data-astro-cid-3ef6ksr2></span> </button> </div> </nav> </header>  <script type="module">const n=document.querySelector("header");function c(){window.scrollY>10?n?.classList.add("scrolled"):n?.classList.remove("scrolled")}window.addEventListener("scroll",c,{passive:!0});c();const t=document.getElementById("hamburgerBtn"),o=document.getElementById("mobileMenu");t?.addEventListener("click",e=>{e.stopPropagation(),t.classList.toggle("open"),o?.classList.toggle("open")});o?.querySelectorAll("a").forEach(e=>{e.addEventListener("click",()=>{t?.classList.remove("open"),o?.classList.remove("open")})});const s=document.getElementById("toolsDropdown"),l=document.getElementById("toolsBtn");l?.addEventListener("click",e=>{e.stopPropagation(),s?.classList.toggle("open")});document.addEventListener("click",e=>{s?.contains(e.target)||s?.classList.remove("open"),!o?.contains(e.target)&&!t?.contains(e.target)&&(t?.classList.remove("open"),o?.classList.remove("open"))});document.addEventListener("keydown",e=>{e.key==="Escape"&&(s?.classList.remove("open"),t?.classList.remove("open"),o?.classList.remove("open"))});</script> <div class="blog-container" data-astro-cid-bvzihdzo> <aside class="toc-sidebar" data-astro-cid-bvzihdzo> <div class="toc-wrapper" data-astro-cid-bvzihdzo> <nav class="toc" aria-label="Table of Contents" data-astro-cid-xvrfupwn><h4 class="toc-title" data-astro-cid-xvrfupwn><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-xvrfupwn><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" data-astro-cid-xvrfupwn></path></svg>
+On this page
+</h4><ul class="toc-list" data-astro-cid-xvrfupwn><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#背景介绍为什么要把-claude-code-变成总控台" class="toc-link" data-astro-cid-xvrfupwn>背景介绍：为什么要把 Claude Code 变成“总控台”</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#mcp-协议详解claude-code-如何接线外部能力" class="toc-link" data-astro-cid-xvrfupwn>MCP 协议详解：Claude Code 如何“接线”外部能力</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#为什么需要多模型协作把正确的任务交给正确的模型" class="toc-link" data-astro-cid-xvrfupwn>为什么需要多模型协作：把正确的任务交给正确的模型</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#架构理念让-claude-作为主控驱动-gemini-和-codex-协同工作" class="toc-link" data-astro-cid-xvrfupwn>架构理念：让 Claude 作为主控，驱动 Gemini 和 Codex 协同工作</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#两个工具的安装配置步骤" class="toc-link" data-astro-cid-xvrfupwn>两个工具的安装配置步骤</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#1-安装配置-gemini-mcp-toolgemini-mcp-tool" class="toc-link" data-astro-cid-xvrfupwn>1) 安装配置 Gemini MCP Tool（gemini-mcp-tool）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#2-安装配置-codex-mcp-servercodex-mcp-server" class="toc-link" data-astro-cid-xvrfupwn>2) 安装配置 Codex MCP Server（codex-mcp-server）</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#实际使用场景与示例把讨论变成可合并的改动" class="toc-link" data-astro-cid-xvrfupwn>实际使用场景与示例：把“讨论”变成“可合并的改动”</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#场景-a复杂需求落地先方案再施工" class="toc-link" data-astro-cid-xvrfupwn>场景 A：复杂需求落地（先方案，再施工）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#场景-b代码评审与重构多视角降低误判" class="toc-link" data-astro-cid-xvrfupwn>场景 B：代码评审与重构（多视角降低误判）</a></li><li class="toc-item depth-3" data-astro-cid-xvrfupwn><a href="#场景-c文档与代码同步避免文档落后" class="toc-link" data-astro-cid-xvrfupwn>场景 C：文档与代码同步（避免文档落后）</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#优缺点对比gemini-mcp-vs-codex-mcp-vs-只用-claude" class="toc-link" data-astro-cid-xvrfupwn>优缺点对比：Gemini MCP vs Codex MCP vs 只用 Claude</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#最佳实践建议让系统跑稳跑快跑安全" class="toc-link" data-astro-cid-xvrfupwn>最佳实践建议：让系统跑稳、跑快、跑安全</a></li><li class="toc-item depth-2" data-astro-cid-xvrfupwn><a href="#结语" class="toc-link" data-astro-cid-xvrfupwn>结语</a></li></ul></nav><script type="module">const i=new IntersectionObserver(e=>{e.forEach(t=>{const c=t.target.getAttribute("id"),r=document.querySelector(`.toc-link[href="#${c}"]`);t.isIntersecting&&(document.querySelectorAll(".toc-link.active").forEach(o=>{o.classList.remove("active")}),r?.classList.add("active"))})},{rootMargin:"-80px 0px -80% 0px",threshold:0});document.querySelectorAll("article h2[id], article h3[id]").forEach(e=>{i.observe(e)});</script> </div> </aside> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo>  <header class="article-header" data-astro-cid-bvzihdzo> <h1 class="article-title" data-astro-cid-bvzihdzo>让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南</h1> <div class="article-meta" data-astro-cid-bvzihdzo>  <time datetime="2026-02-14T00:00:00.000Z"> Feb 13, 2026 </time> <span class="meta-divider" data-astro-cid-bvzihdzo></span> <span class="reading-time" data-astro-cid-rafwukvt> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16" data-astro-cid-rafwukvt> <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" data-astro-cid-rafwukvt></path> </svg> 10 min read
+</span>   </div> </header> <div class="article-content" data-astro-cid-bvzihdzo>  <h1 id="让-claude-当总指挥在-claude-code-里接入-gemini-mcp--codex-mcp-的多模型协作指南">让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南</h1>
+<p>你已经在用 Claude Code 写代码了，但偶尔也会遇到两类典型瓶颈：</p>
+<ul>
+<li>需要一个“第二大脑”做交叉验证，避免单一模型一本正经地胡说八道。</li>
+<li>需要更强的工程化执行能力，比如批量改文件、跑脚本、生成补丁、对齐代码风格和测试。</li>
+</ul>
+<p>这篇文章介绍一种实用架构：<strong>让 Claude 作为主控（Orchestrator），通过 MCP（Model Context Protocol）把 Gemini 和 Codex 接进同一条工作流</strong>。Claude 负责任务分解、路由、验收；Gemini 负责补位的推理/解释/内容生成；Codex 负责更“落地”的代码执行与自动化。</p>
+<h2 id="背景介绍为什么要把-claude-code-变成总控台">背景介绍：为什么要把 Claude Code 变成“总控台”</h2>
+<p>在真实开发里，一个“能写代码的聊天机器人”还不够。你会频繁遇到：</p>
+<ul>
+<li>需求不清晰，需要先把问题结构化，再给出可执行方案</li>
+<li>方案可行但实现繁琐，需要把改动拆成一系列可验证的小步骤</li>
+<li>代码能跑但质量不稳，需要测试、lint、重构、文档、变更说明一起跟上</li>
+</ul>
+<p>把这些工作都压在单一模型身上，常见结果是：<strong>要么慢、要么不稳、要么不可控</strong>。更好的方式是把“思考”和“执行”拆开，并通过协议把多个能力编排起来。</p>
+<h2 id="mcp-协议详解claude-code-如何接线外部能力">MCP 协议详解：Claude Code 如何“接线”外部能力</h2>
+<p>MCP（Model Context Protocol）可以把它理解为一套“标准插头”：</p>
+<ul>
+<li><strong>Claude Code 充当 MCP Client（客户端）</strong>：在对话中决定何时调用外部能力，并把结果合并回上下文。</li>
+<li><strong>MCP Server（服务器）提供工具能力</strong>：对外暴露一组可调用的工具（tools），可能还包括可读取的资源（resources）或提示模板（prompts）。</li>
+<li><strong>传输方式常见是 stdio</strong>：很多 MCP Server 都是“本地进程”，Claude Code 通过启动命令拉起它，然后用标准输入输出交换结构化消息。</li>
+</ul>
+<p>从工程角度看，MCP 的价值在于两点：</p>
+<ol>
+<li><strong>解耦</strong>：Claude Code 不需要“原生支持”每个模型或工具，只要支持 MCP，就能接各种 Server。</li>
+<li><strong>可编排</strong>：你可以同时接入多个 Server，让 Claude 做路由和仲裁，形成一条稳定的工作流。</li>
+</ol>
+<h2 id="为什么需要多模型协作把正确的任务交给正确的模型">为什么需要多模型协作：把正确的任务交给正确的模型</h2>
+<p>多模型不是为了“堆模型”，而是为了把任务拆成更可控的组件：</p>
+<ul>
+<li><strong>Claude（主控）</strong>：擅长任务分解、对话澄清、把多方输出统一成一个可交付结果，并在关键步骤做验收。</li>
+<li><strong>Gemini（外脑）</strong>：适合作为第二视角，帮助解释概念、补充思路、生成内容草稿，或者对 Claude 的结论做交叉检查。</li>
+<li><strong>Codex（执行器）</strong>：更贴近工程落地场景，适合把计划变成一系列具体操作，例如生成补丁、批量改动、脚本化执行。</li>
+</ul>
+<p>当你把它们放到同一条链路里，目标是：<strong>Claude 做“项目经理 + 架构师 + 质检”，Gemini 做“研究员”，Codex 做“施工队”。</strong></p>
+<h2 id="架构理念让-claude-作为主控驱动-gemini-和-codex-协同工作">架构理念：让 Claude 作为主控，驱动 Gemini 和 Codex 协同工作</h2>
+<p>一个直观的心智模型如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>                (你)</span></span>
+<span class="line"><span>                 |</span></span>
+<span class="line"><span>                 v</span></span>
+<span class="line"><span>        Claude Code / Claude (主控 Orchestrator)</span></span>
+<span class="line"><span>          |                     |</span></span>
+<span class="line"><span>          | MCP 调用              | MCP 调用</span></span>
+<span class="line"><span>          v                     v</span></span>
+<span class="line"><span> gemini-mcp-tool (桥接 Gemini)   codex-mcp-server (桥接 Codex CLI)</span></span>
+<span class="line"><span>          |                     |</span></span>
+<span class="line"><span>          v                     v</span></span>
+<span class="line"><span>      Google Gemini          OpenAI Codex CLI</span></span></code></pre>
+<p>关键点是“主控权”：</p>
+<ul>
+<li><strong>只让 Claude 直接和你对话</strong>，统一口径、统一格式、统一验收标准。</li>
+<li><strong>Gemini 和 Codex 不直接决策</strong>，它们只是被 Claude 召唤来完成子任务。</li>
+<li><strong>Claude 负责最终交付</strong>：把多方输出融合、去重、纠错、补上边界条件与风险提示。</li>
+</ul>
+<h2 id="两个工具的安装配置步骤">两个工具的安装配置步骤</h2>
+<p>下面的配置步骤严格基于你提供的信息（命令和仓库）。</p>
+<h3 id="1-安装配置-gemini-mcp-toolgemini-mcp-tool">1) 安装配置 Gemini MCP Tool（gemini-mcp-tool）</h3>
+<p>Gemini MCP Tool 的定位很明确：<strong>桥接 Claude 和 Google Gemini</strong>。</p>
+<ul>
+<li>GitHub: <code>https://github.com/jamubc/gemini-mcp-tool</code></li>
+<li>安装命令：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">claude</span><span style="color:#9ECBFF"> mcp</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> gemini-cli</span><span style="color:#79B8FF"> --</span><span style="color:#9ECBFF"> npx</span><span style="color:#79B8FF"> -y</span><span style="color:#9ECBFF"> gemini-mcp-tool</span></span></code></pre>
+<p>解释一下这条命令在做什么：</p>
+<ul>
+<li><code>claude mcp add gemini-cli</code>：在 Claude Code 里注册一个名为 <code>gemini-cli</code> 的 MCP Server。</li>
+<li><code>-- npx -y gemini-mcp-tool</code>：告诉 Claude Code 该如何启动这个 Server（通过 <code>npx</code> 拉起并运行）。</li>
+</ul>
+<p>建议的验证方式（不依赖具体子命令名称）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">claude</span><span style="color:#9ECBFF"> mcp</span></span></code></pre>
+<p>通常 CLI 会输出可用的子命令或帮助信息，你可以据此确认 <code>gemini-cli</code> 已被注册。</p>
+<h3 id="2-安装配置-codex-mcp-servercodex-mcp-server">2) 安装配置 Codex MCP Server（codex-mcp-server）</h3>
+<p>Codex MCP Server 的作用是：<strong>桥接 Claude 和 OpenAI Codex CLI</strong>，让 Claude 能把“执行型工作”外包给 Codex CLI。</p>
+<ul>
+<li>GitHub: <code>https://github.com/tuannvm/codex-mcp-server</code></li>
+<li>安装步骤（按顺序）：</li>
+</ul>
+<ol>
+<li>全局安装 Codex CLI：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> i</span><span style="color:#79B8FF"> -g</span><span style="color:#9ECBFF"> @openai/codex</span></span></code></pre>
+<ol start="2">
+<li>登录并写入 API Key：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">codex</span><span style="color:#9ECBFF"> login</span><span style="color:#79B8FF"> --api-key</span><span style="color:#9ECBFF"> "your-openai-api-key"</span></span></code></pre>
+<ol start="3">
+<li>在 Claude Code 注册 MCP Server：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">claude</span><span style="color:#9ECBFF"> mcp</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> codex-cli</span><span style="color:#79B8FF"> --</span><span style="color:#9ECBFF"> npx</span><span style="color:#79B8FF"> -y</span><span style="color:#9ECBFF"> codex-mcp-server</span></span></code></pre>
+<p>同样，你可以用 <code>claude mcp</code> 查看当前 MCP 相关命令，确认 <code>codex-cli</code> 已接入。</p>
+<h2 id="实际使用场景与示例把讨论变成可合并的改动">实际使用场景与示例：把“讨论”变成“可合并的改动”</h2>
+<p>下面给出 3 个最常见、最能体现“Claude 主控”的用法。示例以工作流为主，不强依赖某个 UI 语法。</p>
+<h3 id="场景-a复杂需求落地先方案再施工">场景 A：复杂需求落地（先方案，再施工）</h3>
+<p>目标：给一个已有项目加新功能，既要方案清晰，又要改动可控。</p>
+<ol>
+<li>你对 Claude 说清目标与约束（接口、时限、风险偏好）。</li>
+<li>Claude 先调用 Gemini：让 Gemini 给出 2-3 个实现方案、优缺点和边界条件。</li>
+<li>Claude 选定方案后，再调用 Codex：按步骤修改代码、补测试、跑检查，并输出可审阅的改动摘要。</li>
+<li>Claude 汇总：把“为什么这么做”“改了哪些点”“如何回滚/验证”整理成最终交付。</li>
+</ol>
+<p>你可以这样提问（示例）：</p>
+<blockquote>
+<p>你作为主控：先让 Gemini 给出 3 套方案（含风险和取舍），然后选一套最稳的；再让 Codex 按步骤实现，最后给我一份可 code review 的变更说明和验证清单。</p>
+</blockquote>
+<h3 id="场景-b代码评审与重构多视角降低误判">场景 B：代码评审与重构（多视角降低误判）</h3>
+<p>目标：你怀疑某段代码有隐患，但很难一眼看出问题在哪。</p>
+<ul>
+<li>Claude 先让 Codex 做“工程化扫描”：定位可疑模块、潜在回归点、需要补测试的地方。</li>
+<li>Claude 再让 Gemini 做“逻辑复核”：用另一套推理路径解释为什么这里可能有 bug、有哪些边界输入。</li>
+<li>Claude 最后统一裁决：给出改动最小的修复方案，并要求 Codex 只做必要修改，避免“顺手大改”。</li>
+</ul>
+<h3 id="场景-c文档与代码同步避免文档落后">场景 C：文档与代码同步（避免文档落后）</h3>
+<p>目标：你改了 API 或行为，但文档和示例容易忘记更新。</p>
+<p>典型分工：</p>
+<ul>
+<li>Gemini：生成/改写面向读者的说明（更自然的语言、更好的结构）。</li>
+<li>Codex：同步更新 README、示例代码、类型定义、注释，必要时批量替换。</li>
+<li>Claude：对齐术语、给出迁移指南，并检查“文档说的”和“代码做的”是否一致。</li>
+</ul>
+<h2 id="优缺点对比gemini-mcp-vs-codex-mcp-vs-只用-claude">优缺点对比：Gemini MCP vs Codex MCP vs 只用 Claude</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>维度</th><th>只用 Claude</th><th>Claude + Gemini MCP</th><th>Claude + Codex MCP</th><th>Claude + Gemini + Codex（推荐）</th></tr></thead><tbody><tr><td>核心价值</td><td>简单直接</td><td>多一个高质量视角</td><td>更强的工程执行链路</td><td>既有外脑又有执行器，Claude 统一编排</td></tr><tr><td>适合任务</td><td>中等复杂对话与代码</td><td>方案对比、解释、内容草稿</td><td>批量改动、自动化执行、产出补丁</td><td>复杂项目落地、需要稳定交付的开发流</td></tr><tr><td>主要成本</td><td>单点能力上限</td><td>额外一次模型调用</td><td>额外工具链与鉴权</td><td>复杂度最高，需要“路由策略”</td></tr><tr><td>主要风险</td><td>单模型误判</td><td>输出分歧需仲裁</td><td>可能出现过度修改</td><td>需要明确边界与验收机制</td></tr></tbody></table>
+<p>一句话总结：<strong>Gemini 解决“想得更全”，Codex 解决“做得更快”，Claude 解决“把事情做对”。</strong></p>
+<h2 id="最佳实践建议让系统跑稳跑快跑安全">最佳实践建议：让系统跑稳、跑快、跑安全</h2>
+<ul>
+<li>明确主控原则：所有决策、取舍、最终结论都由 Claude 汇总输出，Gemini/Codex 只做子任务。</li>
+<li>先定验收标准再调用工具：例如“必须补测试/不得改 public API/输出变更清单”，把约束写进指令。</li>
+<li>给 Codex 设护栏：默认先做只读分析（列风险、列文件清单、给补丁预览），确认后再让它动手改。</li>
+<li>让 Gemini 做交叉检查而不是拍脑袋：例如让它专注“反例、边界、替代方案”，提高增量价值。</li>
+<li>版本可控：<code>npx -y</code> 会拉取最新版本，追求稳定时可以考虑显式固定版本号（例如 <code>pkg@x.y.z</code> 的形式）。</li>
+<li>密钥安全：API Key 只放在本地安全位置，不写进仓库；必要时为不同工具使用不同权限/不同 Key。</li>
+<li>结果结构化：要求工具输出固定格式（步骤、文件、命令、回滚、验证），Claude 更容易做审阅和合并。</li>
+<li>失败可降级：任何一个 Server 不可用时，Claude 仍应给出“无工具模式”的备选路径，保证流程不断。</li>
+</ul>
+<h2 id="结语">结语</h2>
+<p>把 Gemini MCP 和 Codex MCP 接入 Claude Code 的关键，不是“又多了两个模型”，而是把 Claude 提升为一个<strong>可编排的主控系统</strong>：它能把任务拆解成可验证的子任务，把子任务分发给最合适的执行者，再把结果统一成一个工程上可交付的答案。</p>
+<p>如果你已经在用 Claude Code，下一步就是把这套“主控 + 外脑 + 执行器”的工作流跑起来：先从一个小的重构或一个有明确验收标准的功能开始，你会明显感到交付质量更稳定。</p>  </div> <footer class="article-footer" data-astro-cid-bvzihdzo> <div class="share-section" data-astro-cid-bvzihdzo> <div class="share-buttons" data-astro-cid-zllr3mxm> <span class="share-label" data-astro-cid-zllr3mxm>Share:</span> <a href="https://twitter.com/intent/tweet?text=%E8%AE%A9%20Claude%20%E5%BD%93%E2%80%9C%E6%80%BB%E6%8C%87%E6%8C%A5%E2%80%9D%EF%BC%9A%E5%9C%A8%20Claude%20Code%20%E9%87%8C%E6%8E%A5%E5%85%A5%20Gemini%20MCP%20%2B%20Codex%20MCP%20%E7%9A%84%E5%A4%9A%E6%A8%A1%E5%9E%8B%E5%8D%8F%E4%BD%9C%E6%8C%87%E5%8D%97&url=https%3A%2F%2Fblog.liweijun.com%2Fblog%2Fai%2Fclaude-code-gemini-codex-mcp%2F" target="_blank" rel="noopener noreferrer" class="share-btn twitter" title="Share on X" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-zllr3mxm></path> </svg> <span data-astro-cid-zllr3mxm>Post on X</span> </a> <button class="share-btn copy-link" id="copyLinkBtn" data-url="https://blog.liweijun.com/blog/ai/claude-code-gemini-codex-mcp/" data-astro-cid-zllr3mxm> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" data-astro-cid-zllr3mxm> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" data-astro-cid-zllr3mxm></path> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" data-astro-cid-zllr3mxm></path> </svg> <span class="copy-text" data-astro-cid-zllr3mxm>Copy Link</span> </button> </div>  <script type="module">const t=document.getElementById("copyLinkBtn"),e=t?.querySelector(".copy-text");t?.addEventListener("click",async()=>{const o=t.dataset.url||window.location.href;try{await navigator.clipboard.writeText(o),t.classList.add("copied"),e&&(e.textContent="Copied!"),setTimeout(()=>{t.classList.remove("copied"),e&&(e.textContent="Copy Link")},2e3)}catch(c){console.error("Failed to copy:",c)}});</script> </div> <section class="related-posts" data-astro-cid-dpgbfi7r><h3 class="related-title" data-astro-cid-dpgbfi7r><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20" data-astro-cid-dpgbfi7r><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" data-astro-cid-dpgbfi7r></path></svg>
+Related Posts
+</h3><div class="related-grid" data-astro-cid-dpgbfi7r><a href="/blog/ai/claude-code-mcp-multi-model/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>多模型协同开发：为 Claude Code 配置 Gemini 与 Codex MCP 助手</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>通过 MCP 协议将 Google Gemini 和 OpenAI Codex 接入 Claude Code，构建以 Claude 为主控的多模型协同开发环境。</p></a><a href="/blog/ai/什么是clip模型/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>什么是CLIP模型</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>视觉编码器（Vision Encoder）。</p></a><a href="/blog/git/git-workflow-meeting/" class="related-card" data-astro-cid-dpgbfi7r><h4 class="related-card-title" data-astro-cid-dpgbfi7r>Git Merge Workflow Best Practices and RevieU Meeting</h4><p class="related-card-desc" data-astro-cid-dpgbfi7r>A practical workflow for safer merges with review gates instead of pushing directly to main.</p></a></div></section> <section class="comments-section" id="comments" data-astro-cid-jvxsf75u> <h3 class="comments-title" data-astro-cid-jvxsf75u> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22" data-astro-cid-jvxsf75u> <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" data-astro-cid-jvxsf75u></path> </svg>
+Comments
+</h3> <div class="giscus-wrapper" data-astro-cid-jvxsf75u> <script src="https://giscus.app/client.js" data-repo="LosFurina/LosFurina.github.io" data-repo-id="R_kgDOQ_gmWQ" data-category="General" data-category-id="DIC_kwDOQ_gmWc4C2A9-" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </section>  <script type="module">function s(){const e=document.documentElement.getAttribute("data-theme"),t=document.querySelector("iframe.giscus-frame");if(t){const i=e==="dark"?"dark":"light";t.contentWindow?.postMessage({giscus:{setConfig:{theme:i}}},"https://giscus.app")}}const n=new MutationObserver(e=>{e.forEach(t=>{t.attributeName==="data-theme"&&s()})});n.observe(document.documentElement,{attributes:!0});window.addEventListener("message",e=>{e.origin==="https://giscus.app"&&s()});</script> </footer> </article> </main> <aside class="right-sidebar" data-astro-cid-bvzihdzo> <!-- Future content --> </aside> </div> <footer data-astro-cid-sz7xmlte> <div class="footer-content" data-astro-cid-sz7xmlte> <p class="copyright" data-astro-cid-sz7xmlte>
+&copy; 2026 Wayne Li. All rights reserved.
+</p> <div class="social-links" data-astro-cid-sz7xmlte> <a href="https://github.com/LosFurina" target="_blank" rel="noopener" title="GitHub" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>GitHub</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="https://x.com/MicroNahida" target="_blank" rel="noopener" title="X (Twitter)" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>X (Twitter)</span> <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" data-astro-cid-sz7xmlte></path> </svg> </a> <a href="mailto:me@liweijun.com" title="Email" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Email</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" data-astro-cid-sz7xmlte></path> <polyline points="22,6 12,13 2,6" data-astro-cid-sz7xmlte></polyline> </svg> </a> <a href="/rss.xml" title="RSS Feed" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>RSS Feed</span> <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24" data-astro-cid-sz7xmlte> <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" data-astro-cid-sz7xmlte></path> </svg> </a> </div> <p class="footer-note" data-astro-cid-sz7xmlte>
+Built with <a href="https://astro.build" target="_blank" rel="noopener" data-astro-cid-sz7xmlte>Astro</a> </p> </div> </footer>  </body></html>

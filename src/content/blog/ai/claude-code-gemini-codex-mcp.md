@@ -1,3 +1,11 @@
+---
+title: "让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南"
+description: "让 Claude 作为主控，通过 MCP 将 Gemini 与 Codex 接入 Claude Code，实现更可靠的多模型协作开发流程。"
+pubDate: "2026-02-14"
+category: "ai"
+tags: ["ai"]
+---
+
 # 让 Claude 当“总指挥”：在 Claude Code 里接入 Gemini MCP + Codex MCP 的多模型协作指南
 
 你已经在用 Claude Code 写代码了，但偶尔也会遇到两类典型瓶颈：
@@ -181,4 +189,3 @@ claude mcp add codex-cli -- npx -y codex-mcp-server
 把 Gemini MCP 和 Codex MCP 接入 Claude Code 的关键，不是“又多了两个模型”，而是把 Claude 提升为一个**可编排的主控系统**：它能把任务拆解成可验证的子任务，把子任务分发给最合适的执行者，再把结果统一成一个工程上可交付的答案。
 
 如果你已经在用 Claude Code，下一步就是把这套“主控 + 外脑 + 执行器”的工作流跑起来：先从一个小的重构或一个有明确验收标准的功能开始，你会明显感到交付质量更稳定。
-
