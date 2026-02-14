@@ -1,5 +1,5 @@
 ---
-title: Git Merge Workflow Best Practices and Review Meeting
+title: Git Merge Workflow Best Practices and RevieU Meeting
 description: "A practical workflow for safer merges with review gates instead of pushing directly to main."
 pubDate: 2026-02-13
 ---
@@ -12,7 +12,7 @@ Everyone should change their GitHub nickname to their real name.
 ## 2. Role Distribution
 
 #### 2.1. PM
-- Yanxix
+- Yanxia
 #### 2.2. Infra
 - Weijun
 - Zizhao
@@ -217,6 +217,59 @@ git push origin fix/83-standardized-frontend-configfile
 ![Create a Pull Requests (PR)](https://pub-814c06b6910145dca895b800c5b48770.r2.dev/img/Pasted%20image%2020260213015955.png)
 
 ![Create a Pull Requests (PR)](https://pub-814c06b6910145dca895b800c5b48770.r2.dev/img/Pasted%20image%2020260213020121.png)
+
+#### Wait for Code Review and PR Approval
+
+Once your PR is created:
+- Request reviewers (usually team leads or senior developers)
+- Address any feedback or requested changes
+- Push additional commits to the same branch if changes are needed
+- Wait for approval and merge
+
+#### After PR is Merged: Clean Up Your Local Environment
+
+Once your PR has been approved and merged into `dev` (or `main` for hotfixes), you need to clean up your local environment to complete the development cycle.
+
+**Step 1: Switch back to dev branch**
+```bash
+git checkout dev
+```
+
+**Step 2: Pull the latest changes from remote**
+```bash
+git pull origin dev
+```
+
+This ensures your local `dev` branch is now synchronized with the remote repository, including your merged changes.
+
+**Step 3: Delete your local feature branch**
+```bash
+git branch -d fix/83-standardized-frontend-configfile
+```
+
+The `-d` flag safely deletes the branch only if it has been fully merged. If you need to force delete (rare cases), use `-D` instead.
+
+**Step 4: Delete the remote feature branch (optional but recommended)**
+```bash
+git push origin --delete fix/83-standardized-frontend-configfile
+```
+
+This keeps the remote repository clean. Alternatively, you can delete it via GitHub's PR interface after merging.
+
+**Step 5: Sync your main branch (if dev was merged to main)**
+
+If the `dev` branch was later merged into `main`, remember to sync your local `main` as well:
+```bash
+git checkout main
+git pull origin main
+```
+
+**Step 6: Update your task status in GitHub Project**
+
+Go back to the GitHub Project board and move your task from "In Progress" to "Done".
+
+This completes the full development cycle:
+1. Pick up task → 2. Create feature branch → 3. Develop → 4. Commit → 5. Push → 6. Create PR → 7. Review → 8. Merge → 9. **Clean up local environment** → 10. **Sync branches** → 11. **Mark task as done**
 
 ## 4. I Need Your SSH Public Key (Not GPG Key)
 
