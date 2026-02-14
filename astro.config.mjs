@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import remarkBreaks from 'remark-breaks';
+import remarkMark from 'remark-mark-highlight';
 
 export default defineConfig({
   // 1. 确保 output 是 static（或者干脆不写这行，默认就是 static）
@@ -15,7 +16,7 @@ export default defineConfig({
   site: 'https://blog.liweijun.com',
 
   markdown: {
-    remarkPlugins: [remarkBreaks],
+    remarkPlugins: [remarkBreaks, remarkMark],
   },
 
   integrations: [mdx(), sitemap()],
