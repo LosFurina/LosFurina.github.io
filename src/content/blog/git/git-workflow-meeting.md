@@ -70,12 +70,12 @@ We decided to use GitHub Project as our project management dashboard.
 
 #### 3.2.2. Basics of GitHub Project
 
-- Every item in P2 is a **Backlog** item, which means it is still under discussion — it is not yet an actual task.
-- When an item moves from P2 to P1, its status changes to **Ready**, meaning the idea has been approved for implementation.
+- Every item in **Backlog** status item is still under discussion — it is not yet an actual task.
+- When an item moves from backlog to ready, meaning the idea has been approved for implementation.
 
 #### 3.2.3. Who Can Create Backlog Items
 
-- Anyone can create a Backlog item. If you have an idea, feel free to add it to P2.
+- Anyone can create a Backlog item. If you have an idea, feel free to add it.
 - However, most items are created by the PM and each team's leader.
 
 ### 3.3. Complete Development Workflow
