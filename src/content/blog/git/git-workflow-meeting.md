@@ -88,6 +88,8 @@ First of all, every item represents a complete task, so we need to follow the en
 
 #### Step 2: Set status, change status from ready to In progress
 
+==NOTE==: When you assign yourself to a job and change the status to in progress which means, no one except you can do this job! It's very important to avoid some unexpected conflicts!!!
+
 ![Set status, change status from ready to In progress](https://pub-814c06b6910145dca895b800c5b48770.r2.dev/img/Pasted%20image%2020260213011741.png)
 
 #### Step 3: Get the Issue ID and remember it
