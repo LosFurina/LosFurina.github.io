@@ -300,12 +300,6 @@ git checkout main
 git pull origin main
 ```
 
-**Step 6: Update your task status in GitHub Project**
-
-Go back to the GitHub Project board and move your task from "In Progress" to "Done".
-
-This completes the full development cycle:
-
 1. Pick up task → 2. Create feature branch → 3. Develop → 4. Commit → 5. Push → 6. Create PR → 7. Review → 8. Merge → 9. **Clean up local environment** → 10. **Sync branches** → 11. **Mark task as done**
 
 ## 4. I Need Your SSH Public Key (Not GPG Key)
