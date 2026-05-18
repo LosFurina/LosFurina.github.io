@@ -1,6 +1,6 @@
 ---
 title: "APISIX 安装学习笔记"
-description: "在 TencentOS Server 4.4（RHEL 9 容器环境）中通过 RPM 包管理（dnf）安装 APISIX 与 etcd 的完整流程，包含故障排查记录。"
+description: "在 TencentOS Server 4.4（RHEL 9 容器环境）中通过 RPM 包管理（dnf）安装 APISIX 与 etcd 的完整流程，包含故障排查与调试实战记录。"
 pubDate: "2026-05-18"
 updatedDate: "2026-05-18"
 category: "infra"
@@ -282,6 +282,117 @@ Client → APISIX (Nginx/OpenResty) → Backend Service
 | `dnf install apisix` 报 `404` 下载 repodata | `$releasever` 解析为 `4`，路径错误 | 手动将 repo 文件中 `$releasever` 改为 `9` |
 | GPG 密钥交互确认卡住 | `-y` 无法跳过 GPG 交互 | 先用 `rpm --import` 导入密钥 |
 | 容器中无法使用 systemd | 容器 PID 1 不是 systemd | 用 `nohup` 或 `supervisord` 管理进程 |
+| `502 Bad Gateway` 上游连不上 | 上游用域名但 nginx 连接时 Host 头不对 | 用 `proxy-rewrite` 插件设置 Host 头 |
+| `httpbin.org` 作上游返回 502 | `httpbin.org` 用 Host 头路由，直接 IP 访问被拒 | 换用本机 HTTP 服务作上游 |
+| `PATCH` 更新上游变成合并而非替换 | APISIX `PATCH` 是合并语义，旧节点会保留 | 先删后建，或用 `PUT` 全量替换 |
+| 上游删不掉：`can not delete this upstream` | 上游被路由引用，需先删路由 | 删除顺序：先 `DELETE route`，再 `DELETE upstream` |
+| Python HTTP 服务跑着跑着就 502 了 | Bash 命令结束后后台进程被杀，进程不持久 | 用 `nohup ... &` 让进程跨会话存活 |
+| 路由创建后 Proxy 端口仍 404 | 上游节点健康但不返回对应 URI 的文件 | 在上游服务目录下创建对应文件（如 `/tmp/get`） |
+
+---
+
+## 十、调试实战记录（2026-05-18）
+
+### 10.1 第一个问题：`httpbin.org` 作上游返回 502
+
+**现象：**
+```
+curl http://127.0.0.1:9080/get
+→ 502 Bad Gateway
+```
+
+**排查过程：**
+1. 看 error.log：`upstream prematurely closed connection`
+2. 确认容器能访问外网：`curl http://httpbin.org/get` → 200 ✅
+3. 问题：`httpbin.org` 用 **Host 头**路由，APISIX 直接连 IP 时被拒
+
+**解决方案：**
+换用**本机 HTTP 服务**作上游，完全绕过外网域名问题。
+
+---
+
+### 10.2 第二个问题：PATCH 是合并不是替换
+
+**现象：**
+```bash
+# 先创建 upstream，nodes = { "httpbin.org:80": 1 }
+curl -X PATCH ... -d '{"nodes": {"127.0.0.1:8080": 1}}'
+
+# 查看发现两个节点都在！
+"nodes": {
+  "httpbin.org:80": 1,      # 旧的没删掉
+  "127.0.0.1:8080": 1     # 新的合并进来了
+}
+```
+
+**原因：** APISIX `PATCH` 语义是合并，不是替换。
+
+**正确做法：** 用 `PUT` 全量替换，或先 `DELETE` 再 `PUT`。
+
+---
+
+### 10.3 第三个问题：删上游报 `can not delete this upstream`
+
+**现象：**
+```bash
+curl -X DELETE /apisix/admin/upstreams/1
+→ {"error_msg":"can not delete this upstream, route [1] is still using it now"}
+```
+
+**原因：** 上游被路由引用，APISIX 保护机制防止误删。
+
+**正确顺序：**
+```
+先 DELETE route  →  再 DELETE upstream
+```
+
+---
+
+### 10.4 第四个问题：Python HTTP 服务老是挂掉
+
+**现象：** 用 `python3 -m http.server 8080 &` 启动服务，过一会 curl 就 502 了。
+
+**原因：** Bash 工具的特性——每次命令执行完，**后台进程会被杀掉**。`&` 启动的进程不持久。
+
+**解决方案：**
+```bash
+# 用 nohup 让进程跨会话存活
+nohup python3 -m http.server 8080 --directory /tmp > /tmp/python_http.log 2>&1 &
+```
+
+---
+
+### 10.5 最终工作配置
+
+```bash
+# 上游：指向本机 8080
+curl http://127.0.0.1:9180/apisix/admin/upstreams/1 \
+  -X PUT \
+  -d '{"type":"roundrobin","nodes":{"127.0.0.1:8080":1}}'
+
+# 路由：匹配 /get，指向上游 1
+curl http://127.0.0.1:9180/apisix/admin/routes/1 \
+  -X PUT \
+  -d '{"uri":"/get","upstream_id":"1"}'
+
+# 在上游服务目录下创建对应文件
+echo "Hello from APISIX!" > /tmp/get
+
+# 测试：成功！
+curl http://127.0.0.1:9080/get
+→ Hello from APISIX!
+```
+
+---
+
+### 10.6 核心概念：Upstream vs Route
+
+| 概念 | 作用 | 类比 |
+|---|---|---|
+| **Upstream（上游）** | 定义「请求转发到哪里去」 | 通讯录（后端地址本） |
+| **Route（路由）** | 定义「什么样的请求才转发」 | 前台接待（匹配规则） |
+
+**为什么要分开？** 多个路由可以复用同一个上游，改上游时所有路由自动生效，不用每个路由都改一遍。
 
 ---
 
