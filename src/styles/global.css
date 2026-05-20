@@ -10,6 +10,14 @@
 html {
 	overflow-y: scroll;
 	overflow-x: hidden;
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
 }
 
 :root {
@@ -31,6 +39,43 @@ html {
 	--shadow-soft: 0 8px 18px rgba(38, 30, 25, 0.06);
 	--box-shadow: 0 2px 6px rgba(var(--gray), 14%), 0 8px 20px rgba(var(--gray), 18%),
 		0 12px 24px rgba(var(--gray), 20%);
+
+	/* Type Scale (Perfect Fourth = 1.333) */
+	--step-5: 2.369rem;
+	--step-4: 1.777rem;
+	--step-3: 1.333rem;
+	--step-2: 1.125rem;
+	--step-1: 1rem;
+	--step-0: 0.875rem;
+	--step--1: 0.75rem;
+
+	/* Line Height */
+	--leading-tight: 1.2;
+	--leading-snug: 1.4;
+	--leading-normal: 1.6;
+	--leading-relaxed: 1.75;
+
+	/* Spacing */
+	--space-xs: 0.25rem;
+	--space-sm: 0.5rem;
+	--space-md: 1rem;
+	--space-lg: 1.5rem;
+	--space-xl: 2rem;
+	--space-2xl: 3rem;
+	--space-3xl: 4.5rem;
+
+	/* Radius */
+	--radius-sm: 6px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+
+	/* Transitions */
+	--transition-fast: 150ms ease;
+	--transition-normal: 250ms ease;
+
+	/* Layout */
+	--content-width: 800px;
+	--page-width: 1200px;
 }
 
 [data-theme="dark"] {
@@ -83,8 +128,8 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--ink));
-	font-size: 20px;
-	line-height: 1.7;
+	font-size: 16px;
+	line-height: var(--leading-normal);
 	transition: background-color 0.3s ease, color 0.3s ease;
 	overflow-x: hidden;
 }
@@ -117,23 +162,23 @@ h6 {
 }
 
 h1 {
-	font-size: 3.052em;
+	font-size: var(--step-5);
 }
 
 h2 {
-	font-size: 2.441em;
+	font-size: var(--step-4);
 }
 
 h3 {
-	font-size: 1.953em;
+	font-size: var(--step-3);
 }
 
 h4 {
-	font-size: 1.563em;
+	font-size: var(--step-2);
 }
 
 h5 {
-	font-size: 1.25em;
+	font-size: var(--step-1);
 }
 
 strong,
@@ -210,7 +255,7 @@ p {
 }
 
 .prose p {
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
 }
 
 textarea {
@@ -233,9 +278,10 @@ img {
 }
 
 code {
-	padding: 2px 5px;
+	padding: 0.15em 0.4em;
 	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	border-radius: 4px;
+	font-size: 0.875em;
 }
 
 pre {
@@ -248,10 +294,10 @@ pre>code {
 }
 
 blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
+	border-left: 3px solid var(--accent);
+	padding: 0.75rem 0 0.75rem 1.25rem;
+	margin: var(--space-lg) 0;
+	font-size: 1rem;
 }
 
 hr {
@@ -261,7 +307,7 @@ hr {
 
 @media (max-width: 720px) {
 	body {
-		font-size: 18px;
+		font-size: 15px;
 	}
 
 	main {
@@ -270,7 +316,7 @@ hr {
 	}
 
 	h1 {
-		font-size: 2rem;
+		font-size: 1.875rem;
 	}
 
 	h2 {
@@ -278,7 +324,7 @@ hr {
 	}
 
 	h3 {
-		font-size: 1.25rem;
+		font-size: 1.2rem;
 	}
 }
 
