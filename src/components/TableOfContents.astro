@@ -209,9 +209,11 @@ const tocWithIndex = toc.map((h) => {
         private activeIndicator: HTMLElement | null = null;
         private observer: IntersectionObserver;
         private tocContainer: HTMLElement | null = null;
+        private scrollContainer: HTMLElement | null = null;
 
         constructor() {
             this.tocContainer = document.getElementById("toc-entries");
+            this.scrollContainer = document.getElementById("toc-scroll-container");
             this.activeIndicator = document.getElementById(
                 "toc-active-indicator",
             );
@@ -316,30 +318,36 @@ const tocWithIndex = toc.map((h) => {
             const firstRect = this.tocEntries[first].getBoundingClientRect();
             const lastRect = this.tocEntries[last].getBoundingClientRect();
 
-            const top = firstRect.top - containerRect.top + this.tocContainer.scrollTop;
+            const scrollTop = this.scrollContainer?.scrollTop ?? 0;
+            const top = firstRect.top - containerRect.top + scrollTop;
             const height = lastRect.bottom - firstRect.top;
 
             this.activeIndicator.style.top = `${top}px`;
             this.activeIndicator.style.height = `${height}px`;
             this.activeIndicator.style.opacity = "1";
 
-            // Auto-scroll TOC if needed
-            this.scrollTocIntoView(top, height);
+            // Auto-scroll TOC to keep active item visible
+            this.scrollTocIntoView(firstRect, lastRect);
         }
 
-        private scrollTocIntoView(top: number, height: number) {
-            if (!this.tocContainer) return;
-            const containerHeight = this.tocContainer.clientHeight;
-            const scrollTop = this.tocContainer.scrollTop;
-            const itemCenter = top + height / 2;
-            const viewCenter = scrollTop + containerHeight / 2;
+        private scrollTocIntoView(firstRect: DOMRect, lastRect: DOMRect) {
+            if (!this.scrollContainer) return;
+            const containerRect = this.scrollContainer.getBoundingClientRect();
+            const padding = 40;
 
-            if (
-                itemCenter < scrollTop + 40 ||
-                itemCenter > scrollTop + containerHeight - 40
-            ) {
-                this.tocContainer.scrollTo({
-                    top: itemCenter - containerHeight / 2,
+            // Check if active item is outside the visible area of the scroll container
+            if (firstRect.top < containerRect.top + padding) {
+                // Active item is above visible area — scroll up
+                const offset = containerRect.top + padding - firstRect.top;
+                this.scrollContainer.scrollBy({
+                    top: -offset,
+                    behavior: "smooth",
+                });
+            } else if (lastRect.bottom > containerRect.bottom - padding) {
+                // Active item is below visible area — scroll down
+                const offset = lastRect.bottom - (containerRect.bottom - padding);
+                this.scrollContainer.scrollBy({
+                    top: offset,
                     behavior: "smooth",
                 });
             }

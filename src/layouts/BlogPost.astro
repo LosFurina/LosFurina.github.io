@@ -83,6 +83,11 @@ const hasReadingTime = rawContent.trim().length > 0;
 				top: 5rem;
 				max-height: calc(100vh - 7rem);
 				overflow-y: auto;
+				scrollbar-width: none;
+			}
+
+			.toc-wrapper::-webkit-scrollbar {
+				display: none;
 			}
 
 			main {
@@ -343,7 +348,7 @@ const hasReadingTime = rawContent.trim().length > 0;
 			{
 				showToc && (
 					<aside class="toc-sidebar">
-						<div class="toc-wrapper">
+						<div class="toc-wrapper" id="toc-scroll-container">
 							<TableOfContents headings={headings} />
 						</div>
 					</aside>
