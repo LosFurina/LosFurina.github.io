@@ -131,7 +131,6 @@ body {
 	font-size: 16px;
 	line-height: var(--leading-normal);
 	transition: background-color 0.3s ease, color 0.3s ease;
-	overflow-x: hidden;
 }
 
 [data-theme="dark"] body {
